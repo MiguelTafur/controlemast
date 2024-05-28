@@ -3,7 +3,7 @@
 class OperacaoModel extends Mysql
 {
 	PRIVATE $intIdOperador;
-	PRIVATE $intMatricula;
+	PRIVATE $strMatricula;
 	PRIVATE $strNombre;
 	PRIVATE $strApellido;
 	PRIVATE $intTelefono;
@@ -19,7 +19,7 @@ class OperacaoModel extends Mysql
 
     public function insertOperador(int $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $ruta)
 	{
-		$this->intMatricula = $matricula;
+		$this->strMatricula = $matricula;
 		$this->strNombre = $nombre;
 		$this->strApellido = $apellido;
 		$this->intTelefono = $telefono;
@@ -28,7 +28,7 @@ class OperacaoModel extends Mysql
 		$this->intIdRuta = $ruta;
 		$return = 0;
 
-		$sql = "SELECT * FROM persona WHERE matricula = $this->intMatricula";
+		$sql = "SELECT * FROM persona WHERE matricula = '{$this->strMatricula}'";
 		$request = $this->select_all($sql);
 
 		
@@ -36,7 +36,7 @@ class OperacaoModel extends Mysql
 		if(empty($request))
 		{
 			$query_insert = "INSERT INTO persona(matricula,nombres,apellidos,telefono,email_user,rolid,codigoruta)  VALUES(?,?,?,?,?,?,?)";
-			$arrData = array($this->intMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail,$this->intTipoId,$this->intIdRuta);
+			$arrData = array($this->strMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail,$this->intTipoId,$this->intIdRuta);
 			$request_insert = $this->insert($query_insert, $arrData);
 			$return = $request_insert;
 		}else{
@@ -86,13 +86,13 @@ class OperacaoModel extends Mysql
     public function updateOperador(int $idUsuario, string $matricula, string $nombre, string $apellido, int $telefono, string $email)
 	{
 		$this->intIdOperador = $idUsuario;
-		$this->intMatricula = $matricula;
+		$this->strMatricula = $matricula;
 		$this->strNombre = $nombre;
 		$this->strApellido = $apellido;
 		$this->intTelefono = $telefono;
 		$this->strEmail = $email;
 
-		$sql = "SELECT * FROM persona WHERE (matricula = '{$this->intMatricula}' AND idpersona != $this->intIdOperador)";
+		$sql = "SELECT * FROM persona WHERE (matricula = '{$this->strMatricula}' AND idpersona != $this->intIdOperador)";
 		$request = $this->select_all($sql);
 
 		if(empty($request))
@@ -105,7 +105,7 @@ class OperacaoModel extends Mysql
 						telefono = ?, 
 						email_user = ?  
 					WHERE idpersona = $this->intIdOperador";
-			$arrData = array($this->intMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail);
+			$arrData = array($this->strMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail);
 			$request = $this->update($sql, $arrData);
 		}else{
 			$request = "0";

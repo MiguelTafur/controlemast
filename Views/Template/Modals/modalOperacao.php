@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<!-- Modal ver usuario-->
+<!-- Modal ver operador-->
 <div class="modal fade" id="modalViewOperador" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

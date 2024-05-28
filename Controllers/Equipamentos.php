@@ -32,6 +32,33 @@ class Equipamentos extends Controllers{
 				$btnEdit = '';
 				$btnDelete = '';
 
+				$arrData[$i]['nombre'] = ucwords($arrData[$i]['nombre']);
+				$arrData[$i]['marca'] = ucwords($arrData[$i]['marca']);
+				$arrData[$i]['lacre'] = '<span class="font-weight-bold">'.$arrData[$i]['lacre'].'</span>';
+
+				switch ($arrData[$i]['status']) {
+					case '1':
+						$arrData[$i]['status'] = '<span class="badge badge-primary">Em Estoque</span>';
+						break;
+					case '2':
+						$arrData[$i]['status'] = '<span class="badge badge-success">Em Uso</span>';
+						break;
+					case '3':
+						$arrData[$i]['status'] = '<span class="badge badge-secondary">Troca</span>';
+						break;
+					default:
+						$arrData[$i]['status'] = '<span class="badge badge-warning">Concerto</span>';
+						break;
+				}
+
+				if(empty($arrData[$i]['codigo'])) {
+					$arrData[$i]['codigo'] = '<span class="font-italic">nenhum</span>';
+				}
+
+				if(empty($arrData[$i]['lacre'])) {
+					$arrData[$i]['lacre'] = '<span class="font-italic">nenhum</span>';
+				}
+
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
 				}
@@ -42,9 +69,86 @@ class Equipamentos extends Controllers{
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idequipamento'].')" title="Remover Equipamento"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	public function getequipamento($idequipamento)
+	{
+		if($_SESSION['permisosMod']['r']){
+			$IDequipamento = intval($idequipamento);
+			if($IDequipamento > 0)
+			{
+				$arrData = $this->model->selectEquipamento($IDequipamento);
+				if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+					$arrResponse = array('status' => true, 'data' => $arrData);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
+	}
+
+	public function setEquipamento()
+	{ 
+		if($_POST)
+		{
+			if(empty($_POST['txtID']) || empty($_POST['txtNombre']) || empty($_POST['txtMarca']))
+			{
+				$arrResponse = array("status" => false, "msg" => "Dados errados.");
+			}else{
+				$idEquipamento = intval($_POST['idEquipamento']);
+				$strID = strClean($_POST['txtID']);
+				$strNombre =  ucwords(strClean($_POST['txtNombre']));
+				$strMarca =  ucwords(strClean($_POST['txtMarca']));
+				$strCodigo = strClean($_POST['txtCodigo']);
+				$strLacre =  strClean($_POST['txtLacre']);
+				$request_user = "";
+				$intIdRuta = $_SESSION['idRuta'];
+
+				if($idEquipamento == 0)
+				{
+					$option = 1;
+					if($_SESSION['permisosMod']['w']){
+						$request_user = $this->model->insertEquipamento($strID,
+																	$strNombre,
+																	$strMarca,
+																	$strCodigo,
+																	$strLacre,
+																	$intIdRuta);
+					}
+				}else{
+					$option = 2;
+					if($_SESSION['permisosMod']['u']){
+						$request_user = $this->model->updateEquipamento($idEquipamento,
+																	$strID,
+																	$strNombre,
+																	$strMarca,
+																	$strCodigo,
+																	$strLacre);
+					}
+				}
+
+				if($request_user > 0)
+				{
+					if($option == 1){
+						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					}else{
+						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+					}
+				}else if($request_user == '0'){
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! O IDs de Hardware já existe, verifique novamente.');
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
+				}
+			}	
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}
