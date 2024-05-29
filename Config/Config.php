@@ -39,6 +39,7 @@
 	const MOPERACAO = 4;
 	const MEQUIPAMENTOS = 5;
 	const MRUTAS = 6;
+	const MCONTROLE = 7;
 
 	//Roles
 	const RADMINISTRADOR = 1;

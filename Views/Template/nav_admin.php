@@ -55,6 +55,14 @@
             </a>
         </li>
         <?php } ?>
+        <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/controle">
+                <i class="app-menu__icon fa fa-th" aria-hidden="true"></i>
+                <span class="app-menu__label">Controle</span>
+            </a>
+        </li>
+        <?php } ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
