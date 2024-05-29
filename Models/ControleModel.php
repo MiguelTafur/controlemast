@@ -45,14 +45,21 @@ class ControleModel extends Mysql
         return $request;
     }
 
-    public function insertControle(string $usuario, string $equipamento, string $estado, string $protocolo, string $observacion, int $ruta)
+    public function selectUsuarios($ruta)
+    {
+        $this->intIdRuta = $ruta;
+        $sql = "SELECT idpersona, matricula, nombres, apellidos from persona WHERE status != 0 AND codigoruta = $this->intIdRuta";
+        $request = $this->select_all($sql);
+        return $request;
+    }
+
+    public function insertControle(string $usuario, string $equipamento, string $estado, string $protocolo, string $observacion)
 	{
 		$this->listUsuario = $usuario;
 		$this->listEquipamento = $equipamento;
 		$this->listEstado = $estado;
 		$this->strProtocolo = $protocolo;
 		$this->strObservacion = $observacion;
-		//$this->intIdRuta = $ruta;
 		$return = 0;
 
         $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion)  VALUES(?,?,?,?)";

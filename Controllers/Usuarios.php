@@ -3,10 +3,8 @@
 class Usuarios extends Controllers{
 	public function __construct()
 	{
-		//sessionStart();
 		session_start();
 		parent::__construct();
-		//session_regenerate_id(true);
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
@@ -16,7 +14,7 @@ class Usuarios extends Controllers{
 	public function Usuarios()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/prestamos');
+			header("Location: ".base_url().'/controle');
 		}
 		$data['page_tag'] = "Usuários";
 		$data['page_title'] = "USUÁRIOS";

@@ -14,7 +14,7 @@ class Lideres extends Controllers{
 	public function Lideres()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/fones');
+			header("Location: ".base_url().'/controles');
 		}
 		$data['page_tag'] = "Lideres";
 		$data['page_title'] = "LIDERES";

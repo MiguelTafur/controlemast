@@ -14,7 +14,7 @@ class Operacao extends Controllers{
 	public function Operacao()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/fones');
+			header("Location: ".base_url().'/controle');
 		}
 		$data['page_tag'] = "Operação";
 		$data['page_title'] = "OPERAÇÃO";

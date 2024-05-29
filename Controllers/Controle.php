@@ -46,7 +46,7 @@ class Controle extends Controllers{
 	}
 
     public function setControle()
-	{ //dep($_POST);exit;
+	{
 		if($_POST)
 		{
 			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']) || empty($_POST['listEstadoEquipamento']))
@@ -107,11 +107,39 @@ class Controle extends Controllers{
     public function getEquipamentos()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$htmlOptions = "";
+			$htmlOptions = '<option></option>';
 			$arrData = $this->model->selectEquipamentos();
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
 					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$arrData[$i]['nombre'].' - '.$arrData[$i]['lacre'].'</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();
+
+			if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+					$arrResponse = array('status' => true, 'data' => $arrData);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}	
+
+		die();
+	}
+
+	public function getUsuarios()
+	{
+		if($_SESSION['permisosMod']['r']){
+			$htmlOptions = '<option></option>';
+			$intIdRuta = $_SESSION['idRuta'];
+			$arrData = $this->model->selectUsuarios($intIdRuta);
+			if(count($arrData) > 0){
+				for ($i=0; $i < count($arrData); $i++) { 
+					$ultimo = $arrData[$i]['apellidos'];
+					$ultimo = explode(" ", $ultimo);
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
 				}
 			}
 			echo $htmlOptions;

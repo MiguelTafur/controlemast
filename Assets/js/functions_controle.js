@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function iniciarApp() {
     fntTablaControles();
     fntCrearControle();
-    fntEquipamentos();
+    
 }
 
 function fntTablaControles() {
@@ -121,8 +121,35 @@ function fntEquipamentos()
             if(request.readyState == 4 && request.status == 200){
                 document.querySelector('#listEquipamento').innerHTML = request.responseText;
                 $('#listEquipamento').select2({
-                    placeholder: '-- Escolher --'
+                    placeholder: " -- Escolher -- ",
+                    allowClear: true,
+                    width: 'resolve',
+                    theme: "classic"
                 });
+                
+            }
+        }
+    }
+}
+
+function fntUsuarios()
+{
+    if(document.querySelector('#listUsuario')){
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Controle/getUsuarios';
+        request.open("POST",ajaxUrl,true);
+        request.send();
+
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listUsuario').innerHTML = request.responseText;
+                $('#listUsuario').select2({
+                    placeholder: " -- Escolher -- ",
+                    allowClear: true,
+                    width: 'resolve',
+                    theme: "classic"
+                });
+                
             }
         }
     }
@@ -137,5 +164,13 @@ function openModal()
     document.querySelector('#btnText').innerHTML ="Salvar";
     document.querySelector('#titleModal').innerHTML = "Novo Controle";
     document.querySelector("#formControles").reset();
+    fntEquipamentos();
+    fntUsuarios()
+    $('#listEstadoEquipamento').select2({
+        placeholder: " -- Escolher -- ",
+        allowClear: true,
+        width: 'resolve',
+        theme: "classic"
+    });
     $('#modalFormControles').modal('show');
 }

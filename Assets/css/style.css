@@ -131,14 +131,18 @@
 	z-index: 1021;	
 }
 
-.listClientId{
-	z-index: 1021;
-}
-
 section .login-box form{
 	box-shadow: 0px 0px 7px gray inset;
 }
 
 section .logo h1{
 	text-shadow: -1px -1px white, 1px 1px #333;
+}
+
+.select2-container .select2-selection--single {
+	height: 36px;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__arrow {
+	height: 34px;
 }
