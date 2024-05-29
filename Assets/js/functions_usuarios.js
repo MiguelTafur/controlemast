@@ -309,7 +309,7 @@ function fntViewUsuario(idpersona)
 function fntEditUsuario(element,idpersona)
 {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Atualizar UsuÁrio";
+    document.querySelector('#titleModal').innerHTML = "Atualizar Usuário";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";

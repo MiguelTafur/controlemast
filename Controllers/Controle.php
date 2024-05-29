@@ -31,8 +31,20 @@ class Controle extends Controllers{
 				$btnView = '';
 				$btnEdit = '';
 
+				$ultimo = explode(" ", $arrData[$i]['apellidos']);
+				$arrData[$i]['nombres'] = strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0];
+
+				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+
+				if($arrData[$i]['status'] === 2) {
+					$arrData[$i]['status'] = '<h6 class="text-uppercase font-italic text-info"><a href="#">Entrega</a></h6>';					
+				}
+				if($arrData[$i]['status'] === 3) {
+					$arrData[$i]['status'] = '<h5<span class="badge badge-warning">Troca</span></h5>';					
+				}
+
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Controle"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-primary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Controle"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
 					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcontrole'].')" title="Alterar Controle"><i class="fas fa-pencil-alt"></i></button>';
@@ -45,17 +57,16 @@ class Controle extends Controllers{
 		die();
 	}
 
-    public function setControle()
-	{
+    public function setControleEntrega()
+	{ 
 		if($_POST)
 		{
-			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']) || empty($_POST['listEstadoEquipamento']))
+			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']))
 			{
 				$arrResponse = array("status" => false, "msg" => "Dados errados.");
 			}else{
 				$idControle = intval($_POST['idControle']);
 				$listUsuario = strClean($_POST['listUsuario']);
-				$listEquipamento =  ucwords(strClean($_POST['listEquipamento']));
 				$listEstado =  ucwords(strClean($_POST['listEstadoEquipamento']));
 				$strProtocolo = strClean($_POST['txtProtocolo']);
 				$strObservacion =  strClean($_POST['txtObservacion']);
@@ -66,8 +77,7 @@ class Controle extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertControle($listUsuario,
-																	$listEquipamento,
+						$request_user = $this->model->insertControleEntrega($listUsuario,
 																	$listEstado,
 																	$strProtocolo,
                                                                     $strObservacion,
@@ -76,10 +86,9 @@ class Controle extends Controllers{
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateControle($idControle,
+						$request_user = $this->model->updateControleEntrega($idControle,
 																	$idControle,
 																	$listUsuario,
-																	$listEquipamento,
 																	$listEstado,
 																	$strProtocolo,
                                                                     $strObservacion);
@@ -111,7 +120,7 @@ class Controle extends Controllers{
 			$arrData = $this->model->selectEquipamentos();
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$arrData[$i]['nombre'].' - '.$arrData[$i]['lacre'].'</option>';
+					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$arrData[$i]['nombre'].' - #'.$arrData[$i]['lacre'].'</option>';
 				}
 			}
 			echo $htmlOptions;
@@ -129,6 +138,7 @@ class Controle extends Controllers{
 		die();
 	}
 
+	// Trae os usuários sem relação com o equipamento
 	public function getUsuarios()
 	{
 		if($_SESSION['permisosMod']['r']){

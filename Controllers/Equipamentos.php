@@ -34,23 +34,23 @@ class Equipamentos extends Controllers{
 
 				$arrData[$i]['nombre'] = ucwords($arrData[$i]['nombre']);
 				$arrData[$i]['marca'] = ucwords($arrData[$i]['marca']);
-				$arrData[$i]['lacre'] = '<span class="font-weight-bold">'.$arrData[$i]['lacre'].'</span>';
+				$arrData[$i]['lacre'] = '<span class="font-weight-bold">#'.$arrData[$i]['lacre'].'</span>';
 
 				switch ($arrData[$i]['status']) {
 					case '1':
-						$arrData[$i]['status'] = '<span class="badge badge-primary">Em Estoque</span>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-success">Em Estoque</span></h5>';
 						break;
 					case '2':
-						$arrData[$i]['status'] = '<span class="badge badge-success">Em Uso</span>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-info">Em Uso</span></h5>';
 						break;
 					case '3':
-						$arrData[$i]['status'] = '<span class="badge badge-secondary">Recebido</span>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-secondary">Troca</span></h5>';
 						break;
 					case '4':
-						$arrData[$i]['status'] = '<span class="badge badge-secondary">Troca</span>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-secondary">Recebido</span></h5>';
 						break;
 					default:
-						$arrData[$i]['status'] = '<span class="badge badge-warning">Concerto</span>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-warning">Concerto</span></h5>';
 						break;
 				}
 

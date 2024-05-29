@@ -139,7 +139,15 @@ function fntViewInfo(idequipamento)
                 }
                 
                 document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
-                document.querySelector("#celEstado").innerHTML = objData.data.status;
+                switch (objData.data.status) {
+                    case 1:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Em Estoque</span>';    
+                        break;
+                
+                    default:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-info">Em Uso</span>';    
+                        break;
+                }
 
                 $('#modalViewEquipamento').modal('show');
             }else{

@@ -22,8 +22,10 @@ class ControleModel extends Mysql
 		$sql = "SELECT co.idcontrole, 
                        pe.matricula, 
                        pe.nombres, 
+                       pe.apellidos, 
                        eq.nombre as equipamento, 
                        eq.lacre, 
+                       eq.status,
                        co.protocolo,
                        co.observacion,
                        DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fechaRegistro
@@ -35,29 +37,37 @@ class ControleModel extends Mysql
                 WHERE eq.status != 0 AND pe.codigoruta = $ruta
                 ORDER BY nombre ASC";
 		$request = $this->select_all($sql);
+        //dep($request);exit;
 		return $request;
 	}
 
     public function selectEquipamentos()
     {
-        $sql = "SELECT idequipamento, nombre, lacre from equipamento WHERE status != 0 AND lacre != ''";
+        $sql = "SELECT idequipamento, nombre, lacre from equipamento WHERE status = 1 AND lacre != ''";
         $request = $this->select_all($sql);
         return $request;
     }
 
+    // Trae os usuários sem relação com o equipamento
     public function selectUsuarios($ruta)
     {
         $this->intIdRuta = $ruta;
-        $sql = "SELECT idpersona, matricula, nombres, apellidos from persona WHERE status != 0 AND codigoruta = $this->intIdRuta";
+        $sql = "SELECT idpersona, matricula, nombres, apellidos 
+                FROM persona 
+                WHERE NOT EXISTS(SELECT personaid FROM )
+                AND status != 0 
+                AND codigoruta = $this->intIdRuta
+                AND idpersona != 1
+                ORDER BY nombres ASC";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function insertControle(string $usuario, string $equipamento, string $estado, string $protocolo, string $observacion)
+    public function insertControleEntrega(string $usuario, string $equipamento, string $protocolo, string $observacion)
 	{
 		$this->listUsuario = $usuario;
 		$this->listEquipamento = $equipamento;
-		$this->listEstado = $estado;
+		$this->listEstado = 2;
 		$this->strProtocolo = $protocolo;
 		$this->strObservacion = $observacion;
 		$return = 0;

@@ -139,10 +139,17 @@ section .logo h1{
 	text-shadow: -1px -1px white, 1px 1px #333;
 }
 
+
+/* Personalización del pluguin select2 */
 .select2-container .select2-selection--single {
 	height: 36px;
 }
 
 .select2-container--classic .select2-selection--single .select2-selection__arrow {
 	height: 34px;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__clear {
+	height: 34px;
+    margin-right: 24px;
 }

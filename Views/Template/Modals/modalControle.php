@@ -1,5 +1,5 @@
 <!-- modal formulario Controles -->
-<div class="modal fade" id="modalFormControles" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalFormControleEntrega" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header headerRegister">
@@ -9,29 +9,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="formControles" name="formControles" class="form-horizontal">
-          <input type="hidden" id="idControle" name="idControle" value="">
+        <form id="formControleEntrega" name="formControleEntrega" class="form-horizontal">
+          <input type="hidden" id="idControleEntregue" name="idControleEntregue" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
             <div class="form-group col-md-12" id="divListRuta">
-              <label for="listUsuario">Usuario <span class="required">*</span></label>
+              <label for="listUsuario">Usuário <span class="required">*</span></label>
               <select class="form-control" style="width: 100%;" id="listUsuario" name="listUsuario" required></select>
             </div> 
             <div class="form-group col-md-12">
               <label for="listEquipamento">Equipamento <span class="required">*</span></label>
               <select class="form-control" style="width: 100%;" id="listEquipamento" name="listEquipamento" required></select>
             </div> 
-            <div class="form-group col-md-12">
-              <label for="listEstadoEquipamento">Estado Equipamento <span class="required">*</span></label>
+            <!-- <div class="form-group col-md-12">
+              <label for="listEstadoEquipamento">Tipo de Ação <span class="required">*</span></label>
               <select class="form-control" style="width: 100%;" id="listEstadoEquipamento" name="listEstadoEquipamento" required>
                 <option value="">-- Escolher --</option>
-                <option value="1">Entregue</option>
-                <option value="2">Recebido</option>                
-                <option value="3">Troca</option>
-                <option value="4">Estragado</option>
-                <option value="5">Concerto</option>                
+                <option value="2">Entregue</option>
+                <option value="3">Troca</option>                
               </select>
-            </div>
+            </div> -->
             <div class="form-group col-md-12 text-left">
               <label for="fileProtocolo">Protocolo</label>
               <input type="text" class="form-control" id="fileProtocolo" name="fileProtocolo">
