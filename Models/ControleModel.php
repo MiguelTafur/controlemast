@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ControleModel extends Mysql
 {
@@ -19,12 +19,12 @@ class ControleModel extends Mysql
     public function selectControles()
 	{
 		$ruta = $_SESSION['idRuta'];
-		$sql = "SELECT co.idcontrole, 
-                       pe.matricula, 
-                       pe.nombres, 
-                       pe.apellidos, 
-                       eq.nombre as equipamento, 
-                       eq.lacre, 
+		$sql = "SELECT co.idcontrole,
+                       pe.matricula,
+                       pe.nombres,
+                       pe.apellidos,
+                       eq.nombre as equipamento,
+                       eq.lacre,
                        eq.status,
                        co.protocolo,
                        co.observacion,
@@ -52,14 +52,25 @@ class ControleModel extends Mysql
     public function selectUsuarios($ruta)
     {
         $this->intIdRuta = $ruta;
-        $sql = "SELECT idpersona, matricula, nombres, apellidos 
-                FROM persona 
-                WHERE NOT EXISTS(SELECT personaid FROM )
-                AND status != 0 
+
+
+        $sql2 = "SELECT co.personaid,eq.status
+                 FROM controle co
+                 LEFT OUTER JOIN equipamento eq
+                 ON co.equipamentoid = eq.idequipamento";
+        $request2 = $this->select_all($sql2);
+        // for ($i=0; $i < count($request2); $i++) {
+            //$personaid = $request2[$i]['personaid'];
+            $sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos, co.personaid
+                FROM persona pe
+                LEFT OUTER JOIN controle co
+                ON pe.idpersona = co.personaid
+                WHERE status != 0
                 AND codigoruta = $this->intIdRuta
                 AND idpersona != 1
                 ORDER BY nombres ASC";
-        $request = $this->select_all($sql);
+            $request = $this->select_all($sql);
+
         return $request;
     }
 

@@ -36,12 +36,7 @@ class Controle extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				if($arrData[$i]['status'] === 2) {
-					$arrData[$i]['status'] = '<h6 class="text-uppercase font-italic text-info"><a href="#">Entrega</a></h6>';					
-				}
-				if($arrData[$i]['status'] === 3) {
-					$arrData[$i]['status'] = '<h5<span class="badge badge-warning">Troca</span></h5>';					
-				}
+				$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-primary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Controle"><i class="far fa-eye"></i></button>';
@@ -147,9 +142,12 @@ class Controle extends Controllers{
 			$arrData = $this->model->selectUsuarios($intIdRuta);
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					$ultimo = $arrData[$i]['apellidos'];
-					$ultimo = explode(" ", $ultimo);
-					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
+					if($arrData[$i]['personaid'] == "") {
+						$ultimo = $arrData[$i]['apellidos'];
+						$ultimo = explode(" ", $ultimo);
+						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
+					}
+					
 				}
 			}
 			echo $htmlOptions;

@@ -38,7 +38,7 @@ class Equipamentos extends Controllers{
 
 				switch ($arrData[$i]['status']) {
 					case '1':
-						$arrData[$i]['status'] = '<h5><span class="badge badge-success">Em Estoque</span></h5>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-success">Disponível</span></h5>';
 						break;
 					case '2':
 						$arrData[$i]['status'] = '<h5><span class="badge badge-info">Em Uso</span></h5>';

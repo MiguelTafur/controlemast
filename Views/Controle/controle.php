@@ -8,16 +8,8 @@
         <h1>
           <i class="fas fa-th"></i> <?= $data['page_title'] ?>
             <?php if($_SESSION['permisosMod']['w']){ ?>
-            <!-- <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> Adicionar</button> -->
-            <div class="btn-group" role="group">
-              <button id="btnGroupControle" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-plus-circle"></i> Adicionar
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupControle">
-                <a class="dropdown-item" onclick="openModalEntregue();">Entregue</a>
-                <a class="dropdown-item" href="#">Troca</a>
-              </div>
-            </div>
+            <button class="btn btn-primary" type="button" onclick="openModalEntregue();" >Entregar &nbsp;<i class="fas fa-arrow-right"></i></button>
+            <!-- <button class="btn btn-primary" type="button" onclick="openModalEntregue();" ><i class="fas fa-arrow-left"></i>&nbsp; Receber</button> -->
             <?php } ?>
         </h1>
     </div>
