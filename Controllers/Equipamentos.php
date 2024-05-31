@@ -44,10 +44,7 @@ class Equipamentos extends Controllers{
 						$arrData[$i]['status'] = '<h5><span class="badge badge-info">Em Uso</span></h5>';
 						break;
 					case '3':
-						$arrData[$i]['status'] = '<h5><span class="badge badge-secondary">Troca</span></h5>';
-						break;
-					case '4':
-						$arrData[$i]['status'] = '<h5><span class="badge badge-secondary">Recebido</span></h5>';
+						$arrData[$i]['status'] = '<h5><span class="badge badge-danger">Estragado</span></h5>';
 						break;
 					default:
 						$arrData[$i]['status'] = '<h5><span class="badge badge-warning">Concerto</span></h5>';

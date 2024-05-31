@@ -43,7 +43,7 @@ class EquipamentosModel extends Mysql
                        codigo, 
                        lacre, 
                        status, 
-				DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro 
+					   DATE_FORMAT(datecreated, '%Y-%m-%d') as fechaRegistro 
 				FROM equipamento 
 				WHERE idequipamento = $this->intIdEquipamento";
 		$request = $this->select($sql);

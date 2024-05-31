@@ -41,7 +41,7 @@ function formularioRutas() {
                                     var objData = JSON.parse(request.responseText);
                                     if(objData.status)
                                     {
-                                          window.location = base_url+'/controle';
+                                          window.location = base_url+'/entregue';
                                     }else{
                                           swal("Atenção", objData.msg, "error");
                                     }

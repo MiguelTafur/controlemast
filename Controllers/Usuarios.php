@@ -178,9 +178,9 @@ class Usuarios extends Controllers{
 				$requestDelete = $this->model->deleteUsuario($intIdpersona);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario.');
+					$arrResponse = array('status' => true, 'msg' => 'Usuário removido.');
 				}else{
-					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
+					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o usuário.');
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}

@@ -128,7 +128,7 @@ function fntDelInfo(idruta)
         text: "¿Realmente quer remover a empresa?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonText: "Sim, Remocver!",
+        confirmButtonText: "Sim, Remover!",
         cancelButtonText: "Não, Cancelar!",
         closeOnConfirm: false,
         closeOnCancel: true

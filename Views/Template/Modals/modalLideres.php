@@ -1,4 +1,4 @@
-<!-- Modal agregar y editar usuario -->
+<!-- Modal agregar y editar Lider -->
 <div class="modal fade" id="modalFormCliente" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
@@ -45,7 +45,7 @@
   </div>
 </div>
 
-<!-- Modal ver usuario-->
+<!-- Modal ver Lider-->
 <div class="modal fade" id="modalViewCliente" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -87,7 +87,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Cerrar
+          Fechar
         </button>
       </div>
     </div>

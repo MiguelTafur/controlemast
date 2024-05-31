@@ -123,6 +123,15 @@ function fntViewInfo(idequipamento)
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
+                const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
                 document.querySelector("#celID").innerHTML = objData.data.id_hardware;
                 document.querySelector("#celNombre").innerHTML = objData.data.nombre;
                 document.querySelector("#celMarca").innerHTML = objData.data.marca;
@@ -138,7 +147,7 @@ function fntViewInfo(idequipamento)
                     document.querySelector("#celLacre").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
                 
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
                 switch (objData.data.status) {
                     case 1:
                         document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Em Estoque</span>';    

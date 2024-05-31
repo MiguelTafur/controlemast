@@ -1,4 +1,4 @@
-let tableControle;
+let tableEntregue;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -14,14 +14,14 @@ function iniciarApp() {
 
 // Tabela dos controles
 function fntTablaControles() {
-    tableControle = $('#tableControle').dataTable({
+    tableEntregue = $('#tableEntregue').dataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Controle/getControles",
+            "url": " "+base_url+"/Entregar/getEntregues",
             "dataSrc":""
         },
         "columns":[
@@ -67,7 +67,7 @@ function fntCrearControleEntrega() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Controle/setControleEntrega';
+            let ajaxUrl = base_url + '/Entregar/setControleEntrega';
             let formData = new FormData(formControleEntrega);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -78,7 +78,7 @@ function fntCrearControleEntrega() {
                     if(objData.status)
                     {
                         // if(rowTable == ""){
-                            tableEquipamentos.api().ajax.reload();
+                            tableEntregue.api().ajax.reload();
                         // }else{
                         //     rowTable.cells[0].textContent = strNombre;
                         //     rowTable.cells[1].textContent = strMarca;
@@ -97,7 +97,7 @@ function fntCrearControleEntrega() {
                         // }
                         $('#modalFormControleEntrega').modal("hide");
                         formControleEntrega.reset();
-                        swal("Controle", objData.msg, "success");
+                        swal("Entrega", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -115,7 +115,7 @@ function fntUsuarios()
 {
     if(document.querySelector('#listUsuario')){
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Controle/getUsuarios';
+        let ajaxUrl = base_url+'/Entregar/getUsuarios';
         request.open("POST",ajaxUrl,true);
         request.send();
 
@@ -139,7 +139,7 @@ function fntEquipamentos()
 {
     if(document.querySelector('#listEquipamento')){
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Controle/getEquipamentos';
+        let ajaxUrl = base_url+'/Entregar/getEquipamentos';
         request.open("POST",ajaxUrl,true);
         request.send();
 
@@ -156,6 +156,93 @@ function fntEquipamentos()
             }
         }
     }
+}
+
+function fntReceivedEquipamento(identrega, idpersona , idequipamento) {
+
+}
+
+// funcion para ver los detalles del control de la entrega
+function fntViewInfo(identrega)
+{
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Entregar/getEntrega/'+identrega;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                const datacreated = objData.data.datecreated;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 1;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
+                const nombres = objData.data.nombres;
+                const apellidos = objData.data.apellidos;
+
+                document.querySelector("#celMatricula").innerHTML = '#' + objData.data.matricula;
+                document.querySelector("#celNombres").innerHTML = nombres.toUpperCase();
+                document.querySelector("#celApellidos").innerHTML = apellidos.toUpperCase();
+                document.querySelector("#celEquipamento").innerHTML = objData.data.equipamento;
+                document.querySelector("#celMarca").innerHTML = objData.data.marca;
+                document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
+                document.querySelector("#celProtocolo").innerHTML = objData.data.protocolo;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
+                document.querySelector("#celObservacion").innerHTML = objData.data.observacion;
+
+                $('#modalViewControleEntrega').modal('show');
+            }else{
+                swal("Erro", objData.msg, "error");
+            }
+        }
+    }
+}
+
+// funcion para eliminar el control de la entrega
+function fntDelInfo(identrega, idequipamento)
+{
+    swal({
+        title: "Remover Entrega",
+        text: "¿Realmente quer remover o controle de entrega?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sim, Remover!",
+        cancelButtonText: "Não, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Entregar/delEntrega';
+
+            let strData = "idEntrega=" + identrega + "&idEquipamento=" + idequipamento;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Remover!", objData.msg , "success");
+                        tableEntregue.api().ajax.reload();
+                    }else{
+                        swal("Atenção!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+    });
 }
 
 function openModalEntregue()

@@ -5,7 +5,7 @@ class Login extends Controllers{
 	{
 		session_start();
 		if(isset($_SESSION['login'])){
-			header('Location: '.base_url().'/usuarios');
+			header('Location: '.base_url().'/entregue');
 		}
 		parent::__construct();
 	}
