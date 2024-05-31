@@ -61,7 +61,7 @@ function fntCrearUsuario() {
 
             if(strMatricula == '' || strNombre == '' || strApellido == '' || intTipoUsuario == '' || intRuta == '')
             {
-                swal("Atenção", "Todos os campos são obrigatórios.", "error");
+                swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
             }
 

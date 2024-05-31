@@ -18,6 +18,7 @@ class Entregar extends Controllers{
 		}
 		$data['page_tag'] = "Entregar";
 		$data['page_title'] = "CONTROLE DE EQUIPAMENTOS";
+		$data['page_title2'] = "ENTREGUES";
 		$data['page_name'] = "Entregar";
 		$data['page_functions_js'] = "functions_controle.js";
 		$this->views->getView($this,"entregar",$data);
@@ -35,7 +36,7 @@ class Entregar extends Controllers{
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
-				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
 				$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 
@@ -138,7 +139,7 @@ class Entregar extends Controllers{
 		die();
 	}
 
-	// Trae os usuários sem relação com o equipamento
+	// Traz os usuários sem relação com o equipamento
 	public function getUsuarios()
 	{
 		if($_SESSION['permisosMod']['r']){

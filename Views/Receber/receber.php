@@ -8,13 +8,13 @@
         <h1>
         <i class="fa fa-sliders" aria-hidden="true"></i> <?= $data['page_title'] ?>
             <?php if($_SESSION['permisosMod']['w']){ ?>
-            <button class="btn btn-primary" type="button" onclick="openModalEntregue();"><i class="fa fa-arrow-circle-o-left"></i> Receber </button>
+            <button class="btn btn-primary" type="button" onclick="openModalReceber();"><i class="fa fa-arrow-circle-o-down"></i>Receber</button>
             <?php } ?>
         </h1>
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/entregue"><?= $data['page_title'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/entregue"><?= $data['page_title2'] ?></a></li>
     </ul>
   </div>
 
@@ -29,7 +29,7 @@
                   <th>Matrícula</th>
                   <th>Nome</th>
                   <th>Equipamento</th>
-                  <th>Protocolo</th>
+                  <th>Ação</th>
                   <th>Data</th>
                   <th class="text-center">Ações</th>
                 </tr>

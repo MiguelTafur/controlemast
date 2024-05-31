@@ -53,7 +53,7 @@ function fntCrearControleEntrega() {
 
             if(listUsuario == '' || listEquipamento == '')
             {
-                swal("Atenção", 'Os campos com asterisco (<span class="required">*</span>) são obrigatórios.', "error");
+                swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
             }
 
@@ -158,10 +158,6 @@ function fntEquipamentos()
     }
 }
 
-function fntReceivedEquipamento(identrega, idpersona , idequipamento) {
-
-}
-
 // funcion para ver los detalles del control de la entrega
 function fntViewInfo(identrega)
 {
@@ -255,12 +251,6 @@ function openModalEntregue()
     document.querySelector('#titleModal').innerHTML = "Novo Controle de Entrega";
     document.querySelector("#formControleEntrega").reset();
     fntEquipamentos();
-    fntUsuarios()
-    $('#listEstadoEquipamento').select2({
-        placeholder: " -- Escolher Ação -- ",
-        allowClear: true,
-        width: 'resolve',
-        theme: "classic"
-    });
+    fntUsuarios();
     $('#modalFormControleEntrega').modal('show');
 }

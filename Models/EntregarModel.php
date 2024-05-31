@@ -60,11 +60,10 @@ class EntregarModel extends Mysql
             LEFT OUTER JOIN controle co
             ON pe.idpersona = co.personaid
             WHERE pe.status != 0
-            AND codigoruta = $this->intIdRuta
-            AND idpersona != 1
+            AND pe.codigoruta = $this->intIdRuta
+            AND pe.idpersona != 1
             ORDER BY nombres ASC";
         $request = $this->select_all($sql);
-        dep($request);
         return $request;
     }
     

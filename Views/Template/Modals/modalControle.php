@@ -26,7 +26,7 @@
               <input type="text" class="form-control" id="fileProtocolo" name="fileProtocolo">
             </div>
             <div class="form-group col-md-12 text-left">
-              <label for="txtObservacion">Observação</label>
+              <label for="txtObservacion">Anotação</label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
             </div>
           </div>
