@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function iniciarApp() {
     fntTablaEquipamentos();
     fntCrearEquipamento();
+    fntEditStatus();
 }
 
 function fntTablaEquipamentos() {
@@ -44,13 +45,12 @@ function fntCrearEquipamento() {
         formEquipamentos.onsubmit = function(e)
         {
             e.preventDefault();
-            let strID = document.querySelector('#txtID').value;
             let strNombre = document.querySelector('#txtNombre').value;
             let strMarca = document.querySelector('#txtMarca').value;
             let strCodigo = document.querySelector('#txtCodigo').value;
             let strLacre = document.querySelector('#txtLacre').value;
 
-            if(strID == '' || strNombre == '' || strMarca == '')
+            if(strLacre == '' || strNombre == '' || strMarca == '')
             {
                 swal("Atenção", "Todos os campos são obrigatórios.", "error");
                 return false;
@@ -86,18 +86,69 @@ function fntCrearEquipamento() {
                             } else {
                                 rowTable.cells[2].textContent = strCodigo;
                             }
-                            if(strLacre === '') {
-                                rowTable.cells[3].innerHTML = `<span class="font-italic">nenhum</span>`;
-                            } else {
-                                rowTable.cells[3].textContent = strLacre;
-                            }
-                            //rowTable.cells[3].textContent = strLacre;
+                            rowTable.cells[3].innerHTML = '<span class="font-weight-bold">#' + strLacre + '</span>';
 
                             rowTable = "";
                         }
                         $('#modalFormEquipamentos').modal("hide");
                         formEquipamentos.reset();
                         swal("Equipamentos", objData.msg, "success");
+                        
+                    }else{
+                        swal("Erro", objData.msg, "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+function fntEditStatus() {
+    if(document.querySelector("#formEditarEstado")){
+        let formEditarEstado = document.querySelector("#formEditarEstado");
+        
+        formEditarEstado.onsubmit = function(e)
+        {
+            e.preventDefault();
+            let listEstado = document.querySelector('#listEstado').value;
+
+            if(listEstado === '')
+            {
+                swal("Atenção", "Esolha o Tipo de Estado.", "error");
+                return false;
+            }
+
+            //divLoading.style.display = "flex";
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Equipamentos/setEstadoEquipamento';
+            let formData = new FormData(formEditarEstado);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200)
+                {
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        if(rowTable == ""){
+                            tableEquipamentos.api().ajax.reload();
+                        }else{
+                            if(objData.estado === 1) {
+                                rowTable.cells[4].innerHTML = `<h5><span class="badge badge-success">Disponível</span></h5>`;
+                            } else if(objData.estado === 3) {
+                                rowTable.cells[4].innerHTML = `<h5><span class="badge badge-danger">Estragado</span></h5>`;
+                            } else {
+                                rowTable.cells[4].innerHTML = `<h5><span class="badge badge-warning">Concerto</span></h5>`;
+                            }
+
+                            rowTable = "";
+                        }
+                        $('#modalEditStatus').modal('hide');
+                        $('#modalFormEquipamentos').modal("hide");
+                        formEquipamentos.reset();
+                        swal("Estado", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -132,7 +183,6 @@ function fntViewInfo(idequipamento)
                 const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
                 const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
 
-                document.querySelector("#celID").innerHTML = objData.data.id_hardware;
                 document.querySelector("#celNombre").innerHTML = objData.data.nombre;
                 document.querySelector("#celMarca").innerHTML = objData.data.marca;
                 if(objData.data.codigo) {
@@ -142,7 +192,7 @@ function fntViewInfo(idequipamento)
                 }
 
                 if(objData.data.lacre) {
-                    document.querySelector("#celLacre").innerHTML = objData.data.lacre;
+                    document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
                 } else {
                     document.querySelector("#celLacre").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
@@ -178,6 +228,7 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
+    document.querySelector('#divEditarEstado').classList.remove('d-none');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Equipamentos/getEquipamento/'+idequipamento;
@@ -192,7 +243,7 @@ function fntEditInfo(element, idequipamento)
             {
                 let btnEditar = document.querySelector("#btnEditEstado");
                 document.querySelector("#idEquipamento").value = objData.data.idequipamento;
-                document.querySelector("#txtID").value = objData.data.id_hardware;
+                document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
                 document.querySelector("#txtNombre").value = objData.data.nombre;
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
@@ -204,6 +255,18 @@ function fntEditInfo(element, idequipamento)
 }
 
 function openModalEditStatus() {
+
+    $('#listEstado').select2({
+        placeholder: " -- Escolher o Tipo de Estado -- ",
+        allowClear: true,
+        width: 'resolve',
+        theme: "classic"
+    });
+
+    
+
+    
+
     $('#modalEditStatus').modal('show');
     $('#modalEditStatus').addClass('myModal');
 }
@@ -217,15 +280,7 @@ function openModal()
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
     document.querySelector('#titleModal').innerHTML = "Novo Equipamento";
-    
     document.querySelector("#formEquipamentos").reset();
+    document.querySelector('#divEditarEstado').classList.add('d-none');
     $('#modalFormEquipamentos').modal('show');
-    //Crear botón editar estado
-    // divBtnEdit = document.querySelector('#btnEdit');
-    // const btnEditar = document.createElement('BUTTON');
-    // btnEditar.classList.add('btn btn-warning');
-    // btnEditar.textContent = 'Alterar Estado';
-    // btnEditar.onclick = editStatus;
-
-    //divBtnEdit.appenChild(btnEditar);
 }

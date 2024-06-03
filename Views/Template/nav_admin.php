@@ -33,6 +33,22 @@
         <?php } ?>
         <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
         <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/gerentes">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Gerentes</span>
+            </a>
+        </li>
+        <?php } ?>
+        <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/coordinadores">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Coordinadores</span>
+            </a>
+        </li>
+        <?php } ?>
+        <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
+        <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/lideres">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
                 <span class="app-menu__label">Líderes</span>
@@ -43,7 +59,7 @@
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/operacao">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Operação</span>
+                <span class="app-menu__label">Operadores</span>
             </a>
         </li>
         <?php } ?>

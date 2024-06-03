@@ -13,7 +13,7 @@
           <input type="hidden" id="idControleEntregue" name="idControleEntregue" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-12 p-1">
               <label for="listUsuario">Usuário <span class="required">*</span></label>
               <select class="form-control" style="width: 100%;" id="listUsuario" name="listUsuario" required></select>
             </div> 

@@ -3,7 +3,6 @@
 class EquipamentosModel extends Mysql
 {
 	PRIVATE $intIdEquipamento;
-	PRIVATE $strIdHardware;
 	PRIVATE $strNombre;
 	PRIVATE $strMarca;
 	PRIVATE $strCodigo;
@@ -37,7 +36,6 @@ class EquipamentosModel extends Mysql
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$sql = "SELECT idequipamento, 
-					   id_hardware,
                        nombre, 
                        marca, 
                        codigo, 
@@ -50,9 +48,8 @@ class EquipamentosModel extends Mysql
 		return $request;
 	}
 
-	public function insertEquipamento(string $ID, string $nombre, string $marca, string $codigo, string $lacre, int $ruta)
+	public function insertEquipamento(string $nombre, string $marca, string $codigo, string $lacre, int $ruta)
 	{
-		$this->strIdHardware = $ID;
 		$this->strNombre = $nombre;
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
@@ -60,13 +57,13 @@ class EquipamentosModel extends Mysql
 		$this->intIdRuta = $ruta;
 		$return = 0;
 
-		$sql = "SELECT * FROM equipamento WHERE id_hardware = '{$this->strIdHardware}' AND codigoruta = $this->intIdRuta";
+		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
 		$request = $this->select_all($sql);
 
 		if(empty($request))
 		{
-			$query_insert = "INSERT INTO equipamento(id_hardware,nombre,marca,codigo,lacre,codigoruta)  VALUES(?,?,?,?,?,?)";
-			$arrData = array($this->strIdHardware,$this->strNombre,$this->strMarca,$this->strCodigo,$this->strLacre,$this->intIdRuta);
+			$query_insert = "INSERT INTO equipamento(nombre,marca,codigo,lacre,codigoruta)  VALUES(?,?,?,?,?)";
+			$arrData = array($this->strNombre,$this->strMarca,$this->strCodigo,$this->strLacre,$this->intIdRuta);
 			$request_insert = $this->insert($query_insert, $arrData);
 			$return = $request_insert;
 		}else{
@@ -75,33 +72,52 @@ class EquipamentosModel extends Mysql
 		return $return;
 	}
 
-	public function updateEquipamento(int $idequipamento, string $idhardware, string $nombre, string $marca, string $codigo, string $lacre)
+	public function updateEquipamento(int $idequipamento, string $nombre, string $marca, string $codigo, string $lacre)
 	{
 		$this->intIdEquipamento = $idequipamento;
-		$this->strIdHardware = $idhardware;
 		$this->strNombre = $nombre;
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
 
-		$sql = "SELECT * FROM equipamento WHERE (id_hardware = '{$this->strIdHardware}' AND idequipamento != $this->intIdEquipamento)";
+		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' AND idequipamento != $this->intIdEquipamento)";
 		$request = $this->select_all($sql);
 
 		if(empty($request))
 		{
 
 			$sql = "UPDATE equipamento 
-					SET id_hardware = ?, 
-					    nombre = ?, 
+					SET nombre = ?, 
 						marca = ?, 
 						codigo = ?, 
 						lacre = ?  
 					WHERE idequipamento = $this->intIdEquipamento";
-			$arrData = array($this->strIdHardware,$this->strNombre,$this->strMarca,$this->strCodigo,$this->strLacre);
+			$arrData = array($this->strNombre,$this->strMarca,$this->strCodigo,$this->strLacre);
 			$request = $this->update($sql, $arrData);
 		}else{
 			$request = "0";
 		}
 		return $request;
+	}
+
+	public function updateEstadoEquipamento(int $idequipamento, int $estado) {
+		$this->intIdEquipamento = $idequipamento;
+		$this->intStatus = $estado;
+		$return = 0;
+
+		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
+		$request_select = $this->select($query_select);
+		$estado = $request_select['status'];
+		
+		if($estado === 2) {
+			$return = '0';
+		} else {
+			$query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->intIdEquipamento";
+			$arrData = array($this->intStatus);
+			$request_update = $this->update($query_update, $arrData);
+			$return = $this->intStatus;
+		}
+
+		return $return;
 	}
 }

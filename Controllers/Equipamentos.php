@@ -60,10 +60,10 @@ class Equipamentos extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-info btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idequipamento'].')" title="Remover Equipamento"><i class="far fa-trash-alt"></i></button>';
@@ -99,12 +99,11 @@ class Equipamentos extends Controllers{
 	{ 
 		if($_POST)
 		{
-			if(empty($_POST['txtID']) || empty($_POST['txtNombre']) || empty($_POST['txtMarca']))
+			if(empty($_POST['txtLacre']) || empty($_POST['txtNombre']) || empty($_POST['txtMarca']))
 			{
 				$arrResponse = array("status" => false, "msg" => "Dados errados.");
 			}else{
 				$idEquipamento = intval($_POST['idEquipamento']);
-				$strID = strClean($_POST['txtID']);
 				$strNombre =  ucwords(strClean($_POST['txtNombre']));
 				$strMarca =  ucwords(strClean($_POST['txtMarca']));
 				$strCodigo = strClean($_POST['txtCodigo']);
@@ -116,7 +115,7 @@ class Equipamentos extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertEquipamento($strID,
+						$request_user = $this->model->insertEquipamento(
 																	$strNombre,
 																	$strMarca,
 																	$strCodigo,
@@ -127,7 +126,6 @@ class Equipamentos extends Controllers{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
 						$request_user = $this->model->updateEquipamento($idEquipamento,
-																	$strID,
 																	$strNombre,
 																	$strMarca,
 																	$strCodigo,
@@ -143,11 +141,35 @@ class Equipamentos extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! O IDs de Hardware já existe, verifique novamente.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! O Lacre do equipamento já existe, verifique novamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
 			}	
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	public function setEstadoEquipamento() {
+		if($_POST) { 
+			if(empty($_POST['listEstado'])) {
+				$arrResponse = array("status" => false, "msg" => "Esolha o Tipo de Estado.");
+			} else {
+				$idEquipamento = intval($_POST['idEquipamentoEstado']);
+				$estadoEquipamento = intval($_POST['listEstado']);
+
+				if($_SESSION['permisosMod']['u']){
+					$request_estado = $this->model->updateEstadoEquipamento($idEquipamento, $estadoEquipamento);
+					if($request_estado > 0) {
+						$arrResponse = array('status' => true, 'msg' => 'Estado atualizado com sucesso.', 'estado' => $request_estado);
+					} else if ($request_estado === '0') {
+						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
+					}else {
+						$arrResponse = array('status' => false, 'msg' => 'Erro ao atualizar o Estado.');
+					}
+				}
+			}
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
