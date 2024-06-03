@@ -24,13 +24,12 @@ class ReceberModel extends Mysql
                        co.equipamentoid,
                        co.observacion,
                        DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fechaRegistro,
-					   co.status as estadoControl,
+					   co.status,
                        pe.matricula,
                        pe.nombres,
                        pe.apellidos,
                        eq.nombre as equipamento,
-                       eq.lacre,
-                       eq.status as estadoEquipamento
+                       eq.lacre
                 FROM controle co
                 LEFT OUTER JOIN persona pe
                 ON co.personaid = pe.idpersona
@@ -53,8 +52,9 @@ class ReceberModel extends Mysql
 			LEFT OUTER JOIN controle co
 			ON pe.idpersona = co.personaid
 			WHERE pe.status != 0
+			AND pe.idpersona != 1
+			AND co.status = 1
 			AND codigoruta = $this->intIdRuta
-			AND idpersona != 1
 			ORDER BY nombres ASC";
 		$request = $this->select_all($sql);
 		return $request;
@@ -67,12 +67,37 @@ class ReceberModel extends Mysql
 				FROM controle co 
 				LEFT OUTER JOIN equipamento eq
 				ON co.equipamentoid = eq.idequipamento
-				WHERE co.personaid = $this->listUsuario";
+				WHERE co.personaid = $this->listUsuario
+				AND co.status = 1";
 		$request = $this->select($sql);
 		return $request;
 	}
 
-	public function insertControleEntrega(int $idequipamento, int $usuario, int $acao, string $observacion)
+	public function selectRecebido(int $idrecebido)
+	{
+		$this->intIdControle = $idrecebido;
+		$sql = "SELECT co.idcontrole, 
+                       co.observacion, 
+                       co.datecreated, 
+					   co.status,
+                       pe.matricula, 
+                       pe.nombres, 
+                       pe.apellidos, 
+					   eq.id_hardware as ID,
+                       eq.nombre as equipamento,
+                       eq.marca,
+                       eq.lacre
+				FROM controle co 
+                LEFT OUTER JOIN persona pe
+                ON pe.idpersona = co.personaid
+                LEFT OUTER JOIN equipamento eq
+                ON eq.idequipamento = co.equipamentoid
+				WHERE idcontrole = $this->intIdControle";
+		$request = $this->select($sql);
+		return $request;
+	}
+
+	public function insertControleReceber(int $idequipamento, int $usuario, int $acao, string $observacion)
 	{
 		$this->listEquipamento = $idequipamento;
 		$this->listUsuario = $usuario;
@@ -80,20 +105,34 @@ class ReceberModel extends Mysql
 		$this->strObservacion = $observacion;
 		$return = 0;
 
+		//Selecciona el ID del control actual entregado
+		$query_select = "SELECT * 
+						 FROM controle 
+						 WHERE personaid = $this->listUsuario 
+						 AND equipamentoid = $this->listEquipamento
+						 AND status = 1";
+		$request_select = $this->select($query_select);
+		$idcontrole = $request_select['idcontrole'];
+
         $query_insert = "INSERT INTO controle(personaid,equipamentoid,observacion,status)  VALUES(?,?,?,?)";
-        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strObservacion,$this->listAcao);
+        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strObservacion,$this->listEstado);
         $request_insert = $this->insert($query_insert, $arrData);
+		
 
         if($request_insert) {
+
+			$query_update_controle = "UPDATE controle SET status = ? WHERE idcontrole = $idcontrole";
+			$arrDataControle = array(0);
+			$request_update_controle = $this->update($query_update_controle, $arrDataControle);
+
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
-			if($this->listEstado === 2 || ($this->listEstado === 4 || ($this->listEstado === 5) {
-				$arrData = array(1);
-			} else if($this->listEstado === 3) {
+			if($this->listEstado === 3) {
 				$arrData = array(3);
+			} else {
+				$arrData = array(1);
 			}
             
-            $request = $this->update($query_update,$arrData);
-			$return = $request;
+            $return = $request_update = $this->update($query_update,$arrData);
         } else {
             $return = "0";
         }

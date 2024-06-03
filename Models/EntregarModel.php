@@ -36,11 +36,11 @@ class EntregarModel extends Mysql
                 ON co.personaid = pe.idpersona
                 LEFT OUTER JOIN equipamento eq
                 ON co.equipamentoid = eq.idequipamento
-                WHERE eq.status != 0 
-                AND co.status = 1 
+                WHERE co.status = 1 
                 AND pe.codigoruta = $ruta
                 ORDER BY nombre ASC";
 		$request = $this->select_all($sql);
+        //dep($request);exit;
 		return $request;
 	}
 
@@ -55,13 +55,11 @@ class EntregarModel extends Mysql
     public function selectUsuarios($ruta)
     {
         $this->intIdRuta = $ruta;
-        $sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos, co.personaid, co.status
-            FROM persona pe
-            LEFT OUTER JOIN controle co
-            ON pe.idpersona = co.personaid
-            WHERE pe.status != 0
-            AND pe.codigoruta = $this->intIdRuta
-            AND pe.idpersona != 1
+        $sql = "SELECT idpersona, matricula, nombres, apellidos
+            FROM persona
+            WHERE status != 0
+            AND codigoruta = $this->intIdRuta
+            AND idpersona != 1
             ORDER BY nombres ASC";
         $request = $this->select_all($sql);
         return $request;
@@ -80,8 +78,6 @@ class EntregarModel extends Mysql
                        eq.nombre as equipamento,
                        eq.marca,
                        eq.lacre
-				       /*DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fechaRegistro */
-
 				FROM controle co 
                 LEFT OUTER JOIN persona pe
                 ON pe.idpersona = co.personaid
@@ -101,20 +97,25 @@ class EntregarModel extends Mysql
 		$this->strObservacion = $observacion;
 		$return = 0;
 
-        $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion)  VALUES(?,?,?,?)";
-        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion);
-        $request_insert = $this->insert($query_insert, $arrData);
+        $query_select = "SELECT personaid FROM controle WHERE personaid = $this->listUsuario AND status = 1";
+        $request_select = $this->select($query_select);
 
-        if($request_insert) {
+        if(empty($request_select)){
+            $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion)  VALUES(?,?,?,?)";
+            $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion);
+            $request_insert = $this->insert($query_insert, $arrData);
+            $return = $request_insert;
+
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
             $arrData = array($this->listEstado);
             $request = $this->update($query_update,$arrData);
-			$return = $request;
+
         } else {
             $return = "0";
         }
 
-		return $return;
+		//dep($return);exit;
+        return $return;
 	}
 
     public function deleteEntrega(int $identrega, int $idequipamento)

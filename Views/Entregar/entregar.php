@@ -36,11 +36,11 @@
             <table class="table table-striped text-center" id="tableEntregue">
               <thead>
                 <tr>
+                  <th>Data</th>
+                  <th>Protocolo</th>
+                  <th>Equipamento</th>
                   <th>Matrícula</th>
                   <th>Nome</th>
-                  <th>Equipamento</th>
-                  <th>Protocolo</th>
-                  <th>Data</th>
                   <th class="text-center">Ações</th>
                 </tr>
               </thead>

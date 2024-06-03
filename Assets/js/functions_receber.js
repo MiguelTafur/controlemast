@@ -25,11 +25,11 @@ function fntTablaReceber() {
             "dataSrc":""
         },
         "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
             {"data":"matricula"},
             {"data":"nombres"},
-            {"data":"equipamento"},
-            {"data":"status"},
-            {"data":"fechaRegistro"},
             {"data":"options"}
         ],
         "resonsieve":"true",
@@ -97,6 +97,7 @@ function fntCrearControleReceber() {
                         // }
                         $('#modalFormControleReceber').modal("hide");
                         formControleReceber.reset();
+                        
                         swal("Recebimento", objData.msg, "success");
                         
                     }else{
@@ -161,6 +162,52 @@ function fntEquipamento(idusuario) {
             let idequipamento = document.querySelector('#idequipamentoReceber');
             idequipamento.value = id;
             equipamento.value = nombre + ': #' + lacre;
+        }
+    }
+}
+
+// funcion para ver los detalles del control del Recebimiento
+function fntViewInfo(idrecebido)
+{
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Receber/getRecebido/'+idrecebido;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                //Fecha actual completa 
+                const datacreated = objData.data.datecreated;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 1;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
+                const nombres = objData.data.nombres;
+                const apellidos = objData.data.apellidos;
+
+                document.querySelector("#celAcao").innerHTML = objData.data.status;
+                document.querySelector("#celMatricula").innerHTML = '#' + objData.data.matricula;
+                document.querySelector("#celNombres").innerHTML = nombres.toUpperCase();
+                document.querySelector("#celApellidos").innerHTML = apellidos.toUpperCase();
+                document.querySelector("#celEquipamento").innerHTML = objData.data.equipamento;
+                document.querySelector("#celMarca").innerHTML = objData.data.marca;
+                document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
+                document.querySelector("#celID").innerHTML = objData.data.ID;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
+                document.querySelector("#celObservacion").innerHTML = objData.data.observacion;
+
+                $('#modalViewControleReceber').modal('show');
+            }else{
+                swal("Erro", objData.msg, "error");
+            }
         }
     }
 }

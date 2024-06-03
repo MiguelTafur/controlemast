@@ -25,11 +25,11 @@ function fntTablaControles() {
             "dataSrc":""
         },
         "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
             {"data":"matricula"},
             {"data":"nombres"},
-            {"data":"equipamento"},
-            {"data":"status"},
-            {"data":"fechaRegistro"},
             {"data":"options"}
         ],
         "resonsieve":"true",

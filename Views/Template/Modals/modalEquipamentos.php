@@ -15,7 +15,7 @@
           <div class="form-row">
           <div class="form-group col-md-12">
               <label for="txtID">ID de Hardware <span class="required">*</span></label>
-              <input type="text" class="form-control" id="txtID" name="txtID" required="">
+              <input type="text" class="form-control" id="txtID" name="txtID" required="" readonly>
             </div>
             <div class="form-group col-md-12">
               <label for="txtNombre">Nome <span class="required">*</span></label>
@@ -33,12 +33,13 @@
               <label for="txtLacre">Código Lacre</label>
               <input type="tel" class="form-control" id="txtLacre" name="txtLacre" onkeypress="return controlTag(event)">
             </div>
-            <!-- <div class="form-group col-md-12">
-              <label for="sltEstado">Estado</label>
-              <select class="form-group col-md-12" id="sltEstado" name="sltEstado">
-                <option value="">-- Escolher --</option>
-              </select>
-            </div>  -->
+            <div class="form-group col-md-12">
+              <label for="txtObservacion">Anotação</label>
+              <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
+            </div>
+            <div class="form-group col-md-12 text-center mt-3">
+              <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+            </div>
           </div>
           <hr>
           <div class="tile-footer">
@@ -94,6 +95,28 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal ver equipamento -->
+<div class="modal fade" id="modalEditStatus" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Alterar Estado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

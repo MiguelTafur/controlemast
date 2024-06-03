@@ -17,7 +17,7 @@ class Entregar extends Controllers{
 			header("Location: ".base_url().'/login');
 		}
 		$data['page_tag'] = "Entregar";
-		$data['page_title'] = "CONTROLE DE EQUIPAMENTOS";
+		$data['page_title'] = "EQUIPAMENTOS ENTREGUES";
 		$data['page_title2'] = "ENTREGUES";
 		$data['page_name'] = "Entregar";
 		$data['page_functions_js'] = "functions_controle.js";
@@ -70,24 +70,13 @@ class Entregar extends Controllers{
 				$listEquipamento =  ucwords(strClean($_POST['listEquipamento']));
 				$strProtocolo = strClean($_POST['fileProtocolo']);
 				$strObservacion =  strClean($_POST['txtObservacion']);
-				$request_user = "";
-				$intIdRuta = $_SESSION['idRuta'];
+				//$request_user = "";
 
 				if($idControle == 0)
 				{
-					$option = 1;
+					//$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertControleEntrega($listUsuario,
-																	$listEquipamento,
-																	$strProtocolo,
-                                                                    $strObservacion,
-																	$intIdRuta);
-					}
-				}else{
-					$option = 2;
-					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateControleEntrega($idControle,
-																	$idControle,
+						$request_user = $this->model->insertControleEntrega(
 																	$listUsuario,
 																	$listEquipamento,
 																	$strProtocolo,
@@ -97,13 +86,13 @@ class Entregar extends Controllers{
 
 				if($request_user > 0)
 				{
-					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
-					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
-					}
+					//if($option == 1){
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'data' => $request_user);
+					// }else{
+					// 	$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+					// }
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar o controle.');
+					$arrResponse = array('status' => false, 'msg' => 'O Usuário já possui um equipamento.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
@@ -148,27 +137,13 @@ class Entregar extends Controllers{
 			$arrData = $this->model->selectUsuarios($intIdRuta);
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					if($arrData[$i]['personaid'] == "" || $arrData[$i]['status'] != 1 ) {
-						$ultimo = $arrData[$i]['apellidos'];
-						$ultimo = explode(" ", $ultimo);
-						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
-					}
-					
+					$ultimo = $arrData[$i]['apellidos'];
+					$ultimo = explode(" ", $ultimo);
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
 				}
 			}
 			echo $htmlOptions;
-			die();
-
-			if(empty($arrData))
-				{
-					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
-				}else{
-					$arrResponse = array('status' => true, 'data' => $arrData);
-				}
-				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}	
-
-		die();
 	}
 
 	public function getEntrega($identrega)

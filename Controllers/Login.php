@@ -5,7 +5,7 @@ class Login extends Controllers{
 	{
 		session_start();
 		if(isset($_SESSION['login'])){
-			header('Location: '.base_url().'/entregue');
+			header('Location: '.base_url().'/logout');
 		}
 		parent::__construct();
 	}
@@ -28,12 +28,10 @@ class Login extends Controllers{
 				$strRuta = strtolower(strClean($_POST['txtRuta']));
 				$intCodigo = strClean($_POST['txtCodigo']);
 				$strUsuario = strtolower(strClean($_POST['txtEmail']));
-				$requestUser = $this->model->loginUser($strRuta, $intCodigo, $strUsuario);
-
-				//dep($requestUser);exit;					
+				$requestUser = $this->model->loginUser($strRuta, $intCodigo, $strUsuario);				
 
 				if(empty($requestUser)){
-					$arrResponse = array('status' => false, 'msg' => 'Los datos proporcionados no coinciden.');
+					$arrResponse = array('status' => false, 'msg' => 'Os dados fornecidos não correspondem.');
 				}else{
 					$arrData = $requestUser;
 					if($arrData['status'] == 1){

@@ -26,11 +26,11 @@
             <table class="table table-striped text-center" id="tableReceber">
               <thead>
                 <tr>
+                  <th>Data</th>
+                  <th>Ação</th>
+                  <th>Equipamento</th>
                   <th>Matrícula</th>
                   <th>Nome</th>
-                  <th>Equipamento</th>
-                  <th>Ação</th>
-                  <th>Data</th>
                   <th class="text-center">Ações</th>
                 </tr>
               </thead>

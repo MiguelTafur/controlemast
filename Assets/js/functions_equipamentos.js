@@ -150,9 +150,14 @@ function fntViewInfo(idequipamento)
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
                 switch (objData.data.status) {
                     case 1:
-                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Em Estoque</span>';    
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Disponível</span>';    
                         break;
-                
+                    case 3:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-danger">Estragado</span>';    
+                        break;
+                    case 4:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-warning">Concerto</span>';    
+                        break;
                     default:
                         document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-info">Em Uso</span>';    
                         break;
@@ -185,19 +190,24 @@ function fntEditInfo(element, idequipamento)
 
             if(objData.status)
             {
+                let btnEditar = document.querySelector("#btnEditEstado");
                 document.querySelector("#idEquipamento").value = objData.data.idequipamento;
                 document.querySelector("#txtID").value = objData.data.id_hardware;
                 document.querySelector("#txtNombre").value = objData.data.nombre;
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
-                
                 document.querySelector("#txtLacre").value = objData.data.lacre;
-                //document.querySelector("#txtEstado").value = objData.data.status;
             }
         }
         $('#modalFormEquipamentos').modal('show');
     }
 }
+
+function openModalEditStatus() {
+    $('#modalEditStatus').modal('show');
+    $('#modalEditStatus').addClass('myModal');
+}
+
 
 function openModal()
 {
@@ -207,6 +217,15 @@ function openModal()
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
     document.querySelector('#titleModal').innerHTML = "Novo Equipamento";
+    
     document.querySelector("#formEquipamentos").reset();
     $('#modalFormEquipamentos').modal('show');
+    //Crear botón editar estado
+    // divBtnEdit = document.querySelector('#btnEdit');
+    // const btnEditar = document.createElement('BUTTON');
+    // btnEditar.classList.add('btn btn-warning');
+    // btnEditar.textContent = 'Alterar Estado';
+    // btnEditar.onclick = editStatus;
+
+    //divBtnEdit.appenChild(btnEditar);
 }

@@ -17,7 +17,7 @@ class Receber extends Controllers{
 			header("Location: ".base_url().'/login');
 		}
 		$data['page_tag'] = "Receber";
-		$data['page_title'] = "CONTROLE DE EQUIPAMENTOS";
+		$data['page_title'] = "EQUIPAMENTOS RECEBIDOS";
 		$data['page_title2'] = "RECEBIDOS";
 		$data['page_name'] = "Receber";
 		$data['page_functions_js'] = "functions_receber.js";
@@ -28,26 +28,38 @@ class Receber extends Controllers{
 	{
 		if($_SESSION['permisosMod']['r']){
 			$arrData = $this->model->selectRecebidos();
+			//dep($arrData);exit;
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				//$btnReceived = '';
-				$btnDelete = '';
+				//$btnDelete = '';
+				
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
 				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+				if($arrData[$i]['status'] === 2) {
+					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
+				} else if($arrData[$i]['status'] === 3) {
+					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">ESTRAGADO</span>';
+				} else if($arrData[$i]['status'] === 4){
+					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
+				} else if($arrData[$i]['status'] === 5){
+					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+				}
+
+				//$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
 				}
-				if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
-				}
+				// if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+				// 	$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
+				// }
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnDelete.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
@@ -63,11 +75,11 @@ class Receber extends Controllers{
 			$htmlOptions = '<option></option>';
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					if($arrData[$i]['personaid'] != "" && $arrData[$i]['status'] == 1 ) {
+					// if($arrData[$i]['personaid'] != "" && $arrData[$i]['status'] == 1 ) {
 						$ultimo = $arrData[$i]['apellidos'];
 						$ultimo = explode(" ", $ultimo);
 						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
-					}
+					// }
 				}
 			}
 			echo $htmlOptions;
@@ -94,6 +106,36 @@ class Receber extends Controllers{
 		}
 	}
 
+	public function getRecebido($idrecebido)
+	{
+		if($_SESSION['permisosMod']['r']){
+			$idRecebido = intval($idrecebido);
+			if($idRecebido > 0)
+			{
+				$arrData = $this->model->selectRecebido($idRecebido);
+				if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+					if($arrData['status'] === 2) {
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
+					} else if($arrData['status'] === 3) {
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">ESTRAGADO</span>';
+					} else if($arrData['status'] === 4){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
+					} else if($arrData['status'] === 5){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+					}
+
+					$arrData['observacion'] = '<span class="font-italic">'.$arrData['observacion'].'</span>';
+					$arrResponse = array('status' => true, 'data' => $arrData);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
+	}
+
 	public function setControleReceber()
 	{
 		if($_POST)
@@ -106,8 +148,6 @@ class Receber extends Controllers{
 				$listUsuario = intval($_POST['listUsuario']);
 				$listAcao = intval($_POST['listAcao']);
 				$strObservacion =  strClean($_POST['txtObservacion']);
-				//$request_user = "";
-				$intIdRuta = $_SESSION['idRuta'];
 
 				if($_SESSION['permisosMod']['w']){
 					$request_user = $this->model->insertControleReceber($idEquipamento,
@@ -119,46 +159,11 @@ class Receber extends Controllers{
 				if($request_user > 0){
 					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
-				 	$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+				 	$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar os dados.');
 				}
 
-				// if($idControle == 0)
-				// {
-				// 	$option = 1;
-				// 	if($_SESSION['permisosMod']['w']){
-				// 		$request_user = $this->model->insertControleReceber($listUsuario,
-				// 													$listEquipamento,
-				// 													$strProtocolo,
-                //                                                     $strObservacion,
-				// 													$intIdRuta);
-				// 	}
-				// }else{
-				// 	$option = 2;
-				// 	if($_SESSION['permisosMod']['u']){
-				// 		$request_user = $this->model->updateControleEntrega($idControle,
-				// 													$idControle,
-				// 													$listUsuario,
-				// 													$listEquipamento,
-				// 													$strProtocolo,
-                //                                                     $strObservacion);
-				// 	}
-				// }
-
-				// if($request_user > 0)
-				// {
-					// if($option == 1){
-					// 	$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
-					// }else{
-					// 	$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
-					// }
-					// }else if($request_user == '0'){
-					// 	$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar o controle.');
-					// }else{
-					// 	$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
-					// }
-				//}	
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
 		}
-		die();
 	}
 }
