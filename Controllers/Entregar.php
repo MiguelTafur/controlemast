@@ -60,17 +60,30 @@ class Entregar extends Controllers{
     public function setControleEntrega()
 	{ 
 		if($_POST)
-		{
-			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']))
+		{ 
+			$medida = 1000 * 1000;
+			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']) || empty($_FILES['fileProtocolo']['name']))
 			{
-				$arrResponse = array("status" => false, "msg" => "Dados errados.");
-			}else{
+				$arrResponse = array("status" => false, "msg" => "Os campos com asterisco (*) são obrigatórios.");
+			} else if($_FILES['fileProtocolo']['size'] > $medida) {
+				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
+			} else{
+
 				$idControle = intval($_POST['idControleEntregue']);
 				$listUsuario = strClean($_POST['listUsuario']);
 				$listEquipamento =  ucwords(strClean($_POST['listEquipamento']));
-				$strProtocolo = strClean($_POST['fileProtocolo']);
+				$strProtocolo = $_FILES['fileProtocolo'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
-				//$request_user = "";
+				
+				$carpetaImagenes = 'Assets/images/imagenes/';
+
+				if(!is_dir($carpetaImagenes)) {
+					mkdir($carpetaImagenes);
+				}
+
+				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+				move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
 
 				if($idControle == 0)
 				{
@@ -79,7 +92,7 @@ class Entregar extends Controllers{
 						$request_user = $this->model->insertControleEntrega(
 																	$listUsuario,
 																	$listEquipamento,
-																	$strProtocolo,
+																	$nombreImagen,
                                                                     $strObservacion);
 					}
 				}

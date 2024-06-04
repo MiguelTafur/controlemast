@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="formControleEntrega" name="formControleEntrega" class="form-horizontal">
+        <form id="formControleEntrega" name="formControleEntrega" class="form-horizontal" enctype="multipart/form-data">
           <input type="hidden" id="idControleEntregue" name="idControleEntregue" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
@@ -21,11 +21,11 @@
               <label for="listEquipamento">Equipamento <span class="required">*</span></label>
               <select class="form-control" style="width: 100%;" id="listEquipamento" name="listEquipamento" required></select>
             </div> 
-            <div class="form-group col-md-12 text-left">
-              <label for="fileProtocolo">Protocolo</label>
-              <input type="text" class="form-control" id="fileProtocolo" name="fileProtocolo">
+            <div class="form-group">
+              <label for="fileProtocolo">Protocolo <span class="required">*</span></label>
+              <input type="file" class="form-control-file" id="fileProtocolo" name="fileProtocolo" accept="image/jpeg, image/png">
             </div>
-            <div class="form-group col-md-12 text-left">
+            <div class="form-group col-md-12">
               <label for="txtObservacion">Anotação</label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
             </div>

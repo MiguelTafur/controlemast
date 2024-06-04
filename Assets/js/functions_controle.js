@@ -48,7 +48,7 @@ function fntCrearControleEntrega() {
             e.preventDefault();
             let listUsuario = document.querySelector('#listUsuario').value;
             let listEquipamento = document.querySelector('#listEquipamento').value;
-            let strProtocolo = document.querySelector('#fileProtocolo').value;
+            //let strProtocolo = document.querySelector('#fileProtocolo').value;
             let strObservacion = document.querySelector('#txtObservacion').value;
 
             if(listUsuario == '' || listEquipamento == '')
