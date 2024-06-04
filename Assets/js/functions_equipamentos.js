@@ -241,9 +241,33 @@ function fntEditInfo(element, idequipamento)
 
             if(objData.status)
             {
-                let btnEditar = document.querySelector("#btnEditEstado");
+                let estadoActual = document.querySelector("#estadoActual");
+                estadoActual.classList.add('font-weight-bold');
+                document.querySelector("#formEditarEstado").classList.remove('d-none');
+                document.querySelector("#noAlterado").classList.add('d-none');
+                if(objData.data.status === 1) {
+                    estadoActual.textContent = `Disponível`;
+                    estadoActual.classList.add('text-success');
+                } else if(objData.data.status === 3) {
+                    estadoActual.textContent = `Estragado`;
+                    estadoActual.classList.add('text-danger');
+                } else if(objData.data.status === 3){
+                    estadoActual.textContent = `Concerto`;
+                    estadoActual.classList.add('text-warning');
+                } else {
+                    estadoActual.textContent = `Em uso`;
+                    estadoActual.classList.add('text-info');
+                    document.querySelector("#noAlterado").classList.remove('d-none');
+                    document.querySelector("#formEditarEstado").classList.add('d-none');
+                    document.querySelector("#noAlterado").innerHTML = `<p class="text-uppercase text-center m-0 text-secondary font-weight-bold">Equipamento não pode ser alterado</p>`
+                }
+                
+                //estadoActual.textContent = objData.data.status;
+                
                 document.querySelector("#idEquipamento").value = objData.data.idequipamento;
-                document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
+                if(document.querySelector("#idEquipamentoEstado")) {
+                    document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
+                }
                 document.querySelector("#txtNombre").value = objData.data.nombre;
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
@@ -262,10 +286,6 @@ function openModalEditStatus() {
         width: 'resolve',
         theme: "classic"
     });
-
-    
-
-    
 
     $('#modalEditStatus').modal('show');
     $('#modalEditStatus').addClass('myModal');

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function iniciarApp() {
     fntTablaControles();
     fntCrearControleEntrega();
-    
+    fntActualizarProtocolo();
 }
 
 // Tabela dos controles
@@ -98,6 +98,47 @@ function fntCrearControleEntrega() {
                         $('#modalFormControleEntrega').modal("hide");
                         formControleEntrega.reset();
                         swal("Entrega", objData.msg, "success");
+                        
+                    }else{
+                        swal("Erro", objData.msg, "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+function fntActualizarProtocolo() {
+    if(document.querySelector("#formEditarProtocolo")) {
+        let formEditarProtocolo = document.querySelector("#formEditarProtocolo");
+        formEditarProtocolo.onsubmit = function(e) {
+            e.preventDefault();
+            let protocolo = document.querySelector('#fileEditProtocolo').value;
+            if(protocolo == '')
+            {
+                swal("Atenção", 'Seleciona um arquivo.', "error");
+                return false;
+            }
+
+            //divLoading.style.display = "flex";
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Entregar/setUpdateProtocolo';
+            let formData = new FormData(formEditarProtocolo);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200)
+                {
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        tableEntregue.api().ajax.reload();
+
+                        $('#modalEditProtocolo').modal("hide");
+                        formEditarProtocolo.reset();
+                        swal("Protocolo", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -200,6 +241,32 @@ function fntViewInfo(identrega)
             }
         }
     }
+}
+
+function fntEditProtocolo(identrega) {
+
+    document.querySelector("#fileEditProtocolo").value = "";
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Entregar/getEntrega/'+identrega;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+
+            if(objData.status)
+            {
+                document.querySelector("#idControle").value = objData.data.idcontrole;
+                let imagen = base_url + '/Assets/images/imagenes/' + objData.data.protocolo;
+                document.querySelector("#protocoloActual").setAttribute('target', '_blank');   
+                document.querySelector("#protocoloActual").setAttribute('href', imagen);   
+            }
+        }
+    }
+
+    $('#modalEditProtocolo').modal('show');
 }
 
 // funcion para eliminar el control de la entrega

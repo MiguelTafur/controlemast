@@ -97,7 +97,7 @@
   </div>
 </div>
 
-<!-- modal ver equipamento -->
+<!-- modal editar Estado -->
 <div class="modal fade" id="modalEditStatus" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -108,10 +108,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="text-center">
-          <p class="font-weight-bold text-uppercase m-0 ">Tipo de Estado atual: <span class="font-italic" id="estadoActual"></span></p>
+        <div class="text-right">
+          <p class="font-weight-bold m-0 ">Estado atual:  <span class="font-italic" id="estadoActual"></span></p>
         </div>
         <hr>
+        <div id="noAlterado" class="d-none"></div>
         <form class="mt-3" id="formEditarEstado" name="formEditarEstado">
           <input type="hidden" id="idEquipamentoEstado" name="idEquipamentoEstado" value="">
           <div class="form-row align-items-center">
@@ -127,8 +128,6 @@
               <button type="submit" class="btn btn-primary my-1">Salvar</button>
             </div>
           </div>
-
-          
         </form>
       </div>
       <div class="modal-footer justify-content-start">

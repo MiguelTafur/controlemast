@@ -63,7 +63,7 @@
               <td id="celNombres"></td>
             </tr>
             <tr>
-              <td class="font-weight-bold">Apellidos:</td>
+              <td class="font-weight-bold">Sobrenomes:</td>
               <td id="celApellidos"></td>
             </tr>
             <tr>
@@ -92,6 +92,43 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal editar Protocolo -->
+<div class="modal fade" id="modalEditProtocolo" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Alterar Protocolo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-right mb-3">
+          <a class="font-weight-bold text-decoration-underline" id="protocoloActual"><u>Protocolo atual</u></a>
+        </div>
+        <form class="mt-2" id="formEditarProtocolo" name="formEditarProtocolo">
+          <input type="hidden" id="idControle" name="idControle" value="">
+          <input type="hidden" id="imagenBD" name="imagenBD" value="">
+          <div class="form-row text-center justify-content-center">
+            <div class="form-group col-9">
+              <label for="fileEditProtocolo" class="font-weight-bold">Novo Protocolo <span class="required">*</span></label>
+              <input type="file" class="form-control-file" id="fileEditProtocolo" name="fileEditProtocolo" accept="image/jpeg, image/png" required>
+            </div>
+            <div class="col-5">
+              <button type="submit" class="btn btn-block btn-primary my-1">Salvar</button>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

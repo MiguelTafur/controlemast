@@ -30,7 +30,7 @@ class Entregar extends Controllers{
 			$arrData = $this->model->selectEntregues();
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
-				//$btnReceived = '';
+				$btnEdit = '';
 				$btnDelete = '';
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
@@ -38,19 +38,19 @@ class Entregar extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
 				}
-				// if($_SESSION['permisosMod']['u']){
-				// 	$btnReceived = '<button class="btn btn-warning btn-sm" onClick="fntReceivedEquipamento('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['personaid'].', '.$arrData[$i]['equipamentoid'].')" title="Alterar Controle"><i class="fas fa-arrow-circle-down"></i></button>';
-				// }
+				if($_SESSION['permisosMod']['u']){
+					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditProtocolo('.$arrData[$i]['idcontrole'].')" title="Alterar Protocolo"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>';
+				}
 				if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnDelete.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
@@ -69,10 +69,8 @@ class Entregar extends Controllers{
 				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			} else{
 
-				$idControle = intval($_POST['idControleEntregue']);
 				$listUsuario = strClean($_POST['listUsuario']);
 				$listEquipamento =  ucwords(strClean($_POST['listEquipamento']));
-				$strProtocolo = $_FILES['fileProtocolo'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
 				
 				$carpetaImagenes = 'Assets/images/imagenes/';
@@ -85,31 +83,52 @@ class Entregar extends Controllers{
 
 				move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
 
-				if($idControle == 0)
-				{
-					//$option = 1;
-					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertControleEntrega(
-																	$listUsuario,
-																	$listEquipamento,
-																	$nombreImagen,
-                                                                    $strObservacion);
-					}
+				if($_SESSION['permisosMod']['w']){
+					$request_user = $this->model->insertControleEntrega(
+																$listUsuario,
+																$listEquipamento,
+																$nombreImagen,
+																$strObservacion);
 				}
 
 				if($request_user > 0)
 				{
-					//if($option == 1){
 					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'data' => $request_user);
-					// }else{
-					// 	$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
-					// }
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'O Usuário já possui um equipamento.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
 			}	
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	public function setUpdateProtocolo() 
+	{
+		if($_POST) {
+			$medida = 1000 * 1000;
+			if(empty($_FILES['fileEditProtocolo']['name']))
+			{
+				$arrResponse = array("status" => false, "msg" => "Os campos com asterisco (*) são obrigatórios.");
+			} else if($_FILES['fileEditProtocolo']['size'] > $medida) {
+				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
+			} else {
+				$idControle = intval($_POST['idControle']);
+				dep($idControle);
+				$carpetaImagenes = 'Assets/images/imagenes/';
+
+				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+				if($_SESSION['permisosMod']['u']){
+					$request_user = $this->model->updateProtocolo(
+																$
+																$nombreImagen);
+				}
+
+			}
+
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
