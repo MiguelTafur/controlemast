@@ -28,7 +28,7 @@ class EntregarModel extends Mysql
                        pe.matricula,
                        pe.nombres,
                        pe.apellidos,
-                       eq.nombre as equipamento,
+                       eq.tipo as equipamento,
                        eq.lacre,
                        eq.status
                 FROM controle co
@@ -37,8 +37,7 @@ class EntregarModel extends Mysql
                 LEFT OUTER JOIN equipamento eq
                 ON co.equipamentoid = eq.idequipamento
                 WHERE co.status = 1 
-                AND pe.codigoruta = $ruta
-                ORDER BY nombre ASC";
+                AND pe.codigoruta = $ruta";
 		$request = $this->select_all($sql);
         //dep($request);exit;
 		return $request;
@@ -46,7 +45,7 @@ class EntregarModel extends Mysql
 
     public function selectEquipamentos()
     {
-        $sql = "SELECT idequipamento, nombre, lacre from equipamento WHERE status = 1 AND lacre != ''";
+        $sql = "SELECT idequipamento, tipo, lacre from equipamento WHERE status = 1 AND lacre != ''";
         $request = $this->select_all($sql);
         return $request;
     }
@@ -75,7 +74,7 @@ class EntregarModel extends Mysql
                        pe.matricula, 
                        pe.nombres, 
                        pe.apellidos, 
-                       eq.nombre as equipamento,
+                       eq.tipo as equipamento,
                        eq.marca,
                        eq.lacre
 				FROM controle co 

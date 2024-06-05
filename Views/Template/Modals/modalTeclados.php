@@ -1,15 +1,15 @@
-<!-- modal formulario Fone -->
-<div class="modal fade" id="modalFormEquipamentos" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- modal formulario Teclado -->
+<div class="modal fade" id="modalFormTeclados" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Novo Fone</h5>
+        <h5 class="modal-title" id="titleModal">Novo Teclado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="formEquipamentos" name="formEquipamentos" class="form-horizontal">
+        <form id="formTeclados" name="formTeclados" class="form-horizontal">
           <input type="hidden" id="idEquipamento" name="idEquipamento" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
@@ -44,12 +44,12 @@
   </div>
 </div>
 
-<!-- modal ver Fone -->
-<div class="modal fade" id="modalViewEquipamento" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- modal ver Teclado -->
+<div class="modal fade" id="modalViewTeclado" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header header-primary">
-        <h5 class="modal-title" id="titleModal">Dados do Equipamento</h5>
+        <h5 class="modal-title" id="titleModal">Dados do Teclado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

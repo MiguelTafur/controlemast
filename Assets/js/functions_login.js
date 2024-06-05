@@ -41,7 +41,7 @@ function formularioRutas() {
                                     var objData = JSON.parse(request.responseText);
                                     if(objData.status)
                                     {
-                                          window.location = base_url+'/fones';
+                                          window.location = base_url+'/entregar';
                                     }else{
                                           swal("Atenção", objData.msg, "error");
                                     }

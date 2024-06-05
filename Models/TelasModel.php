@@ -1,13 +1,12 @@
 <?php 
 
-class FonesModel extends Mysql
+class TelasModel extends Mysql
 {
 	PRIVATE $intIdEquipamento;
 	PRIVATE $strMarca;
 	PRIVATE $strCodigo;
 	PRIVATE $strLacre;
 	PRIVATE $intStatus;
-	PRIVATE $intTipo;
 	PRIVATE $intIdRuta;
 
 	public function __construct()
@@ -15,7 +14,7 @@ class FonesModel extends Mysql
 		parent::__construct();
 	}
 
-    public function selectFones()
+    public function selectTelas()
 	{
 		$ruta = $_SESSION['idRuta'];
 		$sql = "SELECT idequipamento, 
@@ -26,12 +25,12 @@ class FonesModel extends Mysql
                 FROM equipamento 
                 WHERE codigoruta = $ruta  
                 AND status != 0
-				AND tipo = " . MFONE;
+				AND tipo = " . MTELA;
 		$request = $this->select_all($sql);
 		return $request;
 	}
 
-	public function selectFone(int $idequipamento)
+	public function selectTela(int $idequipamento)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$sql = "SELECT idequipamento, 
@@ -46,13 +45,13 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
-	public function insertFone(string $marca, string $codigo, string $lacre, int $ruta)
+	public function insertTela(string $marca, string $codigo, string $lacre, int $ruta)
 	{
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
 		$this->intIdRuta = $ruta;
-		$this->intTipo = MFONE;
+		$this->intTipo = MTELA;
 		$return = 0;
 
 		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
@@ -70,7 +69,7 @@ class FonesModel extends Mysql
 		return $return;
 	}
 
-	public function updateFone(int $idequipamento, string $marca, string $codigo, string $lacre)
+	public function updateTela(int $idequipamento, string $marca, string $codigo, string $lacre)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->strMarca = $marca;
@@ -82,7 +81,6 @@ class FonesModel extends Mysql
 
 		if(empty($request))
 		{
-
 			$sql = "UPDATE equipamento 
 					SET	marca = ?, 
 						codigo = ?, 
@@ -96,7 +94,7 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
-	public function updateEstadoFone(int $idequipamento, int $estado) {
+	public function updateEstadoTela(int $idequipamento, int $estado) {
 		$this->intIdEquipamento = $idequipamento;
 		$this->intStatus = $estado;
 		$return = 0;

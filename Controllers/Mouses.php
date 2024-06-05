@@ -1,6 +1,6 @@
 <?php 
 
-class Fones extends Controllers{
+class Mouses extends Controllers{
 	public function __construct()
 	{
 		session_start();
@@ -8,25 +8,25 @@ class Fones extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MFONE);
+		getPermisos(MMOUSE);
 	}
 
-    public function Fones()
+    public function Mouses()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/fones');
+			header("Location: ".base_url().'/entregar');
 		}
-		$data['page_tag'] = "Fones";
-		$data['page_title'] = "FONES";
-		$data['page_name'] = "fones";
-		$data['page_functions_js'] = "functions_fones.js";
-		$this->views->getView($this,"fones",$data);
+		$data['page_tag'] = "Mouses";
+		$data['page_title'] = "MOUSES";
+		$data['page_name'] = "mouses";
+		$data['page_functions_js'] = "functions_mouses.js";
+		$this->views->getView($this,"mouses",$data);
 	}
 
-	public function getFones()
+	public function getMouses()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectFones();
+			$arrData = $this->model->selectMouses();
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -75,13 +75,13 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function getFone($idequipamento)
+	public function getMouse($idequipamento)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectFone($IDequipamento);
+				$arrData = $this->model->selectMouse($IDequipamento);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -94,7 +94,7 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setFone()
+	public function setMouse()
 	{ 
 		if($_POST)
 		{
@@ -113,7 +113,7 @@ class Fones extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertFone(
+						$request_user = $this->model->insertMouse(
 																$strMarca,
 																$strCodigo,
 																$strLacre,
@@ -122,7 +122,7 @@ class Fones extends Controllers{
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateFone($idEquipamento,
+						$request_user = $this->model->updateMouse($idEquipamento,
 																	$strMarca,
 																	$strCodigo,
 																	$strLacre);
@@ -147,7 +147,7 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setEstadoFone() {
+	public function setEstadoMouse() {
 		if($_POST) { 
 			if(empty($_POST['listEstado'])) {
 				$arrResponse = array("status" => false, "msg" => "Esolha o Tipo de Estado.");
@@ -156,7 +156,7 @@ class Fones extends Controllers{
 				$estadoEquipamento = intval($_POST['listEstado']);
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->updateEstadoFone($idEquipamento, $estadoEquipamento);
+					$request_estado = $this->model->updateEstadoMouse($idEquipamento, $estadoEquipamento);
 					if($request_estado > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Estado atualizado com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {

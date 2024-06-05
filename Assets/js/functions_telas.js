@@ -1,4 +1,4 @@
-let tableEquipamentos;
+let tableTelas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -7,20 +7,20 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function iniciarApp() {
-    fntTablaEquipamentos();
-    fntCrearEquipamento();
+    fntTablaTelas();
+    fntCrearTelas();
     fntEditStatus();
 }
 
-function fntTablaEquipamentos() {
-    tableEquipamentos = $('#tableEquipamentos').dataTable({
+function fntTablaTelas() {
+    tableTelas = $('#tableTelas').dataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Fones/getFones",
+            "url": " "+base_url+"/Telas/getTelas",
             "dataSrc":""
         },
         "columns":[
@@ -38,10 +38,10 @@ function fntTablaEquipamentos() {
     });
 }
 
-function fntCrearEquipamento() {
-    if(document.querySelector("#formEquipamentos")){
-        let formEquipamentos = document.querySelector("#formEquipamentos");
-        formEquipamentos.onsubmit = function(e)
+function fntCrearTelas() {
+    if(document.querySelector("#formTelas")){
+        let formTelas = document.querySelector("#formTelas");
+        formTelas.onsubmit = function(e)
         {
             e.preventDefault();
             let strMarca = document.querySelector('#txtMarca').value;
@@ -57,15 +57,15 @@ function fntCrearEquipamento() {
             let ElementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < ElementsValid.length; i++) {
                 if(ElementsValid[i].classList.contains('is-invalid')){
-                    swal("Atenção!", "Verrifique os campos em vermelho.", "error");
+                    swal("Atenção!", "Verifique os campos em vermelho .", "error");
                     return false;
                 }
             }
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Fones/setFone';
-            let formData = new FormData(formEquipamentos);
+            let ajaxUrl = base_url + '/Telas/setTela';
+            let formData = new FormData(formTelas);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){
@@ -75,7 +75,7 @@ function fntCrearEquipamento() {
                     if(objData.status)
                     {
                         if(rowTable == ""){
-                            tableEquipamentos.api().ajax.reload();
+                            tableTelas.api().ajax.reload();
                         }else{
                             rowTable.cells[0].textContent = strMarca;
                             if(strCodigo === '') {
@@ -87,9 +87,9 @@ function fntCrearEquipamento() {
 
                             rowTable = "";
                         }
-                        $('#modalFormEquipamentos').modal("hide");
-                        formEquipamentos.reset();
-                        swal("Equipamentos", objData.msg, "success");
+                        $('#modalFormTelas').modal("hide");
+                        formTelas.reset();
+                        swal("Tela", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -105,14 +105,14 @@ function fntCrearEquipamento() {
 function fntEditInfo(element, idequipamento)
 {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Atualizar Fone";
+    document.querySelector('#titleModal').innerHTML = "Atualizar Tela";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
     document.querySelector('#divEditarEstado').classList.remove('d-none');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Telas/getTela/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -154,7 +154,7 @@ function fntEditInfo(element, idequipamento)
                 document.querySelector("#txtLacre").value = objData.data.lacre;
             }
         }
-        $('#modalFormEquipamentos').modal('show');
+        $('#modalFormTelas').modal('show');
     }
 }
 
@@ -175,7 +175,7 @@ function fntEditStatus() {
 
             //divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Fones/setEstadoFone';
+            let ajaxUrl = base_url + '/Telas/setEstadoTela';
             let formData = new FormData(formEditarEstado);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -199,8 +199,8 @@ function fntEditStatus() {
                             rowTable = "";
                         }
                         $('#modalEditStatus').modal('hide');
-                        $('#modalFormEquipamentos').modal("hide");
-                        formEquipamentos.reset();
+                        $('#modalFormTelas').modal("hide");
+                        formTelas.reset();
                         swal("Estado", objData.msg, "success");
                         
                     }else{
@@ -217,7 +217,7 @@ function fntEditStatus() {
 function fntViewInfo(idequipamento)
 {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Telas/getTela/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -265,7 +265,7 @@ function fntViewInfo(idequipamento)
                         break;
                 }
 
-                $('#modalViewEquipamento').modal('show');
+                $('#modalViewTela').modal('show');
             }else{
                 swal("Erro", objData.msg, "error");
             }
@@ -294,8 +294,8 @@ function openModal()
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
-    document.querySelector('#titleModal').innerHTML = "Novo Fone";
-    document.querySelector("#formEquipamentos").reset();
+    document.querySelector('#titleModal').innerHTML = "Novo Tela";
+    document.querySelector("#formTelas").reset();
     document.querySelector('#divEditarEstado').classList.add('d-none');
-    $('#modalFormEquipamentos').modal('show');
+    $('#modalFormTelas').modal('show');
 }

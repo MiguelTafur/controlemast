@@ -1,12 +1,12 @@
 <?php 
   headerAdmin($data);
-  getModal('modalFones',$data); 
+  getModal('modalMouses',$data); 
 ?>
 <main class="app-content">
   <div class="app-title">
     <div>
         <h1>
-            <i class="fa fa-headphones" aria-hidden="true"></i> <?= $data['page_title'] ?>
+            <i class="fa fa-mouse-pointer" aria-hidden="true"></i> <?= $data['page_title'] ?>
             <?php if($_SESSION['permisosMod']['w']){ ?>
             <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> Adicionar</button>
             <?php } ?>
@@ -23,7 +23,7 @@
       <div class="tile">
         <div class="tile-body">
           <div class="table-responsive">
-            <table class="table table-striped text-center" id="tableEquipamentos">
+            <table class="table table-striped text-center" id="tableMouses">
               <thead>
                 <tr>
                   <th>Marca</th>
