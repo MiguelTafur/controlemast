@@ -225,13 +225,12 @@ function fntViewInfo(identrega)
                 const nombres = objData.data.nombres;
                 const apellidos = objData.data.apellidos;
 
-                document.querySelector("#celMatricula").innerHTML = '#' + objData.data.matricula;
+                document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
                 document.querySelector("#celNombres").innerHTML = nombres.toUpperCase();
                 document.querySelector("#celApellidos").innerHTML = apellidos.toUpperCase();
                 document.querySelector("#celEquipamento").innerHTML = objData.data.equipamento;
                 document.querySelector("#celMarca").innerHTML = objData.data.marca;
                 document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
-                document.querySelector("#celProtocolo").innerHTML = objData.data.protocolo;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
                 document.querySelector("#celObservacion").innerHTML = objData.data.observacion;
 

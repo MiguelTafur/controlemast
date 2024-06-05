@@ -79,10 +79,6 @@
               <td id="celLacre"></td>
             </tr>
             <tr>
-              <td class="font-weight-bold">Protocolo:</td>
-              <td id="celProtocolo"></td>
-            </tr>
-            <tr>
               <td class="font-weight-bold">Data Registro:</td>
               <td id="celFechaRegistro"></td>
             </tr>

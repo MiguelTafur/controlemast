@@ -8,7 +8,7 @@ class Coordinadores extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MLIDERES);
+		getPermisos(MCOORDINADOR);
 	}
 
 	public function Coordinadores()

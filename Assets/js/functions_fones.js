@@ -20,7 +20,7 @@ function fntTablaEquipamentos() {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Equipamentos/getEquipamentos",
+            "url": " "+base_url+"/Fones/getFones",
             "dataSrc":""
         },
         "columns":[
@@ -66,7 +66,7 @@ function fntCrearEquipamento() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Equipamentos/setEquipamento';
+            let ajaxUrl = base_url + '/Fones/setFone';
             let formData = new FormData(formEquipamentos);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -122,7 +122,7 @@ function fntEditStatus() {
 
             //divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Equipamentos/setEstadoEquipamento';
+            let ajaxUrl = base_url + '/Fones/setEstadoFone';
             let formData = new FormData(formEditarEstado);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -164,7 +164,7 @@ function fntEditStatus() {
 function fntViewInfo(idequipamento)
 {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Equipamentos/getEquipamento/'+idequipamento;
+    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -231,7 +231,7 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divEditarEstado').classList.remove('d-none');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Equipamentos/getEquipamento/'+idequipamento;
+    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){

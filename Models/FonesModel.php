@@ -1,6 +1,6 @@
 <?php 
 
-class EquipamentosModel extends Mysql
+class FonesModel extends Mysql
 {
 	PRIVATE $intIdEquipamento;
 	PRIVATE $strNombre;
@@ -15,7 +15,7 @@ class EquipamentosModel extends Mysql
 		parent::__construct();
 	}
 
-    public function selectEquipamentos()
+    public function selectFones()
 	{
 		$ruta = $_SESSION['idRuta'];
 		$sql = "SELECT idequipamento, 
@@ -32,7 +32,7 @@ class EquipamentosModel extends Mysql
 		return $request;
 	}
 
-	public function selectEquipamento(int $idequipamento)
+	public function selectFone(int $idequipamento)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$sql = "SELECT idequipamento, 
@@ -48,7 +48,7 @@ class EquipamentosModel extends Mysql
 		return $request;
 	}
 
-	public function insertEquipamento(string $nombre, string $marca, string $codigo, string $lacre, int $ruta)
+	public function insertFone(string $nombre, string $marca, string $codigo, string $lacre, int $ruta)
 	{
 		$this->strNombre = $nombre;
 		$this->strMarca = $marca;
@@ -72,7 +72,7 @@ class EquipamentosModel extends Mysql
 		return $return;
 	}
 
-	public function updateEquipamento(int $idequipamento, string $nombre, string $marca, string $codigo, string $lacre)
+	public function updateFone(int $idequipamento, string $nombre, string $marca, string $codigo, string $lacre)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->strNombre = $nombre;
@@ -100,7 +100,7 @@ class EquipamentosModel extends Mysql
 		return $request;
 	}
 
-	public function updateEstadoEquipamento(int $idequipamento, int $estado) {
+	public function updateEstadoFone(int $idequipamento, int $estado) {
 		$this->intIdEquipamento = $idequipamento;
 		$this->intStatus = $estado;
 		$return = 0;

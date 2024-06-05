@@ -1,6 +1,6 @@
 <?php 
 
-class Equipamentos extends Controllers{
+class Fones extends Controllers{
 	public function __construct()
 	{
 		session_start();
@@ -8,25 +8,25 @@ class Equipamentos extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MEQUIPAMENTOS);
+		getPermisos(MFONE);
 	}
 
-    public function Equipamentos()
+    public function Fones()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/controle');
 		}
-		$data['page_tag'] = "Equipamentos";
-		$data['page_title'] = "EQUIPAMENTOS";
-		$data['page_name'] = "equipamentos";
-		$data['page_functions_js'] = "functions_equipamentos.js";
-		$this->views->getView($this,"equipamentos",$data);
+		$data['page_tag'] = "Fones";
+		$data['page_title'] = "FONES";
+		$data['page_name'] = "fones";
+		$data['page_functions_js'] = "functions_fones.js";
+		$this->views->getView($this,"fones",$data);
 	}
 
-	public function getEquipamentos()
+	public function getFones()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectEquipamentos();
+			$arrData = $this->model->selectFones();
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -76,13 +76,13 @@ class Equipamentos extends Controllers{
 		die();
 	}
 
-	public function getequipamento($idequipamento)
+	public function getFone($idequipamento)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectEquipamento($IDequipamento);
+				$arrData = $this->model->selectFone($IDequipamento);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -95,7 +95,7 @@ class Equipamentos extends Controllers{
 		die();
 	}
 
-	public function setEquipamento()
+	public function setFone()
 	{ 
 		if($_POST)
 		{
@@ -115,7 +115,7 @@ class Equipamentos extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertEquipamento(
+						$request_user = $this->model->insertFone(
 																	$strNombre,
 																	$strMarca,
 																	$strCodigo,
@@ -125,7 +125,7 @@ class Equipamentos extends Controllers{
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateEquipamento($idEquipamento,
+						$request_user = $this->model->updateFone($idEquipamento,
 																	$strNombre,
 																	$strMarca,
 																	$strCodigo,
@@ -151,7 +151,7 @@ class Equipamentos extends Controllers{
 		die();
 	}
 
-	public function setEstadoEquipamento() {
+	public function setEstadoFone() {
 		if($_POST) { 
 			if(empty($_POST['listEstado'])) {
 				$arrResponse = array("status" => false, "msg" => "Esolha o Tipo de Estado.");
@@ -160,7 +160,7 @@ class Equipamentos extends Controllers{
 				$estadoEquipamento = intval($_POST['listEstado']);
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->updateEstadoEquipamento($idEquipamento, $estadoEquipamento);
+					$request_estado = $this->model->updateEstadoFone($idEquipamento, $estadoEquipamento);
 					if($request_estado > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Estado atualizado com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {

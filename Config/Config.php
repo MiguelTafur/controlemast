@@ -12,7 +12,7 @@
 	// const DB_USER = "qahi319";
 	// const DB_PASSWORD = "m1Guel03";
 
-	const DB_HOST = "127.0.0.1";
+	const DB_HOST = "127.0.0.1:3307";
 	const DB_NAME = "controle_equipamentos";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
@@ -33,17 +33,22 @@
 	const WEB_EMPRESA = "www.credimast.com";
 
 	//Módulos
-	const MDASHBOARD = 1;
-	const MUSUARIOS = 2;
-	const MLIDERES = 3;
-	const MOPERACAO = 4;
-	const MEQUIPAMENTOS = 5;
-	const MRUTAS = 6;
-	const MCONTROLE = 7;
+	const MRUTAS = 1;
+	const MDASHBOARD = 2;
+	const MUSUARIO = 3;
+	const MGERENTE = 4;
+	const MCOORDINADOR = 5;
+	const MLIDER = 6;
+	const MOPERADOR = 7;
+	const MFONE = 8;
+	const MMOUSE = 9;
+	const MTECLADO = 10;
+	const MTELA = 11;
+	const MCONTROLE = 12;
 
 	//Roles
 	const RADMINISTRADOR = 1;
-	const RSUPERVISOR = 2;
+	const RSUPORTE = 2;
 	const RLIDER = 3;
 	const ROPERACAO = 4;
 

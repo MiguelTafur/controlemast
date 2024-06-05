@@ -8,7 +8,7 @@ class Operacao extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MOPERACAO);
+		getPermisos(MOPERADOR);
 	}
 
 	public function Operacao()

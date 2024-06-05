@@ -8,7 +8,7 @@ class Usuarios extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MUSUARIOS);
+		getPermisos(MUSUARIO);
 	}
 
 	public function Usuarios()

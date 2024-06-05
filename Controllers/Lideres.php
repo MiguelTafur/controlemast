@@ -8,7 +8,7 @@ class Lideres extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MLIDERES);
+		getPermisos(MLIDER);
 	}
 
 	public function Lideres()
