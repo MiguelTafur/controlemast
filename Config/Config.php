@@ -12,7 +12,7 @@
 	// const DB_USER = "qahi319";
 	// const DB_PASSWORD = "m1Guel03";
 
-	const DB_HOST = "127.0.0.1:3307";
+	const DB_HOST = "127.0.0.1";
 	const DB_NAME = "controle_equipamentos";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
@@ -48,8 +48,9 @@
 
 	//Roles
 	const RADMINISTRADOR = 1;
-	const RSUPORTE = 2;
-	const RLIDER = 3;
-	const ROPERACAO = 4;
+	const RGERENTE = 2;
+	const RCOORDINADOR = 3;
+	const RLIDER = 4;
+	const ROPERACAO = 5;
 
  ?>

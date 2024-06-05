@@ -54,10 +54,10 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?= base_url(); ?>/Fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/Mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/Teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/Telas"><i class="icon fa fa-circle-o"></i> Telas</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Telas</a></li>
             </ul>
         </li>
         <?php } ?>

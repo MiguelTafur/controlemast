@@ -34,6 +34,9 @@ class Operacao extends Controllers{
 
 				$arrData[$i]['matricula'] = '<span class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</span>';
 
+				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
+				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
+
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Operador"><i class="far fa-eye"></i></button>';
 				}

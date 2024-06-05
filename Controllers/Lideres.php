@@ -23,7 +23,7 @@ class Lideres extends Controllers{
 		$this->views->getView($this,"lideres",$data);
 	}
 	
-	public function setCliente()
+	public function setLider()
 	{ 
 		if($_POST)
 		{
@@ -45,7 +45,7 @@ class Lideres extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertCliente($strMatricula,
+						$request_user = $this->model->insertLider($strMatricula,
 																	$strNombre,
 																	$strApellido,
 																	$intTelefono,
@@ -56,7 +56,7 @@ class Lideres extends Controllers{
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateCliente($idUsuario,
+						$request_user = $this->model->updateLider($idUsuario,
 																	$strMatricula,
 																	$strNombre,
 																	$strApellido,
@@ -84,16 +84,19 @@ class Lideres extends Controllers{
 		die();
 	}
 
-	public function getClientes()
+	public function getLideres()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectClientes();
+			$arrData = $this->model->selectLideres();
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
 
 				$arrData[$i]['matricula'] = '<p class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</p>';
+
+				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
+				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Líder"><i class="far fa-eye"></i></button>';
@@ -112,10 +115,10 @@ class Lideres extends Controllers{
 		die();
 	}
 
-	public function getSelectClientes()
+	public function getSelectLideres()
 	{
 		$htmlOptions = "";
-		$arrData = $this->model->selectClientes();
+		$arrData = $this->model->selectLideres();
 
 		if(count($arrData) > 0){
 			for ($i=0; $i < count($arrData); $i++) { 
@@ -129,13 +132,13 @@ class Lideres extends Controllers{
 		die();
 	}
 
-	public function getCliente($idpersona)
+	public function getLider($idpersona)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectCliente($idusuario);
+				$arrData = $this->model->selectLider($idusuario);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -148,13 +151,13 @@ class Lideres extends Controllers{
 		die();
 	}
 
-	public function delCliente()
+	public function delLider()
 	{
 		if($_POST)
 		{
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
-				$requestDelete = $this->model->deleteCliente($intIdpersona);
+				$requestDelete = $this->model->deleteLider($intIdpersona);
 				if($requestDelete)
 				{
 					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario.');

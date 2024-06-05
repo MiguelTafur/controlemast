@@ -14,7 +14,7 @@ class Fones extends Controllers{
     public function Fones()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/controle');
+			header("Location: ".base_url().'/fones');
 		}
 		$data['page_tag'] = "Fones";
 		$data['page_title'] = "FONES";

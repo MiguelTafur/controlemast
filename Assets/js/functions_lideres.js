@@ -19,7 +19,7 @@ function fntTablaLideres() {
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             },
             "ajax":{
-                "url": " "+base_url+"/Lideres/getClientes",
+                "url": " "+base_url+"/Lideres/getLideres",
                 "dataSrc":""
             },
             "columns":[
@@ -64,7 +64,7 @@ function fntCrearLideres() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Lideres/setCliente';
+            let ajaxUrl = base_url + '/Lideres/setLider';
             let formData = new FormData(formCliente);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -101,7 +101,7 @@ function fntCrearLideres() {
 function fntViewInfo(idpersona)
 {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Lideres/getCliente/'+idpersona;
+    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -111,6 +111,15 @@ function fntViewInfo(idpersona)
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
+                const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
                 document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
                 document.querySelector("#celNombres").innerHTML = objData.data.nombres;
                 document.querySelector("#celApellidos").innerHTML = objData.data.apellidos;
@@ -125,7 +134,7 @@ function fntViewInfo(idpersona)
                 } else {
                     document.querySelector("#celEmail").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
                 $('#modalViewCliente').modal('show');
             }else{
@@ -144,7 +153,7 @@ function fntEditInfo(element, idpersona)
     document.querySelector('#btnText').innerHTML = "Atualizar";
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Lideres/getCliente/'+idpersona;
+    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -183,7 +192,7 @@ function fntDelInfo(idpersona)
         if (isConfirm) 
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Lideres/delCliente';
+            let ajaxUrl = base_url+'/Lideres/delLider';
             let strData = "idUsuario="+idpersona;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

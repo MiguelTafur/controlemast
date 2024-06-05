@@ -17,7 +17,7 @@ class LideresModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertCliente(int $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $ruta)
+	public function insertLider(int $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $ruta)
 	{
 		$this->intMatricula = $matricula;
 		$this->strNombre = $nombre;
@@ -45,7 +45,7 @@ class LideresModel extends Mysql
 		return $return;
 	}
 
-	public function selectClientes()
+	public function selectLideres()
 	{
 		$ruta = $_SESSION['idRuta'];
 		$sql = "SELECT 
@@ -64,7 +64,7 @@ class LideresModel extends Mysql
 		return $request;
 	}
 
-	public function selectCliente(int $idpersona)
+	public function selectLider(int $idpersona)
 	{
 		$this->intIdUsuario = $idpersona;
 		$sql = "SELECT 
@@ -75,7 +75,7 @@ class LideresModel extends Mysql
 					pe.telefono, 
 					pe.email_user, 
 					pe.status, 
-				DATE_FORMAT(pe.datecreated, '%d-%m-%Y') as fechaRegistro 
+					DATE_FORMAT(datecreated, '%Y-%m-%d') as fechaRegistro
 				FROM persona pe 
 				WHERE pe.idpersona = $this->intIdUsuario 
 				AND rolid = ".RLIDER;
@@ -83,7 +83,7 @@ class LideresModel extends Mysql
 		return $request;
 	}
 
-	public function updateCliente(int $idUsuario, string $matricula, string $nombre, string $apellido, int $telefono, string $email)
+	public function updateLider(int $idUsuario, string $matricula, string $nombre, string $apellido, int $telefono, string $email)
 	{
 		$this->intIdUsuario = $idUsuario;
 		$this->intMatricula = $matricula;
@@ -113,7 +113,7 @@ class LideresModel extends Mysql
 		return $request;
 	}
 
-	public function deleteCliente(int $idtipousuario)
+	public function deleteLider(int $idtipousuario)
 	{
 		$this->intIdUsuario = $idtipousuario;
 		$ruta = $_SESSION['idRuta'];
@@ -131,35 +131,6 @@ class LideresModel extends Mysql
 
 		
 		return $request;
-	}
-
-	public function selectDatePagoPrestamo()
-	{
-		$ruta = $_SESSION['idRuta'];
-		$fecha_actual = date("Y-m-d");
-
-		$sqlR = "SELECT datecreated FROM resumen WHERE codigoruta = $ruta AND datecreated != '$fecha_actual' ORDER BY datecreated DESC";
-		$requestR = $this->select($sqlR);
-
-		//dep($requestR);exit;
-
-		// $sql = "SELECT * FROM prestamos pr INNER JOIN persona pe ON(pr.personaid = pe.idpersona) 
-		// 		WHERE (pr.pagoid != '' AND pr.datepago != '$fecha_actual') AND (pe.codigoruta = $ruta AND pr.status != 0)";
-		$sql = "SELECT pa.datecreated as fechaPago FROM prestamos pr 
-					INNER JOIN persona pe ON(pr.personaid = pe.idpersona) 
-					INNER JOIN pagos pa ON(pr.idprestamo = pa.prestamoid)
-					WHERE (pa.datecreated != '$fecha_actual') AND (pe.codigoruta = $ruta AND pr.status != 0)
-					ORDER BY pa.datecreated desc";
-		$request = $this->select($sql);
-
-		//dep($request);exit;
-
-		if(!empty($request) && ($request['fechaPago'] > $requestR['datecreated']))
-		{
-			return $request;
-		}else{
-			return 2;
-		}
 	}
 }
 
