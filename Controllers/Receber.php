@@ -93,6 +93,17 @@ class Receber extends Controllers{
 				$idUsuario = intval($_POST['idUsuario']);
 				$equipamento = "";
 				$arrData = $this->model->selectEquipamento($idUsuario);
+
+				if($arrData['tipo'] === 8) {
+					$arrData['tipo'] = 'Fone';
+				} else if ($arrData['tipo'] === 9) {
+					$arrData['tipo'] = 'Mouse';
+				} else if ($arrData['tipo'] === 10) {
+					$arrData['tipo'] = 'Teclado';
+				} else if ($arrData['tipo'] === 11) {
+					$arrData['tipo'] = 'Tela';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');

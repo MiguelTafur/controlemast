@@ -25,12 +25,11 @@
               <label for="txtCodigo">Código Equipamento</label>
               <input type="text" class="form-control valid" id="txtCodigo" name="txtCodigo">
             </div>
-            <div class="form-group col-md-12">
-              <label for="txtObservacion">Anotação</label>
-              <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
+            <div class="form-group col-md-12 text-center mt-3" id="divAdicionarAnotacao">
+              <button class="btn btn-secondary" type="button" onclick="openModalAddAnnotation();">Adicionar Anotação &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button>
             </div>
             <div class="form-group col-md-12 text-center mt-3" id="divEditarEstado">
-              <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+              <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado &nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </div>
           </div>
           <hr>
@@ -77,6 +76,8 @@
               <td>Estado:</td>
               <td id="celEstado"></td>
             </tr>
+            <tr></tr>
+            <td colspan="2"><button class="btn btn-info btn-block">Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
           </tbody>
         </table>
       </div>
@@ -110,11 +111,11 @@
           <div class="form-row align-items-center">
             <div class="col-sm-9">
               <select class="form-control my-1 mr-sm-2" style="width: 100%;" id="listEstado" name="listEstado" required>
-              <option value=""></option>
-              <option value="1">Disponível</option>
-              <option value="3">Estragado</option>
-              <option value="4">Concerto</option>
-            </select>
+                <option value=""></option>
+                <option value="1">Disponível</option>
+                <option value="3">Estragado</option>
+                <option value="4">Concerto</option>
+              </select>
             </div>
             <div class="col-sm-3 text-center">
               <button type="submit" class="btn btn-primary my-1">Salvar</button>
@@ -123,6 +124,47 @@
         </form>
       </div>
       <div class="modal-footer justify-content-start">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal Adicionar Anotación -->
+<div class="modal fade" id="modalAddAnnotation" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Adicionar Anotação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p class="font-weight-bold font-italic m-0" id="equipamentoLacre"></p>
+        </div>
+        <hr>
+        <form class="mt-3" id="formAnotacao" name="formAnotacao">
+          <input type="hidden" id="idEquipamentoAnotacao" name="idEquipamentoAnotacao" value="">
+          <div class="form-row align-items-center">
+            <div class="form-group col-md-12">
+              <label for="txtAnotacao">Anotação <span class="required">*</span></label>
+              <textarea class="form-control" id="txtAnotacao" name="txtAnotacao" required></textarea>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="fileAnotacao">Imagen</label>
+              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
+            </div>
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary my-1">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Fechar
         </button>

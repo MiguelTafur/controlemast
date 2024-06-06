@@ -32,11 +32,22 @@ class Entregar extends Controllers{
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
+				$tipo = '';
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
-				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				if($arrData[$i]['equipamento'] === 8) {
+					$tipo = 'Fone';
+				} else if ($arrData[$i]['equipamento'] === 9) {
+					$tipo = 'Mouse';
+				} else if ($arrData[$i]['equipamento'] === 10) {
+					$tipo = 'Teclado';
+				} else if ($arrData[$i]['equipamento'] === 11) {
+					$tipo = 'Tela';
+				}
+
+				$arrData[$i]['equipamento'] = '<h6>'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
 				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 
@@ -140,9 +151,19 @@ class Entregar extends Controllers{
 		if($_SESSION['permisosMod']['r']){
 			$htmlOptions = '<option></option>';
 			$arrData = $this->model->selectEquipamentos();
+			$tipo = '';
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$arrData[$i]['nombre'].' - #'.$arrData[$i]['lacre'].'</option>';
+					if($arrData[$i]['tipo'] === 8) {
+						$tipo = 'Fone';
+					} else if ($arrData[$i]['tipo'] === 9) {
+						$tipo = 'Mouse';
+					} else if ($arrData[$i]['tipo'] === 10) {
+						$tipo = 'Teclado';
+					} else if ($arrData[$i]['tipo'] === 11) {
+						$tipo = 'Tela';
+					}
+					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$tipo.' - #'.$arrData[$i]['lacre'].'</option>';
 				}
 			}
 			echo $htmlOptions;
@@ -185,6 +206,17 @@ class Entregar extends Controllers{
 			if($idEntrega > 0)
 			{
 				$arrData = $this->model->selectEntrega($idEntrega);
+
+				if($arrData['equipamento'] === 8) {
+					$arrData['equipamento'] = 'Fone';
+				} else if ($arrData['equipamento'] === 9) {
+					$arrData['equipamento'] = 'Mouse';
+				} else if ($arrData['equipamento'] === 10) {
+					$arrData['equipamento'] = 'Teclado';
+				} else if ($arrData['equipamento'] === 11) {
+					$arrData['equipamento'] = 'Tela';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');

@@ -17,7 +17,7 @@ class OperacaoModel extends Mysql
 		parent::__construct();
 	}
 
-    public function insertOperador(int $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $ruta)
+    public function insertOperador(string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $ruta)
 	{
 		$this->strMatricula = $matricula;
 		$this->strNombre = $nombre;

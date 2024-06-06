@@ -5,7 +5,6 @@
         <div>
           <p class="app-sidebar__user-name"><?= $_SESSION['userData']['nombres'] ?></p>
           <p class="app-sidebar__user-designation">Empresa: <i><b><?= $_SESSION['ruta'] ?></b></i></p>
-          <!-- <p class="app-sidebar__user-designation">Moneda: <i><b><?= 'BRL'.' ('.SMONEY.')' ?></b></i></p> -->
         </div>
       </div>
       <ul class="app-menu">

@@ -26,7 +26,7 @@
     </div>
     <!-- Navbar-->
     <header class="app-header">
-      <a class="app-header__logo font-weight-bold font-italic" href="<?= base_url(); ?>/prestamos">
+      <a class="app-header__logo font-weight-bold font-italic" href="<?= base_url(); ?>/entregar">
         <img src="<?= media();?>/images/sloganControle-removebg-preview-fotor.png" alt="CONTROLEMAST" style="margin-left: -1rem; padding: .2rem;"  height="40px">
       </a>
       <!-- Sidebar toggle button-->

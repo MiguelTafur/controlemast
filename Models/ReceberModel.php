@@ -28,7 +28,7 @@ class ReceberModel extends Mysql
                        pe.matricula,
                        pe.nombres,
                        pe.apellidos,
-                       eq.nombre as equipamento,
+                       eq.tipo as equipamento,
                        eq.lacre
                 FROM controle co
                 LEFT OUTER JOIN persona pe
@@ -37,8 +37,7 @@ class ReceberModel extends Mysql
                 ON co.equipamentoid = eq.idequipamento
                 WHERE co.status != 1 
 				AND co.status != 0
-                AND pe.codigoruta = $ruta
-                ORDER BY nombre ASC";
+                AND pe.codigoruta = $ruta";
 		$request = $this->select_all($sql);
 		return $request;
 	}
@@ -63,7 +62,7 @@ class ReceberModel extends Mysql
 	public function selectEquipamento(int $idusuario) 
 	{
 		$this->listUsuario = $idusuario;
-		$sql = "SELECT eq.idequipamento, eq.nombre, eq.lacre 
+		$sql = "SELECT eq.idequipamento, eq.tipo, eq.lacre 
 				FROM controle co 
 				LEFT OUTER JOIN equipamento eq
 				ON co.equipamentoid = eq.idequipamento

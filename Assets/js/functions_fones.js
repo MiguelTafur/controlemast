@@ -10,6 +10,7 @@ function iniciarApp() {
     fntTablaEquipamentos();
     fntCrearEquipamento();
     fntEditStatus();
+    fntAddAnnotation();
 }
 
 function fntTablaEquipamentos() {
@@ -105,11 +106,12 @@ function fntCrearEquipamento() {
 function fntEditInfo(element, idequipamento)
 {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Atualizar Fone";
+    document.querySelector('#titleModal').innerHTML = "Alterar Fone";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
     document.querySelector('#divEditarEstado').classList.remove('d-none');
+    document.querySelector('#divAdicionarAnotacao').classList.remove('d-none');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
@@ -149,6 +151,9 @@ function fntEditInfo(element, idequipamento)
                 if(document.querySelector("#idEquipamentoEstado")) {
                     document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
                 }
+                if(document.querySelector("#idEquipamentoAnotacao")) {
+                    document.querySelector("#idEquipamentoAnotacao").value = objData.data.idequipamento;
+                }
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
                 document.querySelector("#txtLacre").value = objData.data.lacre;
@@ -173,7 +178,7 @@ function fntEditStatus() {
                 return false;
             }
 
-            //divLoading.style.display = "flex";
+            divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Fones/setEstadoFone';
             let formData = new FormData(formEditarEstado);
@@ -202,6 +207,50 @@ function fntEditStatus() {
                         $('#modalFormEquipamentos').modal("hide");
                         formEquipamentos.reset();
                         swal("Estado", objData.msg, "success");
+                        
+                    }else{
+                        swal("Erro", objData.msg, "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+function fntAddAnnotation() {
+    if(document.querySelector("#formAnotacao")){
+        let formAnotacao = document.querySelector("#formAnotacao");
+        
+        formAnotacao.onsubmit = function(e)
+        {
+            e.preventDefault();
+            let txtAnotacao = document.querySelector('#txtAnotacao').value;
+
+            if(txtAnotacao === '')
+            {
+                swal("Atenção", "Digite uma anotação.", "error");
+                return false;
+            }
+
+            //divLoading.style.display = "flex";
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Fones/setAdicionarAnotacao';
+            let formData = new FormData(formAnotacao);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200)
+                {
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        //tableEquipamentos.api().ajax.reload();
+                        $('#modalAddAnnotation').modal('hide');
+                        $('#modalFormEquipamentos').modal("hide");
+                        formEquipamentos.reset();
+                        swal("Anotação", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -286,6 +335,12 @@ function openModalEditStatus() {
     $('#modalEditStatus').addClass('myModal');
 }
 
+function openModalAddAnnotation() {
+
+    $('#modalAddAnnotation').modal('show');
+    $('#modalAddAnnotation').addClass('myModal');
+}
+
 
 function openModal()
 {
@@ -297,5 +352,6 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Novo Fone";
     document.querySelector("#formEquipamentos").reset();
     document.querySelector('#divEditarEstado').classList.add('d-none');
+    document.querySelector('#divAdicionarAnotacao').classList.add('d-none');
     $('#modalFormEquipamentos').modal('show');
 }

@@ -78,8 +78,8 @@ function fntCrearOperacao() {
                             tableOperadores.api().ajax.reload();
                         }else{
                             rowTable.cells[0].innerHTML = '<span class="font-weight-bold font-italic">' + strMatricula + '</span>';
-                            rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = strApellido;
+                            rowTable.cells[1].textContent = strNombre.toUpperCase();
+                            rowTable.cells[2].textContent = strApellido.toUpperCase();
 
                             rowTable = "";
                         }

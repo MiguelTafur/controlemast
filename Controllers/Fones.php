@@ -170,4 +170,39 @@ class Fones extends Controllers{
 		}
 		die();
 	}
+
+	public function setAdicionarAnotacao() {
+		if($_POST) { 
+			if(empty($_POST['txtAnotacao'])) {
+				$arrResponse = array("status" => false, "msg" => "Digite uma anotação.");
+			} else {
+				$idEquipamento = intval($_POST['idEquipamentoAnotacao']);
+				$AnotacaoEquipamento = strClean($_POST['txtAnotacao']);
+				$imagenAnotacion = $_FILES['fileAnotacao'];
+
+				$carpetaImagenes = 'Assets/images/imagenes/';
+
+				if(!is_dir($carpetaImagenes)) {
+					mkdir($carpetaImagenes);
+				}
+
+				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+				move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
+
+				if($_SESSION['permisosMod']['u']){
+					$request_estado = $this->model->InsertAnotacao($idEquipamento, 
+																   $AnotacaoEquipamento, 
+																   $nombreImagen);
+					if($request_estado > 0) {
+						$arrResponse = array('status' => true, 'msg' => 'Anotação feita com sucesso.');
+					}else {
+						$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar Anotação.');
+					}
+				}
+			}
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
 }

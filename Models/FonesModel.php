@@ -9,6 +9,9 @@ class FonesModel extends Mysql
 	PRIVATE $intStatus;
 	PRIVATE $intTipo;
 	PRIVATE $intIdRuta;
+	PRIVATE $strAnotacao;
+	PRIVATE $strImagem;
+
 
 	public function __construct()
 	{
@@ -96,7 +99,8 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
-	public function updateEstadoFone(int $idequipamento, int $estado) {
+	public function updateEstadoFone(int $idequipamento, int $estado) 
+	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->intStatus = $estado;
 		$return = 0;
@@ -115,5 +119,18 @@ class FonesModel extends Mysql
 		}
 
 		return $return;
+	}
+
+	public function InsertAnotacao(int $idequipamento, string $anotacao, string $imagem) 
+	{
+		$this->intIdEquipamento = $idequipamento;
+		$this->strAnotacao = $anotacao;
+		$this->strImagem = $imagem;
+
+		$query_insert = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen)  VALUES(?,?,?)";
+		$arrData = array($this->intIdEquipamento,$this->strAnotacao, $this->strImagem);
+		$request_insert = $this->insert($query_insert, $arrData);
+
+		return $request_insert;
 	}
 }

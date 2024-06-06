@@ -92,7 +92,6 @@ function fntCrearControleReceber() {
                         //     } else {
                         //         rowTable.cells[3].textContent = strLacre;
                         //     }
-
                         //     rowTable = "";
                         // }
                         $('#modalFormControleReceber').modal("hide");
@@ -155,7 +154,7 @@ function fntEquipamento(idusuario) {
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
             let id = objData.data.idequipamento;
-            let nombre = objData.data.nombre;
+            let nombre = objData.data.tipo;
             let lacre = objData.data.lacre;
 
             let equipamento = document.querySelector('#txtEquipamento');

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Jun-2024 às 22:16
+-- Tempo de geração: 06/06/2024 às 22:09
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `controle`
+-- Estrutura para tabela `anotaciones`
+--
+
+CREATE TABLE `anotaciones` (
+  `idanotacion` int(11) NOT NULL,
+  `equipamentoid` bigint(20) NOT NULL,
+  `anotacion` varchar(200) NOT NULL,
+  `imagen` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `anotaciones`
+--
+
+INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`) VALUES
+(1, 15, 'Fone chegou de BH com mau contato', 'd4add8b7ebdae37eb26d6b07e644e7cc.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `controle`
 --
 
 CREATE TABLE `controle` (
@@ -38,7 +58,7 @@ CREATE TABLE `controle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `controle`
+-- Despejando dados para a tabela `controle`
 --
 
 INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`, `observacion`, `datecreated`, `status`) VALUES
@@ -47,43 +67,52 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (6, 1501, 8, 'nathalia.jpg', '', '2024-06-03 12:33:55', 1),
 (7, 1498, 2, '', '', '2024-06-03 13:56:17', 1),
 (8, 1503, 11, 'paloma.jpg', '', '2024-06-03 16:07:21', 1),
-(9, 1504, 12, 'gustavo.jpg', '', '2024-06-03 16:38:02', 1);
+(9, 1504, 12, 'gustavo.jpg', '', '2024-06-03 16:38:02', 1),
+(13, 1511, 20, '29ed06cf933a78cecf0a0ea34ccda76d.jpg', '', '2024-06-06 12:08:32', 1),
+(14, 1506, 14, 'd7e61bdfc1de9fa91492dc4f819b5907.jpg', '', '2024-06-06 12:13:51', 1),
+(15, 1505, 13, 'd293d2ff3646a55e116ac150ff7481cb.jpg', '', '2024-06-06 12:14:02', 1),
+(18, 1512, 19, '5894ae87fb09ec4a4d07d82057cbb338.jpg', '', '2024-06-06 15:10:45', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `equipamento`
+-- Estrutura para tabela `equipamento`
 --
 
 CREATE TABLE `equipamento` (
   `idequipamento` bigint(20) NOT NULL,
-  `nombre` varchar(55) NOT NULL,
   `marca` varchar(55) NOT NULL,
   `codigo` varchar(55) DEFAULT NULL,
   `lacre` varchar(10) DEFAULT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL DEFAULT 1,
+  `tipo` int(2) NOT NULL,
   `codigoruta` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `equipamento`
+-- Despejando dados para a tabela `equipamento`
 --
 
-INSERT INTO `equipamento` (`idequipamento`, `nombre`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `codigoruta`) VALUES
-(1, 'Fone', 'Topuse', 'G57969', '0000151', '2024-05-27 17:03:02', 1, 444),
-(2, 'Fone', 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 2, 444),
-(3, 'Fone', 'Plantronics', '', '0000394', '2024-05-28 09:54:54', 1, 444),
-(4, 'Fone', 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 2, 444),
-(7, 'Fone Monitoria', 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 444),
-(8, 'Fone', 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 2, 444),
-(11, 'Fone', 'Plantronics', '', '0003349', '2024-06-03 16:06:17', 2, 444),
-(12, 'Fone', 'TopUse', '', '0000320', '2024-06-03 16:30:35', 2, 444);
+INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
+(1, 'Topuse', 'G57969', '0000151', '2024-05-27 17:03:02', 1, 8, 444),
+(2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 2, 8, 444),
+(3, 'Plantronics', '', '0000394', '2024-05-28 09:54:54', 1, 8, 444),
+(4, 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 2, 8, 444),
+(7, 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 8, 444),
+(8, 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 2, 8, 444),
+(11, 'Plantronics', '', '0003349', '2024-06-03 16:06:17', 2, 8, 444),
+(12, 'TopUse', '', '0000320', '2024-06-03 16:30:35', 2, 8, 444),
+(13, 'Unixtron', '177388', '0000915', '2024-06-05 08:59:45', 2, 8, 444),
+(14, 'Unixtron', '201206438', '18281', '2024-06-05 09:00:13', 2, 8, 444),
+(15, 'Unixtrom', '', '23917', '2024-06-05 12:03:09', 3, 8, 444),
+(19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
+(20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `modulo`
+-- Estrutura para tabela `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -94,22 +123,27 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Extraindo dados da tabela `modulo`
+-- Despejando dados para a tabela `modulo`
 --
 
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
-(1, 'Dashboard', 'Dashboard controleMast', 1),
-(2, 'Usuários', 'Usuários controleMast', 1),
-(3, 'Líderes', 'Líderes controleMast', 1),
-(4, 'Operação', 'Operação controleMast', 1),
-(5, 'Equipamentos', 'Equipamentos controleMast', 1),
-(6, 'Rutas', 'Rutas controleMast', 1),
-(7, 'controle', 'controle de equipamentos globalcob', 1);
+(1, 'Rutas', 'Rutas controleMast', 1),
+(2, 'Dashboard', 'Dashboard controleMast', 1),
+(3, 'Usuário', 'Usuários controleMast', 1),
+(4, 'Gerente', 'Gerente controleMast', 1),
+(5, 'Coordinador', 'Coordinador controleMast', 1),
+(6, 'Líder', 'Líderes controleMast', 1),
+(7, 'Operador', 'Operação controleMast', 1),
+(8, 'Fone', 'Fone controleMast', 1),
+(9, 'Mouse', 'Mouse controleMast', 1),
+(10, 'Teclado', 'Teclado controleMast', 1),
+(11, 'Tela', 'Tela controleMast', 1),
+(12, 'controle', 'Controle controleMast', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `permisos`
+-- Estrutura para tabela `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -123,30 +157,27 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Extraindo dados da tabela `permisos`
+-- Despejando dados para a tabela `permisos`
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(449, 3, 1, 0, 0, 0, 0),
-(450, 3, 2, 0, 0, 0, 0),
-(451, 3, 4, 1, 1, 0, 0),
-(454, 3, 6, 0, 0, 0, 0),
-(455, 4, 1, 0, 0, 0, 0),
-(456, 4, 2, 0, 0, 0, 0),
-(457, 4, 4, 0, 0, 0, 0),
-(458, 4, 6, 0, 0, 0, 0),
-(465, 1, 1, 1, 1, 1, 1),
-(466, 1, 2, 1, 1, 1, 1),
-(467, 1, 3, 1, 1, 1, 1),
-(468, 1, 4, 1, 1, 1, 1),
-(469, 1, 5, 1, 1, 1, 1),
-(470, 1, 6, 1, 1, 1, 1),
-(471, 1, 7, 1, 1, 1, 1);
+(472, 1, 1, 1, 1, 1, 1),
+(473, 1, 2, 1, 1, 1, 1),
+(474, 1, 3, 1, 1, 1, 1),
+(475, 1, 4, 1, 1, 1, 1),
+(476, 1, 5, 1, 1, 1, 1),
+(477, 1, 6, 1, 1, 1, 1),
+(478, 1, 7, 1, 1, 1, 1),
+(479, 1, 8, 1, 1, 1, 1),
+(480, 1, 9, 1, 1, 1, 1),
+(481, 1, 10, 1, 1, 1, 1),
+(482, 1, 11, 1, 1, 1, 1),
+(483, 1, 12, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `persona`
+-- Estrutura para tabela `persona`
 --
 
 CREATE TABLE `persona` (
@@ -163,26 +194,31 @@ CREATE TABLE `persona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Extraindo dados da tabela `persona`
+-- Despejando dados para a tabela `persona`
 --
 
 INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `datecreated`, `status`) VALUES
 (1, 'Miguel', 'Sarmiento', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, '2022-11-12 00:00:00', 1),
-(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 3, 444, '2024-05-23 17:48:42', 1),
-(1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 3, 444, '2024-05-24 16:55:35', 1),
-(1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 3, 444, '2024-05-24 16:56:41', 1),
-(1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 4, 444, '2024-05-27 13:17:24', 1),
-(1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 4, 444, '2024-05-27 13:19:30', 1),
-(1500, 'Matheus Henrique', 'Alves Bispo', '110341', 37991492643, '', 3, 444, '2024-06-03 10:17:21', 1),
-(1501, 'Nathalia Patricia', 'Alves', '13313', 0, '', 4, 444, '2024-06-03 12:30:20', 1),
+(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 4, 444, '2024-05-23 17:48:42', 1),
+(1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 4, 444, '2024-05-24 16:55:35', 1),
+(1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 4, 444, '2024-05-24 16:56:41', 1),
+(1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 5, 444, '2024-05-27 13:17:24', 1),
+(1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 5, 444, '2024-05-27 13:19:30', 1),
+(1500, 'Matheus Henrique', 'Alves Bispo', '110341', 37991492643, '', 4, 444, '2024-06-03 10:17:21', 1),
+(1501, 'Natalia Patricia', 'Alves', '013313', 0, '', 5, 444, '2024-06-03 12:30:20', 1),
 (1502, 'Admin', 'Admin', '013301', 0, 'admin@cm.com', 1, 444, '2024-06-03 14:08:17', 1),
-(1503, 'Paloma', 'Aparecida Nunes', '133333', 0, '', 4, 444, '2024-06-03 16:07:08', 1),
-(1504, 'Gustavo Francisco', 'Da Silva', '13223', 0, '', 4, 444, '2024-06-03 16:29:45', 1);
+(1503, 'Paloma', 'Aparecida Nunes', '013333', 0, '', 5, 444, '2024-06-03 16:07:08', 1),
+(1504, 'Gustavo Francisco', 'Da Silva', '013223', 0, '', 5, 444, '2024-06-03 16:29:45', 1),
+(1505, 'PATRICIA GABRIELA', 'CARDOSO', '01819', 0, '', 5, 444, '2024-06-05 09:01:10', 1),
+(1506, 'KARINA', 'PEREIRA DE OLIVEIRA', '013339', 0, '', 5, 444, '2024-06-05 09:01:50', 1),
+(1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, '2024-06-05 16:25:17', 1),
+(1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, '2024-06-06 12:05:51', 1),
+(1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `rol`
+-- Estrutura para tabela `rol`
 --
 
 CREATE TABLE `rol` (
@@ -193,19 +229,20 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Extraindo dados da tabela `rol`
+-- Despejando dados para a tabela `rol`
 --
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 (1, 'Administrador', 'Acceso a todo el sistema', 1),
-(2, 'Supervisor', 'Supervisor ControleMast', 1),
-(3, 'Lider', 'Lider', 1),
-(4, 'Operação', 'Operação', 1);
+(2, 'Gerente', 'Gerente ControleMast', 1),
+(3, 'Coordinador', 'Coordinador controlMast', 1),
+(4, 'Lider', 'Lider', 1),
+(5, 'Operação', 'Operação', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ruta`
+-- Estrutura para tabela `ruta`
 --
 
 CREATE TABLE `ruta` (
@@ -217,7 +254,7 @@ CREATE TABLE `ruta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `ruta`
+-- Despejando dados para a tabela `ruta`
 --
 
 INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUES
@@ -228,7 +265,14 @@ INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUE
 --
 
 --
--- Índices para tabela `controle`
+-- Índices de tabela `anotaciones`
+--
+ALTER TABLE `anotaciones`
+  ADD PRIMARY KEY (`idanotacion`),
+  ADD KEY `equipamentoid` (`equipamentoid`);
+
+--
+-- Índices de tabela `controle`
 --
 ALTER TABLE `controle`
   ADD PRIMARY KEY (`idcontrole`),
@@ -236,20 +280,20 @@ ALTER TABLE `controle`
   ADD KEY `foneid` (`equipamentoid`);
 
 --
--- Índices para tabela `equipamento`
+-- Índices de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD PRIMARY KEY (`idequipamento`),
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices para tabela `modulo`
+-- Índices de tabela `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
 
 --
--- Índices para tabela `permisos`
+-- Índices de tabela `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermiso`),
@@ -257,7 +301,7 @@ ALTER TABLE `permisos`
   ADD KEY `moduloid` (`moduloid`);
 
 --
--- Índices para tabela `persona`
+-- Índices de tabela `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
@@ -265,56 +309,62 @@ ALTER TABLE `persona`
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices para tabela `rol`
+-- Índices de tabela `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idrol`);
 
 --
--- Índices para tabela `ruta`
+-- Índices de tabela `ruta`
 --
 ALTER TABLE `ruta`
   ADD PRIMARY KEY (`idruta`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `anotaciones`
+--
+ALTER TABLE `anotaciones`
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=472;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
 
 --
 -- AUTO_INCREMENT de tabela `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1505;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1513;
 
 --
 -- AUTO_INCREMENT de tabela `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `ruta`
@@ -323,31 +373,37 @@ ALTER TABLE `ruta`
   MODIFY `idruta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `controle`
+-- Restrições para tabelas `anotaciones`
+--
+ALTER TABLE `anotaciones`
+  ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `controle`
 --
 ALTER TABLE `controle`
   ADD CONSTRAINT `controle_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `controle_ibfk_3` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `equipamento`
+-- Restrições para tabelas `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD CONSTRAINT `equipamento_ibfk_1` FOREIGN KEY (`codigoruta`) REFERENCES `ruta` (`idruta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `permisos`
+-- Restrições para tabelas `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`moduloid`) REFERENCES `modulo` (`idmodulo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `persona`
+-- Restrições para tabelas `persona`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
