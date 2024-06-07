@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/06/2024 às 22:09
+-- Tempo de geração: 06/06/2024 às 22:43
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -71,7 +71,8 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (13, 1511, 20, '29ed06cf933a78cecf0a0ea34ccda76d.jpg', '', '2024-06-06 12:08:32', 1),
 (14, 1506, 14, 'd7e61bdfc1de9fa91492dc4f819b5907.jpg', '', '2024-06-06 12:13:51', 1),
 (15, 1505, 13, 'd293d2ff3646a55e116ac150ff7481cb.jpg', '', '2024-06-06 12:14:02', 1),
-(18, 1512, 19, '5894ae87fb09ec4a4d07d82057cbb338.jpg', '', '2024-06-06 15:10:45', 1);
+(18, 1512, 19, '5894ae87fb09ec4a4d07d82057cbb338.jpg', '', '2024-06-06 15:10:45', 1),
+(19, 1513, 21, '8bb27f37a16c9b1f793aa03e5e5d118d.jpg', '', '2024-06-06 17:43:10', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,8 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (14, 'Unixtron', '201206438', '18281', '2024-06-05 09:00:13', 2, 8, 444),
 (15, 'Unixtrom', '', '23917', '2024-06-05 12:03:09', 3, 8, 444),
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
-(20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444);
+(20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
+(21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -213,7 +215,8 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1506, 'KARINA', 'PEREIRA DE OLIVEIRA', '013339', 0, '', 5, 444, '2024-06-05 09:01:50', 1),
 (1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, '2024-06-05 16:25:17', 1),
 (1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, '2024-06-06 12:05:51', 1),
-(1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1);
+(1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1),
+(1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, '2024-06-06 17:41:50', 1);
 
 -- --------------------------------------------------------
 
@@ -334,13 +337,13 @@ ALTER TABLE `anotaciones`
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
@@ -358,7 +361,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de tabela `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1513;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1514;
 
 --
 -- AUTO_INCREMENT de tabela `rol`

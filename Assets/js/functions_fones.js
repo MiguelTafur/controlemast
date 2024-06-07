@@ -269,15 +269,6 @@ function fntViewInfo(idequipamento)
 
     btnAnnotation.setAttribute('id', idequipamento);
 
-    console.log(btnAnnotation);
-
-    /*$('#btnAnnotation').one('click', function(){
-        fntViewAnnotation(idequipamento);
-        console.log(idequipamento);
-
-        //$(this).click(function() { fntViewAnnotation(idequipamento); console.log(idequipamento);});
-    });*/
-
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -340,7 +331,7 @@ function fntViewAnnotation()
     let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Fones/getAnotacionesFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -348,10 +339,12 @@ function fntViewAnnotation()
         if(request.readyState == 4 && request.status == 200)
         {
             let objData = JSON.parse(request.responseText);
-            if(objData.status)
+            /*if(objData.status)
             {
                 console.log(objData);
-                /*const datacreated = objData.data.fechaRegistro;
+                const lacre = objData.data.lacre;
+
+                const datacreated = objData.data.fechaRegistro;
                 const fechaObj = new Date(datacreated);
                 const mes = fechaObj.getMonth();
                 const dia = fechaObj.getDate() + 2;
@@ -360,39 +353,32 @@ function fntViewAnnotation()
                 const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
                 const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
 
-                document.querySelector("#celMarca").innerHTML = objData.data.marca;
-                if(objData.data.codigo) {
-                    document.querySelector("#celCodigo").innerHTML = objData.data.codigo;
-                } else {
-                    document.querySelector("#celCodigo").innerHTML = '<span class="font-italic">nenhum<span/>';
-                }
+                document.querySelector("#celdata").innerHTML = fechaFormateada;
 
-                if(objData.data.lacre) {
-                    document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
-                } else {
-                    document.querySelector("#celLacre").innerHTML = '<span class="font-italic">nenhum<span/>';
-                }
+                document.querySelector("#foneAnotacion").innerHTML = 'Fone: <i class="font-weight-normal">#' + objData.data.lacre + '</i>';
                 
-                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
-                switch (objData.data.status) {
-                    case 1:
-                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Disponível</span>';    
-                        break;
-                    case 3:
-                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-danger">Estragado</span>';    
-                        break;
-                    case 4:
-                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-warning">Concerto</span>';    
-                        break;
-                    default:
-                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-info">Em Uso</span>';    
-                        break;
-                }*/
+                //document.querySelector("#celEstadoAnotacao").innerHTML = '<pan class="text-uppercase text-success">Disponível</span>';
 
-                $('#modalViewAnnotation').modal('show');
+                document.querySelector("#celAnotacao").textContent = objData.data.anotacion;
+
+                if(objData.data.imagen) {
+                    document.querySelector("#celImagemAnotacao").innerHTML = `<a href="${base_url}/Assets/images/imagenes/${objData.data.imagen}" type="button" class="btn btn-info" target="_blank">Ver &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a>`;
+                } else {
+                    document.querySelector("#celImagemAnotacao").innerHTML = '<i>Nenhuma</i>';
+                }                              
+
             }else{
                 swal("Erro", objData.msg, "error");
+            }*/
+            if(objData.status)
+            {
+                let trAnotaciones = objData.data;
+                document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            }else{
+                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="2">Nenhumja anotação</td><tr>';
             }
+            $('#modalViewAnnotation').modal('show');
+            $('#modalViewAnnotation').addClass('myModal');
         }
     }
 }

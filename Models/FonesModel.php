@@ -49,6 +49,22 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
+	public function selectAnotacionesFone(int $idequipamento)
+	{
+		$this->intIdEquipamento = $idequipamento;
+		$sql = "SELECT eq.lacre, 
+					   an.idanotacion,
+                       an.anotacion,
+					   an.imagen, 
+					   an.datecreated
+				FROM equipamento eq
+				LEFT OUTER JOIN anotaciones an
+				ON eq.idequipamento = an.equipamentoid
+				WHERE eq.idequipamento = $this->intIdEquipamento";
+		$request = $this->select_all($sql);
+		return $request;
+	}
+
 	public function insertFone(string $marca, string $codigo, string $lacre, int $ruta)
 	{
 		$this->strMarca = $marca;

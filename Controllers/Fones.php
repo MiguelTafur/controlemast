@@ -94,6 +94,48 @@ class Fones extends Controllers{
 		die();
 	}
 
+	public function getAnotacionesFone($idequipamento)
+	{
+		if($_SESSION['permisosMod']['r']){
+			$IDequipamento = intval($idequipamento);
+			if($IDequipamento > 0)
+			{
+				$arrData = $this->model->selectAnotacionesFone($IDequipamento);
+				if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+					$trAnotaciones = "";
+					$dias = array("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
+					for ($i=0; $i < count($arrData); $i++) { 
+						if($arrData[$i]['idanotacion'] > 0) {
+							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
+							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
+							$trAnotaciones .= '<tr class="text-center">
+								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>
+								<td>'.$arrData[$i]['anotacion'].'</td>';
+								if(!empty($arrData[$i]['imagen'])) {
+									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank">Abrir &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
+								} else {
+									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled>Nenhum &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></button></td>';
+								}
+							$trAnotaciones .= '</tr>';
+						} else {
+							$trAnotaciones .= '
+								<tr class="text-center font-italic">
+									<td colspan="3"></td>
+								</tr>';
+						}
+					}
+
+					$arrResponse = array('status' => true, 'data' => $trAnotaciones);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
+	}
+
 	public function setFone()
 	{ 
 		if($_POST)
@@ -180,15 +222,21 @@ class Fones extends Controllers{
 				$AnotacaoEquipamento = strClean($_POST['txtAnotacao']);
 				$imagenAnotacion = $_FILES['fileAnotacao'];
 
-				$carpetaImagenes = 'Assets/images/imagenes/';
+				if($imagenAnotacion['error'] > 0) {
+					$nombreImagen = "";
+				} else {
+					$carpetaImagenes = 'Assets/images/imagenes/';
 
-				if(!is_dir($carpetaImagenes)) {
-					mkdir($carpetaImagenes);
+					if(!is_dir($carpetaImagenes)) {
+						mkdir($carpetaImagenes);
+					}
+
+					$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
 
-				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
-				move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
+				//dep($nombreImagen);exit;
 
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = $this->model->InsertAnotacao($idEquipamento, 

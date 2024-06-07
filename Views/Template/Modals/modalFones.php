@@ -175,7 +175,7 @@
 
 <!-- modal ver Anotaciones -->
 <div class="modal fade" id="modalViewAnnotation" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header header-primary">
         <h5 class="modal-title" id="titleModal">Anotações</h5>
@@ -185,25 +185,16 @@
       </div>
       <div class="modal-body">
         <h5 class="text-center" id="foneAnotacion"></h5>
-        <table class="table table-bordered">
-          <tbody>
+        <br>
+        <table class="table table-striped text-center">
+          <thead>
             <tr>
-              <td>Data:</td>
-              <td id="celdata"></td>
+              <th>Data</th>
+              <th>Anotação</th>
+              <th>Arquivo</th>
             </tr>
-            <tr>
-              <td>Estado Atual:</td>
-              <td id="celEstado"></td>
-            </tr>
-            <tr>
-              <td>Anotação:</td>
-              <td id="celLacre"></td>
-            </tr>
-            <tr>
-              <td>Imagem:</td>
-              <td id="celImagem"></td>
-            </tr>
-          </tbody>
+          </thead>
+          <tbody id="listAnotaciones"></tbody>
         </table>
       </div>
       <div class="modal-footer">
