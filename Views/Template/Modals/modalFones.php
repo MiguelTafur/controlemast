@@ -77,7 +77,7 @@
               <td id="celEstado"></td>
             </tr>
             <tr></tr>
-            <td colspan="2"><button class="btn btn-info btn-block">Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
+            <td colspan="2"><button class="btn btn-info btn-block btnAnnotation" onclick="fntViewAnnotation();" >Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
           </tbody>
         </table>
       </div>
@@ -163,6 +163,48 @@
             </div>
           </div>
         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal ver Anotaciones -->
+<div class="modal fade" id="modalViewAnnotation" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Anotações</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-center" id="foneAnotacion"></h5>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Data:</td>
+              <td id="celdata"></td>
+            </tr>
+            <tr>
+              <td>Estado Atual:</td>
+              <td id="celEstado"></td>
+            </tr>
+            <tr>
+              <td>Anotação:</td>
+              <td id="celLacre"></td>
+            </tr>
+            <tr>
+              <td>Imagem:</td>
+              <td id="celImagem"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

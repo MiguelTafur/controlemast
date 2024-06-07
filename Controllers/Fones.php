@@ -205,4 +205,8 @@ class Fones extends Controllers{
 		}
 		die();
 	}
+
+	public function getAnotacion($idequipamento) {
+		dep(intval($idequipamento));exit;
+	}
 }

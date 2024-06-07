@@ -265,6 +265,19 @@ function fntAddAnnotation() {
 
 function fntViewInfo(idequipamento)
 {
+    const btnAnnotation =  document.querySelector(".btnAnnotation");
+
+    btnAnnotation.setAttribute('id', idequipamento);
+
+    console.log(btnAnnotation);
+
+    /*$('#btnAnnotation').one('click', function(){
+        fntViewAnnotation(idequipamento);
+        console.log(idequipamento);
+
+        //$(this).click(function() { fntViewAnnotation(idequipamento); console.log(idequipamento);});
+    });*/
+
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -315,6 +328,68 @@ function fntViewInfo(idequipamento)
                 }
 
                 $('#modalViewEquipamento').modal('show');
+            }else{
+                swal("Erro", objData.msg, "error");
+            }
+        }
+    }
+}
+
+function fntViewAnnotation()
+{
+    let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                console.log(objData);
+                /*const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
+                document.querySelector("#celMarca").innerHTML = objData.data.marca;
+                if(objData.data.codigo) {
+                    document.querySelector("#celCodigo").innerHTML = objData.data.codigo;
+                } else {
+                    document.querySelector("#celCodigo").innerHTML = '<span class="font-italic">nenhum<span/>';
+                }
+
+                if(objData.data.lacre) {
+                    document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
+                } else {
+                    document.querySelector("#celLacre").innerHTML = '<span class="font-italic">nenhum<span/>';
+                }
+                
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
+                switch (objData.data.status) {
+                    case 1:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Disponível</span>';    
+                        break;
+                    case 3:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-danger">Estragado</span>';    
+                        break;
+                    case 4:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-warning">Concerto</span>';    
+                        break;
+                    default:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-info">Em Uso</span>';    
+                        break;
+                }*/
+
+                $('#modalViewAnnotation').modal('show');
             }else{
                 swal("Erro", objData.msg, "error");
             }
