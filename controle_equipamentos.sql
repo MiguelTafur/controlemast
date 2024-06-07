@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 07/06/2024 às 21:37
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 07-06-2024 a las 22:41:34
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `controle_equipamentos`
+-- Base de datos: `controle_equipamentos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `anotaciones`
+-- Estructura de tabla para la tabla `anotaciones`
 --
 
 CREATE TABLE `anotaciones` (
@@ -36,7 +36,7 @@ CREATE TABLE `anotaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `anotaciones`
+-- Volcado de datos para la tabla `anotaciones`
 --
 
 INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`, `datecreated`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `controle`
+-- Estructura de tabla para la tabla `controle`
 --
 
 CREATE TABLE `controle` (
@@ -62,13 +62,13 @@ CREATE TABLE `controle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `controle`
+-- Volcado de datos para la tabla `controle`
 --
 
 INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`, `observacion`, `datecreated`, `status`) VALUES
 (1, 1497, 4, '', '', '2024-05-28 13:05:06', 1),
 (5, 1500, 7, '', '', '2024-06-03 10:19:32', 1),
-(6, 1501, 8, 'nathalia.jpg', '', '2024-06-03 12:33:55', 1),
+(6, 1501, 8, 'nathalia.jpg', '', '2024-06-03 12:33:55', 0),
 (7, 1498, 2, '', '', '2024-06-03 13:56:17', 1),
 (8, 1503, 11, 'paloma.jpg', '', '2024-06-03 16:07:21', 1),
 (9, 1504, 12, 'gustavo.jpg', '', '2024-06-03 16:38:02', 1),
@@ -76,12 +76,14 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (14, 1506, 14, 'd7e61bdfc1de9fa91492dc4f819b5907.jpg', '', '2024-06-06 12:13:51', 1),
 (15, 1505, 13, 'd293d2ff3646a55e116ac150ff7481cb.jpg', '', '2024-06-06 12:14:02', 1),
 (18, 1512, 19, '5894ae87fb09ec4a4d07d82057cbb338.jpg', '', '2024-06-06 15:10:45', 1),
-(19, 1513, 21, '8bb27f37a16c9b1f793aa03e5e5d118d.jpg', '', '2024-06-06 17:43:10', 1);
+(19, 1513, 21, '8bb27f37a16c9b1f793aa03e5e5d118d.jpg', '', '2024-06-06 17:43:10', 1),
+(20, 1501, 8, '', 'Fone apresenta mau contato', '2024-06-07 17:35:34', 3),
+(21, 1501, 23, 'cd06760fa16f764182392e04df6746af.jpg', '', '2024-06-07 17:38:04', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `equipamento`
+-- Estructura de tabla para la tabla `equipamento`
 --
 
 CREATE TABLE `equipamento` (
@@ -96,7 +98,7 @@ CREATE TABLE `equipamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `equipamento`
+-- Volcado de datos para la tabla `equipamento`
 --
 
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
@@ -105,7 +107,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (3, 'Plantronics', '', '0000394', '2024-05-28 09:54:54', 1, 8, 444),
 (4, 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 2, 8, 444),
 (7, 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 8, 444),
-(8, 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 2, 8, 444),
+(8, 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 3, 8, 444),
 (11, 'Plantronics', '', '0003349', '2024-06-03 16:06:17', 2, 8, 444),
 (12, 'TopUse', '', '0000320', '2024-06-03 16:30:35', 2, 8, 444),
 (13, 'Unixtron', '177388', '0000915', '2024-06-05 08:59:45', 2, 8, 444),
@@ -114,12 +116,13 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
 (21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
-(22, 'Teste', 'teste', '980603', '2024-06-07 16:02:00', 1, 8, 444);
+(22, 'Teste', 'teste', '980603', '2024-06-07 16:02:00', 1, 8, 444),
+(23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `modulo`
+-- Estructura de tabla para la tabla `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -130,7 +133,7 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `modulo`
+-- Volcado de datos para la tabla `modulo`
 --
 
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
@@ -150,7 +153,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `permisos`
+-- Estructura de tabla para la tabla `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -164,7 +167,7 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `permisos`
+-- Volcado de datos para la tabla `permisos`
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
@@ -184,7 +187,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `persona`
+-- Estructura de tabla para la tabla `persona`
 --
 
 CREATE TABLE `persona` (
@@ -201,7 +204,7 @@ CREATE TABLE `persona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `persona`
+-- Volcado de datos para la tabla `persona`
 --
 
 INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `datecreated`, `status`) VALUES
@@ -226,7 +229,7 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -237,7 +240,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
@@ -250,7 +253,7 @@ INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ruta`
+-- Estructura de tabla para la tabla `ruta`
 --
 
 CREATE TABLE `ruta` (
@@ -262,25 +265,25 @@ CREATE TABLE `ruta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `ruta`
+-- Volcado de datos para la tabla `ruta`
 --
 
 INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUES
 (444, 9806, 'Globalcob', '2024-05-22 15:39:31', 1);
 
 --
--- Índices para tabelas despejadas
+-- Índices para tablas volcadas
 --
 
 --
--- Índices de tabela `anotaciones`
+-- Indices de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD PRIMARY KEY (`idanotacion`),
   ADD KEY `equipamentoid` (`equipamentoid`);
 
 --
--- Índices de tabela `controle`
+-- Indices de la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD PRIMARY KEY (`idcontrole`),
@@ -288,20 +291,20 @@ ALTER TABLE `controle`
   ADD KEY `foneid` (`equipamentoid`);
 
 --
--- Índices de tabela `equipamento`
+-- Indices de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD PRIMARY KEY (`idequipamento`),
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `modulo`
+-- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
 
 --
--- Índices de tabela `permisos`
+-- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermiso`),
@@ -309,7 +312,7 @@ ALTER TABLE `permisos`
   ADD KEY `moduloid` (`moduloid`);
 
 --
--- Índices de tabela `persona`
+-- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
@@ -317,101 +320,101 @@ ALTER TABLE `persona`
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idrol`);
 
 --
--- Índices de tabela `ruta`
+-- Indices de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   ADD PRIMARY KEY (`idruta`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de tabela `anotaciones`
+-- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `controle`
+-- AUTO_INCREMENT de la tabla `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT de tabela `equipamento`
+-- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de tabela `modulo`
+-- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de tabela `permisos`
+-- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
 
 --
--- AUTO_INCREMENT de tabela `persona`
+-- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
   MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1514;
 
 --
--- AUTO_INCREMENT de tabela `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de tabela `ruta`
+-- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   MODIFY `idruta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
 --
--- Restrições para tabelas despejadas
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restrições para tabelas `anotaciones`
+-- Filtros para la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `controle`
+-- Filtros para la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD CONSTRAINT `controle_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `controle_ibfk_3` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `equipamento`
+-- Filtros para la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD CONSTRAINT `equipamento_ibfk_1` FOREIGN KEY (`codigoruta`) REFERENCES `ruta` (`idruta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `permisos`
+-- Filtros para la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`moduloid`) REFERENCES `modulo` (`idmodulo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `persona`
+-- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
