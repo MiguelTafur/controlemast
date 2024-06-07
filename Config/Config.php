@@ -1,7 +1,5 @@
 <?php 
 	
-	//define("BASE_URL", "http://localhost/tienda_virtual/");
-	//const BASE_URL = "https://credimast.com/credimastv2";
 	const BASE_URL = "http://localhost/controleMast";
 
 	//Zona horaria
