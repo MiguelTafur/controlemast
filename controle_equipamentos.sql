@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/06/2024 às 22:43
+-- Tempo de geração: 07/06/2024 às 21:37
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -31,15 +31,19 @@ CREATE TABLE `anotaciones` (
   `idanotacion` int(11) NOT NULL,
   `equipamentoid` bigint(20) NOT NULL,
   `anotacion` varchar(200) NOT NULL,
-  `imagen` varchar(200) NOT NULL
+  `imagen` varchar(200) NOT NULL,
+  `datecreated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `anotaciones`
 --
 
-INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`) VALUES
-(1, 15, 'Fone chegou de BH com mau contato', 'd4add8b7ebdae37eb26d6b07e644e7cc.jpg');
+INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`, `datecreated`) VALUES
+(1, 15, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10'),
+(2, 22, 'Teste1', '', '2024-06-07 16:02:16'),
+(3, 22, 'teste2', '', '2024-06-07 16:23:00'),
+(4, 22, 'teste2', 'a5c6e01e6cfd19aea90e14d5cf797a78.jpg', '2024-06-07 16:23:22');
 
 -- --------------------------------------------------------
 
@@ -109,7 +113,8 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (15, 'Unixtrom', '', '23917', '2024-06-05 12:03:09', 3, 8, 444),
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
-(21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444);
+(21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
+(22, 'Teste', 'teste', '980603', '2024-06-07 16:02:00', 1, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -207,7 +212,7 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 5, 444, '2024-05-27 13:17:24', 1),
 (1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 5, 444, '2024-05-27 13:19:30', 1),
 (1500, 'Matheus Henrique', 'Alves Bispo', '110341', 37991492643, '', 4, 444, '2024-06-03 10:17:21', 1),
-(1501, 'Natalia Patricia', 'Alves', '013313', 0, '', 5, 444, '2024-06-03 12:30:20', 1),
+(1501, 'Nathalia Patricia', 'Alves', '013313', 0, '', 5, 444, '2024-06-03 12:30:20', 1),
 (1502, 'Admin', 'Admin', '013301', 0, 'admin@cm.com', 1, 444, '2024-06-03 14:08:17', 1),
 (1503, 'Paloma', 'Aparecida Nunes', '013333', 0, '', 5, 444, '2024-06-03 16:07:08', 1),
 (1504, 'Gustavo Francisco', 'Da Silva', '013223', 0, '', 5, 444, '2024-06-03 16:29:45', 1),
@@ -331,7 +336,7 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
@@ -343,7 +348,7 @@ ALTER TABLE `controle`
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
