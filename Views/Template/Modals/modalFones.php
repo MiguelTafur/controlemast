@@ -212,7 +212,7 @@
               <th>Data</th>
               <th>Estado Equipamento</th>
               <th>Anotação</th>
-              <th>Arquivo</th>
+              <th>Imagem</th>
             </tr>
           </thead>
           <tbody id="listAnotaciones"></tbody>

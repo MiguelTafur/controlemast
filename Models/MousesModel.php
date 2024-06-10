@@ -7,7 +7,10 @@ class MousesModel extends Mysql
 	PRIVATE $strCodigo;
 	PRIVATE $strLacre;
 	PRIVATE $intStatus;
+	PRIVATE $intTipo;
 	PRIVATE $intIdRuta;
+	PRIVATE $strAnotacao;
+	PRIVATE $strImagem;
 
 	public function __construct()
 	{
@@ -45,28 +48,22 @@ class MousesModel extends Mysql
 		return $request;
 	}
 
-	public function insertMouse(string $marca, string $codigo, string $lacre, int $ruta)
+	public function selectAnotacionesMouse(int $idequipamento)
 	{
-		$this->strMarca = $marca;
-		$this->strCodigo = $codigo;
-		$this->strLacre = $lacre;
-		$this->intIdRuta = $ruta;
-		$this->intTipo = MMOUSE;
-		$return = 0;
-
-		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
+		$this->intIdEquipamento = $idequipamento;
+		$sql = "SELECT eq.lacre, 
+					   an.idanotacion,
+                       an.anotacion,
+					   an.imagen, 
+					   an.datecreated,
+					   an.status
+				FROM equipamento eq
+				LEFT OUTER JOIN anotaciones an
+				ON eq.idequipamento = an.equipamentoid
+				WHERE eq.idequipamento = $this->intIdEquipamento
+				AND an.tipo = ".MMOUSE;
 		$request = $this->select_all($sql);
-
-		if(empty($request))
-		{
-			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,tipo,codigoruta)  VALUES(?,?,?,?,?)";
-			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre,$this->intTipo,$this->intIdRuta);
-			$request_insert = $this->insert($query_insert, $arrData);
-			$return = $request_insert;
-		}else{
-			$return = "0";
-		}
-		return $return;
+		return $request;
 	}
 
 	public function updateMouse(int $idequipamento, string $marca, string $codigo, string $lacre)
@@ -94,9 +91,12 @@ class MousesModel extends Mysql
 		return $request;
 	}
 
-	public function updateEstadoMouse(int $idequipamento, int $estado) {
+	public function updateEstadoMouse(int $idequipamento, int $estado, string $anotacion, string $imagen) 
+	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->intStatus = $estado;
+		$this->strAnotacao = $anotacion;
+		$this->strImagem = $imagen;
 		$return = 0;
 
 		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
@@ -109,9 +109,58 @@ class MousesModel extends Mysql
 			$query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->intIdEquipamento";
 			$arrData = array($this->intStatus);
 			$request_update = $this->update($query_update, $arrData);
+
+			$this->insertAnotacao($this->intIdEquipamento, $this->strAnotacao, $this->strImagem, $this->intStatus);
+
 			$return = $this->intStatus;
 		}
 
 		return $return;
+	}
+
+	public function insertMouse(string $marca, string $codigo, string $lacre, int $ruta, string $observacion, string $imagen, int $checked)
+	{
+		$this->strMarca = $marca;
+		$this->strCodigo = $codigo;
+		$this->strLacre = $lacre;
+		$this->intIdRuta = $ruta;
+		$this->strAnotacao = $observacion;
+		$this->strImagem = $imagen;
+		$this->intStatus = $checked;
+		$this->intTipo = MMOUSE;
+		$return = 0;
+
+		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
+		$request = $this->select_all($sql);
+
+		if(empty($request))
+		{
+			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,status,tipo,codigoruta)  VALUES(?,?,?,?,?,?)";
+			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre,$this->intStatus,$this->intTipo,$this->intIdRuta);
+			$request_insert = $this->insert($query_insert, $arrData);
+
+			if(!empty($this->strAnotacao) || !empty($this->strImagem)) {
+				$this->insertAnotacao($request_insert, $this->strAnotacao, $this->strImagem, $this->intStatus);
+			}
+			$return = $request_insert;
+		}else{
+			$return = "0";
+		}
+		return $return;
+	}
+
+	public function insertAnotacao(int $idequipamento, string $anotacao, string $imagem, int $estado) 
+	{
+		$this->intIdEquipamento = $idequipamento;
+		$this->strAnotacao = $anotacao;
+		$this->strImagem = $imagem;
+		$this->intStatus = $estado;
+		$this->intTipo = MMOUSE;
+
+		$query_insert = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status, tipo)  VALUES(?,?,?,?,?)";
+		$arrData = array($this->intIdEquipamento,$this->strAnotacao, $this->strImagem, $this->intStatus, $this->intTipo);
+		$request_insert = $this->insert($query_insert, $arrData);
+
+		return $request_insert;
 	}
 }

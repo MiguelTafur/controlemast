@@ -100,14 +100,27 @@ class EntregarModel extends Mysql
         $request_select = $this->select($query_select);
 
         if(empty($request_select)){
+
+            $sql = "SELECT tipo FROM equipamento WHERE idequipamento = $this->listEquipamento";
+            $request = $this->select($sql);
+            $tipo = $request['tipo'];
+
             $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion)  VALUES(?,?,?,?)";
             $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion);
             $request_insert = $this->insert($query_insert, $arrData);
-            $return = $request_insert;
+            
 
+            //Actualizar el estado del equipamento
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
             $arrData = array($this->listEstado);
             $request = $this->update($query_update,$arrData);
+
+            //Agrega la anotación
+            $query_insert_anotacion = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status, tipo)  VALUES(?,?,?,?,?)";
+            $arrData_anotacion = array($this->listEquipamento,$this->strObservacion, $this->strProtocolo, $this->listEstado, $tipo);
+            $request_insert_anotacion = $this->insert($query_insert_anotacion, $arrData_anotacion);
+
+            $return = $request_insert;
 
         } else {
             $return = "0";

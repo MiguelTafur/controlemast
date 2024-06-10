@@ -35,6 +35,10 @@
               <label for="txtObservacion">Anotação <span class="required">*</span></label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion" required></textarea>
             </div>
+            <div class="form-group col-md-12 mb-4">
+              <label for="fileReceber">Imagen</label>
+              <input type="file" class="form-control-file" id="fileReceber" name="fileReceber">
+            </div>
           </div>
           <div class="form-check col-md-12">
             <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">

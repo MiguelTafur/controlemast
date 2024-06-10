@@ -134,7 +134,7 @@ class Fones extends Controllers{
 								if(!empty($arrData[$i]['imagen'])) {
 									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank">Abrir &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
 								} else {
-									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled>Nenhum &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></button></td>';
+									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled><i class="fa fa-lg fa-file-image-o" aria-hidden="true" style="margin-right: 0"></i></button></td>';
 								}
 							$trAnotaciones .= '</tr>';
 						} else {
@@ -302,7 +302,7 @@ class Fones extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->InsertAnotacao($idEquipamento, 
+					$request_estado = $this->model->insertAnotacao($idEquipamento, 
 																   $AnotacaoEquipamento, 
 																   $nombreImagen,
 																   $estadoAnotacaoEquipamento);

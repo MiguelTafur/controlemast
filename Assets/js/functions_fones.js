@@ -58,7 +58,7 @@ function fntCrearEquipamento() {
             let ElementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < ElementsValid.length; i++) {
                 if(ElementsValid[i].classList.contains('is-invalid')){
-                    swal("Atenção!", "Verrifique os campos em vermelho.", "error");
+                    swal("Atenção!", "Verifique os campos em vermelho.", "error");
                     return false;
                 }
             }
@@ -190,6 +190,7 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        console.log(objData);
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{
@@ -361,7 +362,6 @@ function fntViewAddAnnotation(idequipamento) {
         if(request.readyState == 4 && request.status == 200)
         {
             let objData = JSON.parse(request.responseText);
-            console.log(objData);
             document.querySelector('#equipamentoLacre').innerHTML = 'Fone: #' + objData.data.lacre;
             document.querySelector('#idEquipamentoAnotacao').value = objData.data.idequipamento;
             document.querySelector('#estadoEquipamentoAnotacao').value = objData.data.status;

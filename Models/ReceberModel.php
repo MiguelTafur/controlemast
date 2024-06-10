@@ -94,12 +94,13 @@ class ReceberModel extends Mysql
 		return $request;
 	}
 
-	public function insertControleReceber(int $idequipamento, int $usuario, int $acao, string $observacion, int $check)
+	public function insertControleReceber(int $idequipamento, int $usuario, int $acao, string $observacion, int $check, string $imagem)
 	{
 		$this->listEquipamento = $idequipamento;
 		$this->listUsuario = $usuario;
 		$this->listEstado = $acao;
 		$this->strObservacion = $observacion;
+		$this->strProtocolo = $imagem;
 		$return = 0;
 
 		//Selecciona el ID del control actual entregado
@@ -111,25 +112,36 @@ class ReceberModel extends Mysql
 		$request_select = $this->select($query_select);
 		$idcontrole = $request_select['idcontrole'];
 
-        $query_insert = "INSERT INTO controle(personaid,equipamentoid,observacion,status)  VALUES(?,?,?,?)";
-        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strObservacion,$this->listEstado);
+		$e = $this->selectEquipamento($this->listUsuario);
+		$tipo = $e['tipo'];
+		$equipamento = $e['idequipamento'];
+
+        $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,status)  VALUES(?,?,?,?,?)";
+        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$this->listEstado);
         $request_insert = $this->insert($query_insert, $arrData);
 		
-
         if($request_insert) {
-
 			$query_update_controle = "UPDATE controle SET status = ? WHERE idcontrole = $idcontrole";
 			$arrDataControle = array(0);
 			$request_update_controle = $this->update($query_update_controle, $arrDataControle);
 
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
 			if($check === 1) {
-				$arrData = array(3);
+				$estado = 3;
 			} else {
-				$arrData = array(1);
+				$estado = 1;
 			}
+
+			$arrData = array($estado);
             
-            $return = $request_update = $this->update($query_update,$arrData);
+			$request_update = $this->update($query_update,$arrData);
+
+			//Agrega la anotacion
+			$query_insert_anotacion = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status, tipo)  VALUES(?,?,?,?,?)";
+            $arrData_anotacion = array($equipamento,$this->strObservacion, $this->strProtocolo, $estado, $tipo);
+            $request_insert_anotacion = $this->insert($query_insert_anotacion, $arrData_anotacion);
+
+            $return = $request_insert;
         } else {
             $return = "0";
         }

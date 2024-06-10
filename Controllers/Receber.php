@@ -158,9 +158,13 @@ class Receber extends Controllers{
 	{
 		if($_POST)
 		{
+			$imagenAnotacion = $_FILES['fileReceber'];
+			$medida = 1000 * 1000;
 			if(empty($_POST['listUsuario']) || empty($_POST['listAcao']) || empty($_POST['txtObservacion']))
 			{
 				$arrResponse = array("status" => false, "msg" => "Dados errados.");
+			} else if($imagenAnotacion['size'] > $medida) {
+				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			}else{
 				$idEquipamento = intval($_POST['idequipamentoReceber']);
 				$listUsuario = intval($_POST['listUsuario']);
@@ -168,12 +172,27 @@ class Receber extends Controllers{
 				$strObservacion =  strClean($_POST['txtObservacion']);
 				$cheked = isset($_POST['equipamentoEstragado']) ?  1 : 0;
 
+				if($imagenAnotacion['error'] > 0) {
+					$nombreImagen = "";
+				} else {
+					$carpetaImagenes = 'Assets/images/imagenes/';
+
+					if(!is_dir($carpetaImagenes)) {
+						mkdir($carpetaImagenes);
+					}
+
+					$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
+				}
+
 				if($_SESSION['permisosMod']['w']){
 					$request_user = $this->model->insertControleReceber($idEquipamento,
 																		$listUsuario,
 																		$listAcao,
 																		$strObservacion, 
-																		$cheked);
+																		$cheked,
+																		$nombreImagen);
 				}
 
 				if($request_user > 0){

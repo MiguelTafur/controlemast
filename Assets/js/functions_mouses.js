@@ -10,6 +10,7 @@ function iniciarApp() {
     fntTablaMouses();
     fntCrearMouse();
     fntEditStatus();
+    fntAddAnnotation();
 }
 
 function fntTablaMouses() {
@@ -57,7 +58,7 @@ function fntCrearMouse() {
             let ElementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < ElementsValid.length; i++) {
                 if(ElementsValid[i].classList.contains('is-invalid')){
-                    swal("Atenção!", "Verifique os campos em vermelho .", "error");
+                    swal("Atenção!", "Verifique os campos em vermelho.", "error");
                     return false;
                 }
             }
@@ -110,6 +111,9 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
     document.querySelector('#divEditarEstado').classList.remove('d-none');
+    document.querySelector('#divTxtAnotacion').classList.add('d-none');
+    document.querySelector('#divFileAnotacion').classList.add('d-none');
+    document.querySelector('#divEqEstragado').classList.add('d-none');
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
@@ -137,7 +141,7 @@ function fntEditInfo(element, idequipamento)
                     //estadoActual.classList.add('text-warning');
                 } else {
                     estadoActual.textContent = `Em uso`;
-                    estadoActual.classList.add('text-info');
+                    //estadoActual.classList.add('text-info');
                     document.querySelector("#noAlterado").classList.remove('d-none');
                     document.querySelector("#formEditarEstado").classList.add('d-none');
                     document.querySelector("#noAlterado").innerHTML = `<p class="text-uppercase text-center m-0 text-secondary font-weight-bold">Equipamento não pode ser alterado</p>`
@@ -166,14 +170,15 @@ function fntEditStatus() {
         {
             e.preventDefault();
             let listEstado = document.querySelector('#listEstado').value;
+            let txtAnotacion = document.querySelector('#txtAnotacaoEstado').value;
 
             if(listEstado === '')
             {
-                swal("Atenção", "Esolha o Tipo de Estado.", "error");
+                swal("Atenção", "Os campos com asterisco (*) são obrigatórios.", "error");
                 return false;
             }
 
-            //divLoading.style.display = "flex";
+            divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Mouses/setEstadoMouse';
             let formData = new FormData(formEditarEstado);
@@ -214,8 +219,53 @@ function fntEditStatus() {
     }
 }
 
+function fntAddAnnotation() {
+    if(document.querySelector("#formAnotacao")){
+        let formAnotacao = document.querySelector("#formAnotacao");
+        
+        formAnotacao.onsubmit = function(e)
+        {
+            e.preventDefault();
+            let txtAnotacao = document.querySelector('#txtAnotacao').value;
+
+            if(txtAnotacao === '')
+            {
+                swal("Atenção", "Digite uma anotação.", "error");
+                return false;
+            }
+
+            divLoading.style.display = "flex";
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Mouses/setAdicionarAnotacao';
+            let formData = new FormData(formAnotacao);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200)
+                {
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        $('#modalAddAnnotation').modal('hide');
+                        swal("Anotação", objData.msg, "success");
+                        
+                    }else{
+                        swal("Erro", objData.msg, "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
 function fntViewInfo(idequipamento)
 {
+    const btnAnnotation =  document.querySelector(".btnAnnotation");
+
+    btnAnnotation.setAttribute('id', idequipamento);
+    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -273,10 +323,57 @@ function fntViewInfo(idequipamento)
     }
 }
 
+function fntViewAnnotation()
+{
+    let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Mouses/getAnotacionesMouse/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+           
+            if(objData.status)
+            {
+                let trAnotaciones = objData.data;
+                document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            }else{
+                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="4">Nenhuma anotação</td><tr>';
+            }
+            $('#modalViewAnnotation').modal('show');
+            $('#modalViewAnnotation').addClass('myModal');
+        }
+    }
+}
+
+function fntViewAddAnnotation(idequipamento) {
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            document.querySelector('#equipamentoLacre').innerHTML = 'Mouse: #' + objData.data.lacre;
+            document.querySelector('#idEquipamentoAnotacao').value = objData.data.idequipamento;
+            document.querySelector('#estadoEquipamentoAnotacao').value = objData.data.status;
+        }
+    }
+
+    $('#modalAddAnnotation').modal('show');
+}
+
 function openModalEditStatus() {
 
     $('#listEstado').select2({
-        placeholder: " -- Escolher o Tipo de Estado -- ",
+        placeholder: " -- Escolha o Tipo de Estado -- ",
         allowClear: true,
         width: 'resolve',
         theme: "classic"
@@ -285,7 +382,6 @@ function openModalEditStatus() {
     $('#modalEditStatus').modal('show');
     $('#modalEditStatus').addClass('myModal');
 }
-
 
 function openModal()
 {
@@ -297,5 +393,8 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Novo Mouse";
     document.querySelector("#formMouses").reset();
     document.querySelector('#divEditarEstado').classList.add('d-none');
+    document.querySelector('#divTxtAnotacion').classList.remove('d-none');
+    document.querySelector('#divFileAnotacion').classList.remove('d-none');
+    document.querySelector('#divEqEstragado').classList.remove('d-none');
     $('#modalFormMouses').modal('show');
 }
