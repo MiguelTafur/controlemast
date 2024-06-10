@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Tempo de geração: 10/06/2024 às 03:27
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.1.17
+-- Host: 127.0.0.1
+-- Tempo de geração: 10/06/2024 às 21:27
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,15 +33,31 @@ CREATE TABLE `anotaciones` (
   `anotacion` varchar(200) NOT NULL,
   `imagen` varchar(200) NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
-  `status` int(2) NOT NULL DEFAULT 1
+  `status` int(2) NOT NULL DEFAULT 1,
+  `tipo` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `anotaciones`
 --
 
-INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`, `datecreated`, `status`) VALUES
-(1, 15, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10', 3);
+INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
+(1, 15, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10', 3, 8),
+(10, 27, 'Fone Recebido do DP. Fone estava no armário de um operador(THALYTA SOARES VENTO - 013253).', 'd0dfbbe7ebe29601e5ab067ad8562fda.jpg', '2024-06-10 10:33:44', 1, 8),
+(11, 22, 'Conertado ok', '', '2024-06-10 10:59:51', 1, 8),
+(12, 22, 'Fone estragou do nada', '', '2024-06-10 11:06:32', 3, 8),
+(13, 22, 'fone no concerto', '', '2024-06-10 11:07:54', 4, 8),
+(14, 22, 'Fone disponível novamente', '', '2024-06-10 11:10:23', 1, 8),
+(15, 28, 'Fone recebido da SAMARA(Coordenadora). Fone estava no nome da POLLYANA ALVEZ CHAGAS(01773)', '', '2024-06-10 11:43:11', 1, 8),
+(16, 28, 'Fone recebido e entregado no mesmo dia', 'f977fbaa8bff243575c674607bd715f7.jpg', '2024-06-10 12:33:58', 2, 8),
+(17, 22, 'ENTREGA TESTE', 'a9f076253be96849ecb75f68bb1fc27c.jpg', '2024-06-10 15:07:23', 2, 8),
+(18, 22, 'recebimento teste', 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', '2024-06-10 15:22:49', 1, 8),
+(19, 29, 'teste', '2621bbd9828cd5abe8a3381afea148b0.jpg', '2024-06-10 15:59:33', 1, 9),
+(20, 29, 'arco quebrado', '', '2024-06-10 16:14:46', 3, 9),
+(21, 29, 'Fone entregue no DP', '', '2024-06-10 16:15:16', 3, 9),
+(22, 29, 'teste novamente', '', '2024-06-10 16:20:15', 1, 9),
+(23, 29, 'teste entregue', '446feeeec9667c8dbb831fb21457ca80.jpg', '2024-06-10 16:20:46', 2, 9),
+(24, 29, 'teste recebimento', '', '2024-06-10 16:21:47', 1, 9);
 
 -- --------------------------------------------------------
 
@@ -76,7 +92,12 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (18, 1512, 19, '5894ae87fb09ec4a4d07d82057cbb338.jpg', '', '2024-06-06 15:10:45', 1),
 (19, 1513, 21, '8bb27f37a16c9b1f793aa03e5e5d118d.jpg', '', '2024-06-06 17:43:10', 1),
 (20, 1501, 8, '', 'Fone apresenta mau contato', '2024-06-07 17:35:34', 2),
-(21, 1501, 23, 'cd06760fa16f764182392e04df6746af.jpg', '', '2024-06-07 17:38:04', 1);
+(21, 1501, 23, 'cd06760fa16f764182392e04df6746af.jpg', '', '2024-06-07 17:38:04', 1),
+(34, 1514, 28, 'f977fbaa8bff243575c674607bd715f7.jpg', 'Fone recebido e entregado no mesmo dia', '2024-06-10 12:33:58', 1),
+(35, 1502, 22, 'a9f076253be96849ecb75f68bb1fc27c.jpg', 'ENTREGA TESTE', '2024-06-10 15:07:23', 0),
+(37, 1502, 22, 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', 'recebimento teste', '2024-06-10 15:22:49', 2),
+(38, 1502, 29, '446feeeec9667c8dbb831fb21457ca80.jpg', 'teste entregue', '2024-06-10 16:20:46', 0),
+(39, 1502, 29, '', 'teste recebimento', '2024-06-10 16:21:47', 2);
 
 -- --------------------------------------------------------
 
@@ -114,8 +135,11 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
 (21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
-(22, 'Teste', 'teste', '980603', '2024-06-07 16:02:00', 4, 8, 444),
-(23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444);
+(22, 'TesteDOS', 'teste', '980603', '2024-06-07 16:02:00', 1, 8, 444),
+(23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444),
+(27, 'Unixtrom', '210707023', '0000228', '2024-06-10 10:33:44', 1, 8, 444),
+(28, 'Paltronics', '', '0000353', '2024-06-10 11:43:11', 2, 8, 444),
+(29, 'Dell', '0T349F', '0333', '2024-06-10 15:59:33', 1, 9, 444);
 
 -- --------------------------------------------------------
 
@@ -222,7 +246,8 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, '2024-06-05 16:25:17', 1),
 (1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, '2024-06-06 12:05:51', 1),
 (1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1),
-(1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, '2024-06-06 17:41:50', 1);
+(1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, '2024-06-06 17:41:50', 1),
+(1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, '2024-06-10 11:44:29', 1);
 
 -- --------------------------------------------------------
 
@@ -337,19 +362,19 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
@@ -367,7 +392,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de tabela `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1514;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1515;
 
 --
 -- AUTO_INCREMENT de tabela `rol`
