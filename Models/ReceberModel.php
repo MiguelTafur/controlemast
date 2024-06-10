@@ -82,8 +82,6 @@ class ReceberModel extends Mysql
                        pe.matricula, 
                        pe.nombres, 
                        pe.apellidos, 
-					   eq.id_hardware as ID,
-                       eq.nombre as equipamento,
                        eq.marca,
                        eq.lacre
 				FROM controle co 
@@ -96,7 +94,7 @@ class ReceberModel extends Mysql
 		return $request;
 	}
 
-	public function insertControleReceber(int $idequipamento, int $usuario, int $acao, string $observacion)
+	public function insertControleReceber(int $idequipamento, int $usuario, int $acao, string $observacion, int $check)
 	{
 		$this->listEquipamento = $idequipamento;
 		$this->listUsuario = $usuario;
@@ -125,7 +123,7 @@ class ReceberModel extends Mysql
 			$request_update_controle = $this->update($query_update_controle, $arrDataControle);
 
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
-			if($this->listEstado === 3) {
+			if($check === 1) {
 				$arrData = array(3);
 			} else {
 				$arrData = array(1);

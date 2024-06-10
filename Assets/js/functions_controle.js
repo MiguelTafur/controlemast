@@ -48,7 +48,6 @@ function fntCrearControleEntrega() {
             e.preventDefault();
             let listUsuario = document.querySelector('#listUsuario').value;
             let listEquipamento = document.querySelector('#listEquipamento').value;
-            //let strProtocolo = document.querySelector('#fileProtocolo').value;
             let strObservacion = document.querySelector('#txtObservacion').value;
 
             if(listUsuario == '' || listEquipamento == '')
@@ -122,7 +121,7 @@ function fntActualizarProtocolo() {
                 return false;
             }
 
-            //divLoading.style.display = "flex";
+            divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Entregar/setUpdateProtocolo';
             let formData = new FormData(formEditarProtocolo);
@@ -202,6 +201,7 @@ function fntEquipamentos()
 // funcion para ver los detalles del control de la entrega
 function fntViewInfo(identrega)
 {
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Entregar/getEntrega/'+identrega;
     request.open("GET",ajaxUrl,true);
@@ -239,6 +239,8 @@ function fntViewInfo(identrega)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -246,11 +248,13 @@ function fntEditProtocolo(identrega) {
 
     document.querySelector("#fileEditProtocolo").value = "";
 
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Entregar/getEntrega/'+identrega;
     request.open("GET",ajaxUrl,true);
     request.send();
-    request.onreadystatechange = function(){
+    request.onreadystatechange = function()
+    {
 
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
@@ -263,6 +267,8 @@ function fntEditProtocolo(identrega) {
                 document.querySelector("#protocoloActual").setAttribute('href', imagen);   
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 
     $('#modalEditProtocolo').modal('show');

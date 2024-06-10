@@ -34,19 +34,26 @@ class Receber extends Controllers{
 				//$btnReceived = '';
 				//$btnDelete = '';
 				
+				if($arrData[$i]['equipamento'] === 8) {
+					$tipo = 'Fone';
+				} else if ($arrData[$i]['equipamento'] === 9) {
+					$tipo = 'Mouse';
+				} else if ($arrData[$i]['equipamento'] === 10) {
+					$tipo = 'Teclado';
+				} else if ($arrData[$i]['equipamento'] === 11) {
+					$tipo = 'Tela';
+				}
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
-				$arrData[$i]['equipamento'] = '<h6>'.$arrData[$i]['equipamento'].' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
 				if($arrData[$i]['status'] === 2) {
 					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
-				} else if($arrData[$i]['status'] === 3) {
-					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">ESTRAGADO</span>';
-				} else if($arrData[$i]['status'] === 4){
+				} else if($arrData[$i]['status'] === 3){
 					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
-				} else if($arrData[$i]['status'] === 5){
+				} else if($arrData[$i]['status'] === 4){
 					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
 				}
 
@@ -159,12 +166,14 @@ class Receber extends Controllers{
 				$listUsuario = intval($_POST['listUsuario']);
 				$listAcao = intval($_POST['listAcao']);
 				$strObservacion =  strClean($_POST['txtObservacion']);
+				$cheked = isset($_POST['equipamentoEstragado']) ?  1 : 0;
 
 				if($_SESSION['permisosMod']['w']){
 					$request_user = $this->model->insertControleReceber($idEquipamento,
 																		$listUsuario,
 																		$listAcao,
-																		$strObservacion);
+																		$strObservacion, 
+																		$cheked);
 				}
 
 				if($request_user > 0){

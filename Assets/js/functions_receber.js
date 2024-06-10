@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
 function iniciarApp() {
     fntTablaReceber();
     fntCrearControleReceber();
-    fntUsuarios();
 }
 
 //Tabela dos recebimentos
@@ -77,23 +76,8 @@ function fntCrearControleReceber() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        // if(rowTable == ""){
-                            tableReceber.api().ajax.reload();
-                        // }else{
-                        //     rowTable.cells[0].textContent = strNombre;
-                        //     rowTable.cells[1].textContent = strMarca;
-                        //     if(strCodigo === '') {
-                        //         rowTable.cells[2].innerHTML = `<span class="font-italic">nenhum</span>`;
-                        //     } else {
-                        //         rowTable.cells[2].textContent = strCodigo;
-                        //     }
-                        //     if(strLacre === '') {
-                        //         rowTable.cells[3].innerHTML = `<span class="font-italic">nenhum</span>`;
-                        //     } else {
-                        //         rowTable.cells[3].textContent = strLacre;
-                        //     }
-                        //     rowTable = "";
-                        // }
+                        tableReceber.api().ajax.reload();
+
                         $('#modalFormControleReceber').modal("hide");
                         formControleReceber.reset();
                         
@@ -123,7 +107,7 @@ function fntUsuarios()
 
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
-                listUsuarios.innerHTML = request.responseText;
+                document.querySelector('#listUsuario').innerHTML = request.responseText;
                 $('#listUsuario').select2({
                     placeholder: " -- Escolher Usuário -- ",
                     width: 'resolve',
@@ -168,6 +152,7 @@ function fntEquipamento(idusuario) {
 // funcion para ver los detalles del control del Recebimiento
 function fntViewInfo(idrecebido)
 {
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Receber/getRecebido/'+idrecebido;
     request.open("GET",ajaxUrl,true);
@@ -193,13 +178,11 @@ function fntViewInfo(idrecebido)
                 const apellidos = objData.data.apellidos;
 
                 document.querySelector("#celAcao").innerHTML = objData.data.status;
-                document.querySelector("#celMatricula").innerHTML = '#' + objData.data.matricula;
+                document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
                 document.querySelector("#celNombres").innerHTML = nombres.toUpperCase();
                 document.querySelector("#celApellidos").innerHTML = apellidos.toUpperCase();
-                document.querySelector("#celEquipamento").innerHTML = objData.data.equipamento;
                 document.querySelector("#celMarca").innerHTML = objData.data.marca;
                 document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
-                document.querySelector("#celID").innerHTML = objData.data.ID;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
                 document.querySelector("#celObservacion").innerHTML = objData.data.observacion;
 
@@ -208,6 +191,8 @@ function fntViewInfo(idrecebido)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -226,5 +211,6 @@ function openModalReceber()
         width: 'resolve',
         theme: "classic"
     });
+    fntUsuarios();
     $('#modalFormControleReceber').modal('show');
 }

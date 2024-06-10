@@ -31,7 +31,7 @@ class Entregar extends Controllers{
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
-				$btnDelete = '';
+				//$btnDelete = '';
 				$tipo = '';
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
@@ -57,9 +57,9 @@ class Entregar extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditProtocolo('.$arrData[$i]['idcontrole'].')" title="Alterar Protocolo"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>';
 				}
-				if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+				/*if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
-				}
+				}*/
 
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
 			}

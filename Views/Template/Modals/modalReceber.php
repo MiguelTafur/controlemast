@@ -27,15 +27,18 @@
               <select class="form-control" style="width: 100%;" id="listAcao" name="listAcao" required>
                 <option value=""></option>
                 <option value="2">Troca</option>
-                <option value="3">Estragado</option>
-                <option value="4">Desligamento</option>
-                <option value="5">Pediu Conta</option>
+                <option value="3">Desligamento</option>
+                <option value="4">Pediu Conta</option>
               </select>
             </div>
             <div class="form-group col-md-12">
               <label for="txtObservacion">Anotação <span class="required">*</span></label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion" required></textarea>
             </div>
+          </div>
+          <div class="form-check col-md-12">
+            <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
+            <label for="equipamentoEstragado" class="form-check-label">Equipamento estragado</label>
           </div>
           <hr>
           <div class="tile-footer">
@@ -70,10 +73,6 @@
               <td id="celAcao"></td>
             </tr>
             <tr>
-              <td class="font-weight-bold">Nome Equipamento:</td>
-              <td id="celEquipamento"></td>
-            </tr>
-            <tr>
               <td class="font-weight-bold">Marca Equipamento:</td>
               <td id="celMarca"></td>
             </tr>
@@ -92,10 +91,6 @@
             <tr>
             <td class="font-weight-bold">Lacre Equipamento:</td>
               <td id="celLacre"></td>
-            </tr>
-            <tr>
-            <td class="font-weight-bold">ID Hardware:</td>
-              <td id="celID"></td>
             </tr>
             <tr>
               <td class="font-weight-bold">Anotações:</td>

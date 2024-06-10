@@ -56,7 +56,8 @@ class FonesModel extends Mysql
 					   an.idanotacion,
                        an.anotacion,
 					   an.imagen, 
-					   an.datecreated
+					   an.datecreated,
+					   an.status
 				FROM equipamento eq
 				LEFT OUTER JOIN anotaciones an
 				ON eq.idequipamento = an.equipamentoid
@@ -65,12 +66,15 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
-	public function insertFone(string $marca, string $codigo, string $lacre, int $ruta)
+	public function insertFone(string $marca, string $codigo, string $lacre, int $ruta, string $observacion, string $imagen, int $checked)
 	{
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
 		$this->intIdRuta = $ruta;
+		$this->strAnotacao = $observacion;
+		$this->strImagem = $imagen;
+		$this->intStatus = $checked;
 		$this->intTipo = MFONE;
 		$return = 0;
 
@@ -79,10 +83,18 @@ class FonesModel extends Mysql
 
 		if(empty($request))
 		{
-			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,tipo,codigoruta)  VALUES(?,?,?,?,?)";
-			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre,$this->intTipo,$this->intIdRuta);
+			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,status,tipo,codigoruta)  VALUES(?,?,?,?,?,?)";
+			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre,$this->intStatus,$this->intTipo,$this->intIdRuta);
 			$request_insert = $this->insert($query_insert, $arrData);
+
+			if(!empty($this->strAnotacao) || !empty($this->strImagem)) {
+				$query_insert_anotacao = "INSERT INTO anotaciones(equipamentoid,anotacion,imagen,status)  VALUES(?,?,?,?)";
+				$arrDataAnotacao = array($request_insert, $this->strAnotacao, $this->strImagem, $this->intStatus);
+				$request_insert = $this->insert($query_insert_anotacao, $arrDataAnotacao);
+			}
+
 			$return = $request_insert;
+
 		}else{
 			$return = "0";
 		}
@@ -115,10 +127,12 @@ class FonesModel extends Mysql
 		return $request;
 	}
 
-	public function updateEstadoFone(int $idequipamento, int $estado) 
+	public function updateEstadoFone(int $idequipamento, int $estado, string $anotacion, string $imagen) 
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->intStatus = $estado;
+		$this->strAnotacao = $anotacion;
+		$this->strImagem = $imagen;
 		$return = 0;
 
 		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
@@ -131,20 +145,26 @@ class FonesModel extends Mysql
 			$query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->intIdEquipamento";
 			$arrData = array($this->intStatus);
 			$request_update = $this->update($query_update, $arrData);
+
+			$query_insert_anotacao = "INSERT INTO anotaciones(equipamentoid,anotacion,imagen,status)  VALUES(?,?,?,?)";
+			$arrDataAnotacao = array($this->intIdEquipamento, $this->strAnotacao, $this->strImagem, $this->intStatus);
+			$request_insert = $this->insert($query_insert_anotacao, $arrDataAnotacao);
+
 			$return = $this->intStatus;
 		}
 
 		return $return;
 	}
 
-	public function InsertAnotacao(int $idequipamento, string $anotacao, string $imagem) 
+	public function InsertAnotacao(int $idequipamento, string $anotacao, string $imagem, int $estado) 
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->strAnotacao = $anotacao;
 		$this->strImagem = $imagem;
+		$this->intStatus = $estado;
 
-		$query_insert = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen)  VALUES(?,?,?)";
-		$arrData = array($this->intIdEquipamento,$this->strAnotacao, $this->strImagem);
+		$query_insert = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status)  VALUES(?,?,?,?)";
+		$arrData = array($this->intIdEquipamento,$this->strAnotacao, $this->strImagem, $this->intStatus);
 		$request_insert = $this->insert($query_insert, $arrData);
 
 		return $request_insert;
