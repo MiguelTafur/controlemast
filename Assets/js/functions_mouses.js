@@ -172,7 +172,7 @@ function fntEditStatus() {
             let listEstado = document.querySelector('#listEstado').value;
             let txtAnotacion = document.querySelector('#txtAnotacaoEstado').value;
 
-            if(listEstado === '')
+            if(listEstado === '' || txtAnotacion === '')
             {
                 swal("Atenção", "Os campos com asterisco (*) são obrigatórios.", "error");
                 return false;

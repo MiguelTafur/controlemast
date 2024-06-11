@@ -113,7 +113,9 @@ class Fones extends Controllers{
 						if($arrData[$i]['idanotacion'] > 0) {
 							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
 							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
+							$ultimo = explode(" ", $arrData[$i]['apellidos']);
 							$trAnotaciones .= '<tr class="text-center">
+								<td>'.$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]).'</td>
 								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>';
 								
 								switch ($arrData[$i]['status']) {
@@ -132,7 +134,7 @@ class Fones extends Controllers{
 								}
 								$trAnotaciones .= '<td>'.$arrData[$i]['anotacion'].'</td>';
 								if(!empty($arrData[$i]['imagen'])) {
-									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank">Abrir &nbsp;<i class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
+									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank"><i style="margin-right: 0" class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
 								} else {
 									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled><i class="fa fa-lg fa-file-image-o" aria-hidden="true" style="margin-right: 0"></i></button></td>';
 								}
@@ -187,8 +189,6 @@ class Fones extends Controllers{
 
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
-
-				//dep($nombreImagen);exit;
 
 				if($idEquipamento == 0)
 				{
@@ -284,8 +284,8 @@ class Fones extends Controllers{
 				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			}else {
 				$idEquipamento = intval($_POST['idEquipamentoAnotacao']);
+				$usuario = $_SESSION['idUser'];
 				$AnotacaoEquipamento = strClean($_POST['txtAnotacao']);
-				$estadoAnotacaoEquipamento = strClean($_POST['estadoEquipamentoAnotacao']);
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -301,12 +301,17 @@ class Fones extends Controllers{
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
 
+				$estadoAnotacaoEquipamento = strClean($_POST['estadoEquipamentoAnotacao']);
+				$tipo = MFONE;
+
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->insertAnotacao($idEquipamento, 
-																   $AnotacaoEquipamento, 
-																   $nombreImagen,
-																   $estadoAnotacaoEquipamento);
-					if($request_estado > 0) {
+					$request_anotacion = setAnotaciones($idEquipamento, 
+														$usuario, 
+														$AnotacaoEquipamento, 
+														$nombreImagen, 
+														$estadoAnotacaoEquipamento,
+														$tipo);				
+					if($request_anotacion > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 					}else {
 						$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar Anotação.');

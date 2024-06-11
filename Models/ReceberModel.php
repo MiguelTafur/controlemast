@@ -4,6 +4,7 @@ class ReceberModel extends Mysql
 {
 	PRIVATE $intIdControle;
 	PRIVATE $listUsuario;
+	PRIVATE $intIdUsuario;
 	PRIVATE $listEquipamento;
 	PRIVATE $listEstado;
 	PRIVATE $strProtocolo;
@@ -98,6 +99,7 @@ class ReceberModel extends Mysql
 	{
 		$this->listEquipamento = $idequipamento;
 		$this->listUsuario = $usuario;
+		$this->intIdUsuario = $_SESSION['idUser'];
 		$this->listEstado = $acao;
 		$this->strObservacion = $observacion;
 		$this->strProtocolo = $imagem;
@@ -113,8 +115,6 @@ class ReceberModel extends Mysql
 		$idcontrole = $request_select['idcontrole'];
 
 		$e = $this->selectEquipamento($this->listUsuario);
-		$tipo = $e['tipo'];
-		$equipamento = $e['idequipamento'];
 
         $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,status)  VALUES(?,?,?,?,?)";
         $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$this->listEstado);
@@ -126,20 +126,22 @@ class ReceberModel extends Mysql
 			$request_update_controle = $this->update($query_update_controle, $arrDataControle);
 
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
-			if($check === 1) {
-				$estado = 3;
-			} else {
-				$estado = 1;
-			}
+			if($check === 1) { $estado = 3; } else { $estado = 1;}
 
 			$arrData = array($estado);
-            
 			$request_update = $this->update($query_update,$arrData);
 
+			$tipo = $e['tipo'];
+			$equipamento = $e['idequipamento'];
+            
+
 			//Agrega la anotacion
-			$query_insert_anotacion = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status, tipo)  VALUES(?,?,?,?,?)";
-            $arrData_anotacion = array($equipamento,$this->strObservacion, $this->strProtocolo, $estado, $tipo);
-            $request_insert_anotacion = $this->insert($query_insert_anotacion, $arrData_anotacion);
+			setAnotaciones($equipamento,
+                           $this->intIdUsuario,
+                           $this->strObservacion,
+                           $this->strProtocolo,
+                           $estado,
+                           $tipo);
 
             $return = $request_insert;
         } else {

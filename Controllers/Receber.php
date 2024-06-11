@@ -85,7 +85,7 @@ class Receber extends Controllers{
 					// if($arrData[$i]['personaid'] != "" && $arrData[$i]['status'] == 1 ) {
 						$ultimo = $arrData[$i]['apellidos'];
 						$ultimo = explode(" ", $ultimo);
-						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0].' - '.$arrData[$i]['matricula'].'</option>';
+						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtoupper(strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0]).' - '.$arrData[$i]['matricula'].'</option>';
 					// }
 				}
 			}

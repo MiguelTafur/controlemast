@@ -20,6 +20,13 @@
         $view_footer = "Views/Template/footer_admin.php";
         require_once ($view_footer);        
     }
+
+    function anotaciones($data = "")
+    {
+        $view_anotaciones = "Views/Template/anotaciones.php";
+        require_once ($view_anotaciones);
+    }
+
 	//Muestra información formateada
 	function dep($data)
     {
@@ -75,6 +82,15 @@
         }
         $_SESSION['permisos'] = $permisos;
         $_SESSION['permisosMod'] = $permisosMod;
+    }
+
+    function setAnotaciones(int $idequipamento, int $usuario, string $anotacao, string $imagem, int $estado, int $tipo)
+    {
+        require_once("Models/AnotacionesModel.php");
+        $objPrestamos = new AnotacionesModel();
+        $request = $objPrestamos->insertAnotacao($idequipamento, $usuario, $anotacao, $imagem, $estado, $tipo);
+        return $request;
+        
     }
 
     function sessionUser(int $idpersona){

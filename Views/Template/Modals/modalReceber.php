@@ -31,13 +31,13 @@
                 <option value="4">Pediu Conta</option>
               </select>
             </div>
-            <div class="form-group col-md-12">
-              <label for="txtObservacion">Anotação <span class="required">*</span></label>
-              <textarea class="form-control" id="txtObservacion" name="txtObservacion" required></textarea>
-            </div>
             <div class="form-group col-md-12 mb-4">
               <label for="fileReceber">Imagen</label>
               <input type="file" class="form-control-file" id="fileReceber" name="fileReceber">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="txtObservacion">Anotação <span class="required">*</span></label>
+              <textarea class="form-control" id="txtObservacion" name="txtObservacion" required></textarea>
             </div>
           </div>
           <div class="form-check col-md-12">
