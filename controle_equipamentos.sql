@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/06/2024 às 21:27
+-- Tempo de geração: 11/06/2024 às 22:21
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `anotaciones` (
   `idanotacion` int(11) NOT NULL,
   `equipamentoid` bigint(20) NOT NULL,
+  `personaid` bigint(20) NOT NULL,
   `anotacion` varchar(200) NOT NULL,
   `imagen` varchar(200) NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
@@ -41,23 +42,36 @@ CREATE TABLE `anotaciones` (
 -- Despejando dados para a tabela `anotaciones`
 --
 
-INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
-(1, 15, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10', 3, 8),
-(10, 27, 'Fone Recebido do DP. Fone estava no armário de um operador(THALYTA SOARES VENTO - 013253).', 'd0dfbbe7ebe29601e5ab067ad8562fda.jpg', '2024-06-10 10:33:44', 1, 8),
-(11, 22, 'Conertado ok', '', '2024-06-10 10:59:51', 1, 8),
-(12, 22, 'Fone estragou do nada', '', '2024-06-10 11:06:32', 3, 8),
-(13, 22, 'fone no concerto', '', '2024-06-10 11:07:54', 4, 8),
-(14, 22, 'Fone disponível novamente', '', '2024-06-10 11:10:23', 1, 8),
-(15, 28, 'Fone recebido da SAMARA(Coordenadora). Fone estava no nome da POLLYANA ALVEZ CHAGAS(01773)', '', '2024-06-10 11:43:11', 1, 8),
-(16, 28, 'Fone recebido e entregado no mesmo dia', 'f977fbaa8bff243575c674607bd715f7.jpg', '2024-06-10 12:33:58', 2, 8),
-(17, 22, 'ENTREGA TESTE', 'a9f076253be96849ecb75f68bb1fc27c.jpg', '2024-06-10 15:07:23', 2, 8),
-(18, 22, 'recebimento teste', 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', '2024-06-10 15:22:49', 1, 8),
-(19, 29, 'teste', '2621bbd9828cd5abe8a3381afea148b0.jpg', '2024-06-10 15:59:33', 1, 9),
-(20, 29, 'arco quebrado', '', '2024-06-10 16:14:46', 3, 9),
-(21, 29, 'Fone entregue no DP', '', '2024-06-10 16:15:16', 3, 9),
-(22, 29, 'teste novamente', '', '2024-06-10 16:20:15', 1, 9),
-(23, 29, 'teste entregue', '446feeeec9667c8dbb831fb21457ca80.jpg', '2024-06-10 16:20:46', 2, 9),
-(24, 29, 'teste recebimento', '', '2024-06-10 16:21:47', 1, 9);
+INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
+(1, 15, 1, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10', 3, 8),
+(10, 27, 1, 'Fone Recebido do DP. Fone estava no armário de um operador(THALYTA SOARES VENTO - 013253).', 'd0dfbbe7ebe29601e5ab067ad8562fda.jpg', '2024-06-10 10:33:44', 1, 8),
+(11, 22, 1, 'Conertado ok', '', '2024-06-10 10:59:51', 1, 8),
+(12, 22, 1, 'Fone estragou do nada', '', '2024-06-10 11:06:32', 3, 8),
+(13, 22, 1, 'fone no concerto', '', '2024-06-10 11:07:54', 4, 8),
+(14, 22, 1, 'Fone disponível novamente', '', '2024-06-10 11:10:23', 1, 8),
+(15, 28, 1, 'Fone recebido da SAMARA(Coordenadora). Fone estava no nome da POLLYANA ALVEZ CHAGAS(01773)', '', '2024-06-10 11:43:11', 1, 8),
+(16, 28, 1, 'Fone recebido e entregado no mesmo dia', 'f977fbaa8bff243575c674607bd715f7.jpg', '2024-06-10 12:33:58', 2, 8),
+(17, 22, 1, 'ENTREGA TESTE', 'a9f076253be96849ecb75f68bb1fc27c.jpg', '2024-06-10 15:07:23', 2, 8),
+(18, 22, 1, 'recebimento teste', 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', '2024-06-10 15:22:49', 1, 8),
+(25, 30, 1, 'Fone no nome da Nazik - 012773 Microfone não funciona', '9cc6a30eca00674e1131ff120cee927e.jpg', '2024-06-11 10:08:59', 3, 8),
+(26, 32, 1, 'Recebido do DP o dia 07 de junho de 2024', '', '2024-06-11 10:18:26', 1, 8),
+(27, 31, 1, '', '208ab674afa57007fda0ffa794dfb192.jpg', '2024-06-11 10:19:00', 2, 8),
+(28, 32, 1, 'Entrega novato', 'df3b06a5eda49db044f0254b76dcbfbb.jpg', '2024-06-11 10:20:48', 2, 8),
+(29, 33, 1, 'teste', '', '2024-06-11 11:31:33', 1, 9),
+(30, 34, 1, 'testando registro de teclado', '', '2024-06-11 11:34:43', 1, 10),
+(31, 34, 1, 'tecla \"Alt\" não funciona', '', '2024-06-11 11:41:17', 3, 10),
+(32, 33, 1, 'Click esquerdo não funciona', '', '2024-06-11 11:42:37', 3, 9),
+(33, 33, 1, 'Mouse entregue para o DP', '', '2024-06-11 11:42:51', 3, 9),
+(34, 34, 1, 'Teclado entregue para o DP', '', '2024-06-11 11:45:34', 3, 10),
+(36, 35, 1502, 'Fone adicionado', '', '2024-06-11 12:50:18', 1, 8),
+(37, 22, 1502, 'teste fone 980603', '', '2024-06-11 15:42:32', 1, 8),
+(38, 35, 1502, 'Teste à 15h', '', '2024-06-11 15:45:08', 1, 8),
+(39, 36, 1502, 'Fone adicionado', '', '2024-06-11 15:53:01', 3, 8),
+(40, 36, 1502, 'Teste disponible', '', '2024-06-11 16:10:08', 1, 8),
+(41, 35, 1502, 'Alteração dos dados do fone', '', '2024-06-11 16:24:48', 1, 8),
+(42, 35, 1502, 'Alteração dos dados do fone', '', '2024-06-11 16:25:50', 1, 8),
+(43, 35, 1502, 'entrega teste', 'bd30b27dca04791872a17de9348b551a.jpg', '2024-06-11 16:53:53', 2, 8),
+(44, 35, 1502, 'Troca teste do admin', '', '2024-06-11 17:10:25', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -96,8 +110,10 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (34, 1514, 28, 'f977fbaa8bff243575c674607bd715f7.jpg', 'Fone recebido e entregado no mesmo dia', '2024-06-10 12:33:58', 1),
 (35, 1502, 22, 'a9f076253be96849ecb75f68bb1fc27c.jpg', 'ENTREGA TESTE', '2024-06-10 15:07:23', 0),
 (37, 1502, 22, 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', 'recebimento teste', '2024-06-10 15:22:49', 2),
-(38, 1502, 29, '446feeeec9667c8dbb831fb21457ca80.jpg', 'teste entregue', '2024-06-10 16:20:46', 0),
-(39, 1502, 29, '', 'teste recebimento', '2024-06-10 16:21:47', 2);
+(40, 1515, 31, '208ab674afa57007fda0ffa794dfb192.jpg', '', '2024-06-11 10:19:00', 1),
+(41, 1516, 32, 'df3b06a5eda49db044f0254b76dcbfbb.jpg', 'Entrega novato', '2024-06-11 10:20:48', 1),
+(42, 1502, 35, 'bd30b27dca04791872a17de9348b551a.jpg', 'entrega teste', '2024-06-11 16:53:53', 0),
+(44, 1502, 35, '', 'Troca teste do admin', '2024-06-11 17:10:25', 2);
 
 -- --------------------------------------------------------
 
@@ -139,7 +155,13 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444),
 (27, 'Unixtrom', '210707023', '0000228', '2024-06-10 10:33:44', 1, 8, 444),
 (28, 'Paltronics', '', '0000353', '2024-06-10 11:43:11', 2, 8, 444),
-(29, 'Dell', '0T349F', '0333', '2024-06-10 15:59:33', 1, 9, 444);
+(30, 'TopUse', 'G09494', '0000357', '2024-06-11 10:08:59', 3, 8, 444),
+(31, 'Paltronics', '', '0003326', '2024-06-11 10:16:00', 2, 8, 444),
+(32, 'Unixtrom', '176601', '0000080', '2024-06-11 10:18:26', 2, 8, 444),
+(33, 'Dell', 'teste', '0914', '2024-06-11 11:31:33', 3, 9, 444),
+(34, 'Teste Teclado', 'teste', '333', '2024-06-11 11:34:43', 3, 10, 444),
+(35, 'Teste Tres', '999', '89', '2024-06-11 12:50:18', 1, 8, 444),
+(36, 'Teste Cuatro', 'teste cuatro', '9803', '2024-06-11 15:53:01', 1, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -230,7 +252,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `datecreated`, `status`) VALUES
-(1, 'Miguel', 'Sarmiento', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, '2022-11-12 00:00:00', 1),
+(1, 'Miguel', 'Tafur', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, '2022-11-12 00:00:00', 1),
 (1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 4, 444, '2024-05-23 17:48:42', 1),
 (1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 4, 444, '2024-05-24 16:55:35', 1),
 (1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 4, 444, '2024-05-24 16:56:41', 1),
@@ -247,7 +269,9 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, '2024-06-06 12:05:51', 1),
 (1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1),
 (1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, '2024-06-06 17:41:50', 1),
-(1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, '2024-06-10 11:44:29', 1);
+(1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, '2024-06-10 11:44:29', 1),
+(1515, 'NAZIK', 'DINIZ', '012773', 0, '', 5, 444, '2024-06-11 10:14:02', 1),
+(1516, 'AIRTON', 'DE PAULO JUNIOR', '013340', 0, '', 5, 444, '2024-06-11 10:15:11', 1);
 
 -- --------------------------------------------------------
 
@@ -303,7 +327,8 @@ INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUE
 --
 ALTER TABLE `anotaciones`
   ADD PRIMARY KEY (`idanotacion`),
-  ADD KEY `equipamentoid` (`equipamentoid`);
+  ADD KEY `equipamentoid` (`equipamentoid`),
+  ADD KEY `personaid` (`personaid`);
 
 --
 -- Índices de tabela `controle`
@@ -362,19 +387,19 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
@@ -392,7 +417,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de tabela `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1515;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1517;
 
 --
 -- AUTO_INCREMENT de tabela `rol`
@@ -414,7 +439,8 @@ ALTER TABLE `ruta`
 -- Restrições para tabelas `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `anotaciones_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Restrições para tabelas `controle`
