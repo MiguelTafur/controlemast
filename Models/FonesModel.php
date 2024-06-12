@@ -9,9 +9,9 @@ class FonesModel extends Mysql
 	PRIVATE $strLacre;
 	PRIVATE $intStatus;
 	PRIVATE $intTipo;
-	PRIVATE $intIdRuta;
 	PRIVATE $strAnotacao;
 	PRIVATE $strImagem;
+	PRIVATE $intIdRuta;
 
 	public function __construct()
 	{
@@ -96,7 +96,7 @@ class FonesModel extends Mysql
 
 			setAnotaciones($this->intIdEquipamento,
 							   $this->intIdPersona,
-							   'Alteração dos dados do fone',
+							   'Alteração dos dados do Fone',
 							   '',
 							   $estado,
 							   $this->intTipo);

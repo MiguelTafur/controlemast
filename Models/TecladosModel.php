@@ -3,6 +3,7 @@
 class TecladosModel extends Mysql
 {
 	PRIVATE $intIdEquipamento;
+	PRIVATE $intIdPersona;
 	PRIVATE $strMarca;
 	PRIVATE $strCodigo;
 	PRIVATE $strLacre;
@@ -51,7 +52,9 @@ class TecladosModel extends Mysql
 	public function selectAnotacionesTeclado(int $idequipamento)
 	{
 		$this->intIdEquipamento = $idequipamento;
-		$sql = "SELECT eq.lacre, 
+		$sql = "SELECT pe.nombres,
+					   pe.apellidos,
+					   eq.lacre, 
 					   an.idanotacion,
                        an.anotacion,
 					   an.imagen, 
@@ -60,6 +63,8 @@ class TecladosModel extends Mysql
 				FROM equipamento eq
 				LEFT OUTER JOIN anotaciones an
 				ON eq.idequipamento = an.equipamentoid
+				LEFT OUTER JOIN persona pe
+				ON pe.idpersona = an.personaid
 				WHERE eq.idequipamento = $this->intIdEquipamento
 				AND an.tipo = ".MTECLADO;
 		$request = $this->select_all($sql);
@@ -69,12 +74,16 @@ class TecladosModel extends Mysql
 	public function updateTeclado(int $idequipamento, string $marca, string $codigo, string $lacre)
 	{
 		$this->intIdEquipamento = $idequipamento;
+		$this->intIdPersona = $_SESSION['idUser'];
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
+		$this->intTipo = MTECLADO;
 
 		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' AND idequipamento != $this->intIdEquipamento)";
 		$request = $this->select_all($sql);
+
+		$estado = $this->selectTeclado($this->intIdEquipamento)['status'];
 
 		if(empty($request))
 		{
@@ -84,6 +93,14 @@ class TecladosModel extends Mysql
 						lacre = ?  
 					WHERE idequipamento = $this->intIdEquipamento";
 			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre);
+
+			setAnotaciones($this->intIdEquipamento,
+							   $this->intIdPersona,
+							   'Alteração dos dados do Teclado',
+							   '',
+							   $estado,
+							   $this->intTipo);
+
 			$request = $this->update($sql, $arrData);
 		}else{
 			$request = "0";
@@ -94,9 +111,11 @@ class TecladosModel extends Mysql
 	public function updateEstadoTeclado(int $idequipamento, int $estado, string $anotacion, string $imagen) 
 	{
 		$this->intIdEquipamento = $idequipamento;
-		$this->intStatus = $estado;
+		$this->intIdPersona = $_SESSION['idUser'];
 		$this->strAnotacao = $anotacion;
 		$this->strImagem = $imagen;
+		$this->intStatus = $estado;
+		$this->intTipo = MTECLADO;
 		$return = 0;
 
 		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
@@ -110,7 +129,12 @@ class TecladosModel extends Mysql
 			$arrData = array($this->intStatus);
 			$request_update = $this->update($query_update, $arrData);
 
-			$this->insertAnotacao($this->intIdEquipamento, $this->strAnotacao, $this->strImagem, $this->intStatus);
+			setAnotaciones($this->intIdEquipamento,
+							   $this->intIdPersona,
+							   $this->strAnotacao,
+							   $this->strImagem,
+							   $this->intStatus,
+							   $this->intTipo);
 
 			$return = $this->intStatus;
 		}
@@ -120,6 +144,7 @@ class TecladosModel extends Mysql
 
 	public function insertTeclado(string $marca, string $codigo, string $lacre, int $ruta, string $observacion, string $imagen, int $checked)
 	{
+		$this->intIdPersona = $_SESSION['idUser'];
 		$this->strMarca = $marca;
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
@@ -139,28 +164,25 @@ class TecladosModel extends Mysql
 			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre,$this->intStatus,$this->intTipo,$this->intIdRuta);
 			$request_insert = $this->insert($query_insert, $arrData);
 
-			if(!empty($this->strAnotacao) || !empty($this->strImagem)) {
-				$this->insertAnotacao($request_insert, $this->strAnotacao, $this->strImagem, $this->intStatus);
+			if(!empty($this->strAnotacao) || !empty($this->strImagem)) { 
+				setAnotaciones($request_insert,
+							   $this->intIdPersona,
+							   $this->strAnotacao,
+							   $this->strImagem,
+							   $this->intStatus,
+							   $this->intTipo);
+			} else {
+				setAnotaciones($request_insert,
+							   $this->intIdPersona,
+							   'Teclado adicionado',
+							   $this->strImagem,
+							   $this->intStatus,
+							   $this->intTipo);
 			}
 			$return = $request_insert;
 		}else{
 			$return = "0";
 		}
 		return $return;
-	}
-
-	public function insertAnotacao(int $idequipamento, string $anotacao, string $imagem, int $estado) 
-	{
-		$this->intIdEquipamento = $idequipamento;
-		$this->strAnotacao = $anotacao;
-		$this->strImagem = $imagem;
-		$this->intStatus = $estado;
-		$this->intTipo = MTECLADO;
-
-		$query_insert = "INSERT INTO anotaciones(equipamentoid, anotacion, imagen, status, tipo)  VALUES(?,?,?,?,?)";
-		$arrData = array($this->intIdEquipamento,$this->strAnotacao, $this->strImagem, $this->intStatus, $this->intTipo);
-		$request_insert = $this->insert($query_insert, $arrData);
-
-		return $request_insert;
 	}
 }

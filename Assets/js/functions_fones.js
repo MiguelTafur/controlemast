@@ -206,7 +206,7 @@ function fntEditStatus() {
                         }
                         $('#modalEditStatus').modal('hide');
                         $('#modalFormEquipamentos').modal("hide");
-                        formEquipamentos.reset();
+                        formEditarEstado.reset();
                         swal("Estado", objData.msg, "success");
                         
                     }else{
@@ -248,6 +248,7 @@ function fntAddAnnotation() {
                     if(objData.status)
                     {
                         $('#modalAddAnnotation').modal('hide');
+                        formAnotacao.reset();
                         swal("Anotação", objData.msg, "success");
                         
                     }else{
@@ -343,7 +344,7 @@ function fntViewAnnotation()
                 let trAnotaciones = objData.data;
                 document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
             }else{
-                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="4">Nenhuma anotação</td><tr>';
+                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="5">Nenhuma anotação</td><tr>';
             }
             $('#modalViewAnnotation').modal('show');
             $('#modalViewAnnotation').addClass('myModal');

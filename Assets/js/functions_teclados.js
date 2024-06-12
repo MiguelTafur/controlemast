@@ -205,7 +205,7 @@ function fntEditStatus() {
                         }
                         $('#modalEditStatus').modal('hide');
                         $('#modalFormTeclados').modal("hide");
-                        formTeclados.reset();
+                        formEditarEstado.reset();
                         swal("Estado", objData.msg, "success");
                         
                     }else{
@@ -247,6 +247,7 @@ function fntAddAnnotation() {
                     if(objData.status)
                     {
                         $('#modalAddAnnotation').modal('hide');
+                        formAnotacao.reset();
                         swal("Anotação", objData.msg, "success");
                         
                     }else{

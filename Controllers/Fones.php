@@ -142,7 +142,7 @@ class Fones extends Controllers{
 						} else {
 							$trAnotaciones .= '
 								<tr class="text-center font-italic">
-									<td colspan="4"><h5 class="mt-4 text-info">NENHUMA ANOTAÇÃO</h5></td>
+									<td colspan="5"><h5 class="mt-4 text-info">NENHUMA ANOTAÇÃO</h5></td>
 								</tr>';
 						}
 					}
@@ -274,7 +274,8 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setAdicionarAnotacao() {
+	public function setAdicionarAnotacao() 
+	{
 		if($_POST) { 
 			$imagenAnotacion = $_FILES['fileAnotacao'];
 			$medida = 1000 * 1000;
@@ -310,7 +311,7 @@ class Fones extends Controllers{
 														$AnotacaoEquipamento, 
 														$nombreImagen, 
 														$estadoAnotacaoEquipamento,
-														$tipo);				
+														$tipo);
 					if($request_anotacion > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 					}else {

@@ -25,13 +25,21 @@
               <label for="txtCodigo">Código Equipamento</label>
               <input type="text" class="form-control valid" id="txtCodigo" name="txtCodigo">
             </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-12" id="divFileAnotacion">
+              <label for="fileAnotacao">Imagen</label>
+              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
+            </div>  
+            <div class="form-group col-md-12" id="divTxtAnotacion">
               <label for="txtObservacion">Anotação</label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
             </div>
             <div class="form-group col-md-12 text-center mt-3" id="divEditarEstado">
               <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
             </div>
+          </div>
+          <div class="form-check col-md-12" id="divEqEstragado">
+            <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
+            <label for="equipamentoEstragado" class="form-check-label">Mouse estragado</label>
           </div>
           <hr>
           <div class="tile-footer">
@@ -77,6 +85,9 @@
               <td>Estado:</td>
               <td id="celEstado"></td>
             </tr>
+            <tr>
+              <td colspan="2"><button class="btn btn-info btn-block btnAnnotation" onclick="fntViewAnnotation();" >Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -107,22 +118,31 @@
         <div id="noAlterado" class="d-none"></div>
         <form class="mt-3" id="formEditarEstado" name="formEditarEstado">
           <input type="hidden" id="idEquipamentoEstado" name="idEquipamentoEstado" value="">
-          <div class="form-row align-items-center">
-            <div class="col-sm-9">
-              <select class="form-control my-1 mr-sm-2" style="width: 100%;" id="listEstado" name="listEstado" required>
-              <option value=""></option>
-              <option value="1">Disponível</option>
-              <option value="3">Estragado</option>
-              <option value="4">Concerto</option>
-            </select>
+          <div class="form-row">
+            <div class="col-sm-12 mb-3">
+              <label for="txtAnotacaoEstado">Estado <span class="required">*</span></label>
+              <select class="form-control" style="width: 100%;" id="listEstado" name="listEstado" required>
+                <option value=""></option>
+                <option value="1">Disponível</option>
+                <option value="3">Estragado</option>
+                <option value="4">Concerto</option>
+              </select>
             </div>
-            <div class="col-sm-3 text-center">
+            <div class="form-group col-md-12">
+              <label for="txtAnotacaoEstado">Anotação <span class="required">*</span></label>
+              <textarea class="form-control" id="txtAnotacaoEstado" name="txtAnotacaoEstado" required></textarea>
+            </div>
+            <div class="form-group col-md-12 mb-4">
+              <label for="fileEstado">Imagen</label>
+              <input type="file" class="form-control-file" id="fileEstado" name="fileEstado">
+            </div>
+            <div class="col-sm-3">
               <button type="submit" class="btn btn-primary my-1">Salvar</button>
             </div>
           </div>
         </form>
       </div>
-      <div class="modal-footer justify-content-start">
+      <div class="modal-footer justify-content-end">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Fechar
         </button>
@@ -130,3 +150,5 @@
     </div>
   </div>
 </div>
+
+<?php anotaciones($data); ?>

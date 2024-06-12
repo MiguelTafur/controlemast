@@ -113,7 +113,9 @@ class Mouses extends Controllers{
 						if($arrData[$i]['idanotacion'] > 0) {
 							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
 							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
+							$ultimo = explode(" ", $arrData[$i]['apellidos']);
 							$trAnotaciones .= '<tr class="text-center">
+								<td>'.$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]).'</td>
 								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>';
 								
 								switch ($arrData[$i]['status']) {
@@ -229,7 +231,8 @@ class Mouses extends Controllers{
 		die();
 	}
 
-	public function setEstadoMouse() {
+	public function setEstadoMouse() 
+	{
 		if($_POST) { 
 			$imagenAnotacion = $_FILES['fileEstado'];
 			$medida = 1000 * 1000;
@@ -259,7 +262,7 @@ class Mouses extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = $this->model->updateEstadoMouse($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Estado atualizado com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {
@@ -283,8 +286,8 @@ class Mouses extends Controllers{
 				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			}else {
 				$idEquipamento = intval($_POST['idEquipamentoAnotacao']);
+				$usuario = $_SESSION['idUser'];
 				$AnotacaoEquipamento = strClean($_POST['txtAnotacao']);
-				$estadoAnotacaoEquipamento = strClean($_POST['estadoEquipamentoAnotacao']);
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -300,12 +303,17 @@ class Mouses extends Controllers{
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
 
+				$estadoAnotacaoEquipamento = strClean($_POST['estadoEquipamentoAnotacao']);
+				$tipo = MMOUSE;
+
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->InsertAnotacao($idEquipamento, 
-																   $AnotacaoEquipamento, 
-																   $nombreImagen,
-																   $estadoAnotacaoEquipamento);
-					if($request_estado > 0) {
+					$request_anotacion = setAnotaciones($idEquipamento, 
+														$usuario, 
+														$AnotacaoEquipamento, 
+														$nombreImagen, 
+														$estadoAnotacaoEquipamento,
+														$tipo);
+					if($request_anotacion > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 					}else {
 						$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar Anotação.');
