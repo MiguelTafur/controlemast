@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/06/2024 às 22:21
+-- Tempo de geração: 12/06/2024 às 21:05
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -45,33 +45,39 @@ CREATE TABLE `anotaciones` (
 INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
 (1, 15, 1, 'Fone chegou de BH com mau contato', '165180ca0fd951d263d9c3300a3beab5.jpg', '2024-06-07 12:02:10', 3, 8),
 (10, 27, 1, 'Fone Recebido do DP. Fone estava no armário de um operador(THALYTA SOARES VENTO - 013253).', 'd0dfbbe7ebe29601e5ab067ad8562fda.jpg', '2024-06-10 10:33:44', 1, 8),
-(11, 22, 1, 'Conertado ok', '', '2024-06-10 10:59:51', 1, 8),
-(12, 22, 1, 'Fone estragou do nada', '', '2024-06-10 11:06:32', 3, 8),
-(13, 22, 1, 'fone no concerto', '', '2024-06-10 11:07:54', 4, 8),
-(14, 22, 1, 'Fone disponível novamente', '', '2024-06-10 11:10:23', 1, 8),
 (15, 28, 1, 'Fone recebido da SAMARA(Coordenadora). Fone estava no nome da POLLYANA ALVEZ CHAGAS(01773)', '', '2024-06-10 11:43:11', 1, 8),
 (16, 28, 1, 'Fone recebido e entregado no mesmo dia', 'f977fbaa8bff243575c674607bd715f7.jpg', '2024-06-10 12:33:58', 2, 8),
-(17, 22, 1, 'ENTREGA TESTE', 'a9f076253be96849ecb75f68bb1fc27c.jpg', '2024-06-10 15:07:23', 2, 8),
-(18, 22, 1, 'recebimento teste', 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', '2024-06-10 15:22:49', 1, 8),
 (25, 30, 1, 'Fone no nome da Nazik - 012773 Microfone não funciona', '9cc6a30eca00674e1131ff120cee927e.jpg', '2024-06-11 10:08:59', 3, 8),
 (26, 32, 1, 'Recebido do DP o dia 07 de junho de 2024', '', '2024-06-11 10:18:26', 1, 8),
 (27, 31, 1, '', '208ab674afa57007fda0ffa794dfb192.jpg', '2024-06-11 10:19:00', 2, 8),
 (28, 32, 1, 'Entrega novato', 'df3b06a5eda49db044f0254b76dcbfbb.jpg', '2024-06-11 10:20:48', 2, 8),
-(29, 33, 1, 'teste', '', '2024-06-11 11:31:33', 1, 9),
-(30, 34, 1, 'testando registro de teclado', '', '2024-06-11 11:34:43', 1, 10),
-(31, 34, 1, 'tecla \"Alt\" não funciona', '', '2024-06-11 11:41:17', 3, 10),
-(32, 33, 1, 'Click esquerdo não funciona', '', '2024-06-11 11:42:37', 3, 9),
-(33, 33, 1, 'Mouse entregue para o DP', '', '2024-06-11 11:42:51', 3, 9),
-(34, 34, 1, 'Teclado entregue para o DP', '', '2024-06-11 11:45:34', 3, 10),
-(36, 35, 1502, 'Fone adicionado', '', '2024-06-11 12:50:18', 1, 8),
-(37, 22, 1502, 'teste fone 980603', '', '2024-06-11 15:42:32', 1, 8),
-(38, 35, 1502, 'Teste à 15h', '', '2024-06-11 15:45:08', 1, 8),
 (39, 36, 1502, 'Fone adicionado', '', '2024-06-11 15:53:01', 3, 8),
 (40, 36, 1502, 'Teste disponible', '', '2024-06-11 16:10:08', 1, 8),
-(41, 35, 1502, 'Alteração dos dados do fone', '', '2024-06-11 16:24:48', 1, 8),
-(42, 35, 1502, 'Alteração dos dados do fone', '', '2024-06-11 16:25:50', 1, 8),
-(43, 35, 1502, 'entrega teste', 'bd30b27dca04791872a17de9348b551a.jpg', '2024-06-11 16:53:53', 2, 8),
-(44, 35, 1502, 'Troca teste do admin', '', '2024-06-11 17:10:25', 1, 8);
+(45, 37, 1, 'Fone não funciona', '572c52b84616e612cfc6111b7285f5f2.jpg', '2024-06-12 09:46:53', 3, 8),
+(46, 38, 1, 'Fone não funciona', '764e35004d5549511b571e6952a5afc5.jpg', '2024-06-12 09:49:44', 3, 8),
+(47, 39, 1, 'Fone funciona normal, porém, o arco soltou.', 'eacc9e9d553a37fa47f62aa6f421965c.jpg', '2024-06-12 09:56:20', 3, 8),
+(63, 43, 1, 'Fone adicionado', '', '2024-06-12 13:46:47', 1, 8),
+(64, 44, 1, 'Fone adicionado', '', '2024-06-12 13:47:23', 1, 8),
+(65, 45, 1, 'Fone adicionado', '', '2024-06-12 13:48:13', 1, 8),
+(66, 46, 1, 'Fone adicionado', '', '2024-06-12 13:48:52', 1, 8),
+(67, 47, 1, 'Fone adicionado', '', '2024-06-12 13:49:24', 1, 8),
+(68, 48, 1, 'Fone adicionado', '', '2024-06-12 13:49:54', 1, 8),
+(69, 49, 1, 'Fone adicionado', '', '2024-06-12 13:50:36', 1, 8),
+(70, 50, 1, 'Fone adicionado', '', '2024-06-12 13:51:39', 1, 8),
+(71, 2, 1, 'Operadora sem renovação do contrato', '', '2024-06-12 13:55:53', 1, 8),
+(72, 51, 1, 'Fone adicionado', '', '2024-06-12 13:57:29', 1, 8),
+(73, 52, 1, 'Fone adicionado', '', '2024-06-12 13:57:56', 1, 8),
+(74, 53, 1, 'Fone adicionado', '', '2024-06-12 13:59:27', 1, 8),
+(75, 54, 1, 'Fone adicionado', '', '2024-06-12 14:01:08', 1, 8),
+(76, 55, 1, 'Fone adicionado', '', '2024-06-12 14:02:40', 1, 8),
+(77, 56, 1, 'Fone adicionado', '', '2024-06-12 14:04:35', 1, 8),
+(78, 57, 1, 'Fone adicionado', '', '2024-06-12 14:06:31', 1, 8),
+(79, 58, 1, 'Fone adicionado', '', '2024-06-12 14:07:41', 1, 8),
+(80, 59, 1, 'Fone funciona normal, porém, o arco está quebrado.', '65c6db67d83400f954d58d8b66588939.jpg', '2024-06-12 14:36:55', 3, 8),
+(81, 60, 1, 'Fone Zero bala', '', '2024-06-12 14:40:52', 1, 8),
+(82, 61, 1, 'Cabo do fone ruim', '5aa221cafebc8f9daa244916e30bf40c.jpg', '2024-06-12 15:06:23', 1, 8),
+(83, 62, 1, 'Fone adicionado', '', '2024-06-12 15:08:08', 1, 8),
+(84, 63, 1, 'Fone trocado pela líder Regiane. Líder manifestou mau contato do fone', '', '2024-06-12 15:09:45', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -97,7 +103,7 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (1, 1497, 4, '', '', '2024-05-28 13:05:06', 1),
 (5, 1500, 7, '', '', '2024-06-03 10:19:32', 1),
 (6, 1501, 8, 'nathalia.jpg', '', '2024-06-03 12:33:55', 0),
-(7, 1498, 2, '', '', '2024-06-03 13:56:17', 1),
+(7, 1498, 2, '', '', '2024-06-03 13:56:17', 0),
 (8, 1503, 11, 'paloma.jpg', '', '2024-06-03 16:07:21', 1),
 (9, 1504, 12, 'gustavo.jpg', '', '2024-06-03 16:38:02', 1),
 (13, 1511, 20, '29ed06cf933a78cecf0a0ea34ccda76d.jpg', '', '2024-06-06 12:08:32', 1),
@@ -108,12 +114,9 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (20, 1501, 8, '', 'Fone apresenta mau contato', '2024-06-07 17:35:34', 2),
 (21, 1501, 23, 'cd06760fa16f764182392e04df6746af.jpg', '', '2024-06-07 17:38:04', 1),
 (34, 1514, 28, 'f977fbaa8bff243575c674607bd715f7.jpg', 'Fone recebido e entregado no mesmo dia', '2024-06-10 12:33:58', 1),
-(35, 1502, 22, 'a9f076253be96849ecb75f68bb1fc27c.jpg', 'ENTREGA TESTE', '2024-06-10 15:07:23', 0),
-(37, 1502, 22, 'ad2661c2c04e0fa1b2f2ac6329262c7f.jpg', 'recebimento teste', '2024-06-10 15:22:49', 2),
 (40, 1515, 31, '208ab674afa57007fda0ffa794dfb192.jpg', '', '2024-06-11 10:19:00', 1),
 (41, 1516, 32, 'df3b06a5eda49db044f0254b76dcbfbb.jpg', 'Entrega novato', '2024-06-11 10:20:48', 1),
-(42, 1502, 35, 'bd30b27dca04791872a17de9348b551a.jpg', 'entrega teste', '2024-06-11 16:53:53', 0),
-(44, 1502, 35, '', 'Troca teste do admin', '2024-06-11 17:10:25', 2);
+(45, 1498, 2, '', 'Operadora sem renovação do contrato', '2024-06-12 13:55:53', 3);
 
 -- --------------------------------------------------------
 
@@ -138,7 +141,7 @@ CREATE TABLE `equipamento` (
 
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
 (1, 'Topuse', 'G57969', '0000151', '2024-05-27 17:03:02', 1, 8, 444),
-(2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 2, 8, 444),
+(2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 1, 8, 444),
 (3, 'Plantronics', '', '0000394', '2024-05-28 09:54:54', 1, 8, 444),
 (4, 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 2, 8, 444),
 (7, 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 8, 444),
@@ -151,17 +154,37 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
 (21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
-(22, 'TesteDOS', 'teste', '980603', '2024-06-07 16:02:00', 1, 8, 444),
 (23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444),
 (27, 'Unixtrom', '210707023', '0000228', '2024-06-10 10:33:44', 1, 8, 444),
 (28, 'Paltronics', '', '0000353', '2024-06-10 11:43:11', 2, 8, 444),
 (30, 'TopUse', 'G09494', '0000357', '2024-06-11 10:08:59', 3, 8, 444),
 (31, 'Paltronics', '', '0003326', '2024-06-11 10:16:00', 2, 8, 444),
 (32, 'Unixtrom', '176601', '0000080', '2024-06-11 10:18:26', 2, 8, 444),
-(33, 'Dell', 'teste', '0914', '2024-06-11 11:31:33', 3, 9, 444),
-(34, 'Teste Teclado', 'teste', '333', '2024-06-11 11:34:43', 3, 10, 444),
-(35, 'Teste Tres', '999', '89', '2024-06-11 12:50:18', 1, 8, 444),
-(36, 'Teste Cuatro', 'teste cuatro', '9803', '2024-06-11 15:53:01', 1, 8, 444);
+(36, 'Teste Cuatro', 'teste cuatro', '9803', '2024-06-11 15:53:01', 1, 8, 444),
+(37, 'Paltronics', '', '0000529', '2024-06-12 09:46:53', 3, 8, 444),
+(38, 'Unixtrom', '176928', '0003359', '2024-06-12 09:49:43', 3, 8, 444),
+(39, 'Unixtrom', '210702364', '0003375', '2024-06-12 09:56:20', 3, 8, 444),
+(43, 'Paltronics', '', '0000400', '2024-06-12 13:46:47', 1, 8, 444),
+(44, 'Paltronics', '', '18295', '2024-06-12 13:47:23', 1, 8, 444),
+(45, 'Paltronics', '', '0023982', '2024-06-12 13:48:12', 1, 8, 444),
+(46, 'Paltronics', '', '0001192', '2024-06-12 13:48:52', 1, 8, 444),
+(47, 'Paltronics', '', '0000454', '2024-06-12 13:49:24', 1, 8, 444),
+(48, 'Paltronics', '', '0009884', '2024-06-12 13:49:54', 1, 8, 444),
+(49, 'Paltronics', '', '0000268', '2024-06-12 13:50:36', 1, 8, 444),
+(50, 'Unixtrom', 'F14428', '0000221', '2024-06-12 13:51:39', 1, 8, 444),
+(51, 'Unixtrom', '', '0009806', '2024-06-12 13:57:29', 1, 8, 444),
+(52, 'Unixtrom', '177335', '000794', '2024-06-12 13:57:56', 1, 8, 444),
+(53, 'Paltronics', '', '0000500', '2024-06-12 13:59:27', 1, 8, 444),
+(54, 'Unixtrom', '177349', '0000727', '2024-06-12 14:01:08', 1, 8, 444),
+(55, 'Unixtrom', '180600062', '0000982', '2024-06-12 14:02:40', 1, 8, 444),
+(56, 'Unixtrom', '210702723', '0003378', '2024-06-12 14:04:35', 1, 8, 444),
+(57, 'Unixtrom', '176468', '0000499', '2024-06-12 14:06:31', 1, 8, 444),
+(58, 'Unixtrom', '180600565', '0001082', '2024-06-12 14:07:41', 1, 8, 444),
+(59, 'Paltronics', '', '0000555', '2024-06-12 14:36:55', 3, 8, 444),
+(60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 1, 8, 444),
+(61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 1, 8, 444),
+(62, 'Paltronics', '', '0000299', '2024-06-12 15:08:08', 1, 8, 444),
+(63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 1, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -387,19 +410,19 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
