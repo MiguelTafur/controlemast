@@ -20,7 +20,7 @@ class UsuariosModel extends Mysql
 		parent::__construct();
 	}	
 
-	public function insertUsuario(string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $ruta)
+	/*public function insertUsuario(string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $ruta)
 	{
 		$this->strMatricula = $matricula;
 		$this->strNombre = $nombre;
@@ -45,7 +45,7 @@ class UsuariosModel extends Mysql
 			$return = "0";
 		}
 		return $return;
-	}
+	}*/
 
 	public function selectUsuarios()
 	{
@@ -61,6 +61,7 @@ class UsuariosModel extends Mysql
 					p.codigoruta, 
 					p.telefono, 
 					p.email_user, 
+					p.modelo,
 					p.codigoruta, 
 					p.status, 
 					r.idrol, 
@@ -82,10 +83,11 @@ class UsuariosModel extends Mysql
 						p.matricula, 
 						p.telefono, 
 						p.email_user, 
+						p.modelo, 
 						r.idrol, 
 						r.nombrerol, 
 						p.status, 
-				DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
+				DATE_FORMAT(p.datecreated, '%Y-%m-%d') as fechaRegistro 
 				FROM persona p 
 				INNER JOIN rol r 
 				ON p.rolid = r.idrol 

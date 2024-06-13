@@ -30,6 +30,7 @@
                     <th>Email</th>
                     <th>Telefono</th>
                     <th>Cargo</th>
+                    <th>Modelo</th>
                     <th>Estado</th>
                     <th>Ações</th>
                   </tr>

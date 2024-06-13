@@ -5,22 +5,27 @@
 	{
 		return BASE_URL;
 	}
-    //Retorla la url de Assets
+    //Retorna la url de Assets
     function media()
     {
         return BASE_URL."/Assets";
     }
+
+    //Template del Header
     function headerAdmin($data="")
     {
         $view_header = "Views/Template/header_admin.php";
         require_once ($view_header);
     }
+
+    //Template del Footer
     function footerAdmin($data="")
     {
         $view_footer = "Views/Template/footer_admin.php";
         require_once ($view_footer);        
     }
 
+    //Template de las anotaciones
     function anotaciones($data = "")
     {
         $view_anotaciones = "Views/Template/anotaciones.php";
@@ -35,11 +40,13 @@
         $format .= print_r('</pre>');
         return $format;
     }
+    //Template de las ventanas modales
     function getModal(string $nameModal, $data)
     {
         $view_modal = "Views/Template/Modals/{$nameModal}.php";
         require_once $view_modal;        
     }
+
 
     function getFile(string $url, $data)
     {
@@ -84,13 +91,22 @@
         $_SESSION['permisosMod'] = $permisosMod;
     }
 
+    //Inserta las anotaciones de los equipamentos
     function setAnotaciones(int $idequipamento, int $usuario, string $anotacao, string $imagem, int $estado, int $tipo)
     {
         require_once("Models/AnotacionesModel.php");
         $objPrestamos = new AnotacionesModel();
         $request = $objPrestamos->insertAnotacao($idequipamento, $usuario, $anotacao, $imagem, $estado, $tipo);
         return $request;
-        
+    }
+
+    //Inserta los usuarios
+    function setPersona(string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $empresa, int $modelo)
+    {
+        require_once("Models/PersonasModel.php");
+        $objPersonas = new PersonasModel();
+        $request = $objPersonas->insertPersona($matricula, $nombre, $apellido, $telefono, $email, $tipoid, $status, $empresa, $modelo);
+        return $request;
     }
 
     function sessionUser(int $idpersona){

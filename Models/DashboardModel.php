@@ -13,7 +13,7 @@ class DashboardModel extends Mysql
 	PRIVATE $strFecha;
 	PRIVATE $strFecha2;
 
-	public function totalCartera($ruta,$fecha)
+	/*public function totalCartera($ruta,$fecha)
 	{
 		$this->intIdRuta = $ruta;
 		$this->strFecha = $fecha;
@@ -142,7 +142,7 @@ class DashboardModel extends Mysql
 	public function cantClientes()
 	{
 		$rutaId = $_SESSION['idRuta'];
-		$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".RCLIENTES;
+		$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".RLIDER;
 		$request = $this->select($sql);
 		$total = $request['total'];
 		return $total;
@@ -469,7 +469,7 @@ class DashboardModel extends Mysql
 		WHERE (pr.status = 1 || (pr.datefinal = '$fecha_actual')) AND pr.formato = 1 AND pe.codigoruta = $rutaId";
 		$request2 = $this->select($sql2);*/
 
-		$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
+		/*$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
 		$dia = $dias[date('w', strtotime(date("Y-m-d")))];
 
 		$sql2 = "SELECT pr.parcela, pr.formato, pe.nombres, CONCAT(ELT(WEEKDAY(pr.datecreated) + 1, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo')) as fecha
@@ -493,9 +493,9 @@ class DashboardModel extends Mysql
 
 		$arrData = array('total' => $request['total'], 'monto' => $request['monto'], 'parcela' => $estimadoCobrar);
 		return $arrData;
-	}
+	}*/
 
-	public function selectResumenAnterior()
+	/*public function selectResumenAnterior()
 	{
 		$rutaId = $_SESSION['idRuta'];
 		$sql = "SELECT total FROM resumen WHERE codigoruta = $rutaId ORDER BY datecreated DESC";
@@ -712,37 +712,5 @@ class DashboardModel extends Mysql
 
 		$arrGastos = array('totalGastos' => $totalGastos, 'anio' => $anio, 'meses' => $arrMGastos);
 		return $arrGastos;
-
-	}
-
-
-	public function selectDatePagoPrestamo()
-	{
-		$ruta = $_SESSION['idRuta'];
-		$fecha_actual = date("Y-m-d");
-
-		$sqlR = "SELECT datecreated FROM resumen WHERE codigoruta = $ruta AND datecreated != '$fecha_actual' ORDER BY datecreated DESC";
-		$requestR = $this->select($sqlR);
-
-		//dep($requestR);exit;
-
-		// $sql = "SELECT * FROM prestamos pr INNER JOIN persona pe ON(pr.personaid = pe.idpersona)
-		// 		WHERE (pr.pagoid != '' AND pr.datepago != '$fecha_actual') AND (pe.codigoruta = $ruta AND pr.status != 0)";
-		$sql = "SELECT pa.datecreated as fechaPago FROM prestamos pr
-					INNER JOIN persona pe ON(pr.personaid = pe.idpersona)
-					INNER JOIN pagos pa ON(pr.idprestamo = pa.prestamoid)
-					WHERE (pa.datecreated != '$fecha_actual') AND (pe.codigoruta = $ruta AND pr.status != 0)
-					ORDER BY pa.datecreated desc";
-		$request = $this->select($sql);
-
-		//dep($request);exit;
-
-		if(!empty($request) && ($request['fechaPago'] > $requestR['datecreated']))
-		{
-			return $request;
-		}else{
-			return 2;
-		}
-	}
-
+	}*/
 }

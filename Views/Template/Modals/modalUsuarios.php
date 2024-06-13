@@ -11,21 +11,21 @@
       <div class="modal-body">
       <form id="formUsuario" name="formUsuario" class="form-horizontal">
           <input type="hidden" id="idUsuario" name="idUsuario" value="">
-          <p><i>Todos los campos son obligatorios.</i></p>
+          <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
             <div class="form-group col-md-12">
-              <label for="txtMatricula">Matrícula</label>
+              <label for="txtMatricula">Matrícula <span class="required">*</span></label>
               <input type="text" class="form-control" id="txtMatricula" name="txtMatricula" required="">
             </div>  
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="txtNombre">Nome</label>
+              <label for="txtNombre">Nome <span class="required">*</span></label>
               <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" required="">
             </div>  
             <div class="form-group col-md-6">
-              <label for="txtApellido">Sobrenome</label>
+              <label for="txtApellido">Sobrenome <span class="required">*</span></label>
               <input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido" required="">
             </div>  
           </div>
@@ -40,22 +40,32 @@
               <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" autocomplete="username">
             </div>
           </div>
+
           <div class="form-row justify-content-center">
-            <div class="form-group col-md-4">
-              <label for="listRolid">Tipo de usuário</label>
+            <div class="form-group col-md-6">
+              <label for="listRolid">Tipo de usuário <span class="required">*</span></label>
               <select class="form-control" data-live-search="true" id="listRolid" name="listRolid" required></select>
             </div>  
-            <div class="form-group col-md-4">
-              <label for="listStatus">Estado</label>
+            <div class="form-group col-md-6">
+              <label for="listStatus">Estado <span class="required">*</span></label>
               <select class="form-control selectpicker" id="listStatus" name="listStatus" required>
                 <option value="1">Ativo</option>
                 <option value="2">Inativo</option>
               </select>
             </div> 
-            <div class="form-group col-md-4" id="divListRuta">
-              <label for="listRuta">Empresa</label>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6" id="divListRuta">
+              <label for="listRuta">Empresa <span class="required">*</span></label>
               <select class="form-control" data-live-search="true" id="listRuta" name="listRuta" required></select>
-            </div> 
+            </div>
+            <div class="form-group col-md-6" id="divListModelo">
+              <label for="listModelo">Modelo <span class="required">*</span></label>
+              <select class="form-control selectpicker" id="listModelo" name="listModelo" required>
+                <option value="1">Precensial</option>
+                <option value="2">Home Office</option>
+              </select>
+            </div>
           </div>
           <hr>
           <div class="tile-footer">
@@ -104,6 +114,10 @@
             <tr>
               <td>Tipo de Usuário</td>
               <td id="celTipoUsuario"></td>
+            </tr>
+            <tr>
+              <td>Modelo de Trabalho</td>
+              <td id="celModelo"></td>
             </tr>
             <tr>
               <td>Estado:</td>

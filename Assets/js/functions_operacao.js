@@ -111,6 +111,15 @@ function fntViewInfo(idpersona)
             let objData = JSON.parse(request.responseText);
             if(objData.status)
             {
+                const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
                 document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
                 document.querySelector("#celNombres").innerHTML = objData.data.nombres;
                 document.querySelector("#celApellidos").innerHTML = objData.data.apellidos;
@@ -126,7 +135,7 @@ function fntViewInfo(idpersona)
                     document.querySelector("#celEmail").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
                 
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
                 $('#modalViewOperador').modal('show');
             }else{

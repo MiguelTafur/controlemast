@@ -33,6 +33,7 @@ function tablaUsuarios() {
                 {"data":"email_user"},
                 {"data":"telefono"},
                 {"data":"nombrerol"},
+                {"data":"modelo"},
                 {"data":"status"},
                 {"data":"options"}
             ],
@@ -58,8 +59,9 @@ function fntCrearUsuario() {
             let intTipoUsuario = document.querySelector('#listRolid').value;
             let intStatus = document.querySelector('#listStatus').value;
             let intRuta = document.querySelector('#listRuta').value;
+            let intModelo = document.querySelector('#listModelo').value;
 
-            if(strMatricula == '' || strNombre == '' || strApellido == '' || intTipoUsuario == '' || intRuta == '')
+            if(strMatricula == '' || strNombre == '' || strApellido == '' || intTipoUsuario == '' || intRuta == '' || intRuta == '')
             {
                 swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
@@ -88,14 +90,20 @@ function fntCrearUsuario() {
                         if(rowTable == ""){
                             tableUsuarios.api().ajax.reload();
                         }else{
+
+                            htmlModelo = intModelo == 1 ? 
+                            'Precensial' : 
+                            'Home Office';
+
                             htmlStatus = intStatus == 1 ? 
                             '<span class"badge badge-success">Ativo</span>' : 
                             '<span class"badge badge-danger">Inativo</span>';
+
                             rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = strApellido;
-                            rowTable.cells[3].textContent = strEmail;
-                            rowTable.cells[4].textContent = intTelefono;
-                            rowTable.cells[5].textContent = document.querySelector("#listRolid").selectedOptions[0].text;
+                            rowTable.cells[2].textContent = strEmail;
+                            rowTable.cells[3].textContent = intTelefono;
+                            rowTable.cells[4].textContent = document.querySelector("#listRolid").selectedOptions[0].text;
+                            rowTable.cells[5].innerHTML = htmlModelo;
                             rowTable.cells[6].innerHTML = htmlStatus;
                             tableUsuarios.api().ajax.reload();
                         }
@@ -280,6 +288,15 @@ function fntViewUsuario(idpersona)
                 '<span class="badge badge-success">Ativo</span>' : 
                 '<span class="badge badge-danger">Inativo</span>';
 
+                const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
                 document.querySelector("#celNombres").innerHTML = objData.data.nombres;
                 document.querySelector("#celApellidos").innerHTML = objData.data.apellidos;
                 document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
@@ -295,8 +312,9 @@ function fntViewUsuario(idpersona)
                     document.querySelector("#celEmail").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
                 document.querySelector("#celTipoUsuario").innerHTML = objData.data.nombrerol;
+                document.querySelector("#celModelo").innerHTML = objData.data.modelo;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
+                document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
                 $('#modalViewUser').modal('show');
             }else{

@@ -16097,6 +16097,16 @@ be a descendant of the grid when it is being dragged.
   background-color: #17a2b8;
 }
 
+.widget-small.secundario.coloured-icon {
+  background-color: #fff;
+  color: #2a2a2a;
+}
+
+.widget-small.secundario.coloured-icon .icon {
+  background-color: var(--secundario);
+  color: var(--light);
+}
+
 .widget-small.info.coloured-icon {
   background-color: #fff;
   color: #2a2a2a;

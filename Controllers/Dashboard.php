@@ -17,15 +17,13 @@ class Dashboard extends Controllers{
 			header("Location: ".base_url().'/controle');
 		}
 		$data['page_id'] = 2;
-		$data['page_tag'] = "Dashboard - Credimast";
-		$data['page_title'] = "Dashboard - Credimast";
-		$data['page_name'] = "credimast";
+		$data['page_tag'] = "Dashboard - controleMast";
+		$data['page_title'] = "Dashboard - controleMast";
+		$data['page_name'] = "controleMast";
 
-		$ruta = $_SESSION['idRuta'];
+		$this->views->getView($this,"dashboard",$data);
 
-		$data['totalCartera'] = $this->model->totalCartera($ruta, date("Y-m-d"));
-
-		$data['usuarios'] = $this->model->cantUsuarios();
+		/*$data['usuarios'] = $this->model->cantUsuarios();
 		$data['clientes'] = $this->model->cantClientes();
 		$data['prestamos'] = $this->model->cantPrestamos();
 		$data['prestamosFinalizados'] = $this->model->cantPrestamosFinalizados();
@@ -50,10 +48,11 @@ class Dashboard extends Controllers{
 		$data['pagamentos'] = $this->model->selectDatePagoPrestamo();
 
 		$data['page_functions_js'] = "functions_dashboard.js";
-		$this->views->getView($this,"dashboard",$data);
+		*/
+
 	}
 
-	public function ventasMes()
+	/*public function ventasMes()
 	{
 		if($_POST)
 		{
@@ -391,6 +390,6 @@ class Dashboard extends Controllers{
 			echo $script;
 			die();
 		}
-	}
+	}*/
 }
 ?>

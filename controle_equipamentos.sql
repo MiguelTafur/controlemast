@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 12/06/2024 às 21:05
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 13-06-2024 a las 22:30:46
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `controle_equipamentos`
+-- Base de datos: `controle_equipamentos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `anotaciones`
+-- Estructura de tabla para la tabla `anotaciones`
 --
 
 CREATE TABLE `anotaciones` (
@@ -39,7 +39,7 @@ CREATE TABLE `anotaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `anotaciones`
+-- Volcado de datos para la tabla `anotaciones`
 --
 
 INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
@@ -77,12 +77,14 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (81, 60, 1, 'Fone Zero bala', '', '2024-06-12 14:40:52', 1, 8),
 (82, 61, 1, 'Cabo do fone ruim', '5aa221cafebc8f9daa244916e30bf40c.jpg', '2024-06-12 15:06:23', 1, 8),
 (83, 62, 1, 'Fone adicionado', '', '2024-06-12 15:08:08', 1, 8),
-(84, 63, 1, 'Fone trocado pela líder Regiane. Líder manifestou mau contato do fone', '', '2024-06-12 15:09:45', 1, 8);
+(84, 63, 1, 'Fone trocado pela líder Regiane. Líder manifestou mau contato do fone', '', '2024-06-12 15:09:45', 1, 8),
+(85, 62, 1, 'Entregue para a líder Ana', '', '2024-06-12 16:42:22', 1, 8),
+(86, 64, 1, 'Fone trocado pala operadora(), ela relata que o cliente reclama do microfone.', 'b7554a85602367565617f8111300424a.jpg', '2024-06-13 12:00:49', 1, 8);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `controle`
+-- Estructura de tabla para la tabla `controle`
 --
 
 CREATE TABLE `controle` (
@@ -96,7 +98,7 @@ CREATE TABLE `controle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `controle`
+-- Volcado de datos para la tabla `controle`
 --
 
 INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`, `observacion`, `datecreated`, `status`) VALUES
@@ -121,7 +123,7 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `equipamento`
+-- Estructura de tabla para la tabla `equipamento`
 --
 
 CREATE TABLE `equipamento` (
@@ -136,7 +138,7 @@ CREATE TABLE `equipamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `equipamento`
+-- Volcado de datos para la tabla `equipamento`
 --
 
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
@@ -184,12 +186,13 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 1, 8, 444),
 (61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 1, 8, 444),
 (62, 'Paltronics', '', '0000299', '2024-06-12 15:08:08', 1, 8, 444),
-(63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 1, 8, 444);
+(63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 1, 8, 444),
+(64, 'TopUse', 'B08197', '0003379', '2024-06-13 12:00:49', 1, 8, 444);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `modulo`
+-- Estructura de tabla para la tabla `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -200,7 +203,7 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `modulo`
+-- Volcado de datos para la tabla `modulo`
 --
 
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
@@ -220,7 +223,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `permisos`
+-- Estructura de tabla para la tabla `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -234,7 +237,7 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `permisos`
+-- Volcado de datos para la tabla `permisos`
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
@@ -254,7 +257,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `persona`
+-- Estructura de tabla para la tabla `persona`
 --
 
 CREATE TABLE `persona` (
@@ -266,40 +269,42 @@ CREATE TABLE `persona` (
   `email_user` varchar(100) DEFAULT NULL,
   `rolid` bigint(20) NOT NULL,
   `codigoruta` bigint(20) NOT NULL,
+  `modelo` int(2) NOT NULL DEFAULT 1,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `persona`
+-- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `datecreated`, `status`) VALUES
-(1, 'Miguel', 'Tafur', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, '2022-11-12 00:00:00', 1),
-(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 4, 444, '2024-05-23 17:48:42', 1),
-(1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 4, 444, '2024-05-24 16:55:35', 1),
-(1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 4, 444, '2024-05-24 16:56:41', 1),
-(1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 5, 444, '2024-05-27 13:17:24', 1),
-(1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 5, 444, '2024-05-27 13:19:30', 1),
-(1500, 'Matheus Henrique', 'Alves Bispo', '110341', 37991492643, '', 4, 444, '2024-06-03 10:17:21', 1),
-(1501, 'Nathalia Patricia', 'Alves', '013313', 0, '', 5, 444, '2024-06-03 12:30:20', 1),
-(1502, 'Admin', 'Admin', '013301', 0, 'admin@cm.com', 1, 444, '2024-06-03 14:08:17', 1),
-(1503, 'Paloma', 'Aparecida Nunes', '013333', 0, '', 5, 444, '2024-06-03 16:07:08', 1),
-(1504, 'Gustavo Francisco', 'Da Silva', '013223', 0, '', 5, 444, '2024-06-03 16:29:45', 1),
-(1505, 'PATRICIA GABRIELA', 'CARDOSO', '01819', 0, '', 5, 444, '2024-06-05 09:01:10', 1),
-(1506, 'KARINA', 'PEREIRA DE OLIVEIRA', '013339', 0, '', 5, 444, '2024-06-05 09:01:50', 1),
-(1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, '2024-06-05 16:25:17', 1),
-(1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, '2024-06-06 12:05:51', 1),
-(1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, '2024-06-06 15:10:25', 1),
-(1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, '2024-06-06 17:41:50', 1),
-(1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, '2024-06-10 11:44:29', 1),
-(1515, 'NAZIK', 'DINIZ', '012773', 0, '', 5, 444, '2024-06-11 10:14:02', 1),
-(1516, 'AIRTON', 'DE PAULO JUNIOR', '013340', 0, '', 5, 444, '2024-06-11 10:15:11', 1);
+INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `modelo`, `datecreated`, `status`) VALUES
+(1, 'Miguel', 'Tafur', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, 1, '2022-11-12 00:00:00', 1),
+(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 4, 444, 1, '2024-05-23 17:48:42', 1),
+(1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 4, 444, 1, '2024-05-24 16:55:35', 1),
+(1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 4, 444, 1, '2024-05-24 16:56:41', 1),
+(1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 5, 444, 1, '2024-05-27 13:17:24', 1),
+(1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 5, 444, 1, '2024-05-27 13:19:30', 0),
+(1500, 'Matheus Henrique', 'Alves Bispo', '110341', 37991492643, '', 4, 444, 1, '2024-06-03 10:17:21', 1),
+(1501, 'Nathalia Patricia', 'Alves', '013313', 0, '', 5, 444, 1, '2024-06-03 12:30:20', 1),
+(1502, 'Admin', 'Admin', '013301', 0, 'admin@cm.com', 1, 444, 1, '2024-06-03 14:08:17', 1),
+(1503, 'Paloma', 'Aparecida Nunes', '013333', 0, '', 5, 444, 1, '2024-06-03 16:07:08', 1),
+(1504, 'Gustavo Francisco', 'Da Silva', '013223', 0, '', 5, 444, 1, '2024-06-03 16:29:45', 1),
+(1505, 'PATRICIA GABRIELA', 'CARDOSO', '01819', 0, '', 5, 444, 1, '2024-06-05 09:01:10', 1),
+(1506, 'KARINA', 'PEREIRA DE OLIVEIRA', '013339', 0, '', 5, 444, 1, '2024-06-05 09:01:50', 1),
+(1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, 1, '2024-06-05 16:25:17', 1),
+(1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, 1, '2024-06-06 12:05:51', 1),
+(1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, 1, '2024-06-06 15:10:25', 1),
+(1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, 1, '2024-06-06 17:41:50', 1),
+(1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, 1, '2024-06-10 11:44:29', 1),
+(1515, 'NAZIK', 'DINIZ', '012773', 0, '', 5, 444, 1, '2024-06-11 10:14:02', 1),
+(1516, 'AIRTON', 'DE PAULO JUNIOR', '013340', 0, '', 5, 444, 1, '2024-06-11 10:15:11', 1),
+(1519, 'Alvaro', 'L', '66544', 0, '', 2, 444, 1, '2024-06-13 17:29:43', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -310,7 +315,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
@@ -323,7 +328,7 @@ INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ruta`
+-- Estructura de tabla para la tabla `ruta`
 --
 
 CREATE TABLE `ruta` (
@@ -335,18 +340,18 @@ CREATE TABLE `ruta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `ruta`
+-- Volcado de datos para la tabla `ruta`
 --
 
 INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUES
 (444, 9806, 'Globalcob', '2024-05-22 15:39:31', 1);
 
 --
--- Índices para tabelas despejadas
+-- Índices para tablas volcadas
 --
 
 --
--- Índices de tabela `anotaciones`
+-- Indices de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD PRIMARY KEY (`idanotacion`),
@@ -354,7 +359,7 @@ ALTER TABLE `anotaciones`
   ADD KEY `personaid` (`personaid`);
 
 --
--- Índices de tabela `controle`
+-- Indices de la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD PRIMARY KEY (`idcontrole`),
@@ -362,20 +367,20 @@ ALTER TABLE `controle`
   ADD KEY `foneid` (`equipamentoid`);
 
 --
--- Índices de tabela `equipamento`
+-- Indices de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD PRIMARY KEY (`idequipamento`),
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `modulo`
+-- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
 
 --
--- Índices de tabela `permisos`
+-- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermiso`),
@@ -383,7 +388,7 @@ ALTER TABLE `permisos`
   ADD KEY `moduloid` (`moduloid`);
 
 --
--- Índices de tabela `persona`
+-- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
@@ -391,102 +396,102 @@ ALTER TABLE `persona`
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idrol`);
 
 --
--- Índices de tabela `ruta`
+-- Indices de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   ADD PRIMARY KEY (`idruta`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de tabela `anotaciones`
+-- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT de tabela `controle`
+-- AUTO_INCREMENT de la tabla `controle`
 --
 ALTER TABLE `controle`
   MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT de tabela `equipamento`
+-- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
--- AUTO_INCREMENT de tabela `modulo`
+-- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de tabela `permisos`
+-- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
 
 --
--- AUTO_INCREMENT de tabela `persona`
+-- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1517;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1520;
 
 --
--- AUTO_INCREMENT de tabela `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de tabela `ruta`
+-- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   MODIFY `idruta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
 --
--- Restrições para tabelas despejadas
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restrições para tabelas `anotaciones`
+-- Filtros para la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anotaciones_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `controle`
+-- Filtros para la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD CONSTRAINT `controle_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `controle_ibfk_3` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `equipamento`
+-- Filtros para la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD CONSTRAINT `equipamento_ibfk_1` FOREIGN KEY (`codigoruta`) REFERENCES `ruta` (`idruta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `permisos`
+-- Filtros para la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`moduloid`) REFERENCES `modulo` (`idmodulo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `persona`
+-- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,

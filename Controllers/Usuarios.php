@@ -27,7 +27,13 @@ class Usuarios extends Controllers{
 	{
 		if($_POST)
 		{
-			if(empty($_POST['txtMatricula']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) || empty($_POST['listRuta']))
+			if(empty($_POST['txtMatricula']) ||
+			   empty($_POST['txtNombre']) || 
+			   empty($_POST['txtApellido']) || 
+			   empty($_POST['listRolid']) || 
+			   empty($_POST['listStatus']) || 
+			   empty($_POST['listRuta']) || 
+			   empty($_POST['listModelo']))
 			{
 				$arrRespose = array("status" => false, "msg" => "Datos incorrectos.");
 			}else{
@@ -40,6 +46,7 @@ class Usuarios extends Controllers{
 				$intTipoId = intval($_POST['listRolid']);
 				$intStatus = intval($_POST['listStatus']);
 				$intRuta = intval($_POST['listRuta']);
+				$intModelo = intval($_POST['listModelo']);
 				$request_user = "";
 
 				if($idUsuario == 0)
@@ -47,12 +54,13 @@ class Usuarios extends Controllers{
 					$option = 1;
 					
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertUsuario($strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta);
+						$request_user = setPersona($strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo);
+
 					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateUsuario($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus);
+						$request_user = $this->model->updateUsuario($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intModelo);
 					}
 				}
 
@@ -64,7 +72,7 @@ class Usuarios extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados con sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe, insire outra.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
@@ -87,7 +95,14 @@ class Usuarios extends Controllers{
 				$btnEdit = '';
 				$btnDelete = '';
 
-				$arrData[$i]['matricula'] = '<p class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</p>';
+				$arrData[$i]['matricula'] = '<span class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</span>';
+
+				if($arrData[$i]['modelo'] === 1)
+				{
+					$arrData[$i]['modelo'] = 'Presencial';
+				}else{
+					$arrData[$i]['modelo'] = 'Home Office';
+				}
 
 				if($arrData[$i]['status'] == 1)
 				{
@@ -132,6 +147,14 @@ class Usuarios extends Controllers{
 			if($idusuario > 0)
 			{
 				$arrData = $this->model->selectUsuario($idusuario);
+
+				if($arrData['modelo'] === 1)
+				{
+					$arrData['modelo'] = 'Presencial';
+				}else{
+					$arrData['modelo'] = 'Home Office';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
