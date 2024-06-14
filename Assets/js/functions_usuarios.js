@@ -61,7 +61,7 @@ function fntCrearUsuario() {
             let intRuta = document.querySelector('#listRuta').value;
             let intModelo = document.querySelector('#listModelo').value;
 
-            if(strMatricula == '' || strNombre == '' || strApellido == '' || intTipoUsuario == '' || intRuta == '' || intRuta == '')
+            if(strMatricula == '' || strNombre == '' || strApellido == '' || intTipoUsuario == '' || intRuta == '' || intModelo == '')
             {
                 swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
@@ -111,119 +111,6 @@ function fntCrearUsuario() {
                         formUsuario.reset();
                         swal("Usuários", objData.msg, "success");
                         
-                    }else{
-                        swal("Erro", objData.msg, "error");
-                    }
-                }
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-}
-
-function fntActualizarPerfil() {
-    //Actualizar perfil
-    if(document.querySelector("#formPerfil")){
-        let formPerfil = document.querySelector("#formPerfil");
-        formPerfil.onsubmit = function(e)
-        {
-            e.preventDefault();
-            let strMatricula = document.querySelector('#txtMatricula').value;
-            let strNombre = document.querySelector('#txtNombre').value;
-            let strApellido = document.querySelector('#txtApellido').value;
-            let intTelefono = document.querySelector('#txtTelefono').value;
-
-            if(strMatricula == '' || strNombre == '' || strApellido == '' || intTelefono == '')
-            {
-                swal("Atenção", "Todos os campos são obrigatórios.", "error");
-                return false;
-            }
-
-            let ElementsValid = document.getElementsByClassName("valid");
-            for (let i = 0; i < ElementsValid.length; i++) {
-                if(ElementsValid[i].classList.contains('is-invalid')){
-                    swal("Atenção!", "Por favor verifique os campos em vermelho.", "error");
-                    return false;
-                }
-            }
-
-            divLoading.style.display = "flex";
-            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Usuarios/putPerfil';
-            let formData = new FormData(formPerfil);
-            request.open("POST",ajaxUrl,true);
-            request.send(formData);
-            request.onreadystatechange = function(){
-                if(request.readyState == 4) return;
-                if(request.status == 200)
-                {
-                    let objData = JSON.parse(request.responseText);                
-                    if(objData.status){
-                        $('#modalFormPerfil').modal('hide');
-                        swal({
-                            title: "",
-                            text: objData.msg,
-                            type: "success",
-                            confirmButtonText: "Aceitar",
-                            closeOnConfirm: false,
-                        }, function(isConfirm){
-                            if(isConfirm){
-                                location.reload();
-                            }
-                        });
-                    }else{
-                        swal("Erro", objData.msg, "error");
-                    }
-                }
-                divLoading.style.display = "none";
-                return false;
-            }
-        }
-    }
-}
-
-function fntActualizarDatosFiscales() {
-    //Actualizar Datos Fiscales
-    if(document.querySelector("#formDataFiscal")){
-        let formDataFiscal = document.querySelector("#formDataFiscal");
-        formDataFiscal.onsubmit = function(e)
-        {
-            e.preventDefault();
-            let strNit = document.querySelector('#txtNit').value;
-            let strNombreFiscal = document.querySelector('#txtNombreFiscal').value;
-            let strDirFiscal = document.querySelector('#txtDirFiscal').value;
-
-            if(strNit == '' || strNombreFiscal == '' || strDirFiscal == '')
-            {
-                swal("Atenção", "Todos os campos são obrigatórios.", "error");
-                return false;
-            }
-
-            divLoading.style.display = "flex";
-            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Usuarios/putDFiscal';
-            let formData = new FormData(formDataFiscal);
-            request.open("POST",ajaxUrl,true);
-            request.send(formData);
-            request.onreadystatechange = function(){
-                if(request.readyState == 4) return;
-                if(request.status == 200)
-                {
-                    let objData = JSON.parse(request.responseText);                
-                    if(objData.status){
-                        $('#modalFormPerfil').modal('hide');
-                        swal({
-                            title: "",
-                            text: objData.msg,
-                            type: "success",
-                            confirmButtonText: "Aceitar",
-                            closeOnConfirm: false,
-                        }, function(isConfirm){
-                            if(isConfirm){
-                                location.reload();
-                            }
-                        });
                     }else{
                         swal("Erro", objData.msg, "error");
                     }

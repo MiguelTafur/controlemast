@@ -62,7 +62,7 @@
             <div class="form-group col-md-6" id="divListModelo">
               <label for="listModelo">Modelo <span class="required">*</span></label>
               <select class="form-control selectpicker" id="listModelo" name="listModelo" required>
-                <option value="1">Precensial</option>
+                <option value="1">Presencial</option>
                 <option value="2">Home Office</option>
               </select>
             </div>

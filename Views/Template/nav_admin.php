@@ -4,6 +4,7 @@
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?= media();?>/images/logoControle-removebg-preview-fotor.png" alt="Usuario">
         <div>
           <p class="app-sidebar__user-name"><?= $_SESSION['userData']['nombres'] ?></p>
+          <p class="app-sidebar__user-designation"><?= $_SESSION['userData']['nombrerol']; ?></b></i></p>
           <p class="app-sidebar__user-designation">Empresa: <i><b><?= $_SESSION['ruta'] ?></b></i></p>
         </div>
       </div>

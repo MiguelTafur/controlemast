@@ -26,6 +26,7 @@ function fntTablaLideres() {
                 {"data":"matricula"},
                 {"data":"nombres"},
                 {"data":"apellidos"},
+                {"data":"modelo"},
                 {"data":"options"}
             ],
             
@@ -47,8 +48,9 @@ function fntCrearLideres() {
             let strApellido = document.querySelector('#txtSobrenome').value;
             let intTelefono = document.querySelector('#txtTelefono').value;
             let strEmail = document.querySelector('#txtEmail').value;
+            let intModelo = document.querySelector('#listModelo').value;
 
-            if(strMatricula == '' || strNombre == '' || strApellido == '')
+            if(strMatricula == '' || strNombre == '' || strApellido == '' || intModelo == '')
             {
                 swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
@@ -77,9 +79,14 @@ function fntCrearLideres() {
                         if(rowTable == ""){
                             tableLideres.api().ajax.reload();
                         }else{
+                            htmlModelo = intModelo == 1 ? 
+                            'Precensial' : 
+                            'Home Office';
+
                             rowTable.cells[0].textContent = strMatricula;
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = strApellido;
+                            rowTable.cells[3].innerHTML = htmlModelo;
 
                             rowTable = "";
                         }
@@ -134,6 +141,7 @@ function fntViewInfo(idpersona)
                 } else {
                     document.querySelector("#celEmail").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
+                document.querySelector("#celModelo").innerHTML = objData.data.modelo;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
                 $('#modalViewCliente').modal('show');

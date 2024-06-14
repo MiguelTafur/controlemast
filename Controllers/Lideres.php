@@ -38,31 +38,23 @@ class Lideres extends Controllers{
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail =  strClean($_POST['txtEmail']);
 				$intTipoId = RLIDER;
+				$intRuta = $_SESSION['idRuta'];
+				$intModelo = intval($_POST['listModelo']);
+				$intStatus = 1;
 				$request_user = "";
-				$intIdRuta = $_SESSION['idRuta'];
 
 				if($idUsuario == 0)
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertLider($strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId,
-																	$intIdRuta);
-					}
+
+					$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
+					
+				}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateLider($idUsuario,
-																	$strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId);
+						$request_user = setPersona($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
 					}
 				}
 
@@ -87,7 +79,8 @@ class Lideres extends Controllers{
 	public function getLideres()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectLideres();
+			$arrData = getPersonas(RLIDER);
+
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -97,6 +90,13 @@ class Lideres extends Controllers{
 
 				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
 				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
+
+				if($arrData[$i]['modelo'] === 1)
+				{
+					$arrData[$i]['modelo'] = 'Presencial';
+				}else{
+					$arrData[$i]['modelo'] = 'Home Office';
+				}
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Líder"><i class="far fa-eye"></i></button>';
@@ -108,27 +108,10 @@ class Lideres extends Controllers{
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Líder"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
-		die();
-	}
-
-	public function getSelectLideres()
-	{
-		$htmlOptions = "";
-		$arrData = $this->model->selectLideres();
-
-		if(count($arrData) > 0){
-			for ($i=0; $i < count($arrData); $i++) { 
-				if($arrData[$i]['status'] == 1){
-					$htmlOptions .= '<option></option>';
-					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtoupper($arrData[$i]['nombres']).' - '.$arrData[$i]['apellidos'].'</option>';
-				}
-			}
-		}
-		echo $htmlOptions;
 		die();
 	}
 
@@ -138,7 +121,15 @@ class Lideres extends Controllers{
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectLider($idusuario);
+				$arrData = getPersona($idusuario, 1);
+
+				if($arrData['modelo'] === 1)
+				{
+					$arrData['modelo'] = 'Presencial';
+				}else{
+					$arrData['modelo'] = 'Home Office';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -157,12 +148,12 @@ class Lideres extends Controllers{
 		{
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
-				$requestDelete = $this->model->deleteLider($intIdpersona);
+				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario.');
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
-					$arrResponse = array('status' => false, 'msg' => 'El cliente tiene préstamos vinculados.');
+					$arrResponse = array('status' => false, 'msg' => 'Erro ao eliminar o Líder.');
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}

@@ -44,9 +44,9 @@ class Usuarios extends Controllers{
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail = strtolower(strClean($_POST['txtEmail']));
 				$intTipoId = intval($_POST['listRolid']);
-				$intStatus = intval($_POST['listStatus']);
 				$intRuta = intval($_POST['listRuta']);
 				$intModelo = intval($_POST['listModelo']);
+				$intStatus = intval($_POST['listStatus']);
 				$request_user = "";
 
 				if($idUsuario == 0)
@@ -54,13 +54,13 @@ class Usuarios extends Controllers{
 					$option = 1;
 					
 					if($_SESSION['permisosMod']['w']){
-						$request_user = setPersona($strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo);
+						$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
 
 					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateUsuario($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intModelo);
+						$request_user = setPersona($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
 					}
 				}
 
@@ -69,7 +69,7 @@ class Usuarios extends Controllers{
 					if($option == 1){
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados con sucesso.');
+						$arrResponse = array('status' => true, 'msg' => 'Dados salvos con sucesso.');
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');
@@ -85,9 +85,7 @@ class Usuarios extends Controllers{
 	public function getUsuarios()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectUsuarios();
-
-			//dep($arrData);exit;
+			$arrData = getPersonas();
 
 			for ($i=0; $i < count($arrData); $i++) {
 
@@ -146,8 +144,8 @@ class Usuarios extends Controllers{
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectUsuario($idusuario);
-
+				$arrData = getPersona($idusuario, 1);
+				
 				if($arrData['modelo'] === 1)
 				{
 					$arrData['modelo'] = 'Presencial';
@@ -198,77 +196,15 @@ class Usuarios extends Controllers{
 		{
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
-				$requestDelete = $this->model->deleteUsuario($intIdpersona);
+				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Usuário removido.');
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o usuário.');
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}
-		}
-		die();
-	}
-
-	public function perfil()
-	{
-		$data['page_tag'] = "Perfil";
-		$data['page_title'] = "Perfil de usuario";
-		$data['page_name'] = "perfil";
-		$data['page_functions_js'] = "functions_usuarios.js";
-		$this->views->getView($this,"perfil",$data);
-	}
-
-	public function putPerfil()
-	{
-		if($_POST){
-			if(empty($_POST['txtMatricula']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono'])){
-				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
-			}else{
-				$idUsuario = $_SESSION['idUser'];
-				$strMatricula = strClean($_POST['txtMatricula']);
-				$strNombre = strClean($_POST['txtNombre']);
-				$strApellido = strClean($_POST['txtApellido']);
-				$intTelefono = intval(strClean($_POST['txtTelefono']));
-				$strPassword = "";
-
-				$request_user = $this->model->updatePerfil($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono);
-
-				if($request_user){
-					sessionUser($idUsuario);
-					$arrResponse = array("status" => true, "msg" => 'Datos actualizados correctamente.');		
-				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atencion! La identificación ya existe, por favor,  ingrese otra.');
-				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible actualizar los datos.');
-				}
-			}
-			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-		}
-		die();
-	}
-
-	public function putDFiscal()
-	{
-		if($_POST){
-			if(empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal'])){
-				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
-			}else{
-				$idUsuario = $_SESSION['idUser'];
-				$strNit = strClean($_POST['txtNit']);
-				$strNomFiscal = strClean($_POST['txtNombreFiscal']);
-				$strDirFiscal = strClean($_POST['txtDirFiscal']);
-				$request_datafiscal = $this->model->updateDataFiscal($idUsuario,$strNit,$strNomFiscal,$strDirFiscal);
-
-				if($request_datafiscal){
-					sessionUser($_SESSION['idUser']);
-					$arrResponse = array("status" => true, "msg" => 'Datos actualizados correctamente.');	
-				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible actualizar los datos.');
-				}
-			}
-			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}

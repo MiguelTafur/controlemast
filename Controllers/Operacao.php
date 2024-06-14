@@ -43,11 +43,11 @@ class Operacao extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Alterar Operador"><i class="fas fa-pencil-alt"></i></button>';
 				}
-				if($_SESSION['permisosMod']['d']){
+				if($_SESSION['permisosMod']['d'] AND $_SESSION['idRol'] === 1){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Operador"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}

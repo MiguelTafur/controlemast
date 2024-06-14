@@ -101,11 +101,47 @@
     }
 
     //Inserta los usuarios
-    function setPersona(string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $empresa, int $modelo)
+    function setPersona(int $idusuario, string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $empresa, int $modelo, int $option)
     {
         require_once("Models/PersonasModel.php");
         $objPersonas = new PersonasModel();
-        $request = $objPersonas->insertPersona($matricula, $nombre, $apellido, $telefono, $email, $tipoid, $status, $empresa, $modelo);
+        if($option === 1) {
+            $request = $objPersonas->insertPersona($matricula, $nombre, $apellido, $telefono, $email, $tipoid, $status, $empresa, $modelo);
+        } else {
+            $request = $objPersonas->updatePersona($idusuario,$matricula, $nombre, $apellido, $telefono, $email, $tipoid, $status, $empresa, $modelo);
+        }
+
+        
+        return $request;
+    }
+
+    //Traer todos los usuarios
+    function getPersonas(int $rol = NULL)
+    {
+        require_once("Models/PersonasModel.php");
+        $objPersonas = new PersonasModel();
+
+        if($rol != NULL) {
+            $request = $objPersonas->selectPersonas($rol);
+        } else {
+            $request = $objPersonas->selectPersonas();
+        }
+
+        return $request;
+    }
+
+    //Traer un usuario y eliminar usuario
+    function getPersona($idpersona, $option)
+    {
+        require_once("Models/PersonasModel.php");
+        $objPersonas = new PersonasModel();
+
+        if($option === 1) {
+            $request = $objPersonas->selectPersona($idpersona);
+        } else {
+            $request = $objPersonas->deletePersona($idpersona);
+        }
+
         return $request;
     }
 
