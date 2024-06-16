@@ -23,10 +23,62 @@ class Operacao extends Controllers{
 		$this->views->getView($this,"operacao",$data);
 	}
 
+	public function setOperador()
+	{ 
+		if($_POST)
+		{
+			if(empty($_POST['txtMatricula']) || empty($_POST['txtNombre']) || empty($_POST['txtSobrenome']))
+			{
+				$arrResponse = array("status" => false, "msg" => "Dados errados.");
+			}else{
+				$idUsuario = intval($_POST['idOperador']);
+				$strMatricula = strClean($_POST['txtMatricula']);
+				$strNombre =  ucwords(strClean($_POST['txtNombre']));
+				$strApellido =  ucwords(strClean($_POST['txtSobrenome']));
+				$intTelefono = intval(strClean($_POST['txtTelefono']));
+				$strEmail =  strClean($_POST['txtEmail']);
+				$intTipoId = ROPERACAO;
+				$intRuta = $_SESSION['idRuta'];
+				$intModelo = intval($_POST['listModelo']);
+				$intStatus = 1;
+				$request_user = "";
+
+				if($idUsuario == 0)
+				{
+					$option = 1;
+					if($_SESSION['permisosMod']['w']){
+						$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
+					}
+				}else{
+					$option = 2;
+					if($_SESSION['permisosMod']['u']){
+						$request_user = setPersona($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
+					}
+				}
+
+				if($request_user > 0)
+				{
+					if($option == 1){
+						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					}else{
+						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+					}
+				}else if($request_user == '0'){
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe, insire outra.');
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
+				}
+			}	
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
     public function getOperadores()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectOperadores();
+			$arrData = getPersonas(ROPERACAO);
+
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -36,6 +88,13 @@ class Operacao extends Controllers{
 
 				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
 				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
+
+				if($arrData[$i]['modelo'] === 1)
+				{
+					$arrData[$i]['modelo'] = 'Presencial';
+				}else{
+					$arrData[$i]['modelo'] = 'Home Office';
+				}
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Operador"><i class="far fa-eye"></i></button>';
@@ -60,7 +119,15 @@ class Operacao extends Controllers{
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectOperador($idusuario);
+				$arrData = getPersona($idusuario, 1);
+
+				if($arrData['modelo'] === 1)
+				{
+					$arrData['modelo'] = 'Presencial';
+				}else{
+					$arrData['modelo'] = 'Home Office';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -73,63 +140,21 @@ class Operacao extends Controllers{
 		die();
 	}
 
-    public function setOperador()
-	{ 
+	public function delOperador()
+	{
 		if($_POST)
 		{
-			if(empty($_POST['txtMatricula']) || empty($_POST['txtNombre']) || empty($_POST['txtSobrenome']))
-			{
-				$arrResponse = array("status" => false, "msg" => "Dados errados.");
-			}else{
-				$idUsuario = intval($_POST['idOperador']);
-				$strMatricula = strClean($_POST['txtMatricula']);
-				$strNombre =  ucwords(strClean($_POST['txtNombre']));
-				$strApellido =  ucwords(strClean($_POST['txtSobrenome']));
-				$intTelefono = intval(strClean($_POST['txtTelefono']));
-				$strEmail =  strClean($_POST['txtEmail']);
-				$intTipoId = ROPERACAO;
-				$request_user = "";
-				$intIdRuta = $_SESSION['idRuta'];
-
-				if($idUsuario == 0)
+			if($_SESSION['permisosMod']['d']){
+				$intIdpersona = intval($_POST['idUsuario']);
+				$requestDelete = getPersona($intIdpersona, 2);
+				if($requestDelete)
 				{
-					$option = 1;
-					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertOperador($strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId,
-																	$intIdRuta);
-					}
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
-					$option = 2;
-					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateOperador($idUsuario,
-																	$strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId);
-					}
+					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Operador.');
 				}
-
-				if($request_user > 0)
-				{
-					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
-					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
-					}
-				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe, insire outra.');
-				}else{
-					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
-				}
-			}	
-			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
+			}
 		}
 		die();
 	}

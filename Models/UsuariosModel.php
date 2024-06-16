@@ -19,9 +19,7 @@ class UsuariosModel extends Mysql
 	{
 		parent::__construct();
 	}	
-
 	
-
 	public function selectRutas()
 	{
 		$sql = "SELECT * from ruta WHERE estado != 0";
@@ -29,4 +27,5 @@ class UsuariosModel extends Mysql
 		return $request;
 	}
 }
+
 ?>

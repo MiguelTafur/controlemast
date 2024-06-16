@@ -1,7 +1,6 @@
 let tableOperadores;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
-
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
@@ -26,6 +25,7 @@ function fntTablaOperadores() {
             {"data":"matricula"},
             {"data":"nombres"},
             {"data":"apellidos"},
+            {"data":"modelo"},
             {"data":"options"}
         ],
         
@@ -47,8 +47,9 @@ function fntCrearOperacao() {
             let strApellido = document.querySelector('#txtSobrenome').value;
             let intTelefono = document.querySelector('#txtTelefono').value;
             let strEmail = document.querySelector('#txtEmail').value;
+            let intModelo = document.querySelector('#listModelo').value;
 
-            if(strMatricula == '' || strNombre == '' || strApellido == '')
+            if(strMatricula == '' || strNombre == '' || strApellido == '' || intModelo == '')
             {
                 swal("Atenção", 'Os campos com asterisco (*) são obrigatórios.', "error");
                 return false;
@@ -77,9 +78,13 @@ function fntCrearOperacao() {
                         if(rowTable == ""){
                             tableOperadores.api().ajax.reload();
                         }else{
-                            rowTable.cells[0].innerHTML = '<span class="font-weight-bold font-italic">' + strMatricula + '</span>';
+                            htmlModelo = intModelo == 1 ? 
+                            'Precensial' : 
+                            'Home Office';
+                            rowTable.cells[0].innerHTML = '<b>' + strMatricula + '</b>';
                             rowTable.cells[1].textContent = strNombre.toUpperCase();
                             rowTable.cells[2].textContent = strApellido.toUpperCase();
+                            rowTable.cells[3].innerHTML = htmlModelo;
 
                             rowTable = "";
                         }
@@ -134,7 +139,7 @@ function fntViewInfo(idpersona)
                 } else {
                     document.querySelector("#celEmail").innerHTML = '<span class="font-italic">nenhum<span/>';
                 }
-                
+                document.querySelector("#celModelo").innerHTML = objData.data.modelo;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
                 $('#modalViewOperador').modal('show');
@@ -172,11 +177,51 @@ function fntEditInfo(element, idpersona)
                     document.querySelector("#txtTelefono").value = '';    
                 }
                 document.querySelector("#txtEmail").value = objData.data.email_user;
+                let htmlModelo = objData.data.modelo === "Presencial" ? 1 : 2;
+                document.querySelector("#listModelo").value = htmlModelo;
+                $('#listModelo').selectpicker('render');
             }
                 
         }
         $('#modalFormOperacao').modal('show');
     }
+}
+
+function fntDelInfo(idpersona)
+{
+    swal({
+        title: "Remover Operador",
+        text: "¿Realmente quer Remover o Operador?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sim, Remover!",
+        cancelButtonText: "Não, Cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Operacao/delOperador';
+            let strData = "idUsuario="+idpersona;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Remover!", objData.msg , "success");
+                        tableOperadores.api().ajax.reload();
+                    }else{
+                        swal("Atenção!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+    });
 }
 
 function openModal()

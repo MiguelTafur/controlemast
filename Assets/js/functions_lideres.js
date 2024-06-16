@@ -12,29 +12,29 @@ function iniciarApp() {
 
 function fntTablaLideres() {
     tableLideres = $('#tableLideres').dataTable( 
-        {
-            "aProcessing":true,
-            "aServerSide":true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-            },
-            "ajax":{
-                "url": " "+base_url+"/Lideres/getLideres",
-                "dataSrc":""
-            },
-            "columns":[
-                {"data":"matricula"},
-                {"data":"nombres"},
-                {"data":"apellidos"},
-                {"data":"modelo"},
-                {"data":"options"}
-            ],
-            
-            "resonsieve":"true",
-            "bDestroy": true,
-            "iDisplayLength": 20,
-            "order":[[0,"desc"]]  
-        });
+    {
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Lideres/getLideres",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"apellidos"},
+            {"data":"modelo"},
+            {"data":"options"}
+        ],
+        
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20,
+        "order":[[0,"desc"]]  
+    });
 }
 
 function fntCrearLideres() {
@@ -82,10 +82,9 @@ function fntCrearLideres() {
                             htmlModelo = intModelo == 1 ? 
                             'Precensial' : 
                             'Home Office';
-
-                            rowTable.cells[0].textContent = strMatricula;
-                            rowTable.cells[1].textContent = strNombre;
-                            rowTable.cells[2].textContent = strApellido;
+                            rowTable.cells[0].innerHTML = '<b>' + strMatricula + '</b>';
+                            rowTable.cells[1].textContent = strNombre.toUpperCase();
+                            rowTable.cells[2].textContent = strApellido.toUpperCase();
                             rowTable.cells[3].innerHTML = htmlModelo;
 
                             rowTable = "";
@@ -102,6 +101,43 @@ function fntCrearLideres() {
                 return false;
             }
         }
+    }
+}
+
+function fntEditInfo(element, idpersona)
+{
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML = "Atualizar Líder";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML = "Atualizar";
+
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+
+            if(objData.status)
+            {
+                document.querySelector("#idUsuario").value = objData.data.idpersona;
+                document.querySelector("#txtMatricula").value = objData.data.matricula;
+                document.querySelector("#txtNombre").value = objData.data.nombres;
+                document.querySelector("#txtSobrenome").value = objData.data.apellidos;
+                if(objData.data.telefono === 0) {
+                    document.querySelector("#txtTelefono").value = '';    
+                }
+                document.querySelector("#txtEmail").value = objData.data.email_user;
+                let htmlModelo = objData.data.modelo === "Presencial" ? 1 : 2;
+                document.querySelector("#listModelo").value = htmlModelo;
+                $('#listModelo').selectpicker('render');
+            }
+                
+        }
+        $('#modalFormCliente').modal('show');
     }
 }
 
@@ -149,38 +185,6 @@ function fntViewInfo(idpersona)
                 swal("Erro", objData.msg, "error");
             }
         }
-    }
-}
-
-function fntEditInfo(element, idpersona)
-{
-    rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Atualizar Líder";
-    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
-    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML = "Atualizar";
-
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
-    request.open("GET",ajaxUrl,true);
-    request.send();
-    request.onreadystatechange = function(){
-
-        if(request.readyState == 4 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-
-            if(objData.status)
-            {
-                document.querySelector("#idUsuario").value = objData.data.idpersona;
-                document.querySelector("#txtMatricula").value = objData.data.matricula;
-                document.querySelector("#txtNombre").value = objData.data.nombres;
-                document.querySelector("#txtSobrenome").value = objData.data.apellidos;
-                document.querySelector("#txtTelefono").value = objData.data.telefono;
-                document.querySelector("#txtEmail").value = objData.data.email_user;
-            }
-                
-        }
-        $('#modalFormCliente').modal('show');
     }
 }
 

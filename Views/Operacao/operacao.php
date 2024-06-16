@@ -29,6 +29,7 @@
                   <th>Matrícula</th>
                   <th>Nome</th>
                   <th>Sobrenome</th>
+                  <th>Modelo</th>
                   <th class="text-center">Ações</th>
                 </tr>
               </thead>

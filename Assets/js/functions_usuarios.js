@@ -10,8 +10,6 @@ function iniciarApp()
 {
     tablaUsuarios();
     fntCrearUsuario();
-    fntActualizarPerfil();
-    fntActualizarDatosFiscales();
     fntRutasUsuario();
     fntRolesUsuario(); 
 }
@@ -91,14 +89,15 @@ function fntCrearUsuario() {
                             tableUsuarios.api().ajax.reload();
                         }else{
 
-                            htmlModelo = intModelo == 1 ? 
+                            let htmlModelo = intModelo == 1 ? 
                             'Precensial' : 
                             'Home Office';
 
-                            htmlStatus = intStatus == 1 ? 
+                            let htmlStatus = intStatus == 1 ? 
                             '<span class"badge badge-success">Ativo</span>' : 
                             '<span class"badge badge-danger">Inativo</span>';
 
+                            rowTable.cells[1].innerHTML = '<b>' + strMatricula + '</b>';
                             rowTable.cells[1].textContent = strNombre;
                             rowTable.cells[2].textContent = strEmail;
                             rowTable.cells[3].textContent = intTelefono;
@@ -217,6 +216,7 @@ function fntEditUsuario(element,idpersona)
     document.querySelector('#titleModal').innerHTML = "Atualizar Usuário";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#divListModelo').classList.replace("col-md-6", "col-md-12");
     document.querySelector('#btnText').innerHTML = "Atualizar";
     if(document.querySelector('#divListRuta')){
         document.querySelector('#divListRuta').classList.add('d-none');
@@ -236,6 +236,7 @@ function fntEditUsuario(element,idpersona)
 
             if(objData.status)
             {
+                console.log(objData);
                 document.querySelector("#idUsuario").value = objData.data.idpersona;
                 document.querySelector("#txtMatricula").value = objData.data.matricula;
                 document.querySelector("#txtNombre").value = objData.data.nombres;
@@ -251,6 +252,9 @@ function fntEditUsuario(element,idpersona)
                     document.querySelector("#listStatus").value = 2;
                 }
                 $('#listStatus').selectpicker('render');
+                let htmlModelo = objData.data.modelo === "Presencial" ? 1 : 2;
+                document.querySelector("#listModelo").value = htmlModelo;
+                $('#listModelo').selectpicker('render');
             }
         }
 
@@ -301,6 +305,7 @@ function openModal()
     document.querySelector('#idUsuario').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
+    document.querySelector('#divListModelo').classList.replace("col-md-12", "col-md-6");
     document.querySelector('#btnText').innerHTML ="Salvar";
     document.querySelector('#titleModal').innerHTML = "Novo Usuário";
     document.querySelector("#formUsuario").reset();

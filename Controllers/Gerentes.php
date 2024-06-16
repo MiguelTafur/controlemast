@@ -38,31 +38,22 @@ class Gerentes extends Controllers{
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail =  strClean($_POST['txtEmail']);
 				$intTipoId = RGERENTE;
+				$intRuta = $_SESSION['idRuta'];
+				$intModelo = intval($_POST['listModelo']);
+				$intStatus = 1;
 				$request_user = "";
-				$intIdRuta = $_SESSION['idRuta'];
 
 				if($idUsuario == 0)
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertGerente($strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId,
-																	$intIdRuta);
+						$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
 					}
+					
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateGerente($idUsuario,
-																	$strMatricula,
-																	$strNombre,
-																	$strApellido,
-																	$intTelefono,
-																	$strEmail,
-																	$intTipoId);
+						$request_user = setPersona($idUsuario,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
 					}
 				}
 
@@ -87,7 +78,7 @@ class Gerentes extends Controllers{
 	public function getGerentes()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectGerentes();
+			$arrData = getPersonas(RGERENTE);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -97,6 +88,13 @@ class Gerentes extends Controllers{
 
 				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
 				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
+
+				if($arrData[$i]['modelo'] === 1)
+				{
+					$arrData[$i]['modelo'] = 'Presencial';
+				}else{
+					$arrData[$i]['modelo'] = 'Home Office';
+				}
 
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Líder"><i class="far fa-eye"></i></button>';
@@ -108,7 +106,7 @@ class Gerentes extends Controllers{
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Líder"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
@@ -121,7 +119,15 @@ class Gerentes extends Controllers{
 			$idusuario = intval($idpersona);
 			if($idusuario > 0)
 			{
-				$arrData = $this->model->selectGerente($idusuario);
+				$arrData = getPersona($idusuario, 1);
+
+				if($arrData['modelo'] === 1)
+				{
+					$arrData['modelo'] = 'Presencial';
+				}else{
+					$arrData['modelo'] = 'Home Office';
+				}	
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -140,10 +146,10 @@ class Gerentes extends Controllers{
 		{
 			if($_SESSION['permisosMod']['d']){
 				$intIdpersona = intval($_POST['idUsuario']);
-				$requestDelete = $this->model->deleteGerente($intIdpersona);
+				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'O Gerente foi removido.');
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Não foi possível remover o Gerente.');
 				}

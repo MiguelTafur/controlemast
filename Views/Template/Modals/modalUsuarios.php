@@ -46,7 +46,7 @@
               <label for="listRolid">Tipo de usuário <span class="required">*</span></label>
               <select class="form-control" data-live-search="true" id="listRolid" name="listRolid" required></select>
             </div>  
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" >
               <label for="listStatus">Estado <span class="required">*</span></label>
               <select class="form-control selectpicker" id="listStatus" name="listStatus" required>
                 <option value="1">Ativo</option>

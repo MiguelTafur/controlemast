@@ -47,10 +47,8 @@ class Lideres extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-
-					$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
-					
-				}
+						$request_user = setPersona(0,$strMatricula,$strNombre,$strApellido,$intTelefono,$strEmail,$intTipoId,$intStatus,$intRuta,$intModelo, $option);
+					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
@@ -66,7 +64,7 @@ class Lideres extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe, insire outra.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
@@ -86,7 +84,7 @@ class Lideres extends Controllers{
 				$btnEdit = '';
 				$btnDelete = '';
 
-				$arrData[$i]['matricula'] = '<p class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</p>';
+				$arrData[$i]['matricula'] = '<span class="font-weight-bold font-italic">'.$arrData[$i]['matricula'].'</span>';
 
 				$arrData[$i]['nombres'] = strtoupper($arrData[$i]['nombres']);
 				$arrData[$i]['apellidos'] = strtoupper($arrData[$i]['apellidos']);
@@ -153,7 +151,7 @@ class Lideres extends Controllers{
 				{
 					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
 				}else{
-					$arrResponse = array('status' => false, 'msg' => 'Erro ao eliminar o Líder.');
+					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Líder.');
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}

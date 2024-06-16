@@ -33,7 +33,7 @@
               <label for="txtEmail">Email</label>
               <input type="text" class="form-control" id="txtEmail" name="txtEmail">
             </div> 
-            <div class="form-group col-md-12" id="divListModelo">
+            <div class="form-group col-md-12">
               <label for="listModelo">Modelo <span class="required">*</span></label>
               <select class="form-control selectpicker" id="listModelo" name="listModelo" required>
                 <option value="1">Presencial</option>

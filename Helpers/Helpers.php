@@ -111,7 +111,6 @@
             $request = $objPersonas->updatePersona($idusuario,$matricula, $nombre, $apellido, $telefono, $email, $tipoid, $status, $empresa, $modelo);
         }
 
-        
         return $request;
     }
 

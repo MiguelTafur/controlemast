@@ -1,3 +1,4 @@
+<!-- Modal agregar y editar Lider -->
 <div class="modal fade" id="modalFormOperacao" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
@@ -32,6 +33,13 @@
               <label for="txtEmail">Email</label>
               <input type="text" class="form-control" id="txtEmail" name="txtEmail">
             </div> 
+            <div class="form-group col-md-12">
+              <label for="listModelo">Modelo <span class="required">*</span></label>
+              <select class="form-control selectpicker" id="listModelo" name="listModelo" required>
+                <option value="1">Presencial</option>
+                <option value="2">Home Office</option>
+              </select>
+            </div>
           </div>
           <hr>
           <div class="tile-footer">
@@ -76,6 +84,10 @@
             <tr>
               <td>Email:</td>
               <td id="celEmail"></td>
+            </tr>
+            <tr>
+              <td>Modelo de Trabalho</td>
+              <td id="celModelo"></td>
             </tr>
             <tr>
               <td>Data Registro:</td>
