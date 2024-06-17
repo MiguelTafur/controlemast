@@ -26,7 +26,7 @@ class Fones extends Controllers{
 	public function getFones()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectFones();
+			$arrData = getEquipamentos(MFONE, 0);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -60,17 +60,17 @@ class Fones extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-secondary btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-info btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-info btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
 					$btnAnnotation = '<button class="btn btn-success btn-sm" onClick="fntViewAddAnnotation('.$arrData[$i]['idequipamento'].')" title="Adicionar Anotação"><i class="fa fa-file-text-o" style="margin-right: 0"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idequipamento'].')" title="Remover Equipamento"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnAnnotation.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnAnnotation.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
@@ -83,7 +83,8 @@ class Fones extends Controllers{
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectFone($IDequipamento);
+				//$arrData = $this->model->selectFone($IDequipamento);
+				$arrData = getEquipamentos("", $IDequipamento);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -171,10 +172,11 @@ class Fones extends Controllers{
 				$strMarca =  ucwords(strClean($_POST['txtMarca']));
 				$strCodigo = strClean($_POST['txtCodigo']);
 				$strLacre =  strClean($_POST['txtLacre']);
-				$strObservacion =  strClean($_POST['txtObservacion']);
-				$checked = isset($_POST['equipamentoEstragado']) ?  3 : 1;
+				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
+				$tipo = MFONE;
 				$request_user = "";
 				$intIdRuta = $_SESSION['idRuta'];
+				$strObservacion =  strClean($_POST['txtObservacion']);
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -194,22 +196,36 @@ class Fones extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertFone(
-																$strMarca,
-																$strCodigo,
-																$strLacre,
-																$intIdRuta,
-																$strObservacion,
-																$nombreImagen,
-																$checked);
+						/*$request_user = $this->model->insertFone($strMarca,
+																 $strCodigo,
+																 $strLacre,
+																 $estado,
+																 $tipo,
+																 $intIdRuta,
+																 $strObservacion,
+																 $nombreImagen);*/
+						$request_user = setEquipamentos($idEquipamento,
+														$strMarca,
+														$strCodigo,
+														$strLacre,
+														$estado,
+														$tipo,
+														$intIdRuta,
+														$strObservacion,
+														$nombreImagen);
 					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateFone($idEquipamento,
-																	$strMarca,
-																	$strCodigo,
-																	$strLacre);
+						$request_user = setEquipamentos($idEquipamento,
+														$strMarca,
+														$strCodigo,
+														$strLacre,
+														$estado,
+														$tipo,
+														$intIdRuta,
+														$strObservacion,
+														$nombreImagen);
 					}
 				}
 

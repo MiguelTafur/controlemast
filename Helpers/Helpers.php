@@ -144,6 +144,34 @@
         return $request;
     }
 
+    //Traer todos los equipamentos y uno por uno
+    function getEquipamentos(string $tipo, int $idequipamento)
+    {
+        require_once("Models/EquipamentosModel.php");
+        $objPersonas = new EquipamentosModel();
+        if(!empty($tipo)) {
+            $request = $objPersonas->selectEquipamentos($tipo);
+        } else {
+            $request = $objPersonas->selectEquipamento($idequipamento);
+        }
+        
+        return $request;
+    }
+
+    function setEquipamentos(int $idequipamento, string $marca, string $codigo, string $lacre, int $estado, string $tipo, int $ruta, string $observacion, string $imagen) {
+        require_once("Models/EquipamentosModel.php");
+        $objPersonas = new EquipamentosModel();
+
+        if($idequipamento === 0) {
+            $request = $objPersonas->insertEquipamento($marca, $codigo, $lacre, $ruta, $observacion, $imagen, $tipo, $estado);
+        } else {
+            $estado = getEquipamentos("", $idequipamento)['status'];
+            $request = $objPersonas->updateEquipamento($idequipamento, $marca, $codigo, $lacre, $estado);
+        }
+
+        return $request;
+    }
+
     function sessionUser(int $idpersona){
         require_once ("Models/LoginModel.php");
         $objLogin = new LoginModel();

@@ -174,7 +174,7 @@ class MousesModel extends Mysql
 			} else {
 				setAnotaciones($request_insert,
 							   $this->intIdPersona,
-							   'Teclado adicionado',
+							   'Mouse adicionado',
 							   $this->strImagem,
 							   $this->intStatus,
 							   $this->intTipo);

@@ -39,7 +39,7 @@
           </div>
           <div class="form-check col-md-12" id="divEqEstragado">
             <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
-            <label for="equipamentoEstragado" class="form-check-label">Mouse estragado</label>
+            <label for="equipamentoEstragado" class="form-check-label">Teclado estragado</label>
           </div>
           <hr>
           <div class="tile-footer">
