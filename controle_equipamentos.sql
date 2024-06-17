@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Tempo de geração: 17/06/2024 às 01:37
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.1.17
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 17-06-2024 a las 22:43:55
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `controle_equipamentos`
+-- Base de datos: `controle_equipamentos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `anotaciones`
+-- Estructura de tabla para la tabla `anotaciones`
 --
 
 CREATE TABLE `anotaciones` (
@@ -39,7 +39,7 @@ CREATE TABLE `anotaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `anotaciones`
+-- Volcado de datos para la tabla `anotaciones`
 --
 
 INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotacion`, `imagen`, `datecreated`, `status`, `tipo`) VALUES
@@ -87,12 +87,42 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (91, 4, 1, 'Fone apresenta avaria (amostra os fios do cabo)', 'da348ce32ce999e6926e2fae0ea118e9.jpg', '2024-06-14 15:17:01', 3, 8),
 (92, 48, 1, '', 'de2385410cbc86e11f906afb99577f56.jpg', '2024-06-14 15:18:21', 2, 8),
 (93, 66, 1, 'Operadora desligada (CINTIA - 01762)', '593b750660d1da169e98f60a0ff6617b.jpg', '2024-06-14 16:08:50', 1, 8),
-(94, 64, 1, 'Microfone com problemas', '', '2024-06-14 16:12:07', 3, 8);
+(94, 64, 1, 'Microfone com problemas', '', '2024-06-14 16:12:07', 3, 8),
+(95, 19, 1, 'Entrega na quinta-feira dia 13 de Junho de 2024', 'bd245bd0bc04c9aa274c98046372a420.jpg', '2024-06-17 10:16:02', 2, 8),
+(96, 48, 1, 'Operadora relata que o som do fone é miuto baixo, porém, não escuta o cliente.', '', '2024-06-17 10:24:42', 1, 8),
+(97, 49, 1, '', 'e399715cd562d3e8dbc9b9e22500f069.jpg', '2024-06-17 10:27:27', 2, 8),
+(98, 36, 1, 'Entregue para o DP', '', '2024-06-17 11:45:12', 3, 8),
+(99, 36, 1, 'Entregue para o entregador Marcial', '', '2024-06-17 11:45:38', 3, 8),
+(100, 67, 1, 'Equipamento adicionado', '', '2024-06-17 12:00:47', 1, 9),
+(104, 67, 1, 'anotacion 1 mouse', '', '2024-06-17 12:06:43', 1, 9),
+(106, 67, 1, 'Alteração dos dados do Equipamento', '', '2024-06-17 12:12:44', 1, 9),
+(107, 67, 1, 'teste estado', '', '2024-06-17 12:14:38', 3, 9),
+(108, 68, 1, 'Equipamento adicionado', '', '2024-06-17 13:46:24', 1, 10),
+(109, 68, 1, 'Alteração de dados do Equipamento', '', '2024-06-17 13:46:52', 1, 10),
+(110, 68, 1, 'teste estado teclado', '', '2024-06-17 13:47:20', 3, 10),
+(111, 68, 1, 'Entregue para o DP', '', '2024-06-17 13:47:44', 3, 10),
+(112, 69, 1, 'Equipamento adicionado', '', '2024-06-17 13:54:58', 1, 11),
+(113, 69, 1, 'Alteração de dados do Equipamento', '', '2024-06-17 13:55:19', 1, 11),
+(114, 69, 1, 'teste estado tela', '', '2024-06-17 13:55:35', 3, 11),
+(115, 69, 1, 'Entregue para o DP', '', '2024-06-17 13:55:59', 3, 11),
+(116, 37, 1, 'Entregue para o DP', '', '2024-06-17 14:48:32', 3, 8),
+(117, 38, 1, 'Entregue para o DP', '', '2024-06-17 14:51:35', 3, 8),
+(118, 30, 1, 'Entregue para o DP', '', '2024-06-17 14:52:42', 3, 8),
+(119, 53, 1, 'Controle de comandos solto. Entregue para o DP', '', '2024-06-17 15:03:39', 3, 8),
+(120, 4, 1, 'Entregue para o DP', '', '2024-06-17 15:03:56', 3, 8),
+(121, 59, 1, 'Entregue para o DP', '', '2024-06-17 15:05:42', 3, 8),
+(122, 39, 1, 'Entregue para o DP', '', '2024-06-17 15:06:03', 3, 8),
+(123, 8, 1, 'Fone apresenta mau contato. Entregue para o DP', '', '2024-06-17 15:08:00', 3, 8),
+(124, 15, 1, 'Entregue para o DP', '', '2024-06-17 15:08:43', 3, 8),
+(125, 64, 1, 'Entregue para o DP', '', '2024-06-17 15:10:28', 3, 8),
+(126, 65, 1, 'Entregue para o DP', '', '2024-06-17 15:11:31', 3, 8),
+(127, 70, 1, 'Fona epresenta Avaria no cabo. Fone da Ana Goes(01638). Operadora relata mau contato. Entregue para o DP', '', '2024-06-17 15:24:29', 3, 8),
+(128, 48, 1, 'Entrega', '73dd0ac2a03ea59815c009a520c74cd1.jpg', '2024-06-17 15:41:22', 2, 8);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `controle`
+-- Estructura de tabla para la tabla `controle`
 --
 
 CREATE TABLE `controle` (
@@ -106,7 +136,7 @@ CREATE TABLE `controle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `controle`
+-- Volcado de datos para la tabla `controle`
 --
 
 INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`, `observacion`, `datecreated`, `status`) VALUES
@@ -131,12 +161,16 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (47, 1520, 62, '7bcfdb523d0f1eb6648ca9373192cece.jpg', 'Fone entregado dia 13 de Junho', '2024-06-14 09:30:03', 1),
 (48, 1522, 63, '8951fda9047e221e71fe63b73bc440f2.jpg', 'Entrega Novata', '2024-06-14 11:58:20', 1),
 (49, 1497, 4, 'da348ce32ce999e6926e2fae0ea118e9.jpg', 'Fone apresenta avaria(amostra nos fios do cabo)', '2024-06-14 15:17:01', 2),
-(50, 1497, 48, 'de2385410cbc86e11f906afb99577f56.jpg', '', '2024-06-14 15:18:21', 1);
+(50, 1497, 48, 'de2385410cbc86e11f906afb99577f56.jpg', '', '2024-06-14 15:18:21', 0),
+(51, 1525, 19, 'bd245bd0bc04c9aa274c98046372a420.jpg', 'Entrega na quinta-feira dia 13 de Junho de 2024', '2024-06-17 10:16:02', 1),
+(52, 1497, 48, '', 'Operadora relata que o som do fone é miuto baixo, porém, não escuta o cliente.', '2024-06-17 10:24:42', 2),
+(53, 1497, 49, 'e399715cd562d3e8dbc9b9e22500f069.jpg', '', '2024-06-17 10:27:27', 1),
+(54, 1527, 48, '73dd0ac2a03ea59815c009a520c74cd1.jpg', 'Entrega', '2024-06-17 15:41:22', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `equipamento`
+-- Estructura de tabla para la tabla `equipamento`
 --
 
 CREATE TABLE `equipamento` (
@@ -151,7 +185,7 @@ CREATE TABLE `equipamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `equipamento`
+-- Volcado de datos para la tabla `equipamento`
 --
 
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
@@ -166,7 +200,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (13, 'Unixtron', '177388', '0000915', '2024-06-05 08:59:45', 2, 8, 444),
 (14, 'Unixtron', '201206438', '18281', '2024-06-05 09:00:13', 2, 8, 444),
 (15, 'Unixtrom', '', '23917', '2024-06-05 12:03:09', 3, 8, 444),
-(19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 1, 8, 444),
+(19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
 (21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
 (23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444),
@@ -175,7 +209,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (30, 'TopUse', 'G09494', '0000357', '2024-06-11 10:08:59', 3, 8, 444),
 (31, 'Paltronics', '', '0003326', '2024-06-11 10:16:00', 2, 8, 444),
 (32, 'Unixtrom', '176601', '0000080', '2024-06-11 10:18:26', 2, 8, 444),
-(36, 'Teste Cuatro', 'teste cuatro', '9803', '2024-06-11 15:53:01', 1, 8, 444),
+(36, 'Teste Cuatro', 'teste cuatro', '9803', '2024-06-11 15:53:01', 3, 8, 444),
 (37, 'Paltronics', '', '0000529', '2024-06-12 09:46:53', 3, 8, 444),
 (38, 'Unixtrom', '176928', '0003359', '2024-06-12 09:49:43', 3, 8, 444),
 (39, 'Unixtrom', '210702364', '0003375', '2024-06-12 09:56:20', 3, 8, 444),
@@ -185,11 +219,11 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (46, 'Paltronics', '', '0001192', '2024-06-12 13:48:52', 1, 8, 444),
 (47, 'Paltronics', '', '0000454', '2024-06-12 13:49:24', 1, 8, 444),
 (48, 'Paltronics', '', '0009884', '2024-06-12 13:49:54', 2, 8, 444),
-(49, 'Paltronics', '', '0000268', '2024-06-12 13:50:36', 1, 8, 444),
+(49, 'Paltronics', '', '0000268', '2024-06-12 13:50:36', 2, 8, 444),
 (50, 'Unixtrom', 'F14428', '0000221', '2024-06-12 13:51:39', 1, 8, 444),
 (51, 'Unixtrom', '', '0009806', '2024-06-12 13:57:29', 1, 8, 444),
 (52, 'Unixtrom', '177335', '000794', '2024-06-12 13:57:56', 1, 8, 444),
-(53, 'Paltronics', '', '0000500', '2024-06-12 13:59:27', 1, 8, 444),
+(53, 'Paltronics', '', '0000500', '2024-06-12 13:59:27', 3, 8, 444),
 (54, 'Unixtrom', '177349', '0000727', '2024-06-12 14:01:08', 1, 8, 444),
 (55, 'Unixtrom', '180600062', '0000982', '2024-06-12 14:02:40', 1, 8, 444),
 (56, 'Unixtrom', '210702723', '0003378', '2024-06-12 14:04:35', 1, 8, 444),
@@ -202,12 +236,16 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 2, 8, 444),
 (64, 'TopUse', 'B08197', '0003379', '2024-06-13 12:00:49', 3, 8, 444),
 (65, 'Unixtron', '180600505', '0001233', '2024-06-14 09:45:23', 3, 8, 444),
-(66, 'Paltronics', '', '0000251', '2024-06-14 16:08:50', 1, 8, 444);
+(66, 'Paltronics', '', '0000251', '2024-06-14 16:08:50', 1, 8, 444),
+(67, 'Teste Mouse', '', '36', '2024-06-17 12:00:47', 3, 9, 444),
+(68, 'Teclado', 'teste teclado', '221', '2024-06-17 13:46:24', 3, 10, 444),
+(69, 'Samsumg', 'teste', '321', '2024-06-17 13:54:58', 3, 11, 444),
+(70, 'TopUse', 'F06457', '0023988', '2024-06-17 15:24:29', 3, 8, 444);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `modulo`
+-- Estructura de tabla para la tabla `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -218,7 +256,7 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `modulo`
+-- Volcado de datos para la tabla `modulo`
 --
 
 INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
@@ -238,7 +276,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `permisos`
+-- Estructura de tabla para la tabla `permisos`
 --
 
 CREATE TABLE `permisos` (
@@ -252,7 +290,7 @@ CREATE TABLE `permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `permisos`
+-- Volcado de datos para la tabla `permisos`
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
@@ -272,7 +310,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `persona`
+-- Estructura de tabla para la tabla `persona`
 --
 
 CREATE TABLE `persona` (
@@ -290,7 +328,7 @@ CREATE TABLE `persona` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `persona`
+-- Volcado de datos para la tabla `persona`
 --
 
 INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `modelo`, `datecreated`, `status`) VALUES
@@ -307,21 +345,45 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1504, 'Gustavo Francisco', 'Da Silva', '013223', 0, '', 5, 444, 1, '2024-06-03 16:29:45', 1),
 (1505, 'PATRICIA GABRIELA', 'CARDOSO', '01819', 0, '', 5, 444, 1, '2024-06-05 09:01:10', 1),
 (1506, 'KARINA', 'PEREIRA DE OLIVEIRA', '013339', 0, '', 5, 444, 1, '2024-06-05 09:01:50', 1),
-(1510, 'TATIANE MEIRIANE', 'AMARO', '1731', 31991360778, '', 4, 444, 1, '2024-06-05 16:25:17', 1),
+(1510, 'TATIANE MEIRIANE', 'AMARO', '01731', 0, '', 4, 444, 1, '2024-06-05 16:25:17', 1),
 (1511, 'LORENA GOMES', 'PEREIRA', '01776', 0, '', 5, 444, 1, '2024-06-06 12:05:51', 1),
 (1512, 'NATALIA', 'REIS DE AQUINO', '01818', 0, '', 5, 444, 1, '2024-06-06 15:10:25', 0),
 (1513, 'Regiane', 'Alves De Souza', '011920', 0, '', 5, 444, 1, '2024-06-06 17:41:50', 1),
 (1514, 'LUANA', 'MARTINS', '01828', 0, '', 5, 444, 1, '2024-06-10 11:44:29', 1),
 (1515, 'NAZIK', 'DINIZ', '012773', 0, '', 5, 444, 1, '2024-06-11 10:14:02', 1),
 (1516, 'AIRTON', 'DE PAULO JUNIOR', '013340', 0, '', 5, 444, 1, '2024-06-11 10:15:11', 1),
-(1519, 'Alvaro', 'A', '66544', 0, '', 2, 444, 1, '2024-06-13 17:29:43', 1),
+(1519, 'Alvaro', 'L', '66544', 0, '', 2, 444, 1, '2024-06-13 17:29:43', 1),
 (1520, 'Jose Inacio', 'Camargos Fonseca', '01419', 0, '', 5, 444, 2, '2024-06-14 09:28:34', 1),
-(1522, 'GISLENE MARIA', 'DOS SANTOS MARRA', '01929', 0, '', 5, 444, 1, '2024-06-14 11:56:44', 1);
+(1522, 'GISLENE MARIA', 'DOS SANTOS MARRA', '01929', 0, '', 5, 444, 1, '2024-06-14 11:56:44', 1),
+(1525, 'BRUNA RAFAELA', 'DA SILVA', '011013', 0, '', 5, 444, 1, '2024-06-17 10:10:47', 1),
+(1526, 'Samara', 'L', '98789', 0, '', 3, 444, 1, '2024-06-17 14:04:42', 1),
+(1527, 'ANA LUIZA', 'GONCALVEZ GOES', '01601', 0, '', 5, 444, 1, '2024-06-17 15:38:46', 1),
+(1528, 'ANA LAURA', 'GOMES NEVES', '01589', 0, '', 5, 444, 1, '2024-06-17 17:26:01', 1),
+(1529, 'CAMILA IOLANDA', 'GUALBERTO DINIZ', '01727', 0, '', 5, 444, 1, '2024-06-17 17:27:34', 1),
+(1530, 'CAROLINA LUIS', 'DOS SANTOS', '01622', 0, '', 5, 444, 1, '2024-06-17 17:28:37', 1),
+(1531, 'DANYELA CARLA', 'DE OLIVEIRA NASCIMENTO SILVA', '013141', 0, '', 5, 444, 1, '2024-06-17 17:29:11', 1),
+(1532, 'EDUARDA VITORIA', 'ALVES', '013331', 0, '', 5, 444, 1, '2024-06-17 17:29:39', 1),
+(1533, 'FREDERICO', 'CUNHA DE SOUZA', '013322', 0, '', 5, 444, 1, '2024-06-17 17:30:02', 1),
+(1534, 'GESSICA', 'RODRIGUES DE SOUSA', '013286', 0, '', 5, 444, 1, '2024-06-17 17:30:23', 1),
+(1535, 'GLADIS CRISTINA', 'DE SOUZA SANTOS', '012878', 0, '', 5, 444, 1, '2024-06-17 17:30:45', 1),
+(1536, 'GRAZIELE MARIA', 'DE PADUA VIEIRA', '015234', 0, '', 4, 444, 1, '2024-06-17 17:32:11', 1),
+(1537, 'JORDANIA', 'APARECIDA ALVES', '014334', 0, '', 5, 444, 1, '2024-06-17 17:33:12', 1),
+(1538, 'JORDANIA', 'VIRGILIO DA SILVA', '01769', 0, '', 5, 444, 1, '2024-06-17 17:33:38', 1),
+(1539, 'JULIA', 'SOUSA SANTOS', '013013', 0, '', 5, 444, 1, '2024-06-17 17:34:00', 1),
+(1540, 'MARAIZA CRISTIANE', 'ROCHA', '01744', 0, '', 5, 444, 1, '2024-06-17 17:36:11', 1),
+(1541, 'MARIA EDUARDA', 'DE CASSIA COUTO', '01616', 0, '', 5, 444, 1, '2024-06-17 17:36:37', 1),
+(1542, 'RAFAELA CARLA', 'LACERDA SILVA', '01647', 0, '', 5, 444, 1, '2024-06-17 17:39:33', 1),
+(1543, 'RHAYANNE ISABELLE', 'COUTINHO ALVES', '013218', 0, '', 5, 444, 1, '2024-06-17 17:40:10', 1),
+(1544, 'RITA DAIANE', 'DE MORAIS SILVA', '013279', 0, '', 5, 444, 1, '2024-06-17 17:40:32', 1),
+(1545, 'ROSALINA ANTONIA', 'PINTO', '0132', 0, '', 5, 444, 1, '2024-06-17 17:41:11', 1),
+(1546, 'ROSANE', 'ANDRADE DA SILVA', '012164', 0, '', 5, 444, 1, '2024-06-17 17:41:36', 1),
+(1547, 'SHIRLEY', 'MACEDO VIEITAS', '01710', 0, '', 5, 444, 1, '2024-06-17 17:42:03', 1),
+(1548, 'VALDIRENE', 'VAQUEIRO ALVES', '013131', 0, '', 5, 444, 1, '2024-06-17 17:42:46', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -332,7 +394,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Despejando dados para a tabela `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
@@ -345,7 +407,7 @@ INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ruta`
+-- Estructura de tabla para la tabla `ruta`
 --
 
 CREATE TABLE `ruta` (
@@ -357,18 +419,18 @@ CREATE TABLE `ruta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `ruta`
+-- Volcado de datos para la tabla `ruta`
 --
 
 INSERT INTO `ruta` (`idruta`, `codigo`, `nombre`, `datecreated`, `estado`) VALUES
 (444, 9806, 'Globalcob', '2024-05-22 15:39:31', 1);
 
 --
--- Índices para tabelas despejadas
+-- Índices para tablas volcadas
 --
 
 --
--- Índices de tabela `anotaciones`
+-- Indices de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD PRIMARY KEY (`idanotacion`),
@@ -376,7 +438,7 @@ ALTER TABLE `anotaciones`
   ADD KEY `personaid` (`personaid`);
 
 --
--- Índices de tabela `controle`
+-- Indices de la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD PRIMARY KEY (`idcontrole`),
@@ -384,20 +446,20 @@ ALTER TABLE `controle`
   ADD KEY `foneid` (`equipamentoid`);
 
 --
--- Índices de tabela `equipamento`
+-- Indices de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD PRIMARY KEY (`idequipamento`),
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `modulo`
+-- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
 
 --
--- Índices de tabela `permisos`
+-- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`idpermiso`),
@@ -405,7 +467,7 @@ ALTER TABLE `permisos`
   ADD KEY `moduloid` (`moduloid`);
 
 --
--- Índices de tabela `persona`
+-- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`),
@@ -413,102 +475,102 @@ ALTER TABLE `persona`
   ADD KEY `rutaid` (`codigoruta`);
 
 --
--- Índices de tabela `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idrol`);
 
 --
--- Índices de tabela `ruta`
+-- Indices de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   ADD PRIMARY KEY (`idruta`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de tabela `anotaciones`
+-- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
--- AUTO_INCREMENT de tabela `controle`
+-- AUTO_INCREMENT de la tabla `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT de tabela `equipamento`
+-- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- AUTO_INCREMENT de tabela `modulo`
+-- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de tabela `permisos`
+-- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
 
 --
--- AUTO_INCREMENT de tabela `persona`
+-- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1530;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1549;
 
 --
--- AUTO_INCREMENT de tabela `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de tabela `ruta`
+-- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
   MODIFY `idruta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
 --
--- Restrições para tabelas despejadas
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restrições para tabelas `anotaciones`
+-- Filtros para la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
   ADD CONSTRAINT `anotaciones_ibfk_1` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anotaciones_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `controle`
+-- Filtros para la tabla `controle`
 --
 ALTER TABLE `controle`
   ADD CONSTRAINT `controle_ibfk_2` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `controle_ibfk_3` FOREIGN KEY (`equipamentoid`) REFERENCES `equipamento` (`idequipamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `equipamento`
+-- Filtros para la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
   ADD CONSTRAINT `equipamento_ibfk_1` FOREIGN KEY (`codigoruta`) REFERENCES `ruta` (`idruta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `permisos`
+-- Filtros para la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`moduloid`) REFERENCES `modulo` (`idmodulo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `persona`
+-- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`idrol`) ON DELETE CASCADE ON UPDATE CASCADE,

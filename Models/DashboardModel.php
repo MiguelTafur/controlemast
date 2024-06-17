@@ -2,16 +2,57 @@
 
 class DashboardModel extends Mysql
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	PRIVATE $intIdRuta;
 	PRIVATE $intIdPrestamo;
 	PRIVATE $intIdCliente;
 	PRIVATE $strFecha;
 	PRIVATE $strFecha2;
+
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	//Cantidad total de usuarios dependiendo del rol
+	public function cantPersonas($rol)
+	{
+		$rutaId = $_SESSION['idRuta'];
+		if($rol === 5) {
+			$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".$rol;
+			$request = $this->select($sql);
+		} else if($rol === 4) {
+			$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".$rol;
+			$request = $this->select($sql);
+		} else if($rol === 3) {
+			$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".$rol;
+			$request = $this->select($sql);
+		} else if($rol === 2) {
+			$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".$rol;
+			$request = $this->select($sql);
+		}
+
+		return $request['total'];
+	}
+
+	public function cantEquipamentos($tipo) 
+	{
+		$rutaId = $_SESSION['idRuta'];
+		if($tipo === 8) {
+			$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
+			$request = $this->select($sql);
+		} else if($tipo === 9) {
+			$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
+			$request = $this->select($sql);
+		} else if($tipo === 10) {
+			$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
+			$request = $this->select($sql);
+		} else if ($tipo === 11) {
+			$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
+			$request = $this->select($sql);
+		}
+
+		return $request['total'];
+	}
 
 	/*public function totalCartera($ruta,$fecha)
 	{

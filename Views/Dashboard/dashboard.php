@@ -18,7 +18,7 @@
             <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
               <div class="info">
                 <h4>Operadores</h4>
-                <p><b>50</b></p>
+                <p>Ativos: <span class="text-success font-italic"><?= $data['operadores']; ?></span></p>
               </div>
             </div>
           </a>
@@ -33,7 +33,7 @@
                 <div class="info">
                   <h4>Líderes</h4>
                   <p>
-                    <b>Activos: </b><i class="text-success">10</i>
+                  <p>Ativos: <span class="text-success font-italic"><?= $data['lideres']; ?></span></p>
                   </p>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                 <div class="info">
                   <h4>Coordinadores</h4>
                   <p>
-                    <b>Activos: </b><i class="text-success">10</i>
+                  <p>Ativos: <span class="text-success font-italic"><?= $data['coordinadores']; ?></span></p>
                   </p>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 <div class="info">
                   <h4>Gerentes</h4>
                   <p>
-                    <b>Activos: </b><i class="text-success">10</i>
+                  <p>Ativos: <span class="text-success font-italic"><?= $data['gerentes']; ?></span></p>
                   </p>
                 </div>
               </div>
@@ -73,6 +73,7 @@
           </div>
         <?php } ?>
       </div>
+
       <div class="row justify-content-around">
         <!-- MÁQUINAS -->
         <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
@@ -95,7 +96,7 @@
             <div class="widget-small secundario coloured-icon"><i class="icon fa fa-headphones fa-3x"></i>
               <div class="info">
                 <h4>Fones</h4>
-                <p><b>50</b></p>
+                <p>Total: <span class="text-success font-italic"><?= $data['fones']; ?></span></p>
               </div>
             </div>
           </a>
@@ -109,7 +110,7 @@
             <div class="widget-small secundario coloured-icon"><i class="icon fa fa-television fa-3x"></i>
               <div class="info">
                 <h4>Telas</h4>
-                <p><b>50</b></p>
+                <p>Total: <span class="text-success font-italic"><?= $data['telas']; ?></span></p>
               </div>
             </div>
           </a>
@@ -123,7 +124,7 @@
             <div class="widget-small secundario coloured-icon"><i class="icon fa fa-keyboard-o fa-3x"></i>
               <div class="info">
                 <h4>Teclados</h4>
-                <p><b>50</b></p>
+                <p>Total: <span class="text-success font-italic"><?= $data['teclados']; ?></span></p>
               </div>
             </div>
           </a>
@@ -137,7 +138,7 @@
             <div class="widget-small secundario coloured-icon"><i class="icon fa fa-mouse fa-3x"></i>
               <div class="info">
                 <h4>Mouses</h4>
-                <p><b>50</b></p>
+                <p>Total: <span class="text-success font-italic"><?= $data['mouses']; ?></span></p>
               </div>
             </div>
           </a>

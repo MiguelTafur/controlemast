@@ -21,10 +21,23 @@ class Dashboard extends Controllers{
 		$data['page_title'] = "Dashboard - controleMast";
 		$data['page_name'] = "controleMast";
 
+		//cantidad total de usuarios activos dependiento del "Rol"
+		$data['operadores'] = $this->model->cantPersonas(ROPERACAO);
+		$data['lideres'] = $this->model->cantPersonas(RLIDER);
+		$data['coordinadores'] = $this->model->cantPersonas(RCOORDINADOR);
+		$data['gerentes'] = $this->model->cantPersonas(RGERENTE);
+
+		//cantidad total de equipamentos dependiento del "Tipo"
+		$data['fones'] = $this->model->cantEquipamentos(MFONE);
+		$data['mouses'] = $this->model->cantEquipamentos(MMOUSE);
+		$data['teclados'] = $this->model->cantEquipamentos(MTECLADO);
+		$data['telas'] = $this->model->cantEquipamentos(MTELA);
+		
+
 		$this->views->getView($this,"dashboard",$data);
 
 		/*$data['usuarios'] = $this->model->cantUsuarios();
-		$data['clientes'] = $this->model->cantClientes();
+		
 		$data['prestamos'] = $this->model->cantPrestamos();
 		$data['prestamosFinalizados'] = $this->model->cantPrestamosFinalizados();
 		$data['cartera'] = $this->model->selectCartera();
