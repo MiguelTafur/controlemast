@@ -34,7 +34,7 @@
               <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
             </div>
             <div class="form-group col-md-12 text-center mt-3" id="divEditarEstado">
-              <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado &nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado &nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
             </div>
           </div>
           <div class="form-check col-md-12" id="divEqEstragado">

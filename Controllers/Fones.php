@@ -103,7 +103,7 @@ class Fones extends Controllers{
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectAnotacionesFone($IDequipamento);
+				$arrData = getAnotacionesEquipamento($IDequipamento, MFONE);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -174,9 +174,9 @@ class Fones extends Controllers{
 				$strLacre =  strClean($_POST['txtLacre']);
 				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
 				$tipo = MFONE;
-				$request_user = "";
 				$intIdRuta = $_SESSION['idRuta'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
+				$request_user = "";
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -196,14 +196,6 @@ class Fones extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						/*$request_user = $this->model->insertFone($strMarca,
-																 $strCodigo,
-																 $strLacre,
-																 $estado,
-																 $tipo,
-																 $intIdRuta,
-																 $strObservacion,
-																 $nombreImagen);*/
 						$request_user = setEquipamentos($idEquipamento,
 														$strMarca,
 														$strCodigo,
@@ -247,7 +239,8 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setEstadoFone() {
+	public function setEstadoFone() 
+	{
 		if($_POST) { 
 			$imagenAnotacion = $_FILES['fileEstado'];
 			$medida = 1000 * 1000;
@@ -275,7 +268,7 @@ class Fones extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->updateEstadoFone($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen);
+					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MFONE);
 					if($request_estado > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {

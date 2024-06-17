@@ -79,7 +79,7 @@ function fntCrearOperacao() {
                             tableOperadores.api().ajax.reload();
                         }else{
                             htmlModelo = intModelo == 1 ? 
-                            'Precensial' : 
+                            'Presencial' : 
                             'Home Office';
                             rowTable.cells[0].innerHTML = '<b>' + strMatricula + '</b>';
                             rowTable.cells[1].textContent = strNombre.toUpperCase();

@@ -8,7 +8,7 @@ class EquipamentosModel extends Mysql
 	PRIVATE $strCodigo;
 	PRIVATE $strLacre;
 	PRIVATE $intStatus;
-	PRIVATE $intTipo;
+	PRIVATE $stringTipo;
 	PRIVATE $strAnotacao;
 	PRIVATE $strImagem;
 	PRIVATE $intIdRuta;
@@ -29,7 +29,7 @@ class EquipamentosModel extends Mysql
                 FROM equipamento 
                 WHERE codigoruta = $ruta  
                 AND status != 0
-				AND tipo = " . $tipo;
+				AND tipo = " . $tipo . " ORDER BY datecreated DESC";
 		$request = $this->select_all($sql);
 		return $request;
 	}
@@ -59,7 +59,7 @@ class EquipamentosModel extends Mysql
 		$this->strAnotacao = $observacion;
 		$this->strImagem = $imagen;
 		$this->intStatus = $checked;
-		$this->intTipo = $estado;
+		$this->stringTipo = $estado;
 		$return = 0;
 
 		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
@@ -72,7 +72,7 @@ class EquipamentosModel extends Mysql
 							 $this->strCodigo,
 							 $this->strLacre,
 							 $this->intStatus,
-							 $this->intTipo,
+							 $this->stringTipo,
 							 $this->intIdRuta);
 			$request_insert = $this->insert($query_insert, $arrData);
 
@@ -82,21 +82,21 @@ class EquipamentosModel extends Mysql
 							   $this->strAnotacao,
 							   $this->strImagem,
 							   $this->intStatus,
-							   $this->intTipo);
+							   $this->stringTipo);
 			} else if(empty($this->strAnotacao) && !empty($this->strImagem)) {
                 setAnotaciones($request_insert,
 							   $this->intIdPersona,
-							   'Fone adicionado',
+							   'Equipamento adicionado',
 							   $this->strImagem,
 							   $this->intStatus,
-							   $this->intTipo);
+							   $this->stringTipo);
             }else {
 				setAnotaciones($request_insert,
 							   $this->intIdPersona,
-							   'Fone adicionado',
+							   'Equipamento adicionado',
 							   $this->strImagem,
 							   $this->intStatus,
-							   $this->intTipo);
+							   $this->stringTipo);
 			}
 			$return = $request_insert;
 		}else{
@@ -105,7 +105,7 @@ class EquipamentosModel extends Mysql
 		return $return;
 	}
 
-    public function updateEquipamento(int $idequipamento, string $marca, string $codigo, string $lacre, int $estado)
+    public function updateEquipamento(int $idequipamento, string $marca, string $codigo, string $lacre, int $estado, string $tipo)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->intIdPersona = $_SESSION['idUser'];
@@ -113,7 +113,7 @@ class EquipamentosModel extends Mysql
 		$this->strCodigo = $codigo;
 		$this->strLacre = $lacre;
         $this->intStatus = $estado;
-		$this->intTipo = MFONE;
+		$this->stringTipo = $tipo;
 
 		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' AND idequipamento != $this->intIdEquipamento)";
 		$request = $this->select_all($sql);
@@ -129,15 +129,49 @@ class EquipamentosModel extends Mysql
 
 			setAnotaciones($this->intIdEquipamento,
 							   $this->intIdPersona,
-							   'Alteração dos dados do Fone',
+							   'Alteração de dados do Equipamento',
 							   '',
 							   $this->intStatus,
-							   $this->intTipo);
+							   $this->stringTipo);
 
 			$request = $this->update($sql, $arrData);
 		}else{
 			$request = "0";
 		}
 		return $request;
+	}
+
+	public function updateEstadoEquipamento(int $idequipamento, int $estado, string $anotacion, string $imagen, string $tipo) 
+	{
+		$this->intIdEquipamento = $idequipamento;
+		$this->intIdPersona = $_SESSION['idUser'];
+		$this->strAnotacao = $anotacion;
+		$this->strImagem = $imagen;
+		$this->intStatus = $estado;
+		$this->stringTipo = $tipo;
+		$return = 0;
+
+		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
+		$request_select = $this->select($query_select);
+		$estado = $request_select['status'];
+		
+		if($estado === 2) {
+			$return = '0';
+		} else {
+			$query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->intIdEquipamento";
+			$arrData = array($this->intStatus);
+			$request_update = $this->update($query_update, $arrData);
+
+			setAnotaciones($this->intIdEquipamento,
+							   $this->intIdPersona,
+							   $this->strAnotacao,
+							   $this->strImagem,
+							   $this->intStatus,
+							   $this->stringTipo);
+
+			$return = $this->intStatus;
+		}
+
+		return $return;
 	}
 }

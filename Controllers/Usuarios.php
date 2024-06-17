@@ -110,14 +110,14 @@ class Usuarios extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm btnViewUsuario" onclick="fntViewUsuario('.$arrData[$i]['idpersona'].')" title="Ver Usuário"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm btnViewUsuario mr-1" onclick="fntViewUsuario('.$arrData[$i]['idpersona'].')" title="Ver Usuário"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
 					if($_SESSION['idUser'] == 1 && $_SESSION['userData']['idrol'] == 1 ||
 					  ($_SESSION['userData']['idrol'] == 1 && $arrData[$i]['idrol'] != 1)){
-						$btnEdit = '<button class="btn btn-primary btn-sm btnEditUsuario" onclick="fntEditUsuario(this,'.$arrData[$i]['idpersona'].')" title="Alterar Usuário"><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-primary btn-sm btnEditUsuario mr-1" onclick="fntEditUsuario(this,'.$arrData[$i]['idpersona'].')" title="Alterar Usuário"><i class="fas fa-pencil-alt"></i></button>';
 					}else{
-						$btnEdit = '<button class="btn btn-secondary btn-sm" disabled><i class="fas fa-pencil-alt"></i></button>';
+						$btnEdit = '<button class="btn btn-secondary btn-sm" disabled mr-1><i class="fas fa-pencil-alt"></i></button>';
 					}
 				}
 				if($_SESSION['permisosMod']['d']){
@@ -131,7 +131,7 @@ class Usuarios extends Controllers{
 					}
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}

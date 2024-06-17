@@ -91,15 +91,6 @@
         $_SESSION['permisosMod'] = $permisosMod;
     }
 
-    //Inserta las anotaciones de los equipamentos
-    function setAnotaciones(int $idequipamento, int $usuario, string $anotacao, string $imagem, int $estado, int $tipo)
-    {
-        require_once("Models/AnotacionesModel.php");
-        $objPrestamos = new AnotacionesModel();
-        $request = $objPrestamos->insertAnotacao($idequipamento, $usuario, $anotacao, $imagem, $estado, $tipo);
-        return $request;
-    }
-
     //Inserta los usuarios
     function setPersona(int $idusuario, string $matricula, string $nombre, string $apellido, int $telefono, string $email, int $tipoid, int $status, int $empresa, int $modelo, int $option)
     {
@@ -148,26 +139,56 @@
     function getEquipamentos(string $tipo, int $idequipamento)
     {
         require_once("Models/EquipamentosModel.php");
-        $objPersonas = new EquipamentosModel();
+        $objEquipamento = new EquipamentosModel();
         if(!empty($tipo)) {
-            $request = $objPersonas->selectEquipamentos($tipo);
+            $request = $objEquipamento->selectEquipamentos($tipo);
         } else {
-            $request = $objPersonas->selectEquipamento($idequipamento);
+            $request = $objEquipamento->selectEquipamento($idequipamento);
         }
         
         return $request;
     }
 
+    //Inserta los equipamentos
     function setEquipamentos(int $idequipamento, string $marca, string $codigo, string $lacre, int $estado, string $tipo, int $ruta, string $observacion, string $imagen) {
         require_once("Models/EquipamentosModel.php");
-        $objPersonas = new EquipamentosModel();
+        $objEquipamento = new EquipamentosModel();
 
         if($idequipamento === 0) {
-            $request = $objPersonas->insertEquipamento($marca, $codigo, $lacre, $ruta, $observacion, $imagen, $tipo, $estado);
+            $request = $objEquipamento->insertEquipamento($marca, $codigo, $lacre, $ruta, $observacion, $imagen, $tipo, $estado);
         } else {
             $estado = getEquipamentos("", $idequipamento)['status'];
-            $request = $objPersonas->updateEquipamento($idequipamento, $marca, $codigo, $lacre, $estado);
+            $request = $objEquipamento->updateEquipamento($idequipamento, $marca, $codigo, $lacre, $estado, $tipo);
         }
+
+        return $request;
+    }
+
+    function setEstadoEquipamento(int $idequipamento, int $estado, string $anotacao, string $imagem, string $tipo)
+    {
+        require_once("Models/EquipamentosModel.php");
+        $objEquipamentos = new EquipamentosModel();
+
+        $request = $objEquipamentos->updateEstadoEquipamento($idequipamento, $estado, $anotacao, $imagem, $tipo);
+
+        return $request;
+    }
+
+     //Inserta las anotaciones de los equipamentos
+     function setAnotaciones(int $idequipamento, int $usuario, string $anotacao, string $imagem, int $estado, string $tipo)
+     {
+         require_once("Models/AnotacionesModel.php");
+         $objAnotaciones = new AnotacionesModel();
+         $request = $objAnotaciones->insertAnotacao($idequipamento, $usuario, $anotacao, $imagem, $estado, $tipo);
+         return $request;
+     }
+
+    //Trae las anotaciones de los equipamentos
+    function getAnotacionesEquipamento(int $idequipamento, string $tipo)
+    {
+        require_once("Models/AnotacionesModel.php");
+        $objAnotaciones = new AnotacionesModel();
+        $request = $objAnotaciones->selectAnotacionesEquipamento($idequipamento, $tipo);
 
         return $request;
     }

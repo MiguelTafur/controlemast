@@ -132,7 +132,6 @@ class PersonasModel extends Mysql
 
 	public function deletePersona(int $idpersona)
 	{
-		$usuarioId = $_SESSION['idUser'];
 		$this->intIdUsuario = $idpersona;
 		$sql = "UPDATE persona SET status = ? WHERE idpersona = $this->intIdUsuario";
 		$arrData = array(0);

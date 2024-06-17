@@ -42,14 +42,14 @@ class Roles extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['u']){
-					$btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onclick="fntPermisos('.$arrData[$i]['idrol'].')" title="Autorizações"><i class="fas fa-key"></i></button>';
-					$btnEdit = '<button class="btn btn-primary btn-sm btnEditRol" onclick="fntEditRol('.$arrData[$i]['idrol'].')" title="Alterar"><i class="fas fa-pencil-alt"></i></button>';
+					$btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol mr-1" onclick="fntPermisos('.$arrData[$i]['idrol'].')" title="Autorizações"><i class="fas fa-key"></i></button>';
+					$btnEdit = '<button class="btn btn-primary btn-sm btnEditRol mr-1" onclick="fntEditRol('.$arrData[$i]['idrol'].')" title="Alterar"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
 					$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol" onclick="fntDelRol('.$arrData[$i]['idrol'].')" title="Remover"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}

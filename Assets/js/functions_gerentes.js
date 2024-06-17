@@ -80,7 +80,7 @@ function fntCrearGerentes() {
                             tableGerentes.api().ajax.reload();
                         }else{
                             htmlModelo = intModelo == 1 ? 
-                            'Precensial' : 
+                            'Presencial' : 
                             'Home Office';
 
                             rowTable.cells[0].innerHTML = '<b>' + strMatricula + '</b>';

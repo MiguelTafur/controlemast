@@ -26,7 +26,7 @@ class Telas extends Controllers{
 	public function getTelas()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectTelas();
+			$arrData = getEquipamentos(MTELA, 0);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -60,17 +60,17 @@ class Telas extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-secondary btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idequipamento'].')" title="Ver Equipamento"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-info btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-info btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idequipamento'].')" title="Alterar Equipamento"><i class="fas fa-pencil-alt"></i></button>';
 					$btnAnnotation = '<button class="btn btn-success btn-sm" onClick="fntViewAddAnnotation('.$arrData[$i]['idequipamento'].')" title="Adicionar Anotação"><i class="fa fa-file-text-o" style="margin-right: 0"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idequipamento'].')" title="Remover Equipamento"><i class="far fa-trash-alt"></i></button>';
 				}
 
-				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnAnnotation.'</div>';
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnAnnotation.'</div>';
 			}
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
@@ -83,7 +83,7 @@ class Telas extends Controllers{
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectTela($IDequipamento);
+				$arrData = getEquipamentos("", $IDequipamento);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -102,7 +102,7 @@ class Telas extends Controllers{
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = $this->model->selectAnotacionesTela($IDequipamento);
+				$arrData = getAnotacionesEquipamento($IDequipamento, MTELA);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -171,10 +171,11 @@ class Telas extends Controllers{
 				$strMarca =  ucwords(strClean($_POST['txtMarca']));
 				$strCodigo = strClean($_POST['txtCodigo']);
 				$strLacre =  strClean($_POST['txtLacre']);
-				$strObservacion =  strClean($_POST['txtObservacion']);
-				$checked = isset($_POST['equipamentoEstragado']) ?  3 : 1;
-				$request_user = "";
+				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
+				$tipo = MTELA;
 				$intIdRuta = $_SESSION['idRuta'];
+				$strObservacion =  strClean($_POST['txtObservacion']);
+				$request_user = "";
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -194,22 +195,28 @@ class Telas extends Controllers{
 				{
 					$option = 1;
 					if($_SESSION['permisosMod']['w']){
-						$request_user = $this->model->insertTela(
-																$strMarca,
-																$strCodigo,
-																$strLacre,
-																$intIdRuta,
-																$strObservacion,
-																$nombreImagen,
-																$checked);
+						$request_user = setEquipamentos($idEquipamento,
+														$strMarca,
+														$strCodigo,
+														$strLacre,
+														$estado,
+														$tipo,
+														$intIdRuta,
+														$strObservacion,
+														$nombreImagen);
 					}
 				}else{
 					$option = 2;
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateTela($idEquipamento,
-																	$strMarca,
-																	$strCodigo,
-																	$strLacre);
+						$request_user = setEquipamentos($idEquipamento,
+														$strMarca,
+														$strCodigo,
+														$strLacre,
+														$estado,
+														$tipo,
+														$intIdRuta,
+														$strObservacion,
+														$nombreImagen);
 					}
 				}
 
@@ -262,7 +269,7 @@ class Telas extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = $this->model->updateEstadoTela($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen);
+					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MTELA);
 					if($request_estado > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {

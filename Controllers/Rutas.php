@@ -35,13 +35,13 @@ class Rutas extends Controllers{
                 $btnDelete = '';
 
                 if($_SESSION['permisosMod']['u']){
-                    $btnEdit = '<button class="btn btn-secondary btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idruta'].')" title="Atualizar Empresa"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-secondary btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idruta'].')" title="Atualizar Empresa"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if($_SESSION['permisosMod']['d']){
                     $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idruta'].')" title="Remover Empresa"><i class="far fa-trash-alt"></i></button>';
                 }
 
-                $arrData[$i]['options'] = '<div class="text-center">'.$btnEdit.' '.$btnDelete.'</div>';
+                $arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnEdit.' '.$btnDelete.'</div>';
             }
             echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
         }

@@ -30,7 +30,7 @@
                           <th>Nome</th>
                           <th>Descrição</th>
                           <th>Estado</th>
-                          <th>Ações</th>
+                          <th class="text-center">Ações</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -34,8 +34,7 @@ function fntTablaEquipamentos() {
         
         "resonsieve":"true",
         "bDestroy": true,
-        "iDisplayLength": 20,
-        "order":[[0,"desc"]]  
+        "iDisplayLength": 20 
     });
 }
 
@@ -190,7 +189,6 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        console.log(objData);
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{
