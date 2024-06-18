@@ -119,12 +119,21 @@ class EntregarModel extends Mysql
             $tipo = $request['tipo'];
 
             //Agrega la anotación
-            setAnotaciones($this->listEquipamento,
-                           $this->intIdUsuario,
-                           $this->strObservacion,
-                           $this->strProtocolo,
-                           $this->listEstado,
-                           $tipo);
+            if(empty($this->strObservacion)) {
+                setAnotaciones($this->listEquipamento,
+                               $this->intIdUsuario,
+                               'Equipamento entregue',
+                               $this->strProtocolo,
+                               $this->listEstado,
+                               $tipo);
+            } else {
+                setAnotaciones($this->listEquipamento,
+                               $this->intIdUsuario,
+                               $this->strObservacion,
+                               $this->strProtocolo,
+                               $this->listEstado,
+                               $tipo);
+            }
 
             $return = $request_insert;
 
@@ -135,6 +144,14 @@ class EntregarModel extends Mysql
 		//dep($return);exit;
         return $return;
 	}
+
+    public function updateProtocolo(int $idcontrole, string $imagen) 
+    {
+        $this->intIdControle = $idcontrole;
+        $this->strProtocolo = $imagen;
+
+        
+    }
 
     public function deleteEntrega(int $identrega, int $idequipamento)
     {

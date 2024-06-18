@@ -127,17 +127,16 @@ class Entregar extends Controllers{
 				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			} else {
 				$idControle = intval($_POST['idControle']);
-				dep($idControle);
+				$datosEntrega = $this->getEntrega($idControle);
+				dep($datosEntrega);exit;
+
 				$carpetaImagenes = 'Assets/images/imagenes/';
 
 				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
 				if($_SESSION['permisosMod']['u']){
-					$request_user = $this->model->updateProtocolo(
-																$
-																$nombreImagen);
+					$request_user = $this->model->updateProtocolo($idControle, $nombreImagen);
 				}
-
 			}
 
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
