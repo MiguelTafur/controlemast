@@ -72,9 +72,11 @@ class EntregarModel extends Mysql
 					   co.protocolo,
                        co.observacion, 
                        co.datecreated, 
+                       co.status,
                        pe.matricula, 
                        pe.nombres, 
                        pe.apellidos, 
+                       eq.idequipamento,
                        eq.tipo as equipamento,
                        eq.marca,
                        eq.lacre
@@ -145,12 +147,26 @@ class EntregarModel extends Mysql
         return $return;
 	}
 
-    public function updateProtocolo(int $idcontrole, string $imagen) 
+    public function updateProtocolo(int $idcontrole, string $imagen, int $idequipamento, int $tipo) 
     {
         $this->intIdControle = $idcontrole;
         $this->strProtocolo = $imagen;
+        $this->intIdUsuario = $_SESSION['idUser'];
+        $this->intIdEquipamento = $idequipamento;
+        $this->listEquipamento = $tipo;
 
-        
+        $sql = "UPDATE controle SET protocolo = ? WHERE idcontrole = $this->intIdControle";
+        $arrData = array($this->strProtocolo);
+        $request = $this->update($sql, $arrData);
+
+        setAnotaciones($this->intIdEquipamento,
+                       $this->intIdUsuario,
+                       'Protocolo da Entrega alterado',
+                       $this->strProtocolo,
+                       2,
+                       $this->listEquipamento);
+
+        return $request;
     }
 
     public function deleteEntrega(int $identrega, int $idequipamento)

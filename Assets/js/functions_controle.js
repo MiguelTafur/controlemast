@@ -121,7 +121,7 @@ function fntActualizarProtocolo() {
                 return false;
             }
 
-            //divLoading.style.display = "flex";
+            divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Entregar/setUpdateProtocolo';
             let formData = new FormData(formEditarProtocolo);

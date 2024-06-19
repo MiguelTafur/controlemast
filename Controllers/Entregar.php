@@ -127,15 +127,30 @@ class Entregar extends Controllers{
 				$arrResponse = array("status" => false, "msg" => "Tamanho da imagem inválido.");
 			} else {
 				$idControle = intval($_POST['idControle']);
-				$datosEntrega = $this->getEntrega($idControle);
-				dep($datosEntrega);exit;
+				$datosEntrega = $this->model->selectEntrega($idControle);
+				$protocolo = $datosEntrega['protocolo'];
+				$tipo = $datosEntrega['equipamento'];
+				$idequipamento = $datosEntrega['idequipamento'];
 
 				$carpetaImagenes = 'Assets/images/imagenes/';
 
+				/*if($_FILES['fileEditProtocolo']['name']) {
+					unlink($carpetaImagenes . $protocolo);
+				}*/
+
 				$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
+				move_uploaded_file($_FILES['fileEditProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
+
 				if($_SESSION['permisosMod']['u']){
-					$request_user = $this->model->updateProtocolo($idControle, $nombreImagen);
+					$request_user = $this->model->updateProtocolo($idControle, $nombreImagen, $idequipamento, $tipo);
+				}
+
+				if($request_user > 0)
+				{
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'data' => $request_user);
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
 			}
 
@@ -247,6 +262,4 @@ class Entregar extends Controllers{
 		}
 		die();
 	}
-
-	
 }
