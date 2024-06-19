@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2024 a las 22:40:03
+-- Tiempo de generación: 19-06-2024 a las 21:45:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -151,7 +151,24 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (160, 83, 1, 'Entregue no dia 12 de Abril de 2024', 'e20eb50d7c34a76a71efc9bc962c67a7.jpg', '2024-06-18 12:36:14', 2, 8),
 (161, 76, 1, 'Entregue no dia 09 de Abril de 2024', '857aaecbc7de07759980bab35167feca.jpg', '2024-06-18 12:39:03', 2, 8),
 (162, 80, 1, 'Entregue no dia 05 de Abril de 2024', '05f67a419158cb66dce47ad9a526f31a.jpg', '2024-06-18 12:42:03', 2, 8),
-(163, 77, 1, 'Entregue no dia 18 de Março de 2024', '4102894b8a3f3973a34c0134b1a31019.jpg', '2024-06-18 12:48:50', 2, 8);
+(163, 77, 1, 'Entregue no dia 18 de Março de 2024', '4102894b8a3f3973a34c0134b1a31019.jpg', '2024-06-18 12:48:50', 2, 8),
+(171, 73, 1, 'Entrega sem Protocolo', '60f43d8f759cb48e90d3404b68c5973a.jpg', '2024-06-19 12:30:50', 2, 8),
+(172, 74, 1, 'Alteração de dados do Equipamento', '', '2024-06-19 12:33:30', 1, 8),
+(173, 74, 1, 'Entrega sem protocolo', '83c0003376e9cc6415ac57ac1b2e5f06.jpg', '2024-06-19 12:34:05', 2, 8),
+(174, 75, 1, 'Entrega sem protocolo', 'ba42f6bb9c3b6b719d7e6c1b4e70ec4a.jpg', '2024-06-19 12:35:15', 2, 8),
+(175, 7, 1, 'Protocolo da Entrega alterado', '9e32586dacbf90436ec209b1cabdbb75.jpg', '2024-06-19 14:00:12', 2, 8),
+(176, 7, 1, 'Protocolo da Entrega alterado', 'cf724b674e04096164ecc38c25588e12.jpg', '2024-06-19 14:00:52', 2, 8),
+(177, 7, 1, 'Protocolo da Entrega alterado', 'c4325eae05094b7778e591b51e3c0c4b.jpg', '2024-06-19 14:01:28', 2, 8),
+(178, 84, 1, 'Entrega sem Protocolo', 'bf0db8710164900996d0d3b53862d49b.jpg', '2024-06-19 14:05:34', 2, 8),
+(179, 86, 1, 'Entrega sem protocolo registrado', 'e7d1cfe25182163ee7915a0378eec041.jpg', '2024-06-19 14:08:33', 2, 8),
+(180, 87, 1, 'Entrega sem Protocolo', '45fd6585c623be09eac473b799b1c9e8.jpg', '2024-06-19 14:10:05', 2, 8),
+(181, 88, 1, 'Entrega sem Protocolo', '2d57833fd6c179fedb58ef076a521b95.jpg', '2024-06-19 14:10:41', 2, 8),
+(182, 89, 1, 'Entrega sem Protocolo', '11d049e01493076976e0a2475bc73dd7.jpg', '2024-06-19 14:12:28', 2, 8),
+(183, 63, 1, 'Operadora relata que o cliente não ouve ela. Várias ligações com inteferência', '', '2024-06-19 14:57:26', 1, 8),
+(184, 43, 1, 'Equipamento entregue', '1711a49656acb900231acd24c5cb5b67.jpg', '2024-06-19 14:59:36', 2, 8),
+(185, 91, 1, 'Recebido pela operadora Élida(010543). Avaria no cabo. Botão \"mute\" não funciona', 'cd491bfbe98221dc1b9d2e002caaecc7.jpg', '2024-06-19 15:20:55', 3, 8),
+(186, 46, 1, 'Equipamento entregue', '9fe201b0a97192dc6b2e8fd059b99181.jpg', '2024-06-19 15:23:05', 2, 8),
+(187, 21, 1, 'Alteração de dados do Equipamento', '', '2024-06-19 15:27:56', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -175,7 +192,7 @@ CREATE TABLE `controle` (
 
 INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`, `observacion`, `datecreated`, `status`) VALUES
 (1, 1497, 4, '', '', '2024-05-28 13:05:06', 0),
-(5, 1500, 7, '', '', '2024-06-03 10:19:32', 1),
+(5, 1500, 7, 'c4325eae05094b7778e591b51e3c0c4b.jpg', '', '2024-06-03 10:19:32', 1),
 (6, 1501, 8, 'nathalia.jpg', '', '2024-06-03 12:33:55', 0),
 (7, 1498, 2, '', '', '2024-06-03 13:56:17', 0),
 (8, 1503, 11, 'paloma.jpg', '', '2024-06-03 16:07:21', 1),
@@ -193,14 +210,14 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (45, 1498, 2, '', 'Operadora sem renovação do contrato', '2024-06-12 13:55:53', 3),
 (46, 1512, 19, '', 'Operadora pediu conta no começo da semana', '2024-06-14 08:19:35', 4),
 (47, 1520, 62, '7bcfdb523d0f1eb6648ca9373192cece.jpg', 'Fone entregado dia 13 de Junho', '2024-06-14 09:30:03', 1),
-(48, 1522, 63, '8951fda9047e221e71fe63b73bc440f2.jpg', 'Entrega Novata', '2024-06-14 11:58:20', 1),
+(48, 1522, 63, '8951fda9047e221e71fe63b73bc440f2.jpg', 'Entrega Novata', '2024-06-14 11:58:20', 0),
 (49, 1497, 4, 'da348ce32ce999e6926e2fae0ea118e9.jpg', 'Fone apresenta avaria(amostra nos fios do cabo)', '2024-06-14 15:17:01', 2),
 (50, 1497, 48, 'de2385410cbc86e11f906afb99577f56.jpg', '', '2024-06-14 15:18:21', 0),
 (51, 1525, 19, 'bd245bd0bc04c9aa274c98046372a420.jpg', 'Entrega na quinta-feira dia 13 de Junho de 2024', '2024-06-17 10:16:02', 1),
 (52, 1497, 48, '', 'Operadora relata que o som do fone é miuto baixo, porém, não escuta o cliente.', '2024-06-17 10:24:42', 2),
 (53, 1497, 49, 'e399715cd562d3e8dbc9b9e22500f069.jpg', '', '2024-06-17 10:27:27', 1),
 (54, 1527, 48, '73dd0ac2a03ea59815c009a520c74cd1.jpg', 'Entrega', '2024-06-17 15:41:22', 1),
-(55, 1528, 71, '86c68459c2d7c9e08c72bdceab27e66e.jpg', 'Entrega sem protocolo', '2024-06-18 09:04:06', 1),
+(55, 1528, 71, '0bd09fdf936b6bdc062df773afb52a9d.jpg', 'Entrega sem protocolo', '2024-06-18 09:04:06', 1),
 (56, 1549, 45, '68aae0703e482cf67e897acad3997aaa.jpg', 'Entrega novato', '2024-06-18 10:10:52', 0),
 (57, 1549, 45, '', 'Fone apresenta mau contato', '2024-06-18 12:04:40', 2),
 (58, 1549, 47, 'fb80550060275a56ba5c201851d30967.jpg', '', '2024-06-18 12:06:14', 1),
@@ -210,7 +227,18 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (62, 1541, 83, 'e20eb50d7c34a76a71efc9bc962c67a7.jpg', 'Entregue no dia 12 de Abril de 2024', '2024-06-18 12:36:14', 1),
 (63, 1532, 76, '857aaecbc7de07759980bab35167feca.jpg', 'Entregue no dia 09 de Abril de 2024', '2024-06-18 12:39:03', 1),
 (64, 1537, 80, '05f67a419158cb66dce47ad9a526f31a.jpg', 'Entregue no dia 05 de Abril de 2024', '2024-06-18 12:42:03', 1),
-(65, 1533, 77, '4102894b8a3f3973a34c0134b1a31019.jpg', 'Entregue no dia 18 de Março de 2024', '2024-06-18 12:48:50', 1);
+(65, 1533, 77, '4102894b8a3f3973a34c0134b1a31019.jpg', 'Entregue no dia 18 de Março de 2024', '2024-06-18 12:48:50', 1),
+(66, 1529, 73, '60f43d8f759cb48e90d3404b68c5973a.jpg', 'Entrega sem Protocolo', '2024-06-19 12:30:50', 1),
+(67, 1530, 74, '83c0003376e9cc6415ac57ac1b2e5f06.jpg', 'Entrega sem protocolo', '2024-06-19 12:34:05', 1),
+(68, 1531, 75, 'ba42f6bb9c3b6b719d7e6c1b4e70ec4a.jpg', 'Entrega sem protocolo', '2024-06-19 12:35:15', 1),
+(69, 1550, 84, 'bf0db8710164900996d0d3b53862d49b.jpg', 'Entrega sem Protocolo', '2024-06-19 14:05:34', 1),
+(70, 1542, 86, 'e7d1cfe25182163ee7915a0378eec041.jpg', 'Entrega sem protocolo registrado', '2024-06-19 14:08:33', 1),
+(71, 1543, 87, '45fd6585c623be09eac473b799b1c9e8.jpg', 'Entrega sem Protocolo', '2024-06-19 14:10:05', 1),
+(72, 1545, 88, '2d57833fd6c179fedb58ef076a521b95.jpg', 'Entrega sem Protocolo', '2024-06-19 14:10:41', 1),
+(73, 1546, 89, '11d049e01493076976e0a2475bc73dd7.jpg', 'Entrega sem Protocolo', '2024-06-19 14:12:28', 1),
+(74, 1522, 63, '', 'Operadora relata que o cliente não ouve ela. Várias ligações com inteferência', '2024-06-19 14:57:26', 2),
+(75, 1522, 43, '1711a49656acb900231acd24c5cb5b67.jpg', '', '2024-06-19 14:59:36', 1),
+(76, 1552, 46, '9fe201b0a97192dc6b2e8fd059b99181.jpg', '', '2024-06-19 15:23:04', 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +264,6 @@ CREATE TABLE `equipamento` (
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
 (1, 'Topuse', 'G57969', '0000151', '2024-05-27 17:03:02', 1, 8, 444),
 (2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 1, 8, 444),
-(3, 'Plantronics', '', '0000394', '2024-05-28 09:54:54', 1, 8, 444),
 (4, 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 3, 8, 444),
 (7, 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 8, 444),
 (8, 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 3, 8, 444),
@@ -247,7 +274,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (15, 'Unixtrom', '', '23917', '2024-06-05 12:03:09', 3, 8, 444),
 (19, 'Paltronics', '', '18263', '2024-06-06 11:07:41', 2, 8, 444),
 (20, 'Paltronics', '', '1208', '2024-06-06 12:05:04', 2, 8, 444),
-(21, 'Paltronics', '', '394', '2024-06-06 17:42:05', 2, 8, 444),
+(21, 'Paltronics', '', '0000394', '2024-06-06 17:42:05', 2, 8, 444),
 (23, 'Paltronics', '', '0000447', '2024-06-07 17:36:58', 2, 8, 444),
 (27, 'Unixtrom', '210707023', '0000228', '2024-06-10 10:33:44', 1, 8, 444),
 (28, 'Paltronics', '', '0000353', '2024-06-10 11:43:11', 2, 8, 444),
@@ -258,10 +285,10 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (37, 'Paltronics', '', '0000529', '2024-06-12 09:46:53', 3, 8, 444),
 (38, 'Unixtrom', '176928', '0003359', '2024-06-12 09:49:43', 3, 8, 444),
 (39, 'Unixtrom', '210702364', '0003375', '2024-06-12 09:56:20', 3, 8, 444),
-(43, 'Paltronics', '', '0000400', '2024-06-12 13:46:47', 1, 8, 444),
+(43, 'Paltronics', '', '0000400', '2024-06-12 13:46:47', 2, 8, 444),
 (44, 'Paltronics', '', '18295', '2024-06-12 13:47:23', 1, 8, 444),
 (45, 'Paltronics', '', '0023982', '2024-06-12 13:48:12', 3, 8, 444),
-(46, 'Paltronics', '', '0001192', '2024-06-12 13:48:52', 1, 8, 444),
+(46, 'Paltronics', '', '0001192', '2024-06-12 13:48:52', 2, 8, 444),
 (47, 'Paltronics', '', '0000454', '2024-06-12 13:49:24', 2, 8, 444),
 (48, 'Paltronics', '', '0009884', '2024-06-12 13:49:54', 2, 8, 444),
 (49, 'Paltronics', '', '0000268', '2024-06-12 13:50:36', 2, 8, 444),
@@ -278,7 +305,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 1, 8, 444),
 (61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 1, 8, 444),
 (62, 'Paltronics', '', '0000299', '2024-06-12 15:08:08', 2, 8, 444),
-(63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 2, 8, 444),
+(63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 1, 8, 444),
 (64, 'TopUse', 'B08197', '0003379', '2024-06-13 12:00:49', 3, 8, 444),
 (65, 'Unixtron', '180600505', '0001233', '2024-06-14 09:45:23', 3, 8, 444),
 (66, 'Paltronics', '', '0000251', '2024-06-14 16:08:50', 2, 8, 444),
@@ -287,9 +314,9 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (69, 'Samsumg', 'teste', '321', '2024-06-17 13:54:58', 3, 11, 444),
 (70, 'TopUse', 'F06457', '0023988', '2024-06-17 15:24:29', 3, 8, 444),
 (71, 'Paltronics', '', '0000456', '2024-06-18 08:58:41', 2, 8, 444),
-(73, 'TopUse', 'F06477', '0000946', '2024-06-18 10:29:37', 1, 8, 444),
-(74, 'Unixtron', '180600562', '0001371', '2024-06-18 10:30:25', 1, 8, 444),
-(75, 'Unixtron', '', '0000461', '2024-06-18 10:31:01', 1, 8, 444),
+(73, 'TopUse', 'F06477', '0000946', '2024-06-18 10:29:37', 2, 8, 444),
+(74, 'Unixtron', '180600562', '0000371', '2024-06-18 10:30:25', 2, 8, 444),
+(75, 'Unixtron', '', '0000461', '2024-06-18 10:31:01', 2, 8, 444),
 (76, 'Unixtron', '', '0000387', '2024-06-18 10:32:20', 2, 8, 444),
 (77, 'Unixtron', '471468', '0001162', '2024-06-18 10:32:46', 2, 8, 444),
 (78, 'Unixtron', '', '0018289', '2024-06-18 10:33:26', 1, 8, 444),
@@ -298,13 +325,14 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (81, 'TopUse', '370044', '0003356', '2024-06-18 10:45:59', 2, 8, 444),
 (82, 'Unixtron', '', '0001315', '2024-06-18 10:46:38', 1, 8, 444),
 (83, 'Paltronics', '', '0000335', '2024-06-18 10:47:58', 2, 8, 444),
-(84, 'Paltronics', '', '0001198', '2024-06-18 10:51:38', 1, 8, 444),
+(84, 'Paltronics', '', '0001198', '2024-06-18 10:51:38', 2, 8, 444),
 (85, 'Unixtron', '177314', '0000792', '2024-06-18 11:20:53', 3, 8, 444),
-(86, 'Paltronics', '', '0000444', '2024-06-18 11:52:59', 1, 8, 444),
-(87, 'TopUse', '', '0000249', '2024-06-18 11:53:30', 1, 8, 444),
-(88, 'TopUse', 'F06475', '0001348', '2024-06-18 11:53:57', 1, 8, 444),
-(89, 'TopUse', 'A72890', '0000229', '2024-06-18 11:54:34', 1, 8, 444),
-(90, 'Paltronics', '', '0023934', '2024-06-18 12:19:40', 2, 8, 444);
+(86, 'Paltronics', '', '0000444', '2024-06-18 11:52:59', 2, 8, 444),
+(87, 'TopUse', '', '0000249', '2024-06-18 11:53:30', 2, 8, 444),
+(88, 'TopUse', 'F06475', '0001348', '2024-06-18 11:53:57', 2, 8, 444),
+(89, 'TopUse', 'A72890', '0000229', '2024-06-18 11:54:34', 2, 8, 444),
+(90, 'Paltronics', '', '0023934', '2024-06-18 12:19:40', 2, 8, 444),
+(91, 'Unixtron', '220103161', '000437', '2024-06-19 15:20:55', 3, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -335,7 +363,10 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (9, 'Mouse', 'Mouse controleMast', 1),
 (10, 'Teclado', 'Teclado controleMast', 1),
 (11, 'Tela', 'Tela controleMast', 1),
-(12, 'controle', 'Controle controleMast', 1);
+(12, 'controle', 'Controle controleMast', 1),
+(13, 'Aprendiz', 'Aprendiz controleMast', 1),
+(14, 'Supervisor', 'Supervisor controleMast', 1),
+(15, 'Monitor', 'Monitor controleMast', 1);
 
 -- --------------------------------------------------------
 
@@ -358,18 +389,21 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(472, 1, 1, 1, 1, 1, 1),
-(473, 1, 2, 1, 1, 1, 1),
-(474, 1, 3, 1, 1, 1, 1),
-(475, 1, 4, 1, 1, 1, 1),
-(476, 1, 5, 1, 1, 1, 1),
-(477, 1, 6, 1, 1, 1, 1),
-(478, 1, 7, 1, 1, 1, 1),
-(479, 1, 8, 1, 1, 1, 1),
-(480, 1, 9, 1, 1, 1, 1),
-(481, 1, 10, 1, 1, 1, 1),
-(482, 1, 11, 1, 1, 1, 1),
-(483, 1, 12, 1, 1, 1, 1);
+(484, 1, 1, 1, 1, 1, 1),
+(485, 1, 2, 1, 1, 1, 1),
+(486, 1, 3, 1, 1, 1, 1),
+(487, 1, 4, 1, 1, 1, 1),
+(488, 1, 5, 1, 1, 1, 1),
+(489, 1, 6, 1, 1, 1, 1),
+(490, 1, 7, 1, 1, 1, 1),
+(491, 1, 8, 1, 1, 1, 1),
+(492, 1, 9, 1, 1, 1, 1),
+(493, 1, 10, 1, 1, 1, 1),
+(494, 1, 11, 1, 1, 1, 1),
+(495, 1, 12, 1, 1, 1, 1),
+(496, 1, 13, 1, 1, 1, 1),
+(497, 1, 14, 1, 1, 1, 1),
+(498, 1, 15, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -445,7 +479,8 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1548, 'VALDIRENE', 'VAQUEIRO ALVES', '013131', 0, '', 5, 444, 2, '2024-06-17 17:42:46', 1),
 (1549, 'ANGELICA', 'APARECIDA DE OLIVEIRA', '01839', 0, '', 5, 444, 1, '2024-06-18 10:07:27', 1),
 (1550, 'NATHALIA', 'GOMES ROCHA', '018287', 0, '', 4, 444, 1, '2024-06-18 10:38:22', 1),
-(1551, 'MARIA GABRIELA', 'MAIA BOMFIM', '013147', 0, '', 5, 444, 1, '2024-06-18 12:14:02', 1);
+(1551, 'MARIA GABRIELA', 'MAIA BOMFIM', '013147', 0, '', 5, 444, 1, '2024-06-18 12:14:02', 1),
+(1552, 'ELIDA CRISTINA', 'DE PAULA', '010543', 0, '', 5, 444, 2, '2024-06-19 15:22:36', 1);
 
 -- --------------------------------------------------------
 
@@ -561,19 +596,19 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT de la tabla `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -585,13 +620,13 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=499;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1552;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1553;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
