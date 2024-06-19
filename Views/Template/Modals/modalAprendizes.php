@@ -1,15 +1,15 @@
-<!-- Modal agregar y editar Operacão -->
-<div class="modal fade" id="modalFormOperacao" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal agregar y editar Aprendiz -->
+<div class="modal fade" id="modalFormAprendiz" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Novo Operador</h5>
+        <h5 class="modal-title" id="titleModal">Novo Aprendiz</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="formOperacao" name="formOperacao" class="form-horizontal">
+        <form id="formAprendiz" name="formAprendiz" class="form-horizontal">
           <input type="hidden" id="idOperador" name="idOperador" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
@@ -35,10 +35,7 @@
             </div> 
             <div class="form-group col-md-12">
               <label for="listModelo">Modelo <span class="required">*</span></label>
-              <select class="form-control selectpicker" id="listModelo" name="listModelo" required>
-                <option value="1">Presencial</option>
-                <option value="2">Home Office</option>
-              </select>
+              <input type="text" class="form-control disabled" id="txtModelo" name="txtModelo" value="Presencial">
             </div>
           </div>
           <hr>
@@ -57,7 +54,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header header-primary">
-        <h5 class="modal-title" id="titleModal">Dados do Operador</h5>
+        <h5 class="modal-title" id="titleModal">Dados do Aprendiz</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

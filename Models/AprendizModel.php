@@ -1,9 +1,9 @@
 <?php 
 
-class CoordinadoresModel extends Mysql
+class AprendizModel extends Mysql
 {
 	public function __construct()
 	{
 		parent::__construct();
-	}	
+	}
 }

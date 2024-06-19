@@ -51,7 +51,6 @@ class EntregarModel extends Mysql
         return $request;
     }
 
-    // Trae os usuários sem relação com o equipamento
     public function selectUsuarios($ruta)
     {
         $this->intIdRuta = $ruta;
@@ -76,6 +75,7 @@ class EntregarModel extends Mysql
                        pe.matricula, 
                        pe.nombres, 
                        pe.apellidos, 
+                       pe.modelo,
                        eq.idequipamento,
                        eq.tipo as equipamento,
                        eq.marca,

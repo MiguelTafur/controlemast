@@ -67,6 +67,10 @@
               <td id="celApellidos"></td>
             </tr>
             <tr>
+              <td class="font-weight-bold">Modelo de Trabalho:</td>
+              <td id="celModelo"></td>
+            </tr>
+            <tr>
               <td class="font-weight-bold">Nome Equipamento:</td>
               <td id="celEquipamento"></td>
             </tr>

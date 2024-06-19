@@ -231,6 +231,13 @@ class Entregar extends Controllers{
 					$arrData['equipamento'] = 'Tela';
 				}
 
+				if($arrData['modelo'] === 1)
+				{
+					$arrData['modelo'] = 'Presencial';
+				}else{
+					$arrData['modelo'] = 'Home Office';
+				}
+
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');

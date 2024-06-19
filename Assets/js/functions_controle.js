@@ -228,6 +228,7 @@ function fntViewInfo(identrega)
                 document.querySelector("#celMatricula").innerHTML = objData.data.matricula;
                 document.querySelector("#celNombres").innerHTML = nombres.toUpperCase();
                 document.querySelector("#celApellidos").innerHTML = apellidos.toUpperCase();
+                document.querySelector("#celModelo").innerHTML = objData.data.modelo;
                 document.querySelector("#celEquipamento").innerHTML = objData.data.equipamento;
                 document.querySelector("#celMarca").innerHTML = objData.data.marca;
                 document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
