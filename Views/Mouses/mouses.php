@@ -14,7 +14,7 @@
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/lideres"><?= $data['page_title'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/mouses"><?= $data['page_title'] ?></a></li>
     </ul>
   </div>
 
@@ -27,8 +27,8 @@
               <thead>
                 <tr>
                   <th>Marca</th>
-                  <th>Código</th>
-                  <th>Lacre</th>
+                  <th>Código / Serial</th>
+                  <th>Patrimônio</th>
                   <th>Estado</th>
                   <th class="text-center">Ações</th>
                 </tr>

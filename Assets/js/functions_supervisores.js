@@ -1,4 +1,4 @@
-let tableLideres;
+let tableSupervisores;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function iniciarApp() {
-    fntTablaLideres();
-    fntCrearLideres();
+    fntTablaSupervisores();
+    fntCrearSupervisores();
 }
 
-function fntTablaLideres() {
-    tableLideres = $('#tableLideres').dataTable( 
+function fntTablaSupervisores() {
+    tableSupervisores = $('#tableSupervisores').dataTable( 
     {
         "aProcessing":true,
         "aServerSide":true,
@@ -19,7 +19,7 @@ function fntTablaLideres() {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Lideres/getLideres",
+            "url": " "+base_url+"/Supervisores/getSupervisores",
             "dataSrc":""
         },
         "columns":[
@@ -37,10 +37,10 @@ function fntTablaLideres() {
     });
 }
 
-function fntCrearLideres() {
-    if(document.querySelector("#formCliente")){
-        let formCliente = document.querySelector("#formCliente");
-        formCliente.onsubmit = function(e)
+function fntCrearSupervisores() {
+    if(document.querySelector("#formSupervisor")){
+        let formSupervisor = document.querySelector("#formSupervisor");
+        formSupervisor.onsubmit = function(e)
         {
             e.preventDefault();
             let strMatricula = document.querySelector('#txtMatricula').value;
@@ -66,8 +66,8 @@ function fntCrearLideres() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Lideres/setLider';
-            let formData = new FormData(formCliente);
+            let ajaxUrl = base_url + '/Supervisores/setSupervisor';
+            let formData = new FormData(formSupervisor);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){
@@ -77,7 +77,7 @@ function fntCrearLideres() {
                     if(objData.status)
                     {
                         if(rowTable == ""){
-                            tableLideres.api().ajax.reload();
+                            tableSupervisores.api().ajax.reload();
                         }else{
                             htmlModelo = intModelo == 1 ? 
                             'Presencial' : 
@@ -89,9 +89,9 @@ function fntCrearLideres() {
 
                             rowTable = "";
                         }
-                        $('#modalFormCliente').modal("hide");
-                        formCliente.reset();
-                        swal("Líder", objData.msg, "success");
+                        $('#modalFormSupervisor').modal("hide");
+                        formSupervisor.reset();
+                        swal("Supervisor", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -108,13 +108,13 @@ function fntEditInfo(element, idpersona)
 {
     rowTable = element.parentNode.parentNode.parentNode;
     divLoading.style.display = "flex";
-    document.querySelector('#titleModal').innerHTML = "Atualizar Líder";
+    document.querySelector('#titleModal').innerHTML = "Atualizar Supervisor";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
 
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
+    let ajaxUrl = base_url + '/Supervisores/getSupervisor/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -139,7 +139,7 @@ function fntEditInfo(element, idpersona)
             }
                 
         }
-        $('#modalFormCliente').modal('show');
+        $('#modalFormSupervisor').modal('show');
         divLoading.style.display = "none";
         return false;
     }
@@ -150,7 +150,7 @@ function fntViewInfo(idpersona)
     divLoading.style.display = "flex";
     
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Lideres/getLider/'+idpersona;
+    let ajaxUrl = base_url + '/Supervisores/getSupervisor/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -186,7 +186,7 @@ function fntViewInfo(idpersona)
                 document.querySelector("#celModelo").innerHTML = objData.data.modelo;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
 
-                $('#modalViewCliente').modal('show');
+                $('#modalViewSupervisor').modal('show');
             }else{
                 swal("Erro", objData.msg, "error");
             }
@@ -199,8 +199,8 @@ function fntViewInfo(idpersona)
 function fntDelInfo(idpersona)
 {
     swal({
-        title: "Remover Líder",
-        text: "¿Realmente quer Remover o Líder?",
+        title: "Remover Supervisor",
+        text: "¿Realmente deseja Remover o Supervisor?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Sim, Remover!",
@@ -212,7 +212,7 @@ function fntDelInfo(idpersona)
         if (isConfirm) 
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Lideres/delLider';
+            let ajaxUrl = base_url+'/Supervisores/delSupervisor';
             let strData = "idUsuario="+idpersona;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -223,7 +223,7 @@ function fntDelInfo(idpersona)
                     if(objData.status)
                     {
                         swal("Remover!", objData.msg , "success");
-                        tableLideres.api().ajax.reload();
+                        tableSupervisores.api().ajax.reload();
                     }else{
                         swal("Atenção!", objData.msg , "error");
                     }
@@ -240,7 +240,7 @@ function openModal()
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
-    document.querySelector('#titleModal').innerHTML = "Novo Líder";
-    document.querySelector("#formCliente").reset();
-    $('#modalFormCliente').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Novo Supervisor";
+    document.querySelector("#formSupervisor").reset();
+    $('#modalFormSupervisor').modal('show');
 }

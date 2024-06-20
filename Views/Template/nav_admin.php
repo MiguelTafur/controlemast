@@ -42,7 +42,7 @@
                 <li><a class="treeview-item" href="<?= base_url(); ?>/gerentes"><i class="icon fa fa-circle-o"></i> Gerentes</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/supervisores"><i class="icon fa fa-circle-o"></i> Supervisores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/coordinadores"><i class="icon fa fa-circle-o"></i> Coordinadores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/monitores"><i class="icon fa fa-circle-o"></i> Monitores de Qualidade</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/gestores"><i class="icon fa fa-circle-o"></i> Gestores de Qualidade</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/lideres"><i class="icon fa fa-circle-o"></i> Líderes</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/operacao"><i class="icon fa fa-circle-o"></i> Operadores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/aprendizes"><i class="icon fa fa-circle-o"></i> Aprendizes</a></li>
@@ -52,22 +52,23 @@
         <?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-cogs" aria-hidden="true"></i>
+                <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
                 <span class="app-menu__label">Equipamentos</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="<?= base_url(); ?>/fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/computadores"><i class="icon fa fa-circle-o"></i> Computadores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Telas</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
             </ul>
         </li>
         <?php } ?>
         <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-sliders" aria-hidden="true"></i>
+                <i class="app-menu__icon fa fa-clipboard" aria-hidden="true"></i>
                 <span class="app-menu__label">Controle</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>

@@ -1,12 +1,12 @@
 <?php 
   headerAdmin($data);
-  getModal('modalFones',$data); 
+  getModal('modalSupervisores',$data); 
 ?>
 <main class="app-content">
   <div class="app-title">
     <div>
         <h1>
-            <i class="fa fa-headphones" aria-hidden="true"></i> <?= $data['page_title'] ?>
+          <i class="fas fa-user-tag"></i> <?= $data['page_title'] ?>
             <?php if($_SESSION['permisosMod']['w']){ ?>
             <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> Adicionar</button>
             <?php } ?>
@@ -14,7 +14,7 @@
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/fones"><?= $data['page_title'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/supervisores"><?= $data['page_title'] ?></a></li>
     </ul>
   </div>
 
@@ -23,13 +23,13 @@
       <div class="tile">
         <div class="tile-body">
           <div class="table-responsive">
-            <table class="table table-striped text-center" id="tableEquipamentos">
+            <table class="table table-striped text-center" id="tableSupervisores">
               <thead>
                 <tr>
-                  <th>Marca</th>
-                  <th>Código / Serial</th>
-                  <th>Lacre</th>
-                  <th>Estado</th>
+                  <th>Matrícula</th>
+                  <th>Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Modelo</th>
                   <th class="text-center">Ações</th>
                 </tr>
               </thead>

@@ -90,7 +90,7 @@ function fntCrearOperacao() {
                         }
                         $('#modalFormOperacao').modal("hide");
                         formOperacao.reset();
-                        swal("Operadores", objData.msg, "success");
+                        swal("Operador", objData.msg, "success");
                         
                     }else{
                         swal("Erro", objData.msg, "error");
@@ -105,6 +105,8 @@ function fntCrearOperacao() {
 
 function fntViewInfo(idpersona)
 {
+    divLoading.style.display = "flex";
+        
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Operacao/getOperador/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -147,6 +149,8 @@ function fntViewInfo(idpersona)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -157,7 +161,8 @@ function fntEditInfo(element, idpersona)
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
-
+    
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Operacao/getOperador/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -173,6 +178,7 @@ function fntEditInfo(element, idpersona)
                 document.querySelector("#txtMatricula").value = objData.data.matricula;
                 document.querySelector("#txtNombre").value = objData.data.nombres;
                 document.querySelector("#txtSobrenome").value = objData.data.apellidos;
+                document.querySelector("#txtTelefono").value = objData.data.telefono;
                 if(objData.data.telefono === 0) {
                     document.querySelector("#txtTelefono").value = '';    
                 }
@@ -184,6 +190,8 @@ function fntEditInfo(element, idpersona)
                 
         }
         $('#modalFormOperacao').modal('show');
+        divLoading.style.display = "none";
+        return false;
     }
 }
 

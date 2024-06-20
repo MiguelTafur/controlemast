@@ -21,7 +21,7 @@ function fntTablaEquipamentos() {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax":{
-            "url": " "+base_url+"/Fones/getFones",
+            "url": " "+base_url+"/Computadores/getComputadores",
             "dataSrc":""
         },
         "columns":[
@@ -64,7 +64,7 @@ function fntCrearEquipamento() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Fones/setFone';
+            let ajaxUrl = base_url + '/Computadores/setComputador';
             let formData = new FormData(formEquipamentos);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -105,7 +105,7 @@ function fntCrearEquipamento() {
 function fntEditInfo(element, idequipamento)
 {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Alterar Fone";
+    document.querySelector('#titleModal').innerHTML = "Alterar Computador";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Atualizar";
@@ -115,9 +115,8 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divEqEstragado').classList.add('d-none');
 
     divLoading.style.display = "flex";
-    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Computadores/getComputador/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -183,7 +182,7 @@ function fntEditStatus() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Fones/setEstadoFone';
+            let ajaxUrl = base_url + '/Computadores/setEstadoComputador';
             let formData = new FormData(formEditarEstado);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -239,7 +238,7 @@ function fntAddAnnotation() {
 
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Fones/setAdicionarAnotacao';
+            let ajaxUrl = base_url + '/Computadores/setAdicionarAnotacao';
             let formData = new FormData(formAnotacao);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -271,9 +270,8 @@ function fntViewInfo(idequipamento)
     btnAnnotation.setAttribute('id', idequipamento);
 
     divLoading.style.display = "flex";
-    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Computadores/getComputador/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -338,7 +336,7 @@ function fntViewAnnotation()
     divLoading.style.display = "flex";
     
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getAnotacionesFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Computadores/getAnotacionesComputador/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -365,9 +363,8 @@ function fntViewAnnotation()
 function fntViewAddAnnotation(idequipamento)
 {
     divLoading.style.display = "flex";
-    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    let ajaxUrl = base_url + '/Computadores/getComputador/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function()
@@ -375,12 +372,12 @@ function fntViewAddAnnotation(idequipamento)
         if(request.readyState == 4 && request.status == 200)
         {
             let objData = JSON.parse(request.responseText);
-            document.querySelector('#equipamentoLacre').innerHTML = 'Fone: #' + objData.data.lacre;
+            document.querySelector('#equipamentoLacre').innerHTML = 'Computador: #' + objData.data.lacre;
             document.querySelector('#idEquipamentoAnotacao').value = objData.data.idequipamento;
             document.querySelector('#estadoEquipamentoAnotacao').value = objData.data.status;
         }
         divLoading.style.display = "none";
-        return false;
+    return false;
     }
 
     $('#modalAddAnnotation').modal('show');
@@ -406,7 +403,7 @@ function openModal()
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
-    document.querySelector('#titleModal').innerHTML = "Novo Fone";
+    document.querySelector('#titleModal').innerHTML = "Novo Computador";
     document.querySelector("#formEquipamentos").reset();
     document.querySelector('#divEditarEstado').classList.add('d-none');
     document.querySelector('#divTxtAnotacion').classList.remove('d-none');

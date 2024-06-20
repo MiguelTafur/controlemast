@@ -107,6 +107,8 @@ function fntCrearGerentes() {
 
 function fntViewInfo(idpersona)
 {
+    divLoading.style.display = "flex";
+        
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Gerentes/getGerente/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -149,11 +151,15 @@ function fntViewInfo(idpersona)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
 function fntEditInfo(element, idpersona)
 {
+    divLoading.style.display = "flex";
+        
     rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML = "Atualizar Gerente";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
@@ -184,6 +190,8 @@ function fntEditInfo(element, idpersona)
                 
         }
         $('#modalFormGerente').modal('show');
+        divLoading.style.display = "none";
+        return false;
     }
 }
 

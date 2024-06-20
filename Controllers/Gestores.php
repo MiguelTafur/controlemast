@@ -1,6 +1,6 @@
 <?php 
 
-class Supervisores extends Controllers{
+class Gestores extends Controllers{
 	public function __construct()
 	{
 		session_start();
@@ -8,22 +8,22 @@ class Supervisores extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MSUPERVISOR);
+		getPermisos(MGESTOR);
 	}
 
-	public function Supervisores()
+	public function Gestores()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/controles');
 		}
-		$data['page_tag'] = "Supervisores";
-		$data['page_title'] = "SUPERVISORES";
-		$data['page_name'] = "supervisores";
-		$data['page_functions_js'] = "functions_supervisores.js";
-		$this->views->getView($this,"supervisores",$data);
+		$data['page_tag'] = "Gestores";
+		$data['page_title'] = "GESTORES";
+		$data['page_name'] = "gestores";
+		$data['page_functions_js'] = "functions_gestores.js";
+		$this->views->getView($this,"gestores",$data);
 	}
 	
-	public function setSupervisor()
+	public function setGestor()
 	{ 
 		if($_POST)
 		{
@@ -37,7 +37,7 @@ class Supervisores extends Controllers{
 				$strApellido =  ucwords(strClean($_POST['txtSobrenome']));
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail =  strClean($_POST['txtEmail']);
-				$intTipoId = RSUPERVISOR;
+				$intTipoId = RGESTOR;
 				$intRuta = $_SESSION['idRuta'];
 				$intModelo = intval($_POST['listModelo']);
 				$intStatus = 1;
@@ -74,10 +74,10 @@ class Supervisores extends Controllers{
 		die();
 	}
 
-	public function getSupervisores()
+	public function getGestores()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = getPersonas(RSUPERVISOR);
+			$arrData = getPersonas(RGESTOR);
 
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
@@ -97,13 +97,13 @@ class Supervisores extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Supervisor"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Gestor"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Alterar Supervisor"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Alterar Gestor"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Supervisor"><i class="far fa-trash-alt"></i></button>';
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Gestor"><i class="far fa-trash-alt"></i></button>';
 				}
 
 				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
@@ -113,7 +113,7 @@ class Supervisores extends Controllers{
 		die();
 	}
 
-	public function getSupervisor($idpersona)
+	public function getGestor($idpersona)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$idusuario = intval($idpersona);
@@ -140,7 +140,7 @@ class Supervisores extends Controllers{
 		die();
 	}
 
-	public function delSupervisor()
+	public function delGestor()
 	{
 		if($_POST)
 		{

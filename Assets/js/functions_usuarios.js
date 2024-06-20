@@ -159,6 +159,7 @@ function fntRolesUsuario()
 
 function fntViewUsuario(idpersona)
 {
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Usuarios/getUsuario/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -207,6 +208,8 @@ function fntViewUsuario(idpersona)
                 swal("Error", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -222,7 +225,7 @@ function fntEditUsuario(element,idpersona)
         document.querySelector('#divListRuta').classList.add('d-none');
     }
 
-
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Usuarios/getUsuario/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -236,12 +239,14 @@ function fntEditUsuario(element,idpersona)
 
             if(objData.status)
             {
-                console.log(objData);
                 document.querySelector("#idUsuario").value = objData.data.idpersona;
                 document.querySelector("#txtMatricula").value = objData.data.matricula;
                 document.querySelector("#txtNombre").value = objData.data.nombres;
                 document.querySelector("#txtApellido").value = objData.data.apellidos;
                 document.querySelector("#txtTelefono").value = objData.data.telefono;
+                if(objData.data.telefono === 0) {
+                    document.querySelector("#txtTelefono").value = '';   
+                }
                 document.querySelector("#txtEmail").value = objData.data.email_user;
                 document.querySelector("#listRolid").value = objData.data.idrol;
                 $('#listRolid').selectpicker('render');
@@ -257,8 +262,9 @@ function fntEditUsuario(element,idpersona)
                 $('#listModelo').selectpicker('render');
             }
         }
-
         $('#modalFormUsuario').modal('show');
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -313,8 +319,4 @@ function openModal()
     if(document.querySelector('#divListRuta')){
         document.querySelector('#divListRuta').classList.remove('d-none');
     }
-}
-
-function openModalPerfil(){
-    $('#modalFormPerfil').modal('show');
 }

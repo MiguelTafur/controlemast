@@ -45,7 +45,8 @@
 	const MCONTROLE = 12;
 	const MAPRENDIZ = 13;
 	const MSUPERVISOR = 14;
-	const MMONITOR = 15;
+	const MGESTOR = 15;
+	const MCOMPUTADOR = 16;
 
 	//Roles
 	const RADMINISTRADOR = 1;
@@ -55,6 +56,6 @@
 	const ROPERACAO = 5;
 	const RAPRENDIZ = 6;
 	const RSUPERVISOR = 7;
-	const RMONITOR = 8;
+	const RGESTOR = 8;
 
  ?>

@@ -109,6 +109,14 @@ class Usuarios extends Controllers{
 					$arrData[$i]['status'] = '<span class="badge badge-danger">Inativo</span>';
 				}
 
+				if(empty($arrData[$i]['telefono'])) {
+					$arrData[$i]['telefono'] = '<span class="font-italic text-secondary">nenhum</span>';
+				}
+
+				if(empty($arrData[$i]['email_user'])) {
+					$arrData[$i]['email_user'] = '<span class="font-italic text-secondary">nenhum</span>';
+				}
+
 				if($_SESSION['permisosMod']['r']){
 					$btnView = '<button class="btn btn-info btn-sm btnViewUsuario mr-1" onclick="fntViewUsuario('.$arrData[$i]['idpersona'].')" title="Ver Usuário"><i class="far fa-eye"></i></button>';
 				}

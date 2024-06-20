@@ -1,6 +1,6 @@
 <?php 
 
-class FonesModel extends Mysql
+class ComputadoresModel extends Mysql
 {
 	public function __construct()
 	{

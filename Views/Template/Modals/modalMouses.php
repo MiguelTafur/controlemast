@@ -18,11 +18,11 @@
               <input type="text" class="form-control valid validText" id="txtMarca" name="txtMarca" required="">
             </div>
             <div class="form-group col-md-12">
-              <label for="txtLacre">Código Lacre</label>
+              <label for="txtLacre">Patrimônio <span class="required">*</span></label>
               <input type="tel" class="form-control" id="txtLacre" name="txtLacre" onkeypress="return controlTag(event)" required>
             </div>
             <div class="form-group col-md-12">
-              <label for="txtCodigo">Código Equipamento</label>
+              <label for="txtCodigo">Código / Serial:</label>
               <input type="text" class="form-control valid" id="txtCodigo" name="txtCodigo">
             </div>
             <div class="form-group col-md-12" id="divFileAnotacion">
@@ -70,11 +70,11 @@
               <td id="celMarca"></td>
             </tr>
             <tr>
-              <td>Código Equipamento:</td>
+              <td>Código / Serial:</td>
               <td id="celCodigo"></td>
             </tr>
             <tr>
-              <td>Código Lacre:</td>
+              <td>Patrimônio:</td>
               <td id="celLacre"></td>
             </tr>
             <tr>

@@ -1,6 +1,6 @@
 <?php 
 
-class Fones extends Controllers{
+class Computadores extends Controllers{
 	public function __construct()
 	{
 		session_start();
@@ -8,25 +8,25 @@ class Fones extends Controllers{
 		if(empty($_SESSION['login'])){
 			header('Location: '.base_url().'/login');
 		}
-		getPermisos(MFONE);
+		getPermisos(MCOMPUTADOR);
 	}
 
-    public function Fones()
+    public function Computadores()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/fones');
 		}
-		$data['page_tag'] = "Fones";
-		$data['page_title'] = "FONES";
-		$data['page_name'] = "fones";
-		$data['page_functions_js'] = "functions_fones.js";
-		$this->views->getView($this,"fones",$data);
+		$data['page_tag'] = "Computadores";
+		$data['page_title'] = "COMPUTADORES";
+		$data['page_name'] = "computadores";
+		$data['page_functions_js'] = "functions_Computadores.js";
+		$this->views->getView($this,"computadores",$data);
 	}
 
-	public function getFones()
+	public function getComputadores()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = getEquipamentos(MFONE, 0);
+			$arrData = getEquipamentos(MCOMPUTADOR, 0);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -77,13 +77,12 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function getFone($idequipamento)
+	public function getComputador($idequipamento)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				//$arrData = $this->model->selectFone($IDequipamento);
 				$arrData = getEquipamentos("", $IDequipamento);
 				if(empty($arrData))
 				{
@@ -97,13 +96,13 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function getAnotacionesFone($idequipamento)
+	public function getAnotacionesComputador($idequipamento)
 	{
 		if($_SESSION['permisosMod']['r']){
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				$arrData = getAnotacionesEquipamento($IDequipamento, MFONE);
+				$arrData = getAnotacionesEquipamento($IDequipamento, MCOMPUTADOR);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
@@ -156,7 +155,7 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setFone()
+	public function setComputador()
 	{ 
 		if($_POST)
 		{
@@ -173,7 +172,7 @@ class Fones extends Controllers{
 				$strCodigo = strClean($_POST['txtCodigo']);
 				$strLacre =  strClean($_POST['txtLacre']);
 				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
-				$tipo = MFONE;
+				$tipo = MCOMPUTADOR;
 				$intIdRuta = $_SESSION['idRuta'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
 				$request_user = "";
@@ -229,7 +228,7 @@ class Fones extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! O Lacre do equipamento já existe, verifique novamente.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! O Patrimônio do equipamento já existe, verifique novamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}
@@ -239,7 +238,7 @@ class Fones extends Controllers{
 		die();
 	}
 
-	public function setEstadoFone() 
+	public function setEstadoComputador() 
 	{
 		if($_POST) { 
 			$imagenAnotacion = $_FILES['fileEstado'];
@@ -268,7 +267,7 @@ class Fones extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['u']){
-					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MFONE);
+					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MCOMPUTADOR);
 					if($request_estado > 0) {
 						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
 					} else if ($request_estado === '0') {
@@ -312,7 +311,7 @@ class Fones extends Controllers{
 				}
 
 				$estadoAnotacaoEquipamento = strClean($_POST['estadoEquipamentoAnotacao']);
-				$tipo = MFONE;
+				$tipo = MCOMPUTADOR;
 
 				if($_SESSION['permisosMod']['u']){
 					$request_anotacion = setAnotaciones($idEquipamento, 

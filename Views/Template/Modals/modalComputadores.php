@@ -1,15 +1,15 @@
-<!-- modal formulario Teclado -->
-<div class="modal fade" id="modalFormTeclados" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- modal formulario Computador -->
+<div class="modal fade" id="modalFormEquipamentos" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Novo Teclado</h5>
+        <h5 class="modal-title" id="titleModal">Novo Fone</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="formTeclados" name="formTeclados" class="form-horizontal">
+        <form id="formEquipamentos" name="formEquipamentos" class="form-horizontal">
           <input type="hidden" id="idEquipamento" name="idEquipamento" value="">
           <p class="font-italic">Os campos com asterisco (<span class="required">*</span>) são obrigatórios.</p>
           <div class="form-row">
@@ -28,7 +28,7 @@
             <div class="form-group col-md-12" id="divFileAnotacion">
               <label for="fileAnotacao">Imagen</label>
               <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
-            </div>  
+            </div>
             <div class="form-group col-md-12" id="divTxtAnotacion">
               <label for="txtObservacion">Anotação</label>
               <textarea class="form-control" id="txtObservacion" name="txtObservacion"></textarea>
@@ -39,7 +39,7 @@
           </div>
           <div class="form-check col-md-12" id="divEqEstragado">
             <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
-            <label for="equipamentoEstragado" class="form-check-label">Teclado estragado</label>
+            <label for="equipamentoEstragado" class="form-check-label">Computador estragado</label>
           </div>
           <hr>
           <div class="tile-footer">
@@ -52,12 +52,12 @@
   </div>
 </div>
 
-<!-- modal ver Teclado -->
-<div class="modal fade" id="modalViewTeclado" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- modal ver Computador -->
+<div class="modal fade" id="modalViewEquipamento" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header header-primary">
-        <h5 class="modal-title" id="titleModal">Dados do Teclado</h5>
+        <h5 class="modal-title" id="titleModal">Dados do Equipamento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

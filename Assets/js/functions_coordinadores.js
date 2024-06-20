@@ -106,6 +106,8 @@ function fntCrearCoordinadores() {
 
 function fntEditInfo(element, idpersona)
 {
+    divLoading.style.display = "flex";
+        
     rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML = "Atualizar Coordinador";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
@@ -116,7 +118,8 @@ function fntEditInfo(element, idpersona)
     let ajaxUrl = base_url + '/Coordinadores/getCoordinador/'+idpersona;
     request.open("GET",ajaxUrl,true);
     request.send();
-    request.onreadystatechange = function(){
+    request.onreadystatechange = function()
+    {
 
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
@@ -135,12 +138,16 @@ function fntEditInfo(element, idpersona)
             }
                 
         }
+        divLoading.style.display = "none";
+        return false;
         $('#modalFormCoordinador').modal('show');
     }
 }
 
 function fntViewInfo(idpersona)
 {
+    divLoading.style.display = "flex";
+        
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Coordinadores/getCoordinador/'+idpersona;
     request.open("GET",ajaxUrl,true);
@@ -183,6 +190,8 @@ function fntViewInfo(idpersona)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 

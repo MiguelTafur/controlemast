@@ -1,6 +1,6 @@
 <?php 
   headerAdmin($data);
-  getModal('modalFones',$data); 
+  getModal('modalComputadores',$data); 
 ?>
 <main class="app-content">
   <div class="app-title">
@@ -14,7 +14,7 @@
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/fones"><?= $data['page_title'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/computadores"><?= $data['page_title'] ?></a></li>
     </ul>
   </div>
 
@@ -28,7 +28,7 @@
                 <tr>
                   <th>Marca</th>
                   <th>Código / Serial</th>
-                  <th>Lacre</th>
+                  <th>Patrimônio</th>
                   <th>Estado</th>
                   <th class="text-center">Ações</th>
                 </tr>

@@ -1,9 +1,11 @@
 <?php 
 
-class FonesModel extends Mysql
+class SupervisoresModel extends Mysql
 {
 	public function __construct()
 	{
 		parent::__construct();
-	}
+	}	
 }
+
+?>
