@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2024 a las 21:45:50
+-- Tiempo de generación: 20-06-2024 a las 22:36:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -101,10 +101,6 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (109, 68, 1, 'Alteração de dados do Equipamento', '', '2024-06-17 13:46:52', 1, 10),
 (110, 68, 1, 'teste estado teclado', '', '2024-06-17 13:47:20', 3, 10),
 (111, 68, 1, 'Entregue para o DP', '', '2024-06-17 13:47:44', 3, 10),
-(112, 69, 1, 'Equipamento adicionado', '', '2024-06-17 13:54:58', 1, 11),
-(113, 69, 1, 'Alteração de dados do Equipamento', '', '2024-06-17 13:55:19', 1, 11),
-(114, 69, 1, 'teste estado tela', '', '2024-06-17 13:55:35', 3, 11),
-(115, 69, 1, 'Entregue para o DP', '', '2024-06-17 13:55:59', 3, 11),
 (116, 37, 1, 'Entregue para o DP', '', '2024-06-17 14:48:32', 3, 8),
 (117, 38, 1, 'Entregue para o DP', '', '2024-06-17 14:51:35', 3, 8),
 (118, 30, 1, 'Entregue para o DP', '', '2024-06-17 14:52:42', 3, 8),
@@ -168,7 +164,77 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (184, 43, 1, 'Equipamento entregue', '1711a49656acb900231acd24c5cb5b67.jpg', '2024-06-19 14:59:36', 2, 8),
 (185, 91, 1, 'Recebido pela operadora Élida(010543). Avaria no cabo. Botão \"mute\" não funciona', 'cd491bfbe98221dc1b9d2e002caaecc7.jpg', '2024-06-19 15:20:55', 3, 8),
 (186, 46, 1, 'Equipamento entregue', '9fe201b0a97192dc6b2e8fd059b99181.jpg', '2024-06-19 15:23:05', 2, 8),
-(187, 21, 1, 'Alteração de dados do Equipamento', '', '2024-06-19 15:27:56', 2, 8);
+(187, 21, 1, 'Alteração de dados do Equipamento', '', '2024-06-19 15:27:56', 2, 8),
+(188, 92, 1, 'Equipamento adicionado', '', '2024-06-20 10:00:22', 1, 8),
+(189, 92, 1, 'Entrega no dia 28 de março de 2024', '28148d2470e5e9b50c3a4a027d423afe.jpg', '2024-06-20 10:05:23', 2, 8),
+(190, 83, 1, 'Fone apresenta Avaria no cabo', '2e2e4905e4115cf7e01aa3a0426f1ba5.jpg', '2024-06-20 11:25:32', 3, 8),
+(191, 58, 1, 'Controle de comandos quebrado', 'ca00289ad9bffebf306b2d49cb12c8f9.jpg', '2024-06-20 11:27:47', 2, 8),
+(198, 94, 1, 'Equipamento adicionado', '', '2024-06-20 14:53:44', 1, 11),
+(199, 95, 1, 'Operadora(ROBERTA ALANNA OLIVEIRA SILVA - 01632) não voltou mais para a empresa.', '', '2024-06-20 14:58:28', 1, 8),
+(200, 96, 1, 'Equipamento adicionado', '', '2024-06-20 15:17:10', 1, 11),
+(201, 97, 1, 'Equipamento adicionado', '', '2024-06-20 15:20:03', 1, 11),
+(202, 98, 1, 'Operadora relata que o som do fone é miuto baixo. O arco do fone está solto', 'acdea4c2521881e3c9465fcb1530edfb.jpg', '2024-06-20 15:52:43', 3, 8),
+(203, 2, 1, 'Equipamento entregue', 'e3b4e508020f44121f5eba4e8ec8ec30.jpg', '2024-06-20 15:53:22', 2, 8),
+(204, 99, 1, 'Equipamento adicionado', '', '2024-06-20 15:57:13', 1, 11),
+(205, 100, 1, 'Equipamento adicionado', '', '2024-06-20 15:58:03', 1, 11),
+(206, 101, 1, 'Equipamento adicionado', '', '2024-06-20 16:08:18', 1, 11),
+(207, 102, 1, 'Equipamento adicionado', '', '2024-06-20 16:09:08', 1, 11),
+(208, 103, 1, 'Equipamento adicionado', '', '2024-06-20 16:09:55', 1, 11),
+(209, 104, 1, 'Equipamento adicionado', '', '2024-06-20 16:11:11', 1, 11),
+(210, 105, 1, 'Equipamento adicionado', '', '2024-06-20 16:12:00', 1, 11),
+(211, 106, 1, 'Equipamento adicionado', '', '2024-06-20 16:15:16', 1, 11),
+(212, 107, 1, 'Equipamento adicionado', '', '2024-06-20 16:16:33', 1, 11),
+(213, 108, 1, 'Equipamento adicionado', '', '2024-06-20 16:17:43', 1, 11),
+(214, 109, 1, 'Equipamento adicionado', '', '2024-06-20 16:18:46', 1, 11),
+(215, 110, 1, 'Equipamento adicionado', '', '2024-06-20 16:19:52', 1, 11),
+(216, 111, 1, 'Equipamento adicionado', '', '2024-06-20 16:20:34', 1, 11),
+(217, 112, 1, 'Equipamento adicionado', '', '2024-06-20 16:22:47', 1, 11),
+(218, 113, 1, 'Equipamento adicionado', '', '2024-06-20 16:23:28', 1, 11),
+(219, 114, 1, 'Equipamento adicionado', '', '2024-06-20 16:24:02', 1, 11),
+(220, 115, 1, 'Equipamento adicionado', '', '2024-06-20 16:25:33', 1, 11),
+(221, 116, 1, 'Equipamento adicionado', '', '2024-06-20 16:29:54', 1, 11),
+(222, 117, 1, 'Equipamento adicionado', '', '2024-06-20 16:31:18', 1, 11),
+(223, 118, 1, 'Equipamento adicionado', '', '2024-06-20 16:32:07', 1, 11),
+(224, 119, 1, 'Equipamento adicionado', '', '2024-06-20 16:33:25', 1, 11),
+(225, 120, 1, 'Equipamento adicionado', '', '2024-06-20 16:34:05', 1, 11),
+(226, 121, 1, 'Equipamento adicionado', '', '2024-06-20 16:37:23', 1, 11),
+(227, 122, 1, 'Equipamento adicionado', '', '2024-06-20 16:38:28', 1, 11),
+(228, 123, 1, 'Equipamento adicionado', '', '2024-06-20 16:41:34', 1, 11),
+(229, 124, 1, 'Equipamento adicionado', '', '2024-06-20 16:42:30', 1, 11),
+(230, 125, 1, 'Equipamento adicionado', '', '2024-06-20 16:43:47', 1, 11),
+(231, 126, 1, 'Equipamento adicionado', '', '2024-06-20 16:44:52', 1, 11),
+(232, 127, 1, 'Equipamento adicionado', '', '2024-06-20 16:45:44', 1, 11),
+(233, 128, 1, 'Equipamento adicionado', '', '2024-06-20 16:47:43', 1, 11),
+(234, 129, 1, 'Equipamento adicionado', '', '2024-06-20 16:48:39', 1, 11),
+(235, 130, 1, 'Equipamento adicionado', '', '2024-06-20 16:49:38', 1, 11),
+(236, 131, 1, 'Equipamento adicionado', '', '2024-06-20 16:50:45', 1, 11),
+(237, 132, 1, 'Equipamento adicionado', '', '2024-06-20 16:52:51', 1, 11),
+(238, 132, 1, 'Alteração de dados do Equipamento', '', '2024-06-20 16:53:25', 1, 11),
+(239, 133, 1, 'Equipamento adicionado', '', '2024-06-20 16:56:04', 1, 11),
+(240, 134, 1, 'Botão de power quebrado', '0ee3b03c0dd54cc1f64473df4d81389d.jpg', '2024-06-20 16:59:31', 1, 11),
+(241, 135, 1, 'Equipamento adicionado', '', '2024-06-20 17:03:27', 1, 11),
+(242, 136, 1, 'Equipamento adicionado', '', '2024-06-20 17:04:32', 1, 11),
+(243, 137, 1, 'Equipamento adicionado', '', '2024-06-20 17:07:08', 1, 11),
+(244, 138, 1, 'Equipamento adicionado', '', '2024-06-20 17:08:19', 1, 11),
+(245, 139, 1, 'Equipamento adicionado', '', '2024-06-20 17:08:55', 1, 11),
+(246, 140, 1, 'Equipamento adicionado', '', '2024-06-20 17:11:27', 1, 11),
+(247, 141, 1, 'Equipamento adicionado', '', '2024-06-20 17:12:02', 1, 11),
+(248, 142, 1, 'Equipamento adicionado', '', '2024-06-20 17:13:22', 1, 11),
+(249, 143, 1, 'Equipamento adicionado', '', '2024-06-20 17:14:03', 1, 11),
+(250, 144, 1, 'Equipamento adicionado', '', '2024-06-20 17:15:10', 1, 11),
+(251, 145, 1, 'Equipamento adicionado', '', '2024-06-20 17:15:42', 1, 11),
+(252, 146, 1, 'Equipamento adicionado', '', '2024-06-20 17:17:14', 1, 11),
+(253, 147, 1, 'Equipamento adicionado', '', '2024-06-20 17:17:59', 1, 11),
+(254, 148, 1, 'Equipamento adicionado', '', '2024-06-20 17:18:43', 1, 11),
+(255, 149, 1, 'Equipamento adicionado', '', '2024-06-20 17:19:36', 1, 11),
+(256, 150, 1, 'Equipamento adicionado', '', '2024-06-20 17:20:27', 1, 11),
+(257, 151, 1, 'Equipamento adicionado', '', '2024-06-20 17:21:24', 1, 11),
+(258, 152, 1, 'Equipamento adicionado', '', '2024-06-20 17:22:21', 1, 11),
+(259, 153, 1, 'Equipamento adicionado', '', '2024-06-20 17:23:04', 1, 11),
+(260, 154, 1, 'Equipamento adicionado', '', '2024-06-20 17:23:47', 1, 11),
+(261, 155, 1, 'Equipamento adicionado', '', '2024-06-20 17:25:15', 1, 11),
+(262, 156, 1, 'Equipamento adicionado', '', '2024-06-20 17:27:10', 1, 11),
+(263, 157, 1, 'Equipamento adicionado', '', '2024-06-20 17:28:03', 1, 11);
 
 -- --------------------------------------------------------
 
@@ -224,7 +290,7 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (59, 1551, 66, '27b0e3c40a8d13ee7111bd1178add507.jpg', '', '2024-06-18 12:14:27', 1),
 (60, 1547, 90, 'b6935c329a4ecdaf55a0b2c09ac44f34.jpg', 'Entrega no dia 24 de Maio de 2024', '2024-06-18 12:22:02', 1),
 (61, 1538, 81, 'cdfc187298a3f7113d787fb10174f5d0.jpg', 'Entregue no dia 12 de Abril de 2024', '2024-06-18 12:34:02', 1),
-(62, 1541, 83, 'e20eb50d7c34a76a71efc9bc962c67a7.jpg', 'Entregue no dia 12 de Abril de 2024', '2024-06-18 12:36:14', 1),
+(62, 1541, 83, 'e20eb50d7c34a76a71efc9bc962c67a7.jpg', 'Entregue no dia 12 de Abril de 2024', '2024-06-18 12:36:14', 0),
 (63, 1532, 76, '857aaecbc7de07759980bab35167feca.jpg', 'Entregue no dia 09 de Abril de 2024', '2024-06-18 12:39:03', 1),
 (64, 1537, 80, '05f67a419158cb66dce47ad9a526f31a.jpg', 'Entregue no dia 05 de Abril de 2024', '2024-06-18 12:42:03', 1),
 (65, 1533, 77, '4102894b8a3f3973a34c0134b1a31019.jpg', 'Entregue no dia 18 de Março de 2024', '2024-06-18 12:48:50', 1),
@@ -238,7 +304,11 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (73, 1546, 89, '11d049e01493076976e0a2475bc73dd7.jpg', 'Entrega sem Protocolo', '2024-06-19 14:12:28', 1),
 (74, 1522, 63, '', 'Operadora relata que o cliente não ouve ela. Várias ligações com inteferência', '2024-06-19 14:57:26', 2),
 (75, 1522, 43, '1711a49656acb900231acd24c5cb5b67.jpg', '', '2024-06-19 14:59:36', 1),
-(76, 1552, 46, '9fe201b0a97192dc6b2e8fd059b99181.jpg', '', '2024-06-19 15:23:04', 1);
+(76, 1552, 46, '9fe201b0a97192dc6b2e8fd059b99181.jpg', '', '2024-06-19 15:23:04', 1),
+(77, 1556, 92, '28148d2470e5e9b50c3a4a027d423afe.jpg', 'Entrega no dia 28 de março de 2024', '2024-06-20 10:05:23', 1),
+(78, 1541, 83, '2e2e4905e4115cf7e01aa3a0426f1ba5.jpg', 'Fone apresenta Avaria no cabo', '2024-06-20 11:25:32', 2),
+(79, 1541, 58, 'ca00289ad9bffebf306b2d49cb12c8f9.jpg', 'Controle de comandos quebrado', '2024-06-20 11:27:47', 1),
+(80, 1559, 2, 'e3b4e508020f44121f5eba4e8ec8ec30.jpg', '', '2024-06-20 15:53:22', 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +333,7 @@ CREATE TABLE `equipamento` (
 
 INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecreated`, `status`, `tipo`, `codigoruta`) VALUES
 (1, 'Topuse', 'G57969', '0000151', '2024-05-27 17:03:02', 1, 8, 444),
-(2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 1, 8, 444),
+(2, 'Unixtron', '180600062', '0000423', '2024-05-28 09:36:54', 2, 8, 444),
 (4, 'Paltronics', '', '0000220', '2024-05-28 12:04:54', 3, 8, 444),
 (7, 'Unixtron', '240500883', '7900375', '2024-06-03 10:16:12', 2, 8, 444),
 (8, 'Paltronics', '', '0000404', '2024-06-03 12:33:29', 3, 8, 444),
@@ -300,7 +370,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (55, 'Unixtrom', '180600062', '0000982', '2024-06-12 14:02:40', 1, 8, 444),
 (56, 'Unixtrom', '210702723', '0003378', '2024-06-12 14:04:35', 1, 8, 444),
 (57, 'Unixtrom', '176468', '0000499', '2024-06-12 14:06:31', 1, 8, 444),
-(58, 'Unixtrom', '180600565', '0001082', '2024-06-12 14:07:41', 1, 8, 444),
+(58, 'Unixtrom', '180600565', '0001082', '2024-06-12 14:07:41', 2, 8, 444),
 (59, 'Paltronics', '', '0000555', '2024-06-12 14:36:55', 3, 8, 444),
 (60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 1, 8, 444),
 (61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 1, 8, 444),
@@ -311,7 +381,6 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (66, 'Paltronics', '', '0000251', '2024-06-14 16:08:50', 2, 8, 444),
 (67, 'Teste Mouse', '', '36', '2024-06-17 12:00:47', 3, 9, 444),
 (68, 'Teclado', 'teste teclado', '221', '2024-06-17 13:46:24', 3, 10, 444),
-(69, 'Samsumg', 'teste', '321', '2024-06-17 13:54:58', 3, 11, 444),
 (70, 'TopUse', 'F06457', '0023988', '2024-06-17 15:24:29', 3, 8, 444),
 (71, 'Paltronics', '', '0000456', '2024-06-18 08:58:41', 2, 8, 444),
 (73, 'TopUse', 'F06477', '0000946', '2024-06-18 10:29:37', 2, 8, 444),
@@ -324,7 +393,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (80, 'Paltronics', '', '0001365', '2024-06-18 10:44:51', 2, 8, 444),
 (81, 'TopUse', '370044', '0003356', '2024-06-18 10:45:59', 2, 8, 444),
 (82, 'Unixtron', '', '0001315', '2024-06-18 10:46:38', 1, 8, 444),
-(83, 'Paltronics', '', '0000335', '2024-06-18 10:47:58', 2, 8, 444),
+(83, 'Paltronics', '', '0000335', '2024-06-18 10:47:58', 3, 8, 444),
 (84, 'Paltronics', '', '0001198', '2024-06-18 10:51:38', 2, 8, 444),
 (85, 'Unixtron', '177314', '0000792', '2024-06-18 11:20:53', 3, 8, 444),
 (86, 'Paltronics', '', '0000444', '2024-06-18 11:52:59', 2, 8, 444),
@@ -332,7 +401,72 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (88, 'TopUse', 'F06475', '0001348', '2024-06-18 11:53:57', 2, 8, 444),
 (89, 'TopUse', 'A72890', '0000229', '2024-06-18 11:54:34', 2, 8, 444),
 (90, 'Paltronics', '', '0023934', '2024-06-18 12:19:40', 2, 8, 444),
-(91, 'Unixtron', '220103161', '000437', '2024-06-19 15:20:55', 3, 8, 444);
+(91, 'Unixtron', '220103161', '000437', '2024-06-19 15:20:55', 3, 8, 444),
+(92, 'Unixtron', '201206422', '0018286', '2024-06-20 10:00:22', 2, 8, 444),
+(94, 'LG', '109SP2K35693', '003885', '2024-06-20 14:53:44', 1, 11, 444),
+(95, 'TopUse', 'F07664', '0009840', '2024-06-20 14:58:28', 1, 8, 444),
+(96, 'LG', '110SPLC3072', '004217', '2024-06-20 15:17:10', 1, 11, 444),
+(97, 'LG', '110SPXV2G778', '004414', '2024-06-20 15:20:03', 1, 11, 444),
+(98, 'Unixtron', '210805899', '0000270', '2024-06-20 15:52:43', 3, 8, 444),
+(99, 'LG', '109SPMZ35771', '004036', '2024-06-20 15:57:13', 1, 11, 444),
+(100, 'LG', '109PHG35809', '004598', '2024-06-20 15:58:03', 1, 11, 444),
+(101, 'LG', '110SPVH2G735', '003934', '2024-06-20 16:08:18', 1, 11, 444),
+(102, 'LG', '109SPRW35734', '003882', '2024-06-20 16:09:08', 1, 11, 444),
+(103, 'LG', '110SPED13052', '004000', '2024-06-20 16:09:55', 1, 11, 444),
+(104, 'LG', '109SPXV35826', '005347', '2024-06-20 16:11:11', 1, 11, 444),
+(105, 'LG', '004SPDTG2930', '001264', '2024-06-20 16:12:00', 1, 11, 444),
+(106, 'LG', '110SPTM2G697', '004031', '2024-06-20 16:15:16', 1, 11, 444),
+(107, 'LG', '111SPQJ1S284', '002443', '2024-06-20 16:16:33', 1, 11, 444),
+(108, 'LG', '111SPED1S292', '002451', '2024-06-20 16:17:43', 1, 11, 444),
+(109, 'LG', '110SPFX12723', '003920', '2024-06-20 16:18:46', 1, 11, 444),
+(110, 'LG', '109SPMZ35747', '004012', '2024-06-20 16:19:52', 1, 11, 444),
+(111, 'LG', '110SPMZ13075', '003933', '2024-06-20 16:20:34', 1, 11, 444),
+(112, 'LG', '110SPFX13155', '004435', '2024-06-20 16:22:47', 1, 11, 444),
+(113, 'LG', '112SPYR0Z354', '001087', '2024-06-20 16:23:28', 1, 11, 444),
+(114, 'LG', '111SPBF1S205', '002452', '2024-06-20 16:24:02', 1, 11, 444),
+(115, 'LG', '001SPVHH8055', '001347', '2024-06-20 16:25:33', 1, 11, 444),
+(116, 'Acer', 'ETLTY0800911206C3D4200', '004623', '2024-06-20 16:29:54', 1, 11, 444),
+(117, 'Acer', 'ETLTJ0D0091120B1548500', '005146', '2024-06-20 16:31:18', 1, 11, 444),
+(118, 'Acer', 'ETLBF08011028008F49800', '005367', '2024-06-20 16:32:07', 1, 11, 444),
+(119, 'Acer', 'ETLTY08009112071FE4200', '004648', '2024-06-20 16:33:25', 1, 11, 444),
+(120, 'Acer', 'ETLTY0800911206BDB4200', '004615', '2024-06-20 16:34:05', 1, 11, 444),
+(121, 'Acer', 'ETLTY080091120D8764200', '005152', '2024-06-20 16:37:23', 1, 11, 444),
+(122, 'Acer', 'ETLTY0D0091120B0DC8500', '004018', '2024-06-20 16:38:28', 1, 11, 444),
+(123, 'Acer', 'ETLBF08011023001C619800', '005399', '2024-06-20 16:41:34', 1, 11, 444),
+(124, 'Acer', 'ETLTJ0D00911200B1D08500', '005157', '2024-06-20 16:42:30', 1, 11, 444),
+(125, 'Acer', 'ETLTY080091120D86E4200', '004640', '2024-06-20 16:43:47', 1, 11, 444),
+(126, 'Acer', 'ETLTJ0D0091120B1E98500', '005153', '2024-06-20 16:44:52', 1, 11, 444),
+(127, 'Acer', 'ETLBF0801102301B589800', '005698', '2024-06-20 16:45:44', 1, 11, 444),
+(128, 'Acer', 'ETLBF0801102301C7B9800', '004829', '2024-06-20 16:47:43', 1, 11, 444),
+(129, 'Acer', 'ETLTY080091120D8394200', '005155', '2024-06-20 16:48:39', 1, 11, 444),
+(130, 'Acer', 'ETLTY0800911206C414200', '005148', '2024-06-20 16:49:38', 1, 11, 444),
+(131, 'Acer', 'ETLBF08011008015E49800', '004422', '2024-06-20 16:50:45', 1, 11, 444),
+(132, 'Acer', 'ETLTY0D0091120B0F08500', '004042', '2024-06-20 16:52:51', 1, 11, 444),
+(133, 'DELL', 'BR0D644F075918BB2D1M', '003908', '2024-06-20 16:56:04', 1, 11, 444),
+(134, 'DELL', 'BR0D644F0759189C03YM', '005145', '2024-06-20 16:59:31', 1, 11, 444),
+(135, 'KMEX', '05A010008274', '005252', '2024-06-20 17:03:27', 1, 11, 444),
+(136, 'KMEX', '05A010008303', '000189', '2024-06-20 17:04:32', 1, 11, 444),
+(137, 'BRAWIEW', '7898441086041', '000575', '2024-06-20 17:07:08', 1, 11, 444),
+(138, 'BENQ', 'ETR5B02246SL0', '004197', '2024-06-20 17:08:19', 1, 11, 444),
+(139, 'BENQ', 'ETR5B02298SL0', '004024', '2024-06-20 17:08:55', 1, 11, 444),
+(140, 'SAMSUMG', 'CM16HXIS302010F', '001448', '2024-06-20 17:11:27', 1, 11, 444),
+(141, 'SAMSUMG', 'CM16HXIS302175J', '08609', '2024-06-20 17:12:02', 1, 11, 444),
+(142, 'SAMSUMG', 'PU16HXJB205090T', '005820', '2024-06-20 17:13:22', 1, 11, 444),
+(143, 'SAMSUMG', 'CM16HXGS301857Y', '000250', '2024-06-20 17:14:03', 1, 11, 444),
+(144, 'SAMSUMG', 'PU16HXKB207336N', '004669', '2024-06-20 17:15:10', 1, 11, 444),
+(145, 'SAMSUMG', 'CM16HXHS301852L', '005830', '2024-06-20 17:15:42', 1, 11, 444),
+(146, 'SAMSUMG', 'CM16HXGS301736R', '005078', '2024-06-20 17:17:14', 1, 11, 444),
+(147, 'SAMSUMG', 'PU16HXKB211794F', '000921', '2024-06-20 17:17:59', 1, 11, 444),
+(148, 'SAMSUMG', 'CM16HXGS300165Y', '001223', '2024-06-20 17:18:43', 1, 11, 444),
+(149, 'SAMSUMG', 'CM16HXHS301289M', '08615', '2024-06-20 17:19:36', 1, 11, 444),
+(150, 'SAMSUMG', 'CM16HXGS302168B', '001410', '2024-06-20 17:20:27', 1, 11, 444),
+(151, 'SAMSUMG', 'CM16HXHS300143X', '08604', '2024-06-20 17:21:24', 1, 11, 444),
+(152, 'SAMSUMG', 'CM16HXGS301856Z', '000370', '2024-06-20 17:22:21', 1, 11, 444),
+(153, 'SAMSUMG', 'CM16HXIS300230A', '005374', '2024-06-20 17:23:04', 1, 11, 444),
+(154, 'SAMSUMG', 'CM16HXIS300218T', '005381', '2024-06-20 17:23:47', 1, 11, 444),
+(155, 'SAMSUMG', 'CM16HXGS302139F', '001293', '2024-06-20 17:25:15', 1, 11, 444),
+(156, 'SAMSUMG', 'CM16HXGS300058H', '03098', '2024-06-20 17:27:10', 1, 11, 444),
+(157, 'SAMSUMG', 'CM16HXIS301852L', '06425', '2024-06-20 17:28:03', 1, 11, 444);
 
 -- --------------------------------------------------------
 
@@ -366,7 +500,8 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (12, 'controle', 'Controle controleMast', 1),
 (13, 'Aprendiz', 'Aprendiz controleMast', 1),
 (14, 'Supervisor', 'Supervisor controleMast', 1),
-(15, 'Monitor', 'Monitor controleMast', 1);
+(15, 'Gestor', 'Monitor controleMast', 1),
+(16, 'Computador', 'Computador controleMast', 1);
 
 -- --------------------------------------------------------
 
@@ -389,21 +524,22 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(484, 1, 1, 1, 1, 1, 1),
-(485, 1, 2, 1, 1, 1, 1),
-(486, 1, 3, 1, 1, 1, 1),
-(487, 1, 4, 1, 1, 1, 1),
-(488, 1, 5, 1, 1, 1, 1),
-(489, 1, 6, 1, 1, 1, 1),
-(490, 1, 7, 1, 1, 1, 1),
-(491, 1, 8, 1, 1, 1, 1),
-(492, 1, 9, 1, 1, 1, 1),
-(493, 1, 10, 1, 1, 1, 1),
-(494, 1, 11, 1, 1, 1, 1),
-(495, 1, 12, 1, 1, 1, 1),
-(496, 1, 13, 1, 1, 1, 1),
-(497, 1, 14, 1, 1, 1, 1),
-(498, 1, 15, 1, 1, 1, 1);
+(499, 1, 1, 1, 1, 1, 1),
+(500, 1, 2, 1, 1, 1, 1),
+(501, 1, 3, 1, 1, 1, 1),
+(502, 1, 4, 1, 1, 1, 1),
+(503, 1, 5, 1, 1, 1, 1),
+(504, 1, 6, 1, 1, 1, 1),
+(505, 1, 7, 1, 1, 1, 1),
+(506, 1, 8, 1, 1, 1, 1),
+(507, 1, 9, 1, 1, 1, 1),
+(508, 1, 10, 1, 1, 1, 1),
+(509, 1, 11, 1, 1, 1, 1),
+(510, 1, 12, 1, 1, 1, 1),
+(511, 1, 13, 1, 1, 1, 1),
+(512, 1, 14, 1, 1, 1, 1),
+(513, 1, 15, 1, 1, 1, 1),
+(514, 1, 16, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -431,12 +567,12 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefono`, `email_user`, `rolid`, `codigoruta`, `modelo`, `datecreated`, `status`) VALUES
 (1, 'Miguel', 'Tafur', '1102387002', 2147483647, 'miguelmita03@gmail.com', 1, 444, 1, '2022-11-12 00:00:00', 1),
-(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 4, 444, 1, '2024-05-23 17:48:42', 1),
+(1493, 'Kylvyk Junior', 'Silva Ferreira', '011965', 37996639874, 'kylvyk.junior@globalcob.com.br', 3, 444, 1, '2024-05-23 17:48:42', 1),
 (1494, 'Larissa Kerolyn', 'Mendes Do Carmo', '017994', 37984262426, '', 4, 444, 1, '2024-05-24 16:55:35', 1),
 (1495, 'Ana Paula', 'Da Silva', '01685', 37984025197, '', 4, 444, 1, '2024-05-24 16:56:41', 1),
 (1497, 'Ana Alice', 'Miranda Basilio', '01624', 0, '', 5, 444, 1, '2024-05-27 13:17:24', 1),
 (1498, 'Anna Clara', 'Ribeiro De Oliveira', '01753', 0, '', 5, 444, 1, '2024-05-27 13:19:30', 0),
-(1500, 'Matheus Henrique', 'Alves Bispo', '010341', 0, '', 4, 444, 1, '2024-06-03 10:17:21', 1),
+(1500, 'Matheus Henrique', 'Alves Bispo', '010341', 0, '', 3, 444, 1, '2024-06-03 10:17:21', 1),
 (1501, 'Nathalia Patricia', 'Alves', '013313', 0, '', 5, 444, 1, '2024-06-03 12:30:20', 1),
 (1502, 'Admin', 'Admin', '013301', 0, 'admin@cm.com', 1, 444, 1, '2024-06-03 14:08:17', 1),
 (1503, 'Paloma', 'Aparecida Nunes', '013333', 0, '', 5, 444, 1, '2024-06-03 16:07:08', 1),
@@ -454,7 +590,7 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1520, 'Jose Inacio', 'Camargos Fonseca', '01419', 0, '', 5, 444, 2, '2024-06-14 09:28:34', 1),
 (1522, 'GISLENE MARIA', 'DOS SANTOS MARRA', '01929', 0, '', 5, 444, 1, '2024-06-14 11:56:44', 1),
 (1525, 'BRUNA RAFAELA', 'DA SILVA', '011013', 0, '', 5, 444, 1, '2024-06-17 10:10:47', 1),
-(1526, 'Samara', 'L', '98789', 0, '', 3, 444, 1, '2024-06-17 14:04:42', 1),
+(1526, 'Samara', 'Aa', '98789', 0, '', 7, 444, 1, '2024-06-17 14:04:42', 1),
 (1527, 'ANA LUIZA', 'GONCALVEZ GOES', '01638', 0, '', 5, 444, 1, '2024-06-17 15:38:46', 1),
 (1528, 'ANA LAURA', 'GOMES NEVES', '01589', 0, '', 5, 444, 1, '2024-06-17 17:26:01', 1),
 (1529, 'CAMILA IOLANDA', 'GUALBERTO DINIZ', '01727', 0, '', 5, 444, 1, '2024-06-17 17:27:34', 1),
@@ -464,7 +600,7 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1533, 'FREDERICO', 'CUNHA DE SOUZA', '013322', 0, '', 5, 444, 1, '2024-06-17 17:30:02', 1),
 (1534, 'GESSICA', 'RODRIGUES DE SOUSA', '013286', 0, '', 5, 444, 2, '2024-06-17 17:30:23', 1),
 (1535, 'GLADIS CRISTINA', 'DE SOUZA SANTOS', '012878', 0, '', 5, 444, 1, '2024-06-17 17:30:45', 1),
-(1536, 'GRAZIELE MARIA', 'DE PADUA VIEIRA', '015234', 0, '', 4, 444, 1, '2024-06-17 17:32:11', 1),
+(1536, 'GRAZIELE MARIA', 'DE PADUA VIEIRA', '015234', 0, '', 8, 444, 1, '2024-06-17 17:32:11', 1),
 (1537, 'JORDANIA', 'APARECIDA ALVES', '014334', 0, '', 5, 444, 1, '2024-06-17 17:33:12', 1),
 (1538, 'JORDANIA', 'VIRGILIO DA SILVA', '01769', 0, '', 5, 444, 1, '2024-06-17 17:33:38', 1),
 (1539, 'JULIA', 'SOUSA SANTOS', '013013', 0, '', 5, 444, 1, '2024-06-17 17:34:00', 1),
@@ -480,7 +616,9 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1549, 'ANGELICA', 'APARECIDA DE OLIVEIRA', '01839', 0, '', 5, 444, 1, '2024-06-18 10:07:27', 1),
 (1550, 'NATHALIA', 'GOMES ROCHA', '018287', 0, '', 4, 444, 1, '2024-06-18 10:38:22', 1),
 (1551, 'MARIA GABRIELA', 'MAIA BOMFIM', '013147', 0, '', 5, 444, 1, '2024-06-18 12:14:02', 1),
-(1552, 'ELIDA CRISTINA', 'DE PAULA', '010543', 0, '', 5, 444, 2, '2024-06-19 15:22:36', 1);
+(1552, 'ELIDA CRISTINA', 'DE PAULA', '010543', 0, '', 5, 444, 2, '2024-06-19 15:22:36', 1),
+(1556, 'YURY ALEXANDRE', 'PEREIRA DA SILVA VAZ', '013323', 0, '', 6, 444, 1, '2024-06-20 08:44:50', 1),
+(1559, 'CAROLINE', 'DE CASTRO CESARIO', '013125', 0, '', 5, 444, 1, '2024-06-20 15:40:48', 1);
 
 -- --------------------------------------------------------
 
@@ -504,7 +642,10 @@ INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 (2, 'Gerente', 'Gerente ControleMast', 1),
 (3, 'Coordinador', 'Coordinador controlMast', 1),
 (4, 'Lider', 'Lider', 1),
-(5, 'Operação', 'Operação', 1);
+(5, 'Operação', 'Operação', 1),
+(6, 'Aprendiz', 'Aprendiz', 1),
+(7, 'Supervisor', 'Supervisor', 1),
+(8, 'Gestor de Qualidade', 'Gestor de Qualidade', 1);
 
 -- --------------------------------------------------------
 
@@ -596,19 +737,19 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 
 --
 -- AUTO_INCREMENT de la tabla `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -620,19 +761,19 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=499;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=515;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1553;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1560;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT de la tabla `ruta`
