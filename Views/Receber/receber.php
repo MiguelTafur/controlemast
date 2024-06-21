@@ -14,7 +14,7 @@
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/entregue"><?= $data['page_title2'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/receber"><?= $data['page_title2'] ?></a></li>
     </ul>
   </div>
 

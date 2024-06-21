@@ -26,25 +26,35 @@ class Dashboard extends Controllers{
 		$data['lideres'] = $this->model->cantPersonas(RLIDER);
 		$data['coordinadores'] = $this->model->cantPersonas(RCOORDINADOR);
 		$data['gerentes'] = $this->model->cantPersonas(RGERENTE);
+		
+		$data['page_functions_js'] = "functions_dasboard.js";
 
+		$this->views->getView($this,"dashboard",$data);
+	}
+
+	public function equipamentos()
+	{
 		//cantidad total de equipamentos dependiento del "Tipo"
 		$data['fones'] = $this->model->cantEquipamentos(MFONE);
 		$data['mouses'] = $this->model->cantEquipamentos(MMOUSE);
 		$data['teclados'] = $this->model->cantEquipamentos(MTECLADO);
 		$data['telas'] = $this->model->cantEquipamentos(MTELA);
 		$data['computadores'] = $this->model->cantEquipamentos(MCOMPUTADOR);
-		
-		$data['page_functions_js'] = "functions_dasboard.js";
 
-		$this->views->getView($this,"dashboardUsuarios",$data);
-	}
-
-	public function dashboardEquipamentos()
-	{
 		$data['page_tag'] = "Dashboard - Equipamentos";
 		$data['page_title'] = "Dashboard - Equipamentos";
 		$data['page_name'] = "Equipamentos";
-		$this->views->getView($this,"dashboardEquipamentos",$data);
+		$data['page_functions_js'] = "functions_dasboard.js";
+		$this->views->getView($this,"equipamentos",$data);
+	}
+
+	public function controle()
+	{
+		$data['page_tag'] = "Dashboard - Controle";
+		$data['page_title'] = "Dashboard - Controle";
+		$data['page_name'] = "Controle";
+		$data['page_functions_js'] = "functions_dasboard.js";
+		$this->views->getView($this,"controle",$data);
 	}
 
 	/*public function ventasMes()

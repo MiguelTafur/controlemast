@@ -1,4 +1,4 @@
-<?php headerAdmin($data); getModal('modalDashboard',$data);?>
+<?php headerAdmin($data); getModal('modalequipamentos',$data);?>
     <main class="app-content">
       <div class="app-title">
         <div>
@@ -6,7 +6,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a href="<?= base_url(); ?>/dashboard">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?= base_url(); ?>/equipamentos">Dashboard</a></li>
         </ul>
       </div>
 
@@ -81,6 +81,7 @@
         </div>
         <?php } ?>
       </div>
+      
     </main>
 <?php footerAdmin($data); ?>
     

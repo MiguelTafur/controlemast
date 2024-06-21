@@ -17,9 +17,9 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboardUsuarios"><i class="icon fa fa-circle-o"></i> Usuários</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboardEquipamentos"><i class="icon fa fa-circle-o"></i> Equipamentos</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboardControle"><i class="icon fa fa-circle-o"></i> Controle</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboard"><i class="icon fa fa-circle-o"></i> Usuários</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboard/equipamentos"><i class="icon fa fa-circle-o"></i> Equipamentos</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/dashboard/controle"><i class="icon fa fa-circle-o"></i> Controle</a></li>
             </ul>
         </li>
         <?php } ?>
