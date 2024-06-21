@@ -16,13 +16,13 @@ class Dashboard extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/controle');
 		}
-		$data['page_id'] = 2;
-		$data['page_tag'] = "Dashboard - controleMast";
-		$data['page_title'] = "Dashboard - controleMast";
-		$data['page_name'] = "controleMast";
+		$data['page_tag'] = "Dashboard - Usurarios";
+		$data['page_title'] = "Dashboard - Usurarios";
+		$data['page_name'] = "Usurarios";
 
 		//cantidad total de usuarios activos dependiento del "Rol"
 		$data['operadores'] = $this->model->cantPersonas(ROPERACAO);
+		$data['aprendizes'] = $this->model->cantPersonas(RAPRENDIZ);
 		$data['lideres'] = $this->model->cantPersonas(RLIDER);
 		$data['coordinadores'] = $this->model->cantPersonas(RCOORDINADOR);
 		$data['gerentes'] = $this->model->cantPersonas(RGERENTE);
@@ -32,37 +32,19 @@ class Dashboard extends Controllers{
 		$data['mouses'] = $this->model->cantEquipamentos(MMOUSE);
 		$data['teclados'] = $this->model->cantEquipamentos(MTECLADO);
 		$data['telas'] = $this->model->cantEquipamentos(MTELA);
+		$data['computadores'] = $this->model->cantEquipamentos(MCOMPUTADOR);
 		
+		$data['page_functions_js'] = "functions_dasboard.js";
 
-		$this->views->getView($this,"dashboard",$data);
+		$this->views->getView($this,"dashboardUsuarios",$data);
+	}
 
-		/*$data['usuarios'] = $this->model->cantUsuarios();
-		
-		$data['prestamos'] = $this->model->cantPrestamos();
-		$data['prestamosFinalizados'] = $this->model->cantPrestamosFinalizados();
-		$data['cartera'] = $this->model->selectCartera();
-		
-		$data['ultimosPrestamo'] = $this->model->ultimosPrestamo($ruta);
-		$anio = date("Y");
-		$mes = date("m");
-		$data['ventasMDia'] = $this->model->selectVentasMes($anio,$mes);
-		$data['CobradoMDia'] = $this->model->selectCobradoMes($anio,$mes);
-		$data['gastosMDia'] = $this->model->selectGastosMes($anio,$mes);
-
-		$data['ventasAnio'] = $this->model->selectVentasAnio($anio);
-		$data['cobradoAnio'] = $this->model->selectCobradoAnio($anio);
-		$data['gastosAnio'] = $this->model->selectGastosAnio($anio);
-
-		$data['totalResumen'] = $this->model->selectResumenAnterior();
-		if(!empty($data['totalResumen']))
-		{
-			$data['totalResumen']['cartera'] = $data['totalResumen']['total'] + ($data['cartera']['total']);
-		}
-		$data['pagamentos'] = $this->model->selectDatePagoPrestamo();
-
-		$data['page_functions_js'] = "functions_dashboard.js";
-		*/
-
+	public function dashboardEquipamentos()
+	{
+		$data['page_tag'] = "Dashboard - Equipamentos";
+		$data['page_title'] = "Dashboard - Equipamentos";
+		$data['page_name'] = "Equipamentos";
+		$this->views->getView($this,"dashboardEquipamentos",$data);
 	}
 
 	/*public function ventasMes()

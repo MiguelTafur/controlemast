@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-06-2024 a las 22:36:31
+-- Tiempo de generación: 21-06-2024 a las 18:28:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -234,7 +234,40 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (260, 154, 1, 'Equipamento adicionado', '', '2024-06-20 17:23:47', 1, 11),
 (261, 155, 1, 'Equipamento adicionado', '', '2024-06-20 17:25:15', 1, 11),
 (262, 156, 1, 'Equipamento adicionado', '', '2024-06-20 17:27:10', 1, 11),
-(263, 157, 1, 'Equipamento adicionado', '', '2024-06-20 17:28:03', 1, 11);
+(263, 157, 1, 'Equipamento adicionado', '', '2024-06-20 17:28:03', 1, 11),
+(264, 158, 1, 'Equipamento adicionado', '', '2024-06-21 08:45:19', 1, 16),
+(265, 159, 1, 'Equipamento adicionado', '', '2024-06-21 08:50:32', 1, 16),
+(266, 160, 1, 'Equipamento adicionado', '', '2024-06-21 08:51:19', 1, 16),
+(267, 161, 1, 'Equipamento adicionado', '', '2024-06-21 08:52:18', 1, 16),
+(268, 162, 1, 'Equipamento adicionado', '', '2024-06-21 08:53:32', 1, 16),
+(269, 163, 1, 'Equipamento adicionado', '', '2024-06-21 08:54:16', 1, 16),
+(270, 164, 1, 'Equipamento adicionado', '', '2024-06-21 08:55:18', 1, 16),
+(271, 165, 1, 'Equipamento adicionado', '', '2024-06-21 09:04:06', 1, 16),
+(272, 166, 1, 'Patrimônio TK', '', '2024-06-21 09:06:08', 1, 16),
+(273, 167, 1, 'Patrimônio TK', '', '2024-06-21 09:12:06', 1, 16),
+(274, 168, 1, 'Equipamento adicionado', '', '2024-06-21 09:13:16', 1, 16),
+(275, 169, 1, 'Equipamento adicionado', '', '2024-06-21 09:16:53', 1, 16),
+(276, 170, 1, 'Equipamento adicionado', '', '2024-06-21 09:21:31', 1, 16),
+(277, 171, 1, 'Equipamento adicionado', '', '2024-06-21 09:22:07', 1, 16),
+(278, 172, 1, 'Equipamento adicionado', '', '2024-06-21 09:23:03', 1, 16),
+(279, 173, 1, 'Equipamento adicionado', '', '2024-06-21 09:23:33', 1, 16),
+(280, 174, 1, 'Equipamento adicionado', '', '2024-06-21 09:24:09', 1, 16),
+(281, 175, 1, 'Equipamento adicionado', '', '2024-06-21 09:24:28', 1, 16),
+(282, 176, 1, 'Equipamento adicionado', '', '2024-06-21 09:24:48', 1, 16),
+(283, 177, 1, 'Equipamento adicionado', '', '2024-06-21 09:25:29', 1, 16),
+(284, 178, 1, 'Equipamento adicionado', '', '2024-06-21 09:25:53', 1, 16),
+(285, 179, 1, 'Equipamento adicionado', '', '2024-06-21 09:26:36', 1, 16),
+(286, 180, 1, 'Equipamento adicionado', '', '2024-06-21 09:27:26', 1, 16),
+(287, 181, 1, 'Equipamento adicionado', '', '2024-06-21 09:28:34', 1, 16),
+(288, 182, 1, 'Equipamento adicionado', '', '2024-06-21 09:29:02', 1, 16),
+(289, 183, 1, 'Equipamento adicionado', '', '2024-06-21 09:29:53', 1, 16),
+(290, 184, 1, 'Equipamento adicionado', '', '2024-06-21 09:30:14', 1, 16),
+(291, 185, 1, 'Equipamento adicionado', '', '2024-06-21 09:31:28', 1, 16),
+(292, 186, 1, 'Equipamento adicionado', '', '2024-06-21 09:31:59', 1, 16),
+(293, 187, 1, 'Equipamento adicionado', '', '2024-06-21 09:32:46', 1, 16),
+(294, 188, 1, 'Equipamento adicionado', '', '2024-06-21 09:34:04', 1, 16),
+(295, 189, 1, 'Equipamento adicionado', '', '2024-06-21 09:34:18', 1, 16),
+(296, 190, 1, 'Equipamento adicionado', '', '2024-06-21 09:34:41', 1, 16);
 
 -- --------------------------------------------------------
 
@@ -466,7 +499,40 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (154, 'SAMSUMG', 'CM16HXIS300218T', '005381', '2024-06-20 17:23:47', 1, 11, 444),
 (155, 'SAMSUMG', 'CM16HXGS302139F', '001293', '2024-06-20 17:25:15', 1, 11, 444),
 (156, 'SAMSUMG', 'CM16HXGS300058H', '03098', '2024-06-20 17:27:10', 1, 11, 444),
-(157, 'SAMSUMG', 'CM16HXIS301852L', '06425', '2024-06-20 17:28:03', 1, 11, 444);
+(157, 'SAMSUMG', 'CM16HXIS301852L', '06425', '2024-06-20 17:28:03', 1, 11, 444),
+(158, 'DELL', '00186715322588', '009100', '2024-06-21 08:45:19', 1, 16, 444),
+(159, 'Lenovo', '00180832137293', '008671', '2024-06-21 08:50:32', 1, 16, 444),
+(160, 'Lenovo', '', '008814', '2024-06-21 08:51:19', 1, 16, 444),
+(161, 'Lenovo', '00180832137379', '008787', '2024-06-21 08:52:18', 1, 16, 444),
+(162, 'Lenovo', '00180832137292', '008692', '2024-06-21 08:53:32', 1, 16, 444),
+(163, 'Lenovo', '00180832137211', '008723', '2024-06-21 08:54:16', 1, 16, 444),
+(164, 'DELL', '', '003983', '2024-06-21 08:55:18', 1, 16, 444),
+(165, 'DELL', '00186715289967', '008984', '2024-06-21 09:04:06', 1, 16, 444),
+(166, 'Hp', 'BRJ509M57C', '2646', '2024-06-21 09:06:08', 1, 16, 444),
+(167, 'Hp', 'BRJ133FJFL', '2937', '2024-06-21 09:12:05', 1, 16, 444),
+(168, 'DELL', '00186715289952', '008983', '2024-06-21 09:13:16', 1, 16, 444),
+(169, 'KMEX', '7898426845762', '000410', '2024-06-21 09:16:53', 1, 16, 444),
+(170, 'Nenhuma', 'GBD0047CK003333', '000182', '2024-06-21 09:21:31', 1, 16, 444),
+(171, 'Nenhuma', '', '004717', '2024-06-21 09:22:07', 1, 16, 444),
+(172, 'KMEX', '', '002361', '2024-06-21 09:23:03', 1, 16, 444),
+(173, 'Nenhuma', '', '004134', '2024-06-21 09:23:33', 1, 16, 444),
+(174, 'Nenhuma', '', '004881', '2024-06-21 09:24:09', 1, 16, 444),
+(175, 'Nenhuma', '', '004125', '2024-06-21 09:24:28', 1, 16, 444),
+(176, 'Nenhuma', '', '000973', '2024-06-21 09:24:48', 1, 16, 444),
+(177, 'Nenhuma', '', '005109', '2024-06-21 09:25:29', 1, 16, 444),
+(178, 'Nenhuma', '', '004872', '2024-06-21 09:25:53', 1, 16, 444),
+(179, 'Nenhuma', '', '0907', '2024-06-21 09:26:36', 1, 16, 444),
+(180, 'Nenhuma', '', '004158', '2024-06-21 09:27:26', 1, 16, 444),
+(181, 'Nenhuma', '', '003808', '2024-06-21 09:28:34', 1, 16, 444),
+(182, 'Nenhuma', '', '003987', '2024-06-21 09:29:02', 1, 16, 444),
+(183, 'Nenhuma', '', '003984', '2024-06-21 09:29:53', 1, 16, 444),
+(184, 'Nenhuma', '', '004112', '2024-06-21 09:30:14', 1, 16, 444),
+(185, 'Hp', '00186721306810', '010056', '2024-06-21 09:31:28', 1, 16, 444),
+(186, 'Nenhuma', '', '004476', '2024-06-21 09:31:59', 1, 16, 444),
+(187, 'Hp', '00186721877406', '011070', '2024-06-21 09:32:45', 1, 16, 444),
+(188, 'Hp', '', '010067', '2024-06-21 09:34:04', 1, 16, 444),
+(189, 'Hp', '', '010072', '2024-06-21 09:34:18', 1, 16, 444),
+(190, 'Hp', '', '010064', '2024-06-21 09:34:41', 1, 16, 444);
 
 -- --------------------------------------------------------
 
@@ -737,7 +803,7 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de la tabla `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
 
 --
 -- AUTO_INCREMENT de la tabla `controle`
@@ -749,7 +815,7 @@ ALTER TABLE `controle`
 -- AUTO_INCREMENT de la tabla `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -773,7 +839,7 @@ ALTER TABLE `persona`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT de la tabla `ruta`

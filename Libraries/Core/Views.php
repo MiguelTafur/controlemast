@@ -10,6 +10,7 @@
 			}else{
 				$view = "Views/".$controller."/".$view.".php";
 			}
+			//dep($view);exit;
 			require_once ($view);
 		}
 	}
