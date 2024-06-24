@@ -1,21 +1,21 @@
-<?php if($grafica = "gastosMes"){ $gastosMes = $data;?>
+<?php if($grafica = "usuariosInactivosMes"){ $usuariosInactivosMes = $data;?>
 
 <script>
     
-    Highcharts.chart('graficaMesGastos', {
+    Highcharts.chart('graficaMesUsuariosInactivos', {
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Gastos de <?= $gastosMes['mes'].' del '.$gastosMes['anio'] ?>'
+            text: 'Usuários Inactivos de <?= $usuariosInactivosMes['mes'].' de '.$usuariosInactivosMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total Gastos <?= SMONEY.' '.formatMoney($gastosMes['total']) ?>'
+            text: 'Total: <?= $usuariosInactivosMes['total']; ?>'
         },
         xAxis: {
             categories: [
                 <?php 
-                foreach ($gastosMes['gastos'] as $dia) {
+                foreach ($usuariosInactivosMes['usuarios'] as $dia) {
                     echo $dia['dia'].",";
                 }
                 ?>
@@ -23,7 +23,7 @@
         },
         yAxis: {
             title: {
-                text: 'CREDIMAST'
+                text: 'GLOBALCOB'
             }
         },
         plotOptions: {
@@ -38,8 +38,8 @@
             name: '',
             data: [
                 <?php 
-                foreach ($gastosMes['gastos'] as $dia) {
-                    echo $dia['gasto'].",";
+                foreach ($usuariosInactivosMes['usuarios'] as $dia) {
+                    echo $dia['usuario'].",";
                 }
                 ?>
             ]

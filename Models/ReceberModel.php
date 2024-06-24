@@ -121,10 +121,19 @@ class ReceberModel extends Mysql
         $request_insert = $this->insert($query_insert, $arrData);
 		
         if($request_insert) {
+			//Actualizar el estado del usuario
+			if($this->listEstado !== 2) {
+				$query_update_usuario = "UPDATE persona SET status = ? WHERE idpersona = $this->listUsuario";
+				$arrData = array(0);
+				$request_update_usuario = $this->update($query_update_usuario, $arrData);
+			}
+
+			//Actualiza el estado del control
 			$query_update_controle = "UPDATE controle SET status = ? WHERE idcontrole = $idcontrole";
 			$arrDataControle = array(0);
 			$request_update_controle = $this->update($query_update_controle, $arrDataControle);
 
+			//Actualiza el estado del equipamento
             $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
 			if($check === 1) { $estado = 3; } else { $estado = 1;}
 

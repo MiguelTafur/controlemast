@@ -23,6 +23,7 @@ class DashboardModel extends Mysql
 		return $request['total'];
 	}
 
+	//Cantidad total de equiopamentos dependiendo del módulo
 	public function cantEquipamentos($tipo) 
 	{
 		$rutaId = $_SESSION['idRuta'];
@@ -30,6 +31,90 @@ class DashboardModel extends Mysql
 		$request = $this->select($sql);
 
 		return $request['total'];
+	}
+
+	//Traer los uauários inactivos
+	public function estadoUsuarios(int $estado)
+	{
+		$rutaId = $_SESSION['idRuta'];
+		if($estado === 1) {
+			$sql = "SELECT pe.matricula,
+					   pe.nombres,
+					   pe.apellidos,
+					   pe.datecreated,
+					   pe.rolid,
+					   pe.modelo,
+					   co.status,
+					   ro.nombrerol
+					FROM persona pe LEFT OUTER JOIN controle co
+					ON pe.idpersona = co.personaid 
+					LEFT OUTER JOIN rol ro
+					ON pe.rolid = ro.idrol
+					WHERE codigoruta = $rutaId AND pe.status != 0 AND (co.status != 3 || co.status != 4)
+					ORDER BY datecreated DESC LIMIT 6";
+		} else {
+			$sql = "SELECT pe.matricula,
+					   pe.nombres,
+					   pe.apellidos,
+					   pe.datecreated,
+					   pe.rolid,
+					   pe.modelo,
+					   co.status,
+					   ro.nombrerol
+					FROM persona pe LEFT OUTER JOIN controle co
+					ON pe.idpersona = co.personaid 
+					LEFT OUTER JOIN rol ro
+					ON pe.rolid = ro.idrol
+					WHERE codigoruta = $rutaId AND pe.status = 0 AND (co.status = 3 || co.status = 4)
+					ORDER BY datecreated DESC LIMIT 6";
+		}
+		
+		$request = $this->select_all($sql);
+		return $request;
+	}
+
+	//Gráfica mensual de usuarios 
+	public function selectUsuariosMes(int $anio, int $mes, int $estado)
+	{
+		$totalUsuariosMes = 0;
+		$arrUsuariosDias = array();
+		$rutaId = $_SESSION['idRuta'];
+		$dias = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
+		$n_dia = 1;
+		for ($i=0; $i < $dias; $i++)
+		{
+			$date = date_create($anio.'-'.$mes.'-'.$n_dia);
+			$fechaUsuario = date_format($date, "Y-m-d");
+			
+			if($estado === 1) 
+			{
+				$sql = "SELECT DAY(datecreated) as dia FROM persona WHERE DATE(datecreated) = '$fechaUsuario' AND codigoruta = $rutaId AND status != 0";
+				$usuarioDia = $this->select($sql);
+
+				$sqlTotal = "SELECT COUNT(*) as total FROM persona WHERE DATE(datecreated) = '$fechaUsuario' AND codigoruta = $rutaId AND status != 0 AND rolid != 1";
+				$usuarioDiaTotal = $this->select($sqlTotal);
+				$usuarioDiaTotal = $usuarioDiaTotal['total'];
+			} else {
+				$sql = "SELECT DAY(datecreated) as dia FROM persona WHERE DATE(datecreated) = '$fechaUsuario' AND codigoruta = $rutaId AND status = 0";
+				$usuarioDia = $this->select($sql);
+
+				$sqlTotal = "SELECT COUNT(*) as total FROM persona WHERE DATE(datecreated) = '$fechaUsuario' AND codigoruta = $rutaId AND status = 0 AND rolid != 1";
+				$usuarioDiaTotal = $this->select($sqlTotal);
+				$usuarioDiaTotal = $usuarioDiaTotal['total'];
+			}
+			
+
+			$usuarioDia['dia'] = $n_dia;
+			$usuarioDia['usuario'] = $usuarioDiaTotal;
+			$usuarioDia['usuario'] = $usuarioDia['usuario'] == "" ? 0 : $usuarioDia['usuario'];
+			$totalUsuariosMes += $usuarioDiaTotal;
+			array_push($arrUsuariosDias, $usuarioDia);
+			$n_dia++;
+
+		}
+		$meses = Meses();
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalUsuariosMes, 'usuarios' => $arrUsuariosDias);
+		return $arrData;
 	}
 
 	/*public function totalCartera($ruta,$fecha)

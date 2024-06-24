@@ -4417,6 +4417,8 @@ input[type="button"].btn-block {
   color: #495057;
   background-color: #FFF;
   border-color: #dee2e6 #dee2e6 #FFF;
+  text-decoration: underline;
+  font-style: italic;
 }
 
 .nav-tabs .dropdown-menu {
@@ -4432,7 +4434,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #FFF;
-  background-color: #009688;
+  background-color: var(--primario);
 }
 
 .nav-fill .nav-item {
