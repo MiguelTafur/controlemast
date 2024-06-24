@@ -119,8 +119,8 @@
           </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-ativos" role="tabpanel" aria-labelledby="pills-ativos-tab">
+              <!-- Tabla usuarios Activos -->
               <div class="table-responsive">
-                <!-- Tabla usuarios Activos -->
                 <table class="table table-striped mb-4">
                   <thead>
                     <tr class="text-center">
@@ -131,7 +131,7 @@
                       <th>Modelo</th>
                     </tr>
                   </thead>
-                  <tbody id="UsuariosInativos">
+                  <tbody>
                   <?php
                       foreach ($data['activos'] as $activo) 
                       {
@@ -176,7 +176,7 @@
                       <th>Cadastro</th>
                     </tr>
                   </thead>
-                  <tbody id="UsuariosInativos">
+                  <tbody>
                   <?php
                       foreach ($data['inactivos'] as $inactivo) 
                       {
@@ -211,7 +211,7 @@
                     ?>
                   </tbody>
                 </table>
-                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchUser()"><i class="fa fa-search" aria-hidden="true"></i> Procurar Usuário Inativo</button>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchUserI()"><i class="fa fa-search" aria-hidden="true"></i> Procurar Usuário Inativo</button>
               </div>
             </div>
           </div>

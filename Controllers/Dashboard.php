@@ -30,6 +30,7 @@ class Dashboard extends Controllers{
 
 		//Usuarios inactivos
 		$data['inactivos'] = $this->model->estadoUsuarios(0);
+
 		//Usuarios ctivos
 		$data['activos'] = $this->model->estadoUsuarios(1);
 
@@ -78,6 +79,88 @@ class Dashboard extends Controllers{
 		}
 	}
 
+	public function getUsuariosD()
+	{
+		if($_POST)
+		{
+			$arrayFechas = explode("-", $_POST['fecha']);
+			$fechaI = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[0])));
+			$fechaF = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[1])));
+			$ruta = $_SESSION['idRuta'];
+			$detalles = '';
+			//$dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+
+			$usuariosD = $this->model->selectUsuariosD($fechaI, $fechaF, $ruta, 1);
+
+			for ($i=0; $i < COUNT($usuariosD); $i++)
+			{ 
+				$ultimo = explode(" ", $usuariosD[$i]['apellidos']);
+				$usuariosD[$i]['nombres'] = strtoupper(strtok($usuariosD[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				if($usuariosD[$i]['modelo'] === 1)
+				{
+					$usuariosD[$i]['modelo'] = 'Presencial';
+				}else{
+					$usuariosD[$i]['modelo'] = 'Home Office';
+				}
+				$fechaFormateada = date('d-m-Y', strtotime($usuariosD[$i]['datecreated']));
+
+				$detalles .= '<tr class="text-center">';
+				$detalles .= '<td>'.$fechaFormateada.'</td>';
+				$detalles .= '<td>'.$usuariosD[$i]['matricula'].'</td>';
+				$detalles .= '<td>'.$usuariosD[$i]['nombres'].'</td>';
+				$detalles .= '<td>'.$usuariosD[$i]['nombrerol'].'</td>';
+				$detalles .= '<td>'.$usuariosD[$i]['modelo'].'</td>';
+				$detalles .= '</tr>';
+			}
+			
+			$arrResponse = array('usuariosD' => $detalles);
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+	}
+
+	public function getUsuariosID()
+	{
+		if($_POST)
+		{
+			$arrayFechas = explode("-", $_POST['fechaI']);
+			$fechaI = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[0])));
+			$fechaF = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[1])));
+			$ruta = $_SESSION['idRuta'];
+			$detalles = '';
+			//$dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+
+			$usuariosID = $this->model->selectUsuariosD($fechaI, $fechaF, $ruta, 0);
+
+			for ($i=0; $i < COUNT($usuariosID); $i++)
+			{ 
+				$ultimo = explode(" ", $usuariosID[$i]['apellidos']);
+				$usuariosID[$i]['nombres'] = strtoupper(strtok($usuariosID[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				if($usuariosID[$i]['modelo'] === 1)
+				{
+					$usuariosID[$i]['modelo'] = 'Presencial';
+				}else{
+					$usuariosID[$i]['modelo'] = 'Home Office';
+				}
+				$fechaFormateada = date('d-m-Y', strtotime($usuariosID[$i]['datecreated']));
+
+				$detalles .= '<tr class="text-center">';
+				$detalles .= '<td>'.$fechaFormateada.'</td>';
+				$detalles .= '<td>'.$usuariosID[$i]['matricula'].'</td>';
+				$detalles .= '<td>'.$usuariosID[$i]['nombres'].'</td>';
+				$detalles .= '<td>'.$usuariosID[$i]['nombrerol'].'</td>';
+				$detalles .= '<td>'.$usuariosID[$i]['modelo'].'</td>';
+				$detalles .= '</tr>';
+			}
+			
+			$arrResponse = array('usuariosID' => $detalles);
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+	}
+
 	public function equipamentos()
 	{
 		//cantidad total de equipamentos dependiento del "Tipo"
@@ -86,6 +169,9 @@ class Dashboard extends Controllers{
 		$data['teclados'] = $this->model->cantEquipamentos(MTECLADO);
 		$data['telas'] = $this->model->cantEquipamentos(MTELA);
 		$data['computadores'] = $this->model->cantEquipamentos(MCOMPUTADOR);
+
+		//Últimos fones cadastrados
+		$data['ultimosFones'] = $this->model->ultimosEquipamentos(MFONE);
 
 		$data['page_tag'] = "Dashboard - Equipamentos";
 		$data['page_title'] = "Dashboard - Equipamentos";
