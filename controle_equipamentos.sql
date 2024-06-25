@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/06/2024 às 22:40
+-- Tempo de geração: 25/06/2024 às 22:40
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -277,7 +277,12 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (304, 194, 1, 'Responsável do fone: SIRLEN MARCIA BORGES - 012783', '', '2024-06-24 08:50:19', 3, 8),
 (305, 95, 1, 'Equipamento entregue', '2223e3758c4b26706cd9b6376733c7c7.jpg', '2024-06-24 09:28:57', 2, 8),
 (306, 13, 1, 'Operadora pediu conta', '', '2024-06-24 14:30:26', 1, 8),
-(307, 44, 1, 'Equipamento entregue', 'dab16b6e5a72fa1f20d47a5b958bd066.jpg', '2024-06-24 16:21:20', 2, 8);
+(307, 44, 1, 'Equipamento entregue', 'dab16b6e5a72fa1f20d47a5b958bd066.jpg', '2024-06-24 16:21:20', 2, 8),
+(308, 84, 1, 'Microfone não funciona', '', '2024-06-25 12:40:40', 3, 8),
+(309, 60, 1, 'Equipamento entregue', '93c0772c8770db3d44307ca05479fddd.jpg', '2024-06-25 12:41:13', 2, 8),
+(310, 61, 1, 'Cabo solto', '', '2024-06-25 15:09:05', 3, 8),
+(311, 57, 1, 'Entrega novata', '3c47311acd8c2bcc63fa611e697c2fa6.jpg', '2024-06-25 15:16:10', 2, 8),
+(312, 56, 1, 'Entrega novata', 'dffd262c24e06e4f483bfcf934ee4899.jpg', '2024-06-25 15:16:30', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -340,7 +345,7 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (66, 1529, 73, '60f43d8f759cb48e90d3404b68c5973a.jpg', 'Entrega sem Protocolo', '2024-06-19 12:30:50', 1),
 (67, 1530, 74, '83c0003376e9cc6415ac57ac1b2e5f06.jpg', 'Entrega sem protocolo', '2024-06-19 12:34:05', 1),
 (68, 1531, 75, 'ba42f6bb9c3b6b719d7e6c1b4e70ec4a.jpg', 'Entrega sem protocolo', '2024-06-19 12:35:15', 1),
-(69, 1550, 84, 'bf0db8710164900996d0d3b53862d49b.jpg', 'Entrega sem Protocolo', '2024-06-19 14:05:34', 1),
+(69, 1550, 84, 'bf0db8710164900996d0d3b53862d49b.jpg', 'Entrega sem Protocolo', '2024-06-19 14:05:34', 0),
 (70, 1542, 86, 'e7d1cfe25182163ee7915a0378eec041.jpg', 'Entrega sem protocolo registrado', '2024-06-19 14:08:33', 1),
 (71, 1543, 87, '45fd6585c623be09eac473b799b1c9e8.jpg', 'Entrega sem Protocolo', '2024-06-19 14:10:05', 1),
 (72, 1545, 88, '2d57833fd6c179fedb58ef076a521b95.jpg', 'Entrega sem Protocolo', '2024-06-19 14:10:41', 1),
@@ -356,7 +361,11 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (82, 1560, 27, 'fe89e2f05a5d8e102e9c5af9578dbe6b.jpg', '', '2024-06-21 15:55:15', 1),
 (83, 1561, 95, '2223e3758c4b26706cd9b6376733c7c7.jpg', '', '2024-06-24 09:28:57', 1),
 (84, 1505, 13, '', 'Operadora pediu conta', '2024-06-24 14:30:26', 4),
-(85, 1547, 44, 'dab16b6e5a72fa1f20d47a5b958bd066.jpg', '', '2024-06-24 16:21:20', 1);
+(85, 1547, 44, 'dab16b6e5a72fa1f20d47a5b958bd066.jpg', '', '2024-06-24 16:21:20', 1),
+(86, 1550, 84, '', 'Microfone não funciona', '2024-06-25 12:40:40', 2),
+(87, 1550, 60, '93c0772c8770db3d44307ca05479fddd.jpg', '', '2024-06-25 12:41:13', 1),
+(88, 1563, 57, '3c47311acd8c2bcc63fa611e697c2fa6.jpg', 'Entrega novata', '2024-06-25 15:16:10', 1),
+(89, 1562, 56, 'dffd262c24e06e4f483bfcf934ee4899.jpg', 'Entrega novata', '2024-06-25 15:16:30', 1);
 
 -- --------------------------------------------------------
 
@@ -416,12 +425,12 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (53, 'Paltronics', '', '0000500', '2024-06-12 13:59:27', 3, 8, 444),
 (54, 'Unixtrom', '177349', '0000727', '2024-06-12 14:01:08', 1, 8, 444),
 (55, 'Unixtrom', '180600062', '0000982', '2024-06-12 14:02:40', 1, 8, 444),
-(56, 'Unixtrom', '210702723', '0003378', '2024-06-12 14:04:35', 1, 8, 444),
-(57, 'Unixtrom', '176468', '0000499', '2024-06-12 14:06:31', 1, 8, 444),
+(56, 'Unixtrom', '210702723', '0003378', '2024-06-12 14:04:35', 2, 8, 444),
+(57, 'Unixtrom', '176468', '0000499', '2024-06-12 14:06:31', 2, 8, 444),
 (58, 'Unixtrom', '180600565', '0001082', '2024-06-12 14:07:41', 2, 8, 444),
 (59, 'Paltronics', '', '0000555', '2024-06-12 14:36:55', 3, 8, 444),
-(60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 1, 8, 444),
-(61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 1, 8, 444),
+(60, 'TopUse', '57968', '0000362', '2024-06-12 14:40:52', 2, 8, 444),
+(61, 'Paltronics', '', '0000955', '2024-06-12 15:06:23', 3, 8, 444),
 (62, 'Paltronics', '', '0000299', '2024-06-12 15:08:08', 2, 8, 444),
 (63, 'Paltronics', '', '0000349', '2024-06-12 15:09:45', 1, 8, 444),
 (64, 'TopUse', 'B08197', '0003379', '2024-06-13 12:00:49', 3, 8, 444),
@@ -442,7 +451,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (81, 'TopUse', '370044', '0003356', '2024-06-18 10:45:59', 2, 8, 444),
 (82, 'Unixtron', '', '0001315', '2024-06-18 10:46:38', 1, 8, 444),
 (83, 'Paltronics', '', '0000335', '2024-06-18 10:47:58', 3, 8, 444),
-(84, 'Paltronics', '', '0001198', '2024-06-18 10:51:38', 2, 8, 444),
+(84, 'Paltronics', '', '0001198', '2024-06-18 10:51:38', 3, 8, 444),
 (85, 'Unixtron', '177314', '0000792', '2024-06-18 11:20:53', 3, 8, 444),
 (86, 'Paltronics', '', '0000444', '2024-06-18 11:52:59', 2, 8, 444),
 (87, 'TopUse', '', '0000249', '2024-06-18 11:53:30', 2, 8, 444),
@@ -704,7 +713,9 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1556, 'YURY ALEXANDRE', 'PEREIRA DA SILVA VAZ', '013323', 0, '', 6, 444, 1, '2024-06-20 08:44:50', 1),
 (1559, 'CAROLINE', 'DE CASTRO CESARIO', '013125', 0, '', 5, 444, 1, '2024-06-20 15:40:48', 1),
 (1560, 'DEBORAH VERONICA', 'ALMEIDA SILVA', '012911', 0, '', 5, 444, 1, '2024-06-21 15:44:35', 1),
-(1561, 'SIRLEN MARCIA', 'BORGES', '012783', 0, '', 5, 444, 2, '2024-06-24 08:44:07', 1);
+(1561, 'SIRLEN MARCIA', 'BORGES', '012783', 0, '', 5, 444, 2, '2024-06-24 08:44:07', 1),
+(1562, 'BARBARA LUCIA', 'DA SILVA BOTELHO', '01837', 0, '', 5, 444, 1, '2024-06-25 15:12:32', 1),
+(1563, 'STHEFANE', 'ARAUJO MELO', '01838', 0, '', 5, 444, 1, '2024-06-25 15:13:05', 1);
 
 -- --------------------------------------------------------
 
@@ -823,13 +834,13 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`
@@ -853,7 +864,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de tabela `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1562;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1564;
 
 --
 -- AUTO_INCREMENT de tabela `rol`

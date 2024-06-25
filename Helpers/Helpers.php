@@ -184,8 +184,9 @@
      }
 
     //Trae las anotaciones de los equipamentos
-    function getAnotacionesEquipamento(int $idequipamento, string $tipo)
+    function getAnotacionesEquipamento(int $idequipamento, int $tipo)
     {
+        
         require_once("Models/AnotacionesModel.php");
         $objAnotaciones = new AnotacionesModel();
         $request = $objAnotaciones->selectAnotacionesEquipamento($idequipamento, $tipo);

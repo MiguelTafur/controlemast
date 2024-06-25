@@ -11,6 +11,7 @@ class Dashboard extends Controllers{
 		getPermisos(MDASHBOARD);
 	}
 
+	/******** USUARIOS  ********/
 	public function dashboard()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
@@ -161,6 +162,7 @@ class Dashboard extends Controllers{
 		}
 	}
 
+	/******** EQUIPAMENTOS  ********/
 	public function equipamentos()
 	{
 		//cantidad total de equipamentos dependiento del "Tipo"
@@ -171,7 +173,13 @@ class Dashboard extends Controllers{
 		$data['computadores'] = $this->model->cantEquipamentos(MCOMPUTADOR);
 
 		//Últimos fones cadastrados
-		$data['ultimosFones'] = $this->model->ultimosEquipamentos(MFONE);
+		$data['ultimosFonesDisponibles'] = $this->model->ultimosEquipamentos(MFONE, 1);
+		$data['ultimosFonesUso'] = $this->model->ultimosEquipamentos(MFONE, 2);
+		$data['ultimosFonesEstragados'] = $this->model->ultimosEquipamentos(MFONE, 3);
+		$data['ultimosFonesConcerto'] = $this->model->ultimosEquipamentos(MFONE, 4);
+
+		//Últimas máquinas cadastradas
+		$data['ultimasMaquinasDisponibles'] = $this->model->ultimosEquipamentos(MCOMPUTADOR, 1);
 
 		$data['page_tag'] = "Dashboard - Equipamentos";
 		$data['page_title'] = "Dashboard - Equipamentos";
@@ -180,6 +188,70 @@ class Dashboard extends Controllers{
 		$this->views->getView($this,"equipamentos",$data);
 	}
 
+	public function getAnotacionesFone(string $dados)
+	{
+		if($_SESSION['permisosMod']['r']){
+			$datos = json_decode($dados, true);
+			
+			$IDequipamento = $datos['idequipamento'];
+			$tipo = $datos['tipo'];
+
+			if($IDequipamento > 0)
+			{
+				$arrData = getAnotacionesEquipamento($IDequipamento, $tipo);
+				if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+					$trAnotaciones = "";
+					$dias = array("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
+					for ($i=0; $i < count($arrData); $i++) { 
+						if($arrData[$i]['idanotacion'] > 0) {
+							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
+							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
+							$ultimo = explode(" ", $arrData[$i]['apellidos']);
+							$trAnotaciones .= '<tr class="text-center">
+								<td>'.$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]).'</td>
+								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>';
+								
+								switch ($arrData[$i]['status']) {
+									case '1':
+										$trAnotaciones .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+										break;
+									case '2':
+										$trAnotaciones .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+										break;
+									case '3':
+										$trAnotaciones .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+										break;
+									default:
+										$trAnotaciones .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+										break;
+								}
+								$trAnotaciones .= '<td>'.$arrData[$i]['anotacion'].'</td>';
+								if(!empty($arrData[$i]['imagen'])) {
+									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank"><i style="margin-right: 0" class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
+								} else {
+									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled><i class="fa fa-lg fa-file-image-o" aria-hidden="true" style="margin-right: 0"></i></button></td>';
+								}
+							$trAnotaciones .= '</tr>';
+						} else {
+							$trAnotaciones .= '
+								<tr class="text-center font-italic">
+									<td colspan="5"><h5 class="mt-4 text-info">NENHUMA ANOTAÇÃO</h5></td>
+								</tr>';
+						}
+					}
+
+					$arrResponse = array('status' => true, 'data' => $trAnotaciones);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
+	}
+
+	/******** CONTROLE ********/
 	public function controle()
 	{
 		$data['page_tag'] = "Dashboard - Controle";

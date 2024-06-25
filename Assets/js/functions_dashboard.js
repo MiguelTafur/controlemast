@@ -241,3 +241,30 @@ function fntSearchUsuariosID()
         return false;
     }
 }
+
+function fntViewAnnotation(idequipamento, tipo)
+{
+    let equipamento = {
+        'idequipamento': idequipamento,
+        'tipo': tipo
+    }
+    let dados = JSON.stringify(equipamento);
+    //divLoading.style.display = "flex";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Dashboard/getAnotacionesFone/'+dados;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+           
+            let trAnotaciones = objData.data;
+            document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            $('#modalViewAnnotation').modal('show');
+        }
+        divLoading.style.display = "none";
+        return false;
+    }
+}

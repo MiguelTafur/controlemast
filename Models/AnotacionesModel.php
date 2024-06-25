@@ -30,7 +30,7 @@ class AnotacionesModel extends Mysql
 		return $request_insert;
 	}
 
-	public function selectAnotacionesEquipamento(int $idequipamento, string $tipo)
+	public function selectAnotacionesEquipamento(int $idequipamento, int $tipo)
 	{
 		$this->intIdEquipamento = $idequipamento;
 		$this->stringTipo = $tipo;

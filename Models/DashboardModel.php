@@ -8,6 +8,7 @@ class DashboardModel extends Mysql
 	PRIVATE $strFecha;
 	PRIVATE $strFecha2;
 	PRIVATE $intTipoEquipamento;
+	PRIVATE $intEstadoEquipamento;
 
 	public function __construct()
 	{
@@ -160,17 +161,19 @@ class DashboardModel extends Mysql
 	}
 
 	/***********   EQUIPAMENTOS   ************/
-	public function ultimosEquipamentos(int $tipo)
+	public function ultimosEquipamentos(int $tipo, int $estado)
 	{
 		$rutaId = $_SESSION['idRuta'];
 		$this->intTipoEquipamento = $tipo;
-		$sql = "SELECT marca,
+		$this->intEstadoEquipamento = $estado;
+		$sql = "SELECT idequipamento,
+					   marca,
 					   codigo,
 					   lacre,
 					   datecreated,
 					   status
 				FROM equipamento
-				WHERE codigoruta = $rutaId AND tipo = $this->intTipoEquipamento
+				WHERE codigoruta = $rutaId AND tipo = $this->intTipoEquipamento AND status = $this->intEstadoEquipamento
 				ORDER BY datecreated DESC LIMIT 6";
 		$request = $this->select_all($sql);
 		return $request;
