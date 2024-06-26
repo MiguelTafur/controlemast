@@ -180,6 +180,33 @@ class Dashboard extends Controllers{
 
 		//Últimas máquinas cadastradas
 		$data['ultimasMaquinasDisponibles'] = $this->model->ultimosEquipamentos(MCOMPUTADOR, 1);
+		$data['ultimasMaquinasUso'] = $this->model->ultimosEquipamentos(MCOMPUTADOR, 2);
+		$data['ultimasMaquinasEstragadas'] = $this->model->ultimosEquipamentos(MCOMPUTADOR, 3);
+		$data['ultimasMaquinasConcerto'] = $this->model->ultimosEquipamentos(MCOMPUTADOR, 4);
+
+		//Últimos Monitores cadastrados
+		$data['ultimosMonitoresDisponibles'] = $this->model->ultimosEquipamentos(MTELA, 1);
+		$data['ultimosMonitoresUso'] = $this->model->ultimosEquipamentos(MTELA, 2);
+		$data['ultimosMonitoresEstragados'] = $this->model->ultimosEquipamentos(MTELA, 3);
+		$data['ultimosMonitoresConcerto'] = $this->model->ultimosEquipamentos(MTELA, 4);
+
+		//Últimos Teclados cadastrados
+		$data['ultimosTecladosDisponibles'] = $this->model->ultimosEquipamentos(MTECLADO, 1);
+		$data['ultimosTecladosUso'] = $this->model->ultimosEquipamentos(MTECLADO, 2);
+		$data['ultimosTecladosEstragados'] = $this->model->ultimosEquipamentos(MTECLADO, 3);
+		$data['ultimosTecladosConcerto'] = $this->model->ultimosEquipamentos(MTECLADO, 4);
+
+		//Últimos Mouses cadastrados
+		$data['ultimosMousesDisponibles'] = $this->model->ultimosEquipamentos(MMOUSE, 1);
+		$data['ultimosMousesUso'] = $this->model->ultimosEquipamentos(MMOUSE, 2);
+		$data['ultimosMousesEstragados'] = $this->model->ultimosEquipamentos(MMOUSE, 3);
+		$data['ultimosMousesConcerto'] = $this->model->ultimosEquipamentos(MMOUSE, 4);
+
+		/**********  GRÁFICAS  ***********/
+		$anio = date("Y");
+		$mes = date("m");
+
+		$data['fonesMDia'] = $this->model->selectFonesMes($anio,$mes,MFONE);
 
 		$data['page_tag'] = "Dashboard - Equipamentos";
 		$data['page_title'] = "Dashboard - Equipamentos";
@@ -251,6 +278,22 @@ class Dashboard extends Controllers{
 		die();
 	}
 
+	public function FonesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "FonesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectFonesMes($anio,$mes,MFONE);
+			$script = getFile("Template/Modals/graficaFonesMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
 	/******** CONTROLE ********/
 	public function controle()
 	{
@@ -260,5 +303,6 @@ class Dashboard extends Controllers{
 		$data['page_functions_js'] = "functions_dashboard.js";
 		$this->views->getView($this,"controle",$data);
 	}
+	
 }
 ?>

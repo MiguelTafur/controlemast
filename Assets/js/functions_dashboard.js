@@ -26,12 +26,40 @@ function iniciarApp() {
     
 }
 
+function fntViewAnnotation(idequipamento, tipo)
+{
+    let equipamento = {
+        'idequipamento': idequipamento,
+        'tipo': tipo
+    }
+    let dados = JSON.stringify(equipamento);
+    //divLoading.style.display = "flex";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Dashboard/getAnotacionesFone/'+dados;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+           
+            let trAnotaciones = objData.data;
+            document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            $('#modalViewAnnotation').modal('show');
+        }
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+/********** USUARIOS ***********/
 function fntSearchUAMes()
 {
     let fecha = document.querySelector(".usuariosActivosMes").value;
     if(fecha == "")
     {
-        swal("", "Selecione mês y ano", "error");
+        swal("", "Selecione mês e ano", "error");
         return false;
     }
     divLoading.style.display = "flex";
@@ -58,7 +86,7 @@ function fntSearchUIMes()
     let fecha = document.querySelector(".usuariosInactivosMes").value;
     if(fecha == "")
     {
-        swal("", "Selecione mês y ano", "error");
+        swal("", "Selecione mês e ano", "error");
         return false;
     }
     divLoading.style.display = "flex";
@@ -242,29 +270,30 @@ function fntSearchUsuariosID()
     }
 }
 
-function fntViewAnnotation(idequipamento, tipo)
+/********** USUARIOS ***********/
+function fntSearchFonesMes()
 {
-    let equipamento = {
-        'idequipamento': idequipamento,
-        'tipo': tipo
+    let fecha = document.querySelector(".fonesMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
     }
-    let dados = JSON.stringify(equipamento);
-    //divLoading.style.display = "flex";
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Dashboard/getAnotacionesFone/'+dados;
-    request.open("GET",ajaxUrl,true);
-    request.send();
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/FonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
     request.onreadystatechange = function()
     {
-        if(request.readyState == 4 && request.status == 200)
+        if(request.readyState != 4) return;
+        if(request.status == 200)
         {
-            let objData = JSON.parse(request.responseText);
-           
-            let trAnotaciones = objData.data;
-            document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
-            $('#modalViewAnnotation').modal('show');
+            $("#graficaMesFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
         }
-        divLoading.style.display = "none";
-        return false;
     }
 }

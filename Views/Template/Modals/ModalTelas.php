@@ -74,7 +74,7 @@
               <td id="celCodigo"></td>
             </tr>
             <tr>
-              <td>Lacre:</td>
+              <td>Patrimônio:</td>
               <td id="celLacre"></td>
             </tr>
             <tr>

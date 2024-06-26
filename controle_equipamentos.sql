@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/06/2024 às 22:40
+-- Tempo de geração: 26/06/2024 às 20:30
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -282,7 +282,15 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (309, 60, 1, 'Equipamento entregue', '93c0772c8770db3d44307ca05479fddd.jpg', '2024-06-25 12:41:13', 2, 8),
 (310, 61, 1, 'Cabo solto', '', '2024-06-25 15:09:05', 3, 8),
 (311, 57, 1, 'Entrega novata', '3c47311acd8c2bcc63fa611e697c2fa6.jpg', '2024-06-25 15:16:10', 2, 8),
-(312, 56, 1, 'Entrega novata', 'dffd262c24e06e4f483bfcf934ee4899.jpg', '2024-06-25 15:16:30', 2, 8);
+(312, 56, 1, 'Entrega novata', 'dffd262c24e06e4f483bfcf934ee4899.jpg', '2024-06-25 15:16:30', 2, 8),
+(313, 195, 1, 'Fone novo enviado de BH', '066832e7d6cd19d0b29cbd43402bd46b.jpg', '2024-06-26 09:50:31', 1, 8),
+(314, 196, 1, 'Fone novo enviado de BH', '2f0be3574c9f13a968ac47a905ceeea3.jpg', '2024-06-26 10:00:48', 1, 8),
+(315, 197, 1, 'Fone novo enviado de BH', 'c225681b598074164d9f38c5780605f6.jpg', '2024-06-26 10:06:39', 1, 8),
+(316, 198, 1, 'Fone novo enviado de BH', '026c395d8f11bdfecdefddf32d6486e5.jpg', '2024-06-26 10:10:05', 1, 8),
+(317, 199, 1, 'Fone novo enviado de BH', '0909de25dd5fee4f329d1f2be6357d14.jpg', '2024-06-26 10:13:03', 1, 8),
+(318, 200, 1, 'Fone novo enviado de BH', 'abe1eb16afb0220f74812b9bff017e92.jpg', '2024-06-26 10:18:39', 1, 8),
+(319, 201, 1, 'Fone novo enviado BH', 'f23c152580e3cfc66a74d0e28820d971.jpg', '2024-06-26 10:22:36', 1, 8),
+(320, 202, 1, 'Fone novo enviado de BH', 'e7143f0a604661ffebe54fa2e6050548.jpg', '2024-06-26 10:27:47', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -559,7 +567,15 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (190, 'Hp', '', '010064', '2024-06-21 09:34:41', 1, 16, 444),
 (192, 'TopUse', 'B99307', '0000240', '2024-06-21 15:51:17', 3, 8, 444),
 (193, 'Lenovo', '', '8917', '2024-06-21 16:15:22', 1, 16, 444),
-(194, 'Paltronics', '', '0001355', '2024-06-24 08:49:13', 3, 8, 444);
+(194, 'Paltronics', '', '0001355', '2024-06-24 08:49:13', 3, 8, 444),
+(195, 'Unixtron', '240502183', '7900332', '2024-06-26 09:50:31', 1, 8, 444),
+(196, 'Unixtron', '240502164', '7900381', '2024-06-26 10:00:48', 1, 8, 444),
+(197, 'Unixtron', '240502195', '7900311', '2024-06-26 10:06:39', 1, 8, 444),
+(198, 'Unixtron', '240502187', '7900321', '2024-06-26 10:10:04', 1, 8, 444),
+(199, 'Unixtron', '240502163', '7900353', '2024-06-26 10:13:03', 1, 8, 444),
+(200, 'Unixtron', '240502109', '7900359', '2024-06-26 10:18:39', 1, 8, 444),
+(201, 'Unixtron', '240502120', '7900335', '2024-06-26 10:22:36', 1, 8, 444),
+(202, 'Unixtron', '240502192', '7900350', '2024-06-26 10:27:47', 1, 8, 444);
 
 -- --------------------------------------------------------
 
@@ -834,7 +850,7 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
@@ -846,7 +862,7 @@ ALTER TABLE `controle`
 -- AUTO_INCREMENT de tabela `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `idequipamento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`

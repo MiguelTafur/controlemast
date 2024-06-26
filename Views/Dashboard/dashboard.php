@@ -229,8 +229,8 @@
             </li>
           </ul>
           <div class="tab-content" id="pills-tabGraficoContent">
+            <!-- Gráfica usuarios Activos -->
             <div class="tab-pane fade show active" id="pills-graficoAtivos" role="tabpanel" aria-labelledby="pills-graficoAtivos-tab">
-              <!-- Gráfica usuarios Activos -->
               <div class="tile">
                 <div class="container-title">
                   <div class="dflex">
@@ -241,6 +241,7 @@
                 <div id="graficaMesUsuariosActivos"></div>
               </div>
             </div>
+            
             <div class="tab-pane fade" id="pills-graficoInativos" role="tabpanel" aria-labelledby="pills-graficoInativos-tab">
               <!-- Gráfica usuarios Inactivos -->
               <div class="tile">

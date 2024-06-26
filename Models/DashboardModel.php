@@ -178,4 +178,37 @@ class DashboardModel extends Mysql
 		$request = $this->select_all($sql);
 		return $request;
 	}
+
+	public function selectFonesMes(string $anio, string $mes, int $tipo)
+	{
+		$totalUsuariosMes = 0;
+		$arrEquipamentosDias = array();
+		$rutaId = $_SESSION['idRuta'];
+		$this->intTipoEquipamento = $tipo;
+		$dias = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
+		$n_dia = 1;
+		for ($i=0; $i < $dias; $i++)
+		{
+			$date = date_create($anio.'-'.$mes.'-'.$n_dia);
+			$fechaEquipamento = date_format($date, "Y-m-d");
+		
+			$sql = "SELECT DAY(datecreated) as dia FROM equipamento WHERE DATE(datecreated) = '$fechaEquipamento' AND codigoruta = $rutaId AND tipo = $this->intTipoEquipamento";
+			$equipamentoDia = $this->select($sql);
+
+			$sqlTotal = "SELECT COUNT(*) as total FROM equipamento WHERE DATE(datecreated) = '$fechaEquipamento' AND codigoruta = $rutaId AND status != 0 AND tipo = $this->intTipoEquipamento";
+			$equipamentoDiaTotal = $this->select($sqlTotal);
+			$equipamentoDiaTotal = $equipamentoDiaTotal['total'];
+
+			$equipamentoDia['dia'] = $n_dia;
+			$equipamentoDia['equipamento'] = $equipamentoDiaTotal;
+			$equipamentoDia['equipamento'] = $equipamentoDia['equipamento'] == "" ? 0 : $equipamentoDia['equipamento'];
+			$totalUsuariosMes += $equipamentoDiaTotal;
+			array_push($arrEquipamentosDias, $equipamentoDia);
+			$n_dia++;
+
+		}
+		$meses = Meses();
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
+		return $arrData;
+	}
 }
