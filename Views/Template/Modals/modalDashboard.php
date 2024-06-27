@@ -1,3 +1,4 @@
+<!-- ******************USUARIOS**************** -->
 <!-- Modal detalle Usuarios Activos -->
 <div class="modal fade" id="modalDetalleU" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -87,3 +88,4 @@
     </div>
   </div>
 </div>
+

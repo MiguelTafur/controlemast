@@ -16,23 +16,12 @@ class DashboardModel extends Mysql
 	}
 
 	/***********   USUARIOS   ************/
-
 	//Cantidad total de usuarios dependiendo del rol
 	public function cantPersonas($rol)
 	{
 		$rutaId = $_SESSION['idRuta'];
 		$sql = "SELECT COUNT(*) AS total FROM persona WHERE codigoruta = $rutaId AND status != 0 AND rolid = ".$rol;
 			$request = $this->select($sql);
-
-		return $request['total'];
-	}
-
-	//Cantidad total de equiopamentos dependiendo del módulo
-	public function cantEquipamentos($tipo) 
-	{
-		$rutaId = $_SESSION['idRuta'];
-		$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
-		$request = $this->select($sql);
 
 		return $request['total'];
 	}
@@ -161,6 +150,17 @@ class DashboardModel extends Mysql
 	}
 
 	/***********   EQUIPAMENTOS   ************/
+	//Cantidad total de equiopamentos dependiendo del módulo
+	public function cantEquipamentos($tipo) 
+	{
+		$rutaId = $_SESSION['idRuta'];
+		$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE codigoruta = $rutaId AND status != 0 AND tipo = ".$tipo;
+		$request = $this->select($sql);
+
+		return $request['total'];
+	}
+
+	//Trae los último Equipamentos cadastrados
 	public function ultimosEquipamentos(int $tipo, int $estado)
 	{
 		$rutaId = $_SESSION['idRuta'];
@@ -179,7 +179,28 @@ class DashboardModel extends Mysql
 		return $request;
 	}
 
-	public function selectFonesMes(string $anio, string $mes, int $tipo)
+	//Trae los usuarios en un rango de fechas 
+	public function selectFonesD(string $fechaI, string $fechaF, int $ruta, int $estado)
+	{
+		$this->strFecha = $fechaI;
+		$this->strFecha2 = $fechaF;
+		$this->intIdRuta = $ruta;
+
+		$sql = "SELECT *
+				FROM equipamento
+				WHERE datecreated
+				BETWEEN '{$this->strFecha}' AND '{$this->strFecha2}' 
+				AND codigoruta = $ruta 
+				ORDER BY datecreated desc";
+		
+		$request = $this->select_all($sql);
+	
+		return $request;
+
+	}
+
+	//Gráfica mensual de Equipamentos
+	public function selectEquipamentosMes(string $anio, string $mes, int $tipo)
 	{
 		$totalUsuariosMes = 0;
 		$arrEquipamentosDias = array();

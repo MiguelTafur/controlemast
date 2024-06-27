@@ -206,7 +206,11 @@ class Dashboard extends Controllers{
 		$anio = date("Y");
 		$mes = date("m");
 
-		$data['fonesMDia'] = $this->model->selectFonesMes($anio,$mes,MFONE);
+		$data['fonesMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+		$data['mousesMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MMOUSE);
+		$data['tecladosMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MTECLADO);
+		$data['monitoresMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MTELA);
+		$data['computadoresMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
 
 		$data['page_tag'] = "Dashboard - Equipamentos";
 		$data['page_title'] = "Dashboard - Equipamentos";
@@ -278,6 +282,68 @@ class Dashboard extends Controllers{
 		die();
 	}
 
+	public function getFonesD()
+	{
+		if($_POST)
+		{
+			$arrayFechas = explode("-", $_POST['fecha']);
+			$fechaI = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[0])));
+			$fechaF = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[1])));
+			$ruta = $_SESSION['idRuta'];
+			$detalles = '';
+			//$dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+
+			$fonesD = $this->model->selectFonesD($fechaI, $fechaF, $ruta, 1);
+
+			for ($i=0; $i < COUNT($fonesD); $i++)
+			{ 
+				if(empty($fonesD[$i]['codigo'])) {
+					$fonesD[$i]['codigo'] = '<span class="text-secondary font-italic">nenhum</span>';
+				}
+
+				$fonesD[$i]['lacre'] = '#' . $fonesD[$i]['lacre'];
+
+				switch ($fonesD[$i]['status']) {
+					case '1':
+						$fonesD[$i]['status'] = '<h5><span class="badge badge-success">Disponível</span></h5>';
+						break;
+					case '2':
+						$fonesD[$i]['status'] = '<h5><span class="badge badge-info">Em Uso</span></h5>';
+						break;
+					case '3':
+						$fonesD[$i]['status'] = '<h5><span class="badge badge-danger">Estragado</span></h5>';
+						break;
+					default:
+						$fonesD[$i]['status'] = '<h5><span class="badge badge-warning">Concerto</span></h5>';
+						break;
+				}
+				
+				$fechaFormateada = date('d-m-Y', strtotime($fonesD[$i]['datecreated']));
+
+				$btnAnnotation = '
+								<button 
+									class="btn btn-secondary" 
+									onClick="fntViewAnnotation('.$fonesD[$i]['idequipamento'].', '.MFONE.')" 
+									title="Ver Anotações">
+									<i class="fa fa-file-text" style="margin-right: 0"></i>
+								</button>';
+
+				$detalles .= '<tr class="text-center">';
+				$detalles .= '<td>'.$fechaFormateada.'</td>';
+				$detalles .= '<td>'.$fonesD[$i]['marca'].'</td>';
+				$detalles .= '<td>'.$fonesD[$i]['codigo'].'</td>';
+				$detalles .= '<td>'.$fonesD[$i]['lacre'].'</td>';
+				$detalles .= '<td>'.$fonesD[$i]['status'].'</td>';
+				$detalles .= '<td>'.$btnAnnotation.'</td>';
+				$detalles .= '</tr>';
+			}
+			
+			$arrResponse = array('fonesD' => $detalles);
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+	}
+
 	public function FonesMes()
 	{
 		if($_POST)
@@ -287,12 +353,77 @@ class Dashboard extends Controllers{
 			$arrFecha = explode('-', $nFecha);
 			$mes = $arrFecha[0];
 			$anio = $arrFecha[1];
-			$fones = $this->model->selectFonesMes($anio,$mes,MFONE);
+			$fones = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
 			$script = getFile("Template/Modals/graficaFonesMes", $fones);
 			echo $script;
 			die();
 		}
 	}
+
+	public function MousesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "MousesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$mouses = $this->model->selectEquipamentosMes($anio,$mes,MMOUSE);
+			$script = getFile("Template/Modals/graficaMousesMes", $mouses);
+			echo $script;
+			die();
+		}
+	}
+
+	public function TecladosMes()
+	{
+		if($_POST)
+		{
+			$grafica = "TecladosMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$teclados = $this->model->selectEquipamentosMes($anio,$mes,MTECLADO);
+			$script = getFile("Template/Modals/graficaTecladosMes", $teclados);
+			echo $script;
+			die();
+		}
+	}
+
+	public function MonitoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "MonitoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$monitores = $this->model->selectEquipamentosMes($anio,$mes,MTELA);
+			$script = getFile("Template/Modals/graficaMonitoresMes", $monitores);
+			echo $script;
+			die();
+		}
+	}
+
+	public function ComputadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "ComputadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$computadores = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaComputadoresMes", $computadores);
+			echo $script;
+			die();
+		}
+	}
+
 
 	/******** CONTROLE ********/
 	public function controle()

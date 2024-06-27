@@ -400,7 +400,6 @@
                     <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchFone()"><i class="fa fa-search" aria-hidden="true"></i> Procurar Fone</button>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -1617,6 +1616,58 @@
                 <div id="graficaMesFones"></div>
               </div>
             </div>
+
+            <!-- Gráfica Mouses -->
+            <div class="tab-pane fade" id="pills-graficoMouses" role="tabpanel" aria-labelledby="pills-graficoMouses-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker mousesMes" name="mousesMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchMousesMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesMouses"></div>
+              </div>
+            </div>
+
+            <!-- Gráfica Teclados -->
+            <div class="tab-pane fade" id="pills-graficoTeclados" role="tabpanel" aria-labelledby="pills-graficoTeclados-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker tecladosMes" name="tecladosMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchTecladosMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesTeclados"></div>
+              </div>
+            </div>
+
+            <!-- Gráfica Monitores -->
+            <div class="tab-pane fade" id="pills-graficoMonitores" role="tabpanel" aria-labelledby="pills-graficoMonitores-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker monitoresMes" name="monitoresMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchMonitoresMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesMonitores"></div>
+              </div>
+            </div>
+
+            <!-- Gráfica Computadores -->
+            <div class="tab-pane fade" id="pills-graficoComputadores" role="tabpanel" aria-labelledby="pills-graficoComputadores-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker computadoresMes" name="computadoresMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchComputadoresMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesComputadores"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1625,7 +1676,7 @@
 <?php footerAdmin($data); ?>
 
 <script>
-  // Gráfica de usuarios activos
+  // Gráfica Fones
   Highcharts.chart('graficaMesFones', 
   {
     chart: {
@@ -1664,6 +1715,190 @@
         data: [
           <?php 
             foreach ($data['fonesMDia']['equipamentos'] as $equipamento) {
+              echo $equipamento['equipamento'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+
+  // Gráfica Mouses
+  Highcharts.chart('graficaMesMouses', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Mouses Cadastrados <?= $data['mousesMDia']['mes'].' de '.$data['mousesMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['mousesMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['mousesMDia']['equipamentos'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['mousesMDia']['equipamentos'] as $equipamento) {
+              echo $equipamento['equipamento'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+
+  // Gráfica Teclados
+  Highcharts.chart('graficaMesTeclados', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Teclados Cadastrados <?= $data['tecladosMDia']['mes'].' de '.$data['tecladosMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['tecladosMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['tecladosMDia']['equipamentos'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['tecladosMDia']['equipamentos'] as $equipamento) {
+              echo $equipamento['equipamento'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+
+  // Gráfica Monitores
+  Highcharts.chart('graficaMesMonitores', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Monitores Cadastrados <?= $data['monitoresMDia']['mes'].' de '.$data['monitoresMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['monitoresMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['monitoresMDia']['equipamentos'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['monitoresMDia']['equipamentos'] as $equipamento) {
+              echo $equipamento['equipamento'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+
+  // Gráfica Computadores
+  Highcharts.chart('graficaMesComputadores', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Computadores Cadastrados <?= $data['computadoresMDia']['mes'].' de '.$data['computadoresMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['computadoresMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['computadoresMDia']['equipamentos'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['computadoresMDia']['equipamentos'] as $equipamento) {
               echo $equipamento['equipamento'].",";
             }
           ?>
