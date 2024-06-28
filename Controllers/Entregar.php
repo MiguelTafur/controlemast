@@ -47,7 +47,7 @@ class Entregar extends Controllers{
 					$tipo = 'Tela';
 				}
 
-				$arrData[$i]['equipamento'] = '<h6>'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				$arrData[$i]['equipamento'] = '<h5>'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h5>';
 
 				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 

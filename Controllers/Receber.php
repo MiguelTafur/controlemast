@@ -49,12 +49,20 @@ class Receber extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid']);
+
 				if($arrData[$i]['status'] === 2) {
-					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">TROCA</span></a>';
 				} else if($arrData[$i]['status'] === 3){
-					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">DESLIGAMENTO</span></a>';
 				} else if($arrData[$i]['status'] === 4){
-					$arrData[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">PEDIU CONTA</span></a>';
+				} else if($arrData[$i]['status'] === 5){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">SEM RENOVAÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 6){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">JUSTA CAUSA</span></a>';
+				} else if($arrData[$i]['status'] === 7){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">RESCISÇAO</span></a>';
 				}
 
 				//$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
@@ -138,11 +146,15 @@ class Receber extends Controllers{
 					if($arrData['status'] === 2) {
 						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
 					} else if($arrData['status'] === 3) {
-						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">ESTRAGADO</span>';
-					} else if($arrData['status'] === 4){
 						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
-					} else if($arrData['status'] === 5){
+					} else if($arrData['status'] === 4){
 						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+					} else if($arrData['status'] === 5){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">SEM RENOVAÇÃO DO CONTRATO</span>';
+					} else if($arrData['status'] === 6){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
+					} else if($arrData['status'] === 7){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
 					}
 
 					$arrData['observacion'] = '<span class="font-italic">'.$arrData['observacion'].'</span>';

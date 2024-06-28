@@ -428,6 +428,19 @@ class Dashboard extends Controllers{
 	/******** CONTROLE ********/
 	public function controle()
 	{
+
+		//cantidad total de Entregas
+		$data['entregas'] = $this->model->cantControle(1, MFONE);
+		$data['trocas'] = $this->model->cantControle(2, MFONE);
+		$data['desligados'] = $this->model->cantControle(3, MFONE);
+		$data['pediuConta'] = $this->model->cantControle(4, MFONE);
+
+		//Últimas entregas
+		$data['ultimasEntregas'] = $this->model->ultimosControles(1, MFONE);
+		$data['ultimasTrocas'] = $this->model->ultimosControles(2, MFONE);
+		$data['ultimosDesligamentos'] = $this->model->ultimosControles(3, MFONE);
+		$data['ultimosPediuConta'] = $this->model->ultimosControles(4, MFONE);
+
 		$data['page_tag'] = "Dashboard - Controle";
 		$data['page_title'] = "Dashboard - Controle";
 		$data['page_name'] = "Controle";

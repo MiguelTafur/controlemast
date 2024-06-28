@@ -194,6 +194,17 @@
         return $request;
     }
 
+    //Trea el protocolo de la entrega con el estado 0
+    function getProtocolo(int $idequipamento)
+    {
+        
+        require_once("Models/EntregarModel.php");
+        $objEntregar = new EntregarModel();
+        $request = $objEntregar->selectProtocolo($idequipamento);
+
+        return $request['protocolo'];
+    }
+
     function sessionUser(int $idpersona){
         require_once ("Models/LoginModel.php");
         $objLogin = new LoginModel();

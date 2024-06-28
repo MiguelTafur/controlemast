@@ -29,6 +29,9 @@
                 <option value="2">Troca</option>
                 <option value="3">Desligamento</option>
                 <option value="4">Pediu Conta</option>
+                <option value="5">Sem renovação do contrato</option>
+                <option value="6">Justa causa</option>
+                <option value="7">Rescisão</option>
               </select>
             </div>
             <div class="form-group col-md-12 mb-4">

@@ -232,4 +232,39 @@ class DashboardModel extends Mysql
 		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
 		return $arrData;
 	}
+
+	/***********   CONTROLE   ************/
+	//Cantidad total Entregas
+	public function cantControle(int $estado, $tipoEquipamento) 
+	{
+		$this->intEstadoEquipamento = $estado;
+		$this->intTipoEquipamento = $tipoEquipamento;
+		$rutaId = $_SESSION['idRuta'];
+		$sql = "SELECT COUNT(*) AS total FROM controle co 
+				LEFT OUTER JOIN persona pe
+				ON(co.personaid = pe.idpersona)
+				LEFT OUTER JOIN equipamento eq
+				ON(co.equipamentoid = eq.idequipamento)
+				WHERE pe.codigoruta = $rutaId AND co.status = $this->intEstadoEquipamento AND eq.tipo = $this->intTipoEquipamento";
+		$request = $this->select($sql);
+
+		return $request['total'];
+	}
+
+	//Últimas Entregas
+	public function ultimosControles(int $estado, int $tipoEquipamento)
+	{
+		$rutaId = $_SESSION['idRuta'];
+		$this->intTipoEquipamento = $tipoEquipamento;
+		$this->intEstadoEquipamento = $estado;
+		$sql = "SELECT co.datecreated, co.protocolo, co.equipamentoid, eq.tipo, eq.lacre, pe.matricula, pe.nombres, pe.apellidos FROM controle co 
+				LEFT OUTER JOIN persona pe
+				ON(co.personaid = pe.idpersona)
+				LEFT OUTER JOIN equipamento eq
+				ON(co.equipamentoid = eq.idequipamento)
+				WHERE pe.codigoruta = $rutaId AND co.status = $this->intEstadoEquipamento AND eq.tipo = $this->intTipoEquipamento
+				ORDER BY co.datecreated DESC LIMIT 6";
+		$request = $this->select_all($sql);
+		return $request;
+	}
 }

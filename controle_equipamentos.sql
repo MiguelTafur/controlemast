@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/06/2024 às 22:38
+-- Tempo de geração: 28/06/2024 às 22:32
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -297,7 +297,8 @@ INSERT INTO `anotaciones` (`idanotacion`, `equipamentoid`, `personaid`, `anotaci
 (324, 28, 1, 'Operadora manifesta que o som é miuto baixo', '', '2024-06-27 12:42:22', 1, 8),
 (325, 50, 1, 'Equipamento entregue', 'fc79f5c4addd80d3c45cff6f1f7d10db.jpg', '2024-06-27 12:49:53', 2, 8),
 (326, 204, 1, 'Fone recebido do Operador(CHARLES - 01425). Manifestou mau contato.', '02763a3d24e6fea9d28b1d979c4dc0a4.jpg', '2024-06-27 16:07:47', 1, 8),
-(327, 200, 1, 'Equipamento entregue', '90bf0d5ab0f8bae8eb62d7f550a63334.jpg', '2024-06-27 16:16:47', 2, 8);
+(327, 200, 1, 'Equipamento entregue', '90bf0d5ab0f8bae8eb62d7f550a63334.jpg', '2024-06-27 16:16:47', 2, 8),
+(328, 95, 1, 'Rescisão indireta', '', '2024-06-28 17:15:29', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -374,7 +375,7 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (80, 1559, 2, 'e3b4e508020f44121f5eba4e8ec8ec30.jpg', '', '2024-06-20', 1),
 (81, 1547, 90, '', 'Microfone chiando, Avaria no cabo e voz robotizada', '2024-06-21', 2),
 (82, 1560, 27, 'fe89e2f05a5d8e102e9c5af9578dbe6b.jpg', '', '2024-06-21', 1),
-(83, 1561, 95, '2223e3758c4b26706cd9b6376733c7c7.jpg', '', '2024-06-24', 1),
+(83, 1561, 95, '2223e3758c4b26706cd9b6376733c7c7.jpg', '', '2024-06-24', 0),
 (84, 1505, 13, '', 'Operadora pediu conta', '2024-06-24', 4),
 (85, 1547, 44, 'dab16b6e5a72fa1f20d47a5b958bd066.jpg', '', '2024-06-24', 1),
 (86, 1550, 84, '', 'Microfone não funciona', '2024-06-25', 2),
@@ -385,7 +386,8 @@ INSERT INTO `controle` (`idcontrole`, `personaid`, `equipamentoid`, `protocolo`,
 (91, 1565, 201, '52a24e953ae3d67077105aa5201e3d3b.jpg', '', '2024-06-27', 1),
 (92, 1514, 28, '', 'Operadora manifesta que o som é miuto baixo', '2024-06-27', 2),
 (93, 1514, 50, 'fc79f5c4addd80d3c45cff6f1f7d10db.jpg', '', '2024-06-27', 1),
-(94, 1566, 200, '90bf0d5ab0f8bae8eb62d7f550a63334.jpg', '', '2024-06-27', 1);
+(94, 1566, 200, '90bf0d5ab0f8bae8eb62d7f550a63334.jpg', '', '2024-06-27', 1),
+(95, 1561, 95, '', 'Rescisão indireta', '2024-06-28', 7);
 
 -- --------------------------------------------------------
 
@@ -481,7 +483,7 @@ INSERT INTO `equipamento` (`idequipamento`, `marca`, `codigo`, `lacre`, `datecre
 (91, 'Unixtron', '220103161', '000437', '2024-06-19', 3, 8, 444),
 (92, 'Unixtron', '201206422', '0018286', '2024-06-20', 2, 8, 444),
 (94, 'LG', '109SP2K35693', '003885', '2024-06-20', 1, 11, 444),
-(95, 'TopUse', 'F07664', '0009840', '2024-06-20', 2, 8, 444),
+(95, 'TopUse', 'F07664', '0009840', '2024-06-20', 1, 8, 444),
 (96, 'LG', '110SPLC3072', '004217', '2024-06-20', 1, 11, 444),
 (97, 'LG', '110SPXV2G778', '004414', '2024-06-20', 1, 11, 444),
 (98, 'Unixtron', '210805899', '0000270', '2024-06-20', 3, 8, 444),
@@ -743,7 +745,7 @@ INSERT INTO `persona` (`idpersona`, `nombres`, `apellidos`, `matricula`, `telefo
 (1556, 'YURY ALEXANDRE', 'PEREIRA DA SILVA VAZ', '013323', 0, '', 6, 444, 1, '2024-06-20', 1),
 (1559, 'CAROLINE', 'DE CASTRO CESARIO', '013125', 0, '', 5, 444, 1, '2024-06-20', 1),
 (1560, 'DEBORAH VERONICA', 'ALMEIDA SILVA', '012911', 0, '', 5, 444, 1, '2024-06-21', 1),
-(1561, 'SIRLEN MARCIA', 'BORGES', '012783', 0, '', 5, 444, 2, '2024-06-24', 1),
+(1561, 'SIRLEN MARCIA', 'BORGES', '012783', 0, '', 5, 444, 2, '2024-06-24', 0),
 (1562, 'BARBARA LUCIA', 'DA SILVA BOTELHO', '01837', 0, '', 5, 444, 1, '2024-06-25', 1),
 (1563, 'STHEFANE', 'ARAUJO MELO', '01838', 0, '', 5, 444, 1, '2024-06-25', 1),
 (1564, 'MARIANY', 'DE SOUZA MORAIS', '01840', 0, '', 5, 444, 1, '2024-06-27', 1),
@@ -867,13 +869,13 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de tabela `anotaciones`
 --
 ALTER TABLE `anotaciones`
-  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `idanotacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=329;
 
 --
 -- AUTO_INCREMENT de tabela `controle`
 --
 ALTER TABLE `controle`
-  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `idcontrole` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de tabela `equipamento`

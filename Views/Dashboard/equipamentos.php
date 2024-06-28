@@ -1,4 +1,4 @@
-<?php headerAdmin($data); getModal('modalequipamentos',$data);?>
+<?php headerAdmin($data); getModal('modalDashboard',$data);?>
     <main class="app-content">
       <div class="app-title">
         <div>

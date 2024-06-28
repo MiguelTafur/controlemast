@@ -90,6 +90,17 @@ class EntregarModel extends Mysql
 		return $request;
 	}
 
+    public function selectProtocolo(int $idequipamento) {
+        $this->intIdEquipamento = $idequipamento;
+
+        $sql = "SELECT co.protocolo FROM controle co 
+                LEFT OUTER JOIN equipamento eq
+                ON(co.equipamentoid = eq.idequipamento)
+                WHERE co.status = 0 AND eq.idequipamento = $this->intIdEquipamento";
+        $request = $this->select($sql);
+        return $request;
+    }
+
     public function insertControleEntrega(string $usuario, string $equipamento, string $protocolo, string $observacion)
 	{
 		$this->listUsuario = $usuario;
