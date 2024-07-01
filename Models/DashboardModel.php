@@ -9,6 +9,7 @@ class DashboardModel extends Mysql
 	PRIVATE $strFecha2;
 	PRIVATE $intTipoEquipamento;
 	PRIVATE $intEstadoEquipamento;
+	PRIVATE $intEstadoControle;
 
 	public function __construct()
 	{
@@ -58,7 +59,7 @@ class DashboardModel extends Mysql
 					ON pe.idpersona = co.personaid 
 					LEFT OUTER JOIN rol ro
 					ON pe.rolid = ro.idrol
-					WHERE codigoruta = $rutaId AND pe.status = 0 AND (co.status = 3 || co.status = 4)
+					WHERE codigoruta = $rutaId AND pe.status = 0 AND (co.status = 3 || co.status = 4 || co.status = 5 || co.status = 6 || co.status = 7)
 					ORDER BY datecreated DESC LIMIT 6";
 		}
 		
@@ -148,6 +149,7 @@ class DashboardModel extends Mysql
 		return $request;
 
 	}
+
 
 	/***********   EQUIPAMENTOS   ************/
 	//Cantidad total de equiopamentos dependiendo del módulo
@@ -257,7 +259,7 @@ class DashboardModel extends Mysql
 		$rutaId = $_SESSION['idRuta'];
 		$this->intTipoEquipamento = $tipoEquipamento;
 		$this->intEstadoEquipamento = $estado;
-		$sql = "SELECT co.datecreated, co.protocolo, co.equipamentoid, eq.tipo, eq.lacre, pe.matricula, pe.nombres, pe.apellidos FROM controle co 
+		$sql = "SELECT 	co.idcontrole, co.datecreated, co.protocolo, co.equipamentoid, eq.tipo, eq.lacre, pe.matricula, pe.nombres, pe.apellidos FROM controle co 
 				LEFT OUTER JOIN persona pe
 				ON(co.personaid = pe.idpersona)
 				LEFT OUTER JOIN equipamento eq
@@ -266,5 +268,73 @@ class DashboardModel extends Mysql
 				ORDER BY co.datecreated DESC LIMIT 6";
 		$request = $this->select_all($sql);
 		return $request;
+	}
+
+	//Deltalles del control
+	public function selectRecebido(int $idrecebido)
+	{
+		$this->intIdControle = $idrecebido;
+		$sql = "SELECT co.idcontrole, 
+                       co.observacion, 
+                       co.protocolo, 
+                       co.datecreated, 
+					   co.status,
+                       pe.matricula, 
+                       pe.nombres, 
+                       pe.apellidos, 
+                       eq.marca,
+                       eq.lacre
+				FROM controle co 
+                LEFT OUTER JOIN persona pe
+                ON pe.idpersona = co.personaid
+                LEFT OUTER JOIN equipamento eq
+                ON eq.idequipamento = co.equipamentoid
+				WHERE idcontrole = $this->intIdControle";
+		$request = $this->select($sql);
+		return $request;
+	}
+
+	//Gráfica mensual de Controle
+	public function selectControleMes(string $anio, string $mes, int $estado)
+	{
+		$totalControleMes = 0;
+		$arrControleDias = array();
+		$rutaId = $_SESSION['idRuta'];
+		$this->intEstadoControle = $estado;
+		$dias = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
+		$n_dia = 1;
+		for ($i=0; $i < $dias; $i++)
+		{
+			$date = date_create($anio.'-'.$mes.'-'.$n_dia);
+			$fechaControle = date_format($date, "Y-m-d");
+		
+			$sql = "SELECT DAY(co.datecreated) as dia FROM controle co
+					LEFT OUTER JOIN persona pe
+					ON(pe.idpersona = co.personaid)
+					WHERE DATE(co.datecreated) = '$fechaControle' 
+					AND pe.codigoruta = $rutaId 
+					AND co.status = $this->intEstadoControle";
+			$controleDia = $this->select($sql);
+
+			$sqlTotal = "SELECT COUNT(*) as total FROM controle co 
+						 LEFT OUTER JOIN persona pe
+						 ON(pe.idpersona = co.personaid)
+						 WHERE DATE(co.datecreated) = '$fechaControle' 
+						 AND pe.codigoruta = $rutaId 
+						 AND co.status = $this->intEstadoControle";
+			$controleDiaTotal = $this->select($sqlTotal);
+			$controleDiaTotal = $controleDiaTotal['total'];
+
+			$controleDia['dia'] = $n_dia;
+			$controleDia['controle'] = $controleDiaTotal;
+			$controleDia['controle'] = $controleDia['controle'] == "" ? 0 : $controleDia['controle'];
+			$totalControleMes += $controleDiaTotal;
+			array_push($arrControleDias, $controleDia);
+			$n_dia++;
+
+		}
+		$meses = Meses();
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalControleMes, 'controles' => $arrControleDias);
+		return $arrData;
 	}
 }

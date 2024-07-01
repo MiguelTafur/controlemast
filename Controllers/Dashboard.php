@@ -428,18 +428,36 @@ class Dashboard extends Controllers{
 	/******** CONTROLE ********/
 	public function controle()
 	{
-
 		//cantidad total de Entregas
 		$data['entregas'] = $this->model->cantControle(1, MFONE);
 		$data['trocas'] = $this->model->cantControle(2, MFONE);
 		$data['desligados'] = $this->model->cantControle(3, MFONE);
 		$data['pediuConta'] = $this->model->cantControle(4, MFONE);
+		$data['semRenovacao'] = $this->model->cantControle(5, MFONE);
+		$data['justaCausa'] = $this->model->cantControle(6, MFONE);
+		$data['rescisão'] = $this->model->cantControle(7, MFONE);
 
 		//Últimas entregas
 		$data['ultimasEntregas'] = $this->model->ultimosControles(1, MFONE);
 		$data['ultimasTrocas'] = $this->model->ultimosControles(2, MFONE);
 		$data['ultimosDesligamentos'] = $this->model->ultimosControles(3, MFONE);
 		$data['ultimosPediuConta'] = $this->model->ultimosControles(4, MFONE);
+		$data['ultimosSemRenovacao'] = $this->model->ultimosControles(5, MFONE);
+		$data['ultimosJustaCausa'] = $this->model->ultimosControles(6, MFONE);
+		$data['ultimosRescisão'] = $this->model->ultimosControles(7, MFONE);
+
+		/**********  GRÁFICAS  ***********/
+		$anio = date("Y");
+		$mes = date("m");
+
+		$data['entregasMDia'] = $this->model->selectControleMes($anio,$mes,1);
+		$data['trocasMDia'] = $this->model->selectControleMes($anio,$mes,2);
+		$data['desligamentosMDia'] = $this->model->selectControleMes($anio,$mes,3);
+		$data['pediuContaMDia'] = $this->model->selectControleMes($anio,$mes,4);
+		$data['semRenovacaoMDia'] = $this->model->selectControleMes($anio,$mes,5);
+		$data['justaCausaMDia'] = $this->model->selectControleMes($anio,$mes,6);
+		$data['rescisaoMDia'] = $this->model->selectControleMes($anio,$mes,7);
+		
 
 		$data['page_tag'] = "Dashboard - Controle";
 		$data['page_title'] = "Dashboard - Controle";
@@ -448,5 +466,157 @@ class Dashboard extends Controllers{
 		$this->views->getView($this,"controle",$data);
 	}
 	
+	public function getRecebido($idrecebido)
+	{
+		if($_SESSION['permisosMod']['r']){
+			$idRecebido = intval($idrecebido);
+			if($idRecebido > 0)
+			{
+				$arrData = $this->model->selectRecebido($idRecebido);
+				if(empty($arrData))
+				{
+					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
+				}else{
+
+					if($arrData['protocolo']) {
+						$arrData['protocolo'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>';
+					} else {
+						$arrData['protocolo'] = '<span class="font-italic text-danger">Sem Evidência</span>';
+					}
+
+					if($arrData['status'] === 2) {
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
+					} else if($arrData['status'] === 3) {
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
+					} else if($arrData['status'] === 4){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+					} else if($arrData['status'] === 5){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">SEM RENOVAÇÃO DO CONTRATO</span>';
+					} else if($arrData['status'] === 6){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
+					} else if($arrData['status'] === 7){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
+					}
+
+					$arrData['observacion'] = '<span class="font-italic">'.$arrData['observacion'].'</span>';
+					$arrResponse = array('status' => true, 'data' => $arrData);
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+		}
+		die();
+	}
+
+	public function entregasMes()
+	{
+		if($_POST)
+		{
+			$grafica = "entregasMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$entregas = $this->model->selectControleMes($anio,$mes,1);
+			$script = getFile("Template/Modals/graficaEntregasMes", $entregas);
+			echo $script;
+			die();
+		}
+	}
+
+	public function trocasMes()
+	{
+		if($_POST)
+		{
+			$grafica = "trocasMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$trocas = $this->model->selectControleMes($anio,$mes,2);
+			$script = getFile("Template/Modals/graficaTrocasMes", $trocas);
+			echo $script;
+			die();
+		}
+	}
+
+	public function pediuContaMes()
+	{
+		if($_POST)
+		{
+			$grafica = "pediuContaMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$pediuConta = $this->model->selectControleMes($anio,$mes,3);
+			$script = getFile("Template/Modals/graficaPediuContaMes", $pediuConta);
+			echo $script;
+			die();
+		}
+	}
+
+	public function desligamentosMes()
+	{
+		if($_POST)
+		{
+			$grafica = "desligamentosMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$desligamentos = $this->model->selectControleMes($anio,$mes,4);
+			$script = getFile("Template/Modals/graficaDesligamentosMes", $desligamentos);
+			echo $script;
+			die();
+		}
+	}
+
+	public function semRenovacaoMes()
+	{
+		if($_POST)
+		{
+			$grafica = "semRenovacaoMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$semRenovacao = $this->model->selectControleMes($anio,$mes,5);
+			$script = getFile("Template/Modals/graficaSemRenovacaoMes", $semRenovacao);
+			echo $script;
+			die();
+		}
+	}
+
+	public function justaCausaMes()
+	{
+		if($_POST)
+		{
+			$grafica = "justaCausaMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$justaCausa = $this->model->selectControleMes($anio,$mes,6);
+			$script = getFile("Template/Modals/graficaJustaCausaMes", $justaCausa);
+			echo $script;
+			die();
+		}
+	}
+
+	public function rescisaoMes()
+	{
+		if($_POST)
+		{
+			$grafica = "rescisaoMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$rescisao = $this->model->selectControleMes($anio,$mes,7);
+			$script = getFile("Template/Modals/graficaRescisaoMes", $rescisao);
+			echo $script;
+			die();
+		}
+	}
 }
 ?>

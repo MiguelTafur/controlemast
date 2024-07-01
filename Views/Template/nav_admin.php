@@ -9,7 +9,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-dashboard" aria-hidden="true"></i>

@@ -109,6 +109,7 @@ class EntregarModel extends Mysql
 		$this->listEstado = 2;
 		$this->strProtocolo = $protocolo;
 		$this->strObservacion = $observacion;
+        $fecha = date('Y-m-d');
 		$return = 0;
 
         $query_select = "SELECT personaid FROM controle WHERE personaid = $this->listUsuario AND status = 1";
@@ -116,8 +117,8 @@ class EntregarModel extends Mysql
 
         if(empty($request_select)){
 
-            $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion)  VALUES(?,?,?,?)";
-            $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion);
+            $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion, datecreated)  VALUES(?,?,?,?,?)";
+            $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha);
             $request_insert = $this->insert($query_insert, $arrData);
             
 

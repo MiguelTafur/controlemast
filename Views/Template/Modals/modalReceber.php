@@ -103,6 +103,10 @@
               <td class="font-weight-bold">Anotações:</td>
               <td id="celObservacion"></td>
             </tr>
+            <tr>
+              <td class="font-weight-bold">Evidência:</td>
+              <td id="celEvidencia"></td>
+            </tr>
           </tbody>
         </table>
       </div>

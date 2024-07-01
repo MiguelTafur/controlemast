@@ -78,6 +78,7 @@ class ReceberModel extends Mysql
 		$this->intIdControle = $idrecebido;
 		$sql = "SELECT co.idcontrole, 
                        co.observacion, 
+                       co.protocolo, 
                        co.datecreated, 
 					   co.status,
                        pe.matricula, 
@@ -103,6 +104,7 @@ class ReceberModel extends Mysql
 		$this->listEstado = $acao;
 		$this->strObservacion = $observacion;
 		$this->strProtocolo = $imagem;
+		$fecha = date('Y-m-d');
 		$return = 0;
 
 		//Selecciona el ID del control actual entregado
@@ -116,8 +118,8 @@ class ReceberModel extends Mysql
 
 		$e = $this->selectEquipamento($this->listUsuario);
 
-        $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,status)  VALUES(?,?,?,?,?)";
-        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$this->listEstado);
+        $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,datecreated,status)  VALUES(?,?,?,?,?,?)";
+        $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha,$this->listEstado);
         $request_insert = $this->insert($query_insert, $arrData);
 		
         if($request_insert) {

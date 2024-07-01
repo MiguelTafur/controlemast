@@ -60,6 +60,7 @@ class EquipamentosModel extends Mysql
 		$this->strImagem = $imagen;
 		$this->intStatus = $checked;
 		$this->stringTipo = $estado;
+		$fecha = date('Y-m-d');
 		$return = 0;
 
 		$sql = "SELECT * FROM equipamento WHERE lacre = '{$this->strLacre}' AND codigoruta = $this->intIdRuta";
@@ -67,10 +68,11 @@ class EquipamentosModel extends Mysql
 
 		if(empty($request))
 		{
-			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,status,tipo,codigoruta)  VALUES(?,?,?,?,?,?)";
+			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,datecreated,status,tipo,codigoruta)  VALUES(?,?,?,?,?,?,?)";
 			$arrData = array($this->strMarca,
 							 $this->strCodigo,
 							 $this->strLacre,
+							 $fecha,
 							 $this->intStatus,
 							 $this->stringTipo,
 							 $this->intIdRuta);

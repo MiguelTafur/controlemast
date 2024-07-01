@@ -19,7 +19,7 @@
             </div>
             <div class="form-group col-md-12">
               <label for="txtLacre">Patrimônio <span class="required">*</span></label>
-              <input type="tel" class="form-control" id="txtLacre" name="txtLacre" onkeypress="return controlTag(event)" required>
+              <input type="text" class="form-control" id="txtLacre" name="txtLacre" required>
             </div>
             <div class="form-group col-md-12">
               <label for="txtCodigo">Código / Serial:</label>

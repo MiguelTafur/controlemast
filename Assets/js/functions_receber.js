@@ -185,6 +185,7 @@ function fntViewInfo(idrecebido)
                 document.querySelector("#celLacre").innerHTML = '#' + objData.data.lacre;
                 document.querySelector("#celFechaRegistro").innerHTML = fechaFormateada;
                 document.querySelector("#celObservacion").innerHTML = objData.data.observacion;
+                document.querySelector("#celEvidencia").innerHTML = objData.data.protocolo;
 
                 $('#modalViewControleReceber').modal('show');
             }else{

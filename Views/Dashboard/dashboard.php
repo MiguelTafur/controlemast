@@ -185,8 +185,14 @@
 
                         if($inactivo['status'] === 3) {
                           $inactivo['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGADO(A)</span>';
-                        } else {
+                        } else if($inactivo['status'] === 4) {
                           $inactivo['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+                        } else if($inactivo['status'] === 5) {
+                          $inactivo['status'] = '<span class="font-weight-bold font-italic text-danger">SEM RENOVAÇÃO</span>';
+                        } else if($inactivo['status'] === 6) {
+                          $inactivo['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
+                        } else if($inactivo['status'] === 7) {
+                          $inactivo['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
                         }
 
                         if($inactivo['modelo'] === 1)

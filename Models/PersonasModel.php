@@ -29,6 +29,7 @@ class PersonasModel extends Mysql
 		$this->intRuta = $ruta;
         $this->intModelo = $modelo;
 		$this->intStatus = $status;
+		$fecha = date('Y-m-d');
 		$return = 0;
 
         $sql = "SELECT * FROM persona WHERE codigoRuta = $this->intRuta AND matricula = '{$this->strMatricula}'";
@@ -36,8 +37,8 @@ class PersonasModel extends Mysql
 
         if(empty($request))
 		{
-			$query_insert = "INSERT INTO persona(matricula,nombres,apellidos,telefono,email_user,rolid,codigoruta,modelo,status)  VALUES(?,?,?,?,?,?,?,?,?)";
-			$arrData = array($this->strMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail,$this->intTipoId,$this->intRuta,$this->intModelo,$this->intStatus);
+			$query_insert = "INSERT INTO persona(matricula,nombres,apellidos,telefono,email_user,rolid,codigoruta,modelo,datecreated,status)  VALUES(?,?,?,?,?,?,?,?,?,?)";
+			$arrData = array($this->strMatricula,$this->strNombre,$this->strApellido,$this->intTelefono,$this->strEmail,$this->intTipoId,$this->intRuta,$this->intModelo,$fecha,$this->intStatus);
 			$request_insert = $this->insert($query_insert, $arrData);
 			$return = $request_insert;
 		}else{

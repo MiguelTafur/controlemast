@@ -1,4 +1,4 @@
-<!-- ******************USUARIOS**************** -->
+<!-- ******************  USUARIOS  **************** -->
 <!-- Modal detalle Usuarios Activos -->
 <div class="modal fade" id="modalDetalleU" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -89,7 +89,7 @@
   </div>
 </div>
 
-<!-- ******************EQUIPAMENTOS**************** -->
+<!-- ******************  EQUIPAMENTOS  **************** -->
 <!-- modal ver Anotaciones -->
 <div class="modal fade" id="modalViewAnnotation" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -168,6 +168,68 @@
           </div>
           <br>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************  CONTROLE  **************** -->
+<!-- modal ver Controles Receber -->
+<div class="modal fade" id="modalViewControleReceber" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Dados do Recebimento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="font-weight-bold">Data Registro:</td>
+              <td id="celFechaRegistro"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Tipo de Ação:</td>
+              <td id="celAcao"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Marca Equipamento:</td>
+              <td id="celMarca"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Matrícula:</td>
+              <td id="celMatricula"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Nomes Operador:</td>
+              <td id="celNombres"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Sobrenomes Operador:</td>
+              <td id="celApellidos"></td>
+            </tr>
+            <tr>
+            <td class="font-weight-bold">Lacre Equipamento:</td>
+              <td id="celLacre"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Anotações:</td>
+              <td id="celObservacion"></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">Evidência:</td>
+              <td id="celEvidencia"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
       </div>
     </div>
   </div>
