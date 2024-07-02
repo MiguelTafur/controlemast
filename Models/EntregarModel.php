@@ -112,11 +112,15 @@ class EntregarModel extends Mysql
         $fecha = date('Y-m-d');
 		$return = 0;
 
-        $query_select = "SELECT personaid FROM controle WHERE personaid = $this->listUsuario AND status = 1";
+        $query_select = "SELECT co.personaid, pe.modelo, pe.rolid FROM controle co
+                         LEFT OUTER JOIN persona pe
+                         ON(pe.idpersona = co.personaid)
+                         WHERE personaid = $this->listUsuario AND co.status = 1";
         $request_select = $this->select($query_select);
+        //dep($request_select);exit;
 
-        if(empty($request_select)){
-
+        if($request_select['modelo'] === 2 || $request_select['rolid'] !== 5 || $request_select['rolid'] !== 6)
+        {
             $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion, datecreated)  VALUES(?,?,?,?,?)";
             $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha);
             $request_insert = $this->insert($query_insert, $arrData);

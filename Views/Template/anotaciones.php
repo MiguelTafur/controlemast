@@ -17,13 +17,13 @@
           <input type="hidden" id="idEquipamentoAnotacao" name="idEquipamentoAnotacao" value="">
           <input type="hidden" id="estadoEquipamentoAnotacao" name="estadoEquipamentoAnotacao" value="">
           <div class="form-row align-items-center">
-            <div class="form-group col-md-12 mb-4">
-              <label for="fileAnotacao">Imagen</label>
-              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
-            </div>
             <div class="form-group col-md-12">
               <label for="txtAnotacao">Anotação <span class="required">*</span></label>
               <textarea class="form-control" id="txtAnotacao" name="txtAnotacao" required></textarea>
+            </div>
+            <div class="form-group col-md-12 mb-4">
+              <label for="fileAnotacao">Imagen</label>
+              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
             </div>
             <div class="col-sm-12">
               <button type="submit" class="btn btn-primary my-1">Salvar</button>

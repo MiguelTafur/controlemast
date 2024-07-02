@@ -378,12 +378,11 @@ function fntViewAddAnnotation(idequipamento)
             document.querySelector('#equipamentoLacre').innerHTML = 'Fone: #' + objData.data.lacre;
             document.querySelector('#idEquipamentoAnotacao').value = objData.data.idequipamento;
             document.querySelector('#estadoEquipamentoAnotacao').value = objData.data.status;
+            $('#modalAddAnnotation').modal('show');
         }
         divLoading.style.display = "none";
         return false;
     }
-
-    $('#modalAddAnnotation').modal('show');
 }
 
 function openModalEditStatus() {

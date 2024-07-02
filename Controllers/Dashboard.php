@@ -481,7 +481,7 @@ class Dashboard extends Controllers{
 					if($arrData['protocolo']) {
 						$arrData['protocolo'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>';
 					} else {
-						$arrData['protocolo'] = '<span class="font-italic text-danger">Sem Evidência</span>';
+						$arrData['protocolo'] = '<span class="font-italic text-secondary">Sem Evidência</span>';
 					}
 
 					if($arrData['status'] === 2) {

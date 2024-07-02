@@ -147,15 +147,7 @@ class Receber extends Controllers{
 					if($arrData['protocolo']) {
 						$arrData['protocolo'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>';
 					} else {
-						$arrData['protocolo'] = '<a 
-													href="#" 
-													class="text-dark" 
-													style="margin: 0;">
-													<span class="fa-stack fa-lg">
-														<i class="fa fa-file-image-o fa-stack-1x" aria-hidden="true"></i>
-														<i class="fa fa-ban fa-stack-2x text-danger"></i>
-													</span>
-												</a>';
+						$arrData['protocolo'] = '<span class="font-italic text-secondary">Sem Evidência</span>';
 					}
 
 					if($arrData['status'] === 2) {
