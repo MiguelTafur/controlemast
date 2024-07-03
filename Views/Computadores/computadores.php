@@ -14,7 +14,7 @@
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/computadores"><?= $data['page_title'] ?></a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/computadores"><?= $data['page_title']; ?></a></li>
     </ul>
   </div>
 
@@ -23,7 +23,7 @@
       <div class="tile">
         <div class="tile-body">
           <div class="table-responsive">
-            <table class="table table-striped text-center" id="tableEquipamentos">
+            <table class="table table-striped text-center" id="tableComputadores">
               <thead>
                 <tr>
                   <th>Marca</th>

@@ -27,6 +27,7 @@ class Dashboard extends Controllers{
 		$data['lideres'] = $this->model->cantPersonas(RLIDER);
 		$data['gestores'] = $this->model->cantPersonas(RGESTOR);
 		$data['coordinadores'] = $this->model->cantPersonas(RCOORDINADOR);
+		$data['supervisores'] = $this->model->cantPersonas(RSUPERVISOR);
 		$data['gerentes'] = $this->model->cantPersonas(RGERENTE);
 
 		//Usuarios inactivos

@@ -14,12 +14,12 @@ class Computadores extends Controllers{
     public function Computadores()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
-			header("Location: ".base_url().'/fones');
+			header("Location: ".base_url().'/entregar');
 		}
 		$data['page_tag'] = "Computadores";
 		$data['page_title'] = "COMPUTADORES";
 		$data['page_name'] = "computadores";
-		$data['page_functions_js'] = "functions_Computadores.js";
+		$data['page_functions_js'] = "functions_computadores.js";
 		$this->views->getView($this,"computadores",$data);
 	}
 

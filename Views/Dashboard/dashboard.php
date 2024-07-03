@@ -18,7 +18,7 @@
             <a href="<?= base_url() ?>/operacao" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                 <div class="info">
-                  <h4>Operadores</h4>
+                  <h4>Operadores(as)</h4>
                   <p>Ativos: <span class="text-success font-italic"><?= $data['operadores']; ?></span></p>
                 </div>
               </div>
@@ -62,7 +62,7 @@
               <a href="<?= base_url() ?>/gestores" class="linkw">
                 <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                   <div class="info">
-                    <h4>Gestores</h4>
+                    <h4>Monitores(as) de Qualidade</h4>
                     <p>
                     <p>Ativos: <span class="text-success font-italic"><?= $data['gestores']; ?></span></p>
                     </p>
@@ -78,9 +78,25 @@
               <a href="<?= base_url() ?>/coordinadores" class="linkw">
                 <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                   <div class="info">
-                    <h4>Coordinadores</h4>
+                    <h4>Coordinadores(as)</h4>
                     <p>
                     <p>Ativos: <span class="text-success font-italic"><?= $data['coordinadores']; ?></span></p>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <?php } ?>
+
+          <!-- SUPERVISORES -->
+          <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
+            <div class="col-md-6 col-lg-3">
+              <a href="<?= base_url() ?>/supervisores" class="linkw">
+                <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                  <div class="info">
+                    <h4>supervisores(as)</h4>
+                    <p>
+                    <p>Ativos: <span class="text-success font-italic"><?= $data['supervisores']; ?></span></p>
                     </p>
                   </div>
                 </div>

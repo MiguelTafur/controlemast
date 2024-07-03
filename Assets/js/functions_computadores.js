@@ -1,4 +1,4 @@
-let tableEquipamentos;
+let tableComputadores;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -14,7 +14,7 @@ function iniciarApp() {
 }
 
 function fntTablaEquipamentos() {
-    tableEquipamentos = $('#tableEquipamentos').dataTable({
+    tableComputadores = $('#tableComputadores').dataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
@@ -75,7 +75,7 @@ function fntCrearEquipamento() {
                     if(objData.status)
                     {
                         if(rowTable == ""){
-                            tableEquipamentos.api().ajax.reload();
+                            tableComputadores.api().ajax.reload();
                         }else{
                             rowTable.cells[0].textContent = strMarca;
                             if(strCodigo === '') {
@@ -193,7 +193,7 @@ function fntEditStatus() {
                     if(objData.status)
                     {
                         if(rowTable == ""){
-                            tableEquipamentos.api().ajax.reload();
+                            tableComputadores.api().ajax.reload();
                         }else{
                             if(objData.estado === 1) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-success">Disponível</span></h5>`;

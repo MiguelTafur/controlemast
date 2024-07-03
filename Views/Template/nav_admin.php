@@ -47,8 +47,8 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="<?= base_url(); ?>/gerentes"><i class="icon fa fa-circle-o"></i> Gerentes</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/supervisores"><i class="icon fa fa-circle-o"></i> Supervisores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/coordinadores"><i class="icon fa fa-circle-o"></i> Coordinadores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/gestores"><i class="icon fa fa-circle-o"></i> Gestores de Qualidade</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/coordinadores"><i class="icon fa fa-circle-o"></i> Coordenadores</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/gestores"><i class="icon fa fa-circle-o"></i> Monitores de Qualidade</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/lideres"><i class="icon fa fa-circle-o"></i> Líderes</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/operacao"><i class="icon fa fa-circle-o"></i> Operadores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/aprendizes"><i class="icon fa fa-circle-o"></i> Aprendizes</a></li>
@@ -65,7 +65,7 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="<?= base_url(); ?>/fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/computadores"><i class="icon fa fa-circle-o"></i> Computadores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Telas</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Monitores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
             </ul>

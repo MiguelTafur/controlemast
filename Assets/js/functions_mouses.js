@@ -115,13 +115,16 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divFileAnotacion').classList.add('d-none');
     document.querySelector('#divEqEstragado').classList.add('d-none');
 
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
     request.open("GET",ajaxUrl,true);
     request.send();
-    request.onreadystatechange = function(){
+    request.onreadystatechange = function()
+    {
 
-        if(request.readyState == 4 && request.status == 200){
+        if(request.readyState == 4 && request.status == 200)
+            {
             let objData = JSON.parse(request.responseText);
 
             if(objData.status)
@@ -156,9 +159,11 @@ function fntEditInfo(element, idequipamento)
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
                 document.querySelector("#txtLacre").value = objData.data.lacre;
+                $('#modalFormMouses').modal('show');
             }
         }
-        $('#modalFormMouses').modal('show');
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -184,14 +189,15 @@ function fntEditStatus() {
             let formData = new FormData(formEditarEstado);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
-            request.onreadystatechange = function(){
+            request.onreadystatechange = function()
+            {
                 if(request.readyState == 4 && request.status == 200)
                 {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
                         if(rowTable == ""){
-                            tableEquipamentos.api().ajax.reload();
+                            tableMouses.api().ajax.reload();
                         }else{
                             if(objData.estado === 1) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-success">Disponível</span></h5>`;
@@ -267,6 +273,7 @@ function fntViewInfo(idequipamento)
 
     btnAnnotation.setAttribute('id', idequipamento);
     
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -321,6 +328,8 @@ function fntViewInfo(idequipamento)
                 swal("Erro", objData.msg, "error");
             }
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
@@ -328,6 +337,7 @@ function fntViewAnnotation()
 {
     let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
 
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getAnotacionesMouse/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -348,11 +358,15 @@ function fntViewAnnotation()
             $('#modalViewAnnotation').modal('show');
             $('#modalViewAnnotation').addClass('myModal');
         }
+        divLoading.style.display = "none";
+        return false;
     }
 }
 
-function fntViewAddAnnotation(idequipamento) {
+function fntViewAddAnnotation(idequipamento)
+{
 
+    divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Mouses/getMouse/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -365,10 +379,11 @@ function fntViewAddAnnotation(idequipamento) {
             document.querySelector('#equipamentoLacre').innerHTML = 'Mouse: #' + objData.data.lacre;
             document.querySelector('#idEquipamentoAnotacao').value = objData.data.idequipamento;
             document.querySelector('#estadoEquipamentoAnotacao').value = objData.data.status;
+            $('#modalAddAnnotation').modal('show');
         }
+        divLoading.style.display = "none";
+        return false;
     }
-
-    $('#modalAddAnnotation').modal('show');
 }
 
 function openModalEditStatus() {
