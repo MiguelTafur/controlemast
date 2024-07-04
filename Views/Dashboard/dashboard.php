@@ -162,6 +162,7 @@
                         }
 
                         $activo['datecreated'] = date("d-m-Y", strtotime($activo['datecreated']));
+                        $activo['datecreated'] = fechaInline($activo['datecreated']);
                     ?>
                         <tr class="text-center">
                           <td><?= $activo['datecreated']; ?></td>
@@ -219,6 +220,7 @@
                         }
 
                         $inactivo['datecreated'] = date("d-m-Y", strtotime($inactivo['datecreated']));
+                        $inactivo['datecreated'] = fechaInline($inactivo['datecreated']);
                     ?>
                         <tr class="text-center">
                         <td><?= $inactivo['matricula']; ?></td>

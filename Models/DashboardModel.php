@@ -44,7 +44,7 @@ class DashboardModel extends Mysql
 					ON pe.idpersona = co.personaid 
 					LEFT OUTER JOIN rol ro
 					ON pe.rolid = ro.idrol
-					WHERE codigoruta = $rutaId AND pe.status != 0 AND (co.status != 3 || co.status != 4)
+					WHERE codigoruta = $rutaId AND pe.status != 0 || (co.status != 3 || co.status != 4)
 					ORDER BY datecreated DESC LIMIT 6";
 		} else {
 			$sql = "SELECT pe.matricula,
@@ -59,7 +59,7 @@ class DashboardModel extends Mysql
 					ON pe.idpersona = co.personaid 
 					LEFT OUTER JOIN rol ro
 					ON pe.rolid = ro.idrol
-					WHERE codigoruta = $rutaId AND pe.status = 0 AND (co.status = 3 || co.status = 4 || co.status = 5 || co.status = 6 || co.status = 7)
+					WHERE codigoruta = $rutaId AND pe.status = 0 AND co.status != 0 || (co.status = 3 || co.status = 4 || co.status = 5 || co.status = 6 || co.status = 7)
 					ORDER BY datecreated DESC LIMIT 6";
 		}
 		

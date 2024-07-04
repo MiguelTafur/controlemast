@@ -195,12 +195,12 @@
     }
 
     //Trea el protocolo de la entrega con el estado 0
-    function getProtocolo(int $idequipamento)
+    function getProtocolo(int $idequipamento, int $estado)
     {
         
         require_once("Models/EntregarModel.php");
         $objEntregar = new EntregarModel();
-        $request = $objEntregar->selectProtocolo($idequipamento);
+        $request = $objEntregar->selectProtocolo($idequipamento, $estado);
 
         return $request['protocolo'];
     }
@@ -302,6 +302,14 @@
     {
         $meses = array("Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dizembro");
         return $meses;
+    }
+
+    //Fecha formateada en linea recta
+    function fechaInline(string $fecha) {
+        $fechaFormateada = explode("-", $fecha);
+        $fechaFormateada = '<div class="d-flex">'.'<div>'.$fechaFormateada[0].'</div>-<div>'.$fechaFormateada[1].'</div>-<div>'.$fechaFormateada[2].'</div></div>';
+
+        return $fechaFormateada;
     }
     
 

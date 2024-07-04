@@ -113,11 +113,12 @@ class Fones extends Controllers{
 					for ($i=0; $i < count($arrData); $i++) { 
 						if($arrData[$i]['idanotacion'] > 0) {
 							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
+							$arrData[$i]['datecreated'] = fechaInline($arrData[$i]['datecreated']);
 							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
 							$ultimo = explode(" ", $arrData[$i]['apellidos']);
 							$trAnotaciones .= '<tr class="text-center">
 								<td>'.$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]).'</td>
-								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>';
+								<td>'.$arrData[$i]['datecreated'].'</td>';
 								
 								switch ($arrData[$i]['status']) {
 									case '1':

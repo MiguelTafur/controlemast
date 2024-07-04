@@ -163,11 +163,13 @@
                       {
                         $ultimasEntregas['datecreated'] = date("d-m-Y", strtotime($ultimasEntregas['datecreated']));
 
-                        $ultimasEntregas['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimasEntregas['lacre'].'</span></h5>';
+                        $ultimasEntregas['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimasEntregas['lacre'].'</span></h6>';
+
+                        $protocolo = getProtocolo($ultimasEntregas['equipamentoid'], 1);
                         
                         if($ultimasEntregas['protocolo']) {
                           $ultimasEntregas['protocolo'] = '<a 
-                                                          href="'.base_url().'/Assets/images/imagenes/'.$ultimasEntregas['equipamentoid'].'" 
+                                                          href="'.base_url().'/Assets/images/imagenes/'.$protocolo.'" 
                                                           target="_blank" 
                                                           class="text-dark" 
                                                           style="margin: 0;">
@@ -227,9 +229,9 @@
                       {
                         $ultimasTrocas['datecreated'] = date("d-m-Y", strtotime($ultimasTrocas['datecreated']));
 
-                        $ultimasTrocas['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimasTrocas['lacre'].'</span></h5>';
+                        $ultimasTrocas['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimasTrocas['lacre'].'</span></h5>';
 
-                        $protocolo = getProtocolo($ultimasTrocas['equipamentoid']);
+                        $protocolo = getProtocolo($ultimasTrocas['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimasTrocas['protocolo'] = '<a 
@@ -293,9 +295,9 @@
                       {
                         $ultimosDesligamentos['datecreated'] = date("d-m-Y", strtotime($ultimosDesligamentos['datecreated']));
 
-                        $ultimosDesligamentos['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimosDesligamentos['lacre'].'</span></h5>';
+                        $ultimosDesligamentos['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosDesligamentos['lacre'].'</span></h5>';
 
-                        $protocolo = getProtocolo($ultimosDesligamentos['equipamentoid']);
+                        $protocolo = getProtocolo($ultimosDesligamentos['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimosDesligamentos['protocolo'] = '<a 
@@ -358,9 +360,9 @@
                       {
                         $ultimosPediuConta['datecreated'] = date("d-m-Y", strtotime($ultimosPediuConta['datecreated']));
 
-                        $ultimosPediuConta['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimosPediuConta['lacre'].'</span></h5>';
+                        $ultimosPediuConta['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosPediuConta['lacre'].'</span></h5>';
 
-                        $protocolo = getProtocolo($ultimosPediuConta['equipamentoid']);
+                        $protocolo = getProtocolo($ultimosPediuConta['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimosPediuConta['protocolo'] = '<a 
@@ -424,9 +426,9 @@
                       {
                         $ultimosSemRenovacao['datecreated'] = date("d-m-Y", strtotime($ultimosSemRenovacao['datecreated']));
 
-                        $ultimosSemRenovacao['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimosSemRenovacao['lacre'].'</span></h5>';
+                        $ultimosSemRenovacao['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosSemRenovacao['lacre'].'</span></h5>';
 
-                        $protocolo = getProtocolo($ultimosSemRenovacao['equipamentoid']);
+                        $protocolo = getProtocolo($ultimosSemRenovacao['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimosSemRenovacao['protocolo'] = '<a 
@@ -490,9 +492,9 @@
                       {
                         $ultimosJustaCausa['datecreated'] = date("d-m-Y", strtotime($ultimosJustaCausa['datecreated']));
 
-                        $ultimosJustaCausa['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimosJustaCausa['lacre'].'</span></h5>';
+                        $ultimosJustaCausa['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosJustaCausa['lacre'].'</span></h5>';
 
-                        $protocolo = getProtocolo($ultimosJustaCausa['equipamentoid']);
+                        $protocolo = getProtocolo($ultimosJustaCausa['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimosJustaCausa['protocolo'] = '<a 
@@ -556,9 +558,9 @@
                       {
                         $ultimosRescisão['datecreated'] = date("d-m-Y", strtotime($ultimosRescisão['datecreated']));
 
-                        $ultimosRescisão['lacre'] = '<h5>Fone: <span class="badge badge-secondary">#'.$ultimosRescisão['lacre'].'</span></h5>';
+                        $ultimosRescisão['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosRescisão['lacre'].'</span></h6>';
 
-                        $protocolo = getProtocolo($ultimosRescisão['equipamentoid']);
+                        $protocolo = getProtocolo($ultimosRescisão['equipamentoid'], 0);
                         
                         if($protocolo) {
                           $ultimosRescisão['protocolo'] = '<a 

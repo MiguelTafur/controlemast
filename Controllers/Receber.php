@@ -49,7 +49,8 @@ class Receber extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$protocolo = getProtocolo($arrData[$i]['equipamentoid']);
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
 				if($arrData[$i]['status'] === 2) {
 					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">TROCA</span></a>';

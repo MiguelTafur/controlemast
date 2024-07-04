@@ -53,18 +53,20 @@
       <div class="modal-body">
         <h5 class="text-center" id="foneAnotacion"></h5>
         <br>
-        <table class="table table-striped text-center">
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Data</th>
-              <th>Estado Equipamento</th>
-              <th>Anotação</th>
-              <th>Imagem</th>
-            </tr>
-          </thead>
-          <tbody id="listAnotaciones"></tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Data</th>
+                <th>Estado Equipamento</th>
+                <th>Anotação</th>
+                <th>Imagem</th>
+              </tr>
+            </thead>
+            <tbody id="listAnotaciones"></tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

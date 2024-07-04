@@ -90,6 +90,7 @@ function fntCrearOperacao() {
                         }
                         $('#modalFormOperacao').modal("hide");
                         formOperacao.reset();
+                        $("#listModelo").selectpicker("refresh");
                         swal("Operador", objData.msg, "success");
                         
                     }else{

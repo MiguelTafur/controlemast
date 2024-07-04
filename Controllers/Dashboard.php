@@ -33,7 +33,7 @@ class Dashboard extends Controllers{
 		//Usuarios inactivos
 		$data['inactivos'] = $this->model->estadoUsuarios(0);
 
-		//Usuarios ctivos
+		//Usuarios activos
 		$data['activos'] = $this->model->estadoUsuarios(1);
 
 		//GRÁFICAS
