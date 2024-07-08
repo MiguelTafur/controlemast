@@ -127,10 +127,10 @@
 
           <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-ativos-tab" data-toggle="pill" href="#pills-ativos" role="tab" aria-controls="pills-ativos" aria-selected="true">USUÁRIOS ATIVOS</a>
+              <a class="nav-link active" id="pills-ativos-tab" data-toggle="pill" href="#pills-ativos" role="tab" aria-controls="pills-ativos" aria-selected="true">ATIVOS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-inativos-tab" data-toggle="pill" href="#pills-inativos" role="tab" aria-controls="pills-inativos" aria-selected="false">USUÁRIOS INATIVOS</a>
+              <a class="nav-link" id="pills-inativos-tab" data-toggle="pill" href="#pills-inativos" role="tab" aria-controls="pills-inativos" aria-selected="false">INATIVOS</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">
@@ -246,10 +246,10 @@
           <h3 class="tile-title text-center">GRÁFICO DE USUÁRIOS</h3>
           <ul class="nav nav-tabs mb-3" id="pills-tabGrafico" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-graficoAtivos-tab" data-toggle="pill" href="#pills-graficoAtivos" role="tab" aria-controls="pills-ativos" aria-selected="true">USUÁRIOS ATIVOS</a>
+              <a class="nav-link active" id="pills-graficoAtivos-tab" data-toggle="pill" href="#pills-graficoAtivos" role="tab" aria-controls="pills-ativos" aria-selected="true">ATIVOS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-graficoInativos-tab" data-toggle="pill" href="#pills-graficoInativos" role="tab" aria-controls="pills-inativos" aria-selected="false">USUÁRIOS INATIVOS</a>
+              <a class="nav-link" id="pills-graficoInativos-tab" data-toggle="pill" href="#pills-graficoInativos" role="tab" aria-controls="pills-inativos" aria-selected="false">INATIVOS</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabGraficoContent">

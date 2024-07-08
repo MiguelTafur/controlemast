@@ -25,7 +25,7 @@ class EntregarModel extends Mysql
                        co.equipamentoid,
                        co.protocolo,
                        co.observacion,
-                       DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fechaRegistro,
+                       co.datecreated as fechaRegistro,
                        pe.matricula,
                        pe.nombres,
                        pe.apellidos,
@@ -40,7 +40,6 @@ class EntregarModel extends Mysql
                 WHERE co.status = 1 
                 AND pe.codigoruta = $ruta";
 		$request = $this->select_all($sql);
-        //dep($request);exit;
 		return $request;
 	}
 

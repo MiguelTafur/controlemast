@@ -47,6 +47,8 @@ class Entregar extends Controllers{
 					$tipo = 'Tela';
 				}
 
+				$arrData[$i]['fechaRegistro'] = date("d-m-Y", strtotime($arrData[$i]['fechaRegistro']));
+
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';

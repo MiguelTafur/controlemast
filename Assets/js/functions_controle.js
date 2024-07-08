@@ -34,8 +34,7 @@ function fntTablaControles() {
         ],
         "resonsieve":"true",
         "bDestroy": true,
-        "iDisplayLength": 20,
-        "order":[[0,"desc"]]  
+        "iDisplayLength": 20
     });
 }
 

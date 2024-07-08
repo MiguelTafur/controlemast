@@ -88,14 +88,13 @@ class Receber extends Controllers{
 		if($_SESSION['permisosMod']['r']){
 			$intIdRuta = $_SESSION['idRuta'];
 			$arrData = $this->model->selectUsuarios($intIdRuta);
+			//dep($arrData);exit;
 			$htmlOptions = '<option></option>';
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
-					// if($arrData[$i]['personaid'] != "" && $arrData[$i]['status'] == 1 ) {
-						$ultimo = $arrData[$i]['apellidos'];
-						$ultimo = explode(" ", $ultimo);
-						$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].'">'.strtoupper(strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0]).' - '.$arrData[$i]['matricula'].'</option>';
-					// }
+					$ultimo = $arrData[$i]['apellidos'];
+					$ultimo = explode(" ", $ultimo);
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].', '.$arrData[$i]['equipamentoid'].'">'.strtoupper(strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0]).' - '.$arrData[$i]['matricula'].'</option>';
 				}
 			}
 			echo $htmlOptions;
@@ -107,8 +106,9 @@ class Receber extends Controllers{
 		if($_POST) {
 			if($_SESSION['permisosMod']['r']) {
 				$idUsuario = intval($_POST['idUsuario']);
+				$idEquipamento = intval($_POST['idEquipamento']);
 				$equipamento = "";
-				$arrData = $this->model->selectEquipamento($idUsuario);
+				$arrData = $this->model->selectEquipamento($idUsuario, $idEquipamento);
 
 				if($arrData['tipo'] === 8) {
 					$arrData['tipo'] = 'Fone';

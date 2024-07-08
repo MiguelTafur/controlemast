@@ -305,9 +305,10 @@
     }
 
     //Fecha formateada en linea recta
-    function fechaInline(string $fecha) {
+    function fechaInline(string $fecha) 
+    {
         $fechaFormateada = explode("-", $fecha);
-        $fechaFormateada = '<div class="d-flex">'.'<div>'.$fechaFormateada[0].'</div>-<div>'.$fechaFormateada[1].'</div>-<div>'.$fechaFormateada[2].'</div></div>';
+        $fechaFormateada = '<div class="d-flex justify-content-center">'.'<div>'.$fechaFormateada[0].'</div>-<div>'.$fechaFormateada[1].'</div>-<div>'.$fechaFormateada[2].'</div></div>';
 
         return $fechaFormateada;
     }

@@ -47,7 +47,7 @@ class ReceberModel extends Mysql
 	public function selectUsuarios($ruta)
 	{
 		$this->intIdRuta = $ruta;
-		$sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos, co.personaid, co.status
+		$sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos, co.equipamentoid, co.personaid, co.status
 			FROM persona pe
 			LEFT OUTER JOIN controle co
 			ON pe.idpersona = co.personaid
@@ -60,14 +60,16 @@ class ReceberModel extends Mysql
 		return $request;
 	}
 
-	public function selectEquipamento(int $idusuario) 
+	public function selectEquipamento(int $idusuario, int $idequipamento) 
 	{
 		$this->listUsuario = $idusuario;
+		$this->intIdEquipamento = $idequipamento;
 		$sql = "SELECT eq.idequipamento, eq.tipo, eq.lacre 
 				FROM controle co 
 				LEFT OUTER JOIN equipamento eq
 				ON co.equipamentoid = eq.idequipamento
 				WHERE co.personaid = $this->listUsuario
+				AND co.equipamentoid = $this->intIdEquipamento
 				AND co.status = 1";
 		$request = $this->select($sql);
 		return $request;

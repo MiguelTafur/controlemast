@@ -121,15 +121,19 @@ function fntUsuarios()
 
 function fntIdUsuario() {
     $('#listUsuario').on("change", function (e) {
-        const idUsuario = e.target.value;
-        fntEquipamento(idUsuario);
+        const options = e.target.value;
+        const arrData = options.split(',');
+        const idUsuario = arrData[0];
+        const idEquipamento = arrData[1];
+
+        fntEquipamento(idUsuario, idEquipamento);
     });
 }
 
-function fntEquipamento(idusuario) {
+function fntEquipamento(idusuario, idequipamento) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Receber/getEquipamento';
-    let strData = "idUsuario=" + idusuario;
+    let strData = "idUsuario=" + idusuario + "&idEquipamento=" + idequipamento;
     request.open("POST",ajaxUrl,true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(strData);
