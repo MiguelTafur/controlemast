@@ -117,6 +117,7 @@ class EntregarModel extends Mysql
 		$this->strObservacion = $observacion;
         $fecha = date('Y-m-d');
 		$return = 0;
+        $teste = '';
 
         $query_select = "SELECT co.personaid, pe.modelo, pe.rolid FROM controle co
                          LEFT OUTER JOIN persona pe
@@ -125,8 +126,48 @@ class EntregarModel extends Mysql
         $request_select = $this->select($query_select);
         //dep($request_select);exit;
 
-        if($request_select['modelo'] === 2 || $request_select['rolid'] !== 5 || $request_select['rolid'] !== 6)
+        if(!empty($request_select))
         {
+            if($request_select['modelo'] === 2 || ($request_select['rolid'] === RGERENTE || $request_select['rolid'] === RSUPERVISOR || $request_select['rolid'] === RCOORDINADOR || $request_select['rolid'] === RLIDER || $request_select['rolid'] === RGESTOR))
+            {
+                $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion, datecreated)  VALUES(?,?,?,?,?)";
+                $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha);
+                $request_insert = $this->insert($query_insert, $arrData);
+                
+    
+                //Actualizar el estado del equipamento
+                $query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->listEquipamento";
+                $arrData = array($this->listEstado);
+                $request = $this->update($query_update,$arrData);
+    
+                //Selecciona el tipo de equipamento
+                $sql = "SELECT tipo FROM equipamento WHERE idequipamento = $this->listEquipamento";
+                $request = $this->select($sql);
+                $tipo = $request['tipo'];
+    
+                //Agrega la anotación
+                if(empty($this->strObservacion)) {
+                    setAnotaciones($this->listEquipamento,
+                                   $this->intIdUsuario,
+                                   'Equipamento entregue',
+                                   $this->strProtocolo,
+                                   $this->listEstado,
+                                   $tipo);
+                } else {
+                    setAnotaciones($this->listEquipamento,
+                                   $this->intIdUsuario,
+                                   $this->strObservacion,
+                                   $this->strProtocolo,
+                                   $this->listEstado,
+                                   $tipo);
+                }
+    
+                $return = $request_insert;
+    
+            } else {
+                $return = "0";
+            }
+        } else {
             $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion, datecreated)  VALUES(?,?,?,?,?)";
             $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha);
             $request_insert = $this->insert($query_insert, $arrData);
@@ -160,12 +201,8 @@ class EntregarModel extends Mysql
             }
 
             $return = $request_insert;
-
-        } else {
-            $return = "0";
         }
 
-		//dep($return);exit;
         return $return;
 	}
 

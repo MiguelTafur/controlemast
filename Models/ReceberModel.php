@@ -118,7 +118,7 @@ class ReceberModel extends Mysql
 		$request_select = $this->select($query_select);
 		$idcontrole = $request_select['idcontrole'];
 
-		$e = $this->selectEquipamento($this->listUsuario);
+		$e = $this->selectEquipamento($this->listUsuario, $this->listEquipamento);
 
         $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,datecreated,status)  VALUES(?,?,?,?,?,?)";
         $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha,$this->listEstado);
