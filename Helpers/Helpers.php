@@ -305,12 +305,17 @@
     }
 
     //Fecha formateada en linea recta
-    function fechaInline(string $fecha) 
-    {
+    function fechaInline(string $fecha) {
         $fechaFormateada = explode("-", $fecha);
         $fechaFormateada = '<div class="d-flex justify-content-center">'.'<div>'.$fechaFormateada[0].'</div>-<div>'.$fechaFormateada[1].'</div>-<div>'.$fechaFormateada[2].'</div></div>';
 
         return $fechaFormateada;
+    }
+
+    function formatName($nombre, $apellido) {
+        $ultimo = explode(" ", $apellido);
+        $nombreFormateado = strtoupper(strtok($nombre, " "). ' ' . array_reverse($ultimo)[0]);
+        return $nombreFormateado;
     }
     
 

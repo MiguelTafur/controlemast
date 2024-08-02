@@ -32,7 +32,6 @@ class Dashboard extends Controllers{
 
 		//Usuarios inactivos
 		$data['inactivos'] = $this->model->estadoUsuarios(0);
-
 		//Usuarios activos
 		$data['activos'] = $this->model->estadoUsuarios(1);
 
@@ -147,13 +146,29 @@ class Dashboard extends Controllers{
 					$usuariosID[$i]['modelo'] = 'Home Office';
 				}
 				$fechaFormateada = date('d-m-Y', strtotime($usuariosID[$i]['datecreated']));
+				$fechaFormateadaSalida = date('d-m-Y', strtotime($usuariosID[$i]['fechaControle']));
+				$fechaFormateada = fechaInline($fechaFormateada);
+				$fechaFormateadaSalida = fechaInline($fechaFormateadaSalida);
+
+				if($usuariosID[$i]['status'] === 3) {
+					$usuariosID[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGADO(A)</span>';
+				} else if($usuariosID[$i]['status'] === 4) {
+					$usuariosID[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+				} else if($usuariosID[$i]['status'] === 5) {
+					$usuariosID[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">SEM RENOVAÇÃO</span>';
+				} else if($usuariosID[$i]['status'] === 6) {
+					$usuariosID[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
+				} else if($usuariosID[$i]['status'] === 7) {
+					$usuariosID[$i]['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
+				}
 
 				$detalles .= '<tr class="text-center">';
 				$detalles .= '<td>'.$fechaFormateada.'</td>';
+				$detalles .= '<td>'.$fechaFormateadaSalida.'</td>';
 				$detalles .= '<td>'.$usuariosID[$i]['matricula'].'</td>';
 				$detalles .= '<td>'.$usuariosID[$i]['nombres'].'</td>';
 				$detalles .= '<td>'.$usuariosID[$i]['nombrerol'].'</td>';
-				$detalles .= '<td>'.$usuariosID[$i]['modelo'].'</td>';
+				$detalles .= '<td>'.$usuariosID[$i]['status'].'</td>';
 				$detalles .= '</tr>';
 			}
 			
@@ -241,10 +256,11 @@ class Dashboard extends Controllers{
 						if($arrData[$i]['idanotacion'] > 0) {
 							$arrData[$i]['datecreated'] = date("d-m-Y", strtotime($arrData[$i]['datecreated']));
 							$dia = $dias[date('w', strtotime($arrData[$i]['datecreated']))];
+							$arrData[$i]['datecreated'] = fechaInline($arrData[$i]['datecreated']);
 							$ultimo = explode(" ", $arrData[$i]['apellidos']);
 							$trAnotaciones .= '<tr class="text-center">
 								<td>'.$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]).'</td>
-								<td>'.$dia.' (<i>'.$arrData[$i]['datecreated'].'</i>)'.'</td>';
+								<td><i>'.$arrData[$i]['datecreated'].'</i></td>';
 								
 								switch ($arrData[$i]['status']) {
 									case '1':
@@ -437,6 +453,8 @@ class Dashboard extends Controllers{
 		$data['semRenovacao'] = $this->model->cantControle(5, MFONE);
 		$data['justaCausa'] = $this->model->cantControle(6, MFONE);
 		$data['rescisão'] = $this->model->cantControle(7, MFONE);
+		$data['INSS'] = $this->model->cantControle(8, MFONE);
+		$data['maternidade'] = $this->model->cantControle(9, MFONE);
 
 		//Últimas entregas
 		$data['ultimasEntregas'] = $this->model->ultimosControles(1, MFONE);
@@ -446,6 +464,8 @@ class Dashboard extends Controllers{
 		$data['ultimosSemRenovacao'] = $this->model->ultimosControles(5, MFONE);
 		$data['ultimosJustaCausa'] = $this->model->ultimosControles(6, MFONE);
 		$data['ultimosRescisão'] = $this->model->ultimosControles(7, MFONE);
+		$data['ultimosINSS'] = $this->model->ultimosControles(8, MFONE);
+		$data['ultimosMaternidade'] = $this->model->ultimosControles(9, MFONE);
 
 		/**********  GRÁFICAS  ***********/
 		$anio = date("Y");
@@ -458,6 +478,8 @@ class Dashboard extends Controllers{
 		$data['semRenovacaoMDia'] = $this->model->selectControleMes($anio,$mes,5);
 		$data['justaCausaMDia'] = $this->model->selectControleMes($anio,$mes,6);
 		$data['rescisaoMDia'] = $this->model->selectControleMes($anio,$mes,7);
+		$data['INSSMDia'] = $this->model->selectControleMes($anio,$mes,8);
+		$data['maternidadeMDia'] = $this->model->selectControleMes($anio,$mes,9);
 		
 
 		$data['page_tag'] = "Dashboard - Controle";
@@ -465,6 +487,59 @@ class Dashboard extends Controllers{
 		$data['page_name'] = "Controle";
 		$data['page_functions_js'] = "functions_dashboard.js";
 		$this->views->getView($this,"controle",$data);
+	}
+
+	//Informacion recente
+	public function getControleD()
+	{
+		if($_POST)
+		{
+			$arrayFechas = explode("-", $_POST['fecha']);
+			$fechaI = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[0])));
+			$fechaF = date("Y-m-d", strtotime(str_replace("/", "-", $arrayFechas[1])));
+			$ruta = $_SESSION['idRuta'];
+			$estado = $_POST['estado'];
+			$detalles = '';
+
+			$entregasD = $this->model->selectControleD($fechaI, $fechaF, $ruta, $estado);
+			//dep($entregasD);exit;
+
+			for ($i=0; $i < COUNT($entregasD); $i++)
+			{ 	
+				$fechaFormateada = date('d-m-Y', strtotime($entregasD[$i]['datecreated']));
+
+				if($entregasD[$i]['status'] === 1) {
+					$imgprotocolo = $entregasD[$i]['protocolo'];
+				} else {
+					$imgprotocolo = getProtocolo($entregasD[$i]['equipamentoid'], 0);
+				}
+				$protocolo = '<a 
+					href="'.base_url().'/Assets/images/imagenes/'.$imgprotocolo.'" 
+					target="_blank" 
+					class="text-dark" 
+					style="margin: 0;">
+					<i class="fa fa-file-text-o fa-lg" aria-hidden="true">
+					</i>
+				</a>';
+
+				$entregasD[$i]['lacre'] = '<h6>Fone: <span class="badge badge-secondary p-1">#'.$entregasD[$i]['lacre'].'</span></h5>';
+
+				$nombreFormateado = formatName($entregasD[$i]['nombres'], $entregasD[$i]['apellidos']);
+
+				$detalles .= '<tr class="text-center">';
+				$detalles .= '<td>'.$fechaFormateada.'</td>';
+				$detalles .= '<td>'.$protocolo.'</td>';
+				$detalles .= '<td>'.$entregasD[$i]['lacre'].'</td>';
+				$detalles .= '<td>'.$entregasD[$i]['matricula'].'</td>';
+				$detalles .= '<td>'.$nombreFormateado.'</td>';
+				//$detalles .= '<td>'.$btnAnnotation.'</td>';
+				$detalles .= '</tr>';
+			}
+			
+			$arrResponse = array('fonesD' => $detalles);
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
 	}
 	
 	public function getRecebido($idrecebido)
@@ -615,6 +690,38 @@ class Dashboard extends Controllers{
 			$anio = $arrFecha[1];
 			$rescisao = $this->model->selectControleMes($anio,$mes,7);
 			$script = getFile("Template/Modals/graficaRescisaoMes", $rescisao);
+			echo $script;
+			die();
+		}
+	}
+
+	public function INSSMes()
+	{
+		if($_POST)
+		{
+			$grafica = "INSSMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$INSS = $this->model->selectControleMes($anio,$mes,8);
+			$script = getFile("Template/Modals/graficaINSSMes", $INSS);
+			echo $script;
+			die();
+		}
+	}
+
+	public function maternidadeMes()
+	{
+		if($_POST)
+		{
+			$grafica = "maternidadeMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$maternidade = $this->model->selectControleMes($anio,$mes,9);
+			$script = getFile("Template/Modals/graficaMaternidadeMes", $maternidade);
 			echo $script;
 			die();
 		}

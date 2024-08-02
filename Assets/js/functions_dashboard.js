@@ -129,6 +129,45 @@ function fntsearchUser()
     });
 }
 
+function fntSearchUsuariosD()
+{
+    let fecha = document.querySelector("#fechaUsuarios").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getUsuariosD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrUsuarios = objData.usuariosD;
+
+            document.querySelector("#divUsuariosD").classList.remove("d-none");
+
+            if(arrUsuarios) {
+                document.querySelector("#datosUsuariosD").innerHTML = arrUsuarios;
+            } else {
+                document.querySelector("#divUsuariosD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
 function fntsearchUserI()
 {
     $('#modalDetalleUI').modal('show');
@@ -176,40 +215,6 @@ function fntsearchUserI()
     });
 }
 
-function fntSearchUsuariosD()
-{
-    let fecha = document.querySelector("#fechaUsuarios").value;
-    if(fecha == "")
-    {
-        swal("", "Selecione uma data", "error");
-        return false;
-    }
-
-    divLoading.style.display = "flex";
-    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let  ajaxUrl = base_url+'/Dashboard/getUsuariosD';
-    let  formData = new FormData();
-    formData.append('fecha', fecha);
-    request.open("POST",ajaxUrl,true);
-    request.send(formData);
-    request.onreadystatechange = function()
-    {
-        if(request.readyState != 4) return;
-        if(request.status == 200)
-        {
-            let objData = JSON.parse(request.responseText);
-            arrUsuarios = objData.usuariosD;
-
-            document.querySelector("#divUsuariosD").classList.remove("d-none");
-            document.querySelector("#datosUsuariosD").innerHTML = arrUsuarios;
-
-        }
-
-        divLoading.style.display = "none";
-        return false;
-    }
-}
-
 function fntSearchUsuariosID()
 {
     let fecha = document.querySelector("#fechaUsuariosI").value;
@@ -219,7 +224,7 @@ function fntSearchUsuariosID()
         return false;
     }
 
-    //divLoading.style.display = "flex";
+    divLoading.style.display = "flex";
     let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let  ajaxUrl = base_url+'/Dashboard/getUsuariosID';
     let  formData = new FormData();
@@ -235,7 +240,12 @@ function fntSearchUsuariosID()
             arrUsuarios = objData.usuariosID;
 
             document.querySelector("#divUsuariosID").classList.remove("d-none");
-            document.querySelector("#datosUsuariosID").innerHTML = arrUsuarios;
+
+            if(arrUsuarios) {
+                document.querySelector("#datosUsuariosID").innerHTML = arrUsuarios;
+            } else {
+                document.querySelector("#divUsuariosID").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
 
         }
 
@@ -490,7 +500,797 @@ function fntSearchComputadoresMes()
     }
 }
 
-/********** EQUIPAMENTOS ***********/
+/********** CONTROLE ***********/
+
+///*Información recente*///
+
+//Entregas
+function fntsearchEntregas()
+{
+    $('#modalDetalleEntregas').modal('show');
+    document.querySelector("#divEntregasD").classList.add("d-none");
+    $('#fechaEntregas').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaEntregas').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaEntregas').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchEntregasD()
+{
+    let fecha = document.querySelector("#fechaEntregas").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 1);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divEntregasD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosEntregasD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divEntregasD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Trocas
+function fntsearchTrocas()
+{
+    $('#modalDetalleTrocas').modal('show');
+    document.querySelector("#divTrocasD").classList.add("d-none");
+    $('#fechaTrocas').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaTrocas').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaTrocas').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchTrocasD()
+{
+    let fecha = document.querySelector("#fechaTrocas").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 2);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrTrocas = objData.fonesD;
+
+            document.querySelector("#divTrocasD").classList.remove("d-none");
+            if(arrTrocas) {
+                document.querySelector("#datosTrocasD").innerHTML = arrTrocas;
+            } else {
+                document.querySelector("#divTrocasD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+            
+
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Desligados
+function fntsearchDesligados()
+{
+    $('#modalDetalleDesligados').modal('show');
+    document.querySelector("#divDesligadosD").classList.add("d-none");
+    $('#fechaDesligados').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaDesligados').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaDesligados').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchDesligadosD()
+{
+    let fecha = document.querySelector("#fechaDesligados").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 3);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrDesligados = objData.fonesD;
+
+            document.querySelector("#divDesligadosD").classList.remove("d-none");
+            if(arrDesligados) {
+                document.querySelector("#datosDesligadosD").innerHTML = arrDesligados;
+            } else {
+                document.querySelector("#divDesligadosD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+                //document.querySelector("#divDesligadosD").classList.add("d-none");
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Pediu Conta
+function fntsearchPediuConta()
+{
+    $('#modalDetallePediuConta').modal('show');
+    document.querySelector("#divPediuContaD").classList.add("d-none");
+    $('#fechaPediuConta').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaPediuConta').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaPediuConta').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchPediuContaD()
+{
+    let fecha = document.querySelector("#fechaPediuConta").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 4);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divPediuContaD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosPediuContaD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divPediuContaD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Sem renovação
+function fntsearchSemRenovacao()
+{
+    $('#modalDetalleSemRenovacao').modal('show');
+    document.querySelector("#divSemRenovacaoD").classList.add("d-none");
+    $('#fechaSemRenovacao').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaSemRenovacao').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaSemRenovacao').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchSemRenovacaoD()
+{
+    let fecha = document.querySelector("#fechaSemRenovacao").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 5);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divSemRenovacaoD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosSemRenovacaoD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divSemRenovacaoD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Justa causa
+function fntsearchJustaCausa()
+{
+    $('#modalDetalleJustaCausa').modal('show');
+    document.querySelector("#divJustaCausaD").classList.add("d-none");
+    $('#fechaJustaCausa').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaJustaCausa').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaJustaCausa').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchJustaCausaD()
+{
+    let fecha = document.querySelector("#fechaJustaCausa").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 6);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divJustaCausaD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosJustaCausaD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divJustaCausaD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Recisão
+function fntsearchRescisao()
+{
+    $('#modalDetalleRecisao').modal('show');
+    document.querySelector("#divRecisaoD").classList.add("d-none");
+    $('#fechaRecisao').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaRecisao').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaRecisao').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchRecisaoD()
+{
+    let fecha = document.querySelector("#fechaRecisao").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 7);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divRecisaoD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosRecisaoD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divRecisaoD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//INSS
+function fntsearchINSS()
+{
+    $('#modalDetalleINSS').modal('show');
+    document.querySelector("#divINSSD").classList.add("d-none");
+    $('#fechaINSS').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaINSS').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaINSS').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchINSSD()
+{
+    let fecha = document.querySelector("#fechaINSS").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 8);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divINSSD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosINSSD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divINSSD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//Maternidade
+function fntsearchMaternidade()
+{
+    $('#modalDetalleMaternidade').modal('show');
+    document.querySelector("#divMaternidadeD").classList.add("d-none");
+    $('#fechaMaternidade').daterangepicker({
+        "autoUpdateInput": false,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "daysOfWeek": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sab"
+            ],
+            "monthNames": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abil",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "firstDay": 1
+        }
+    });
+
+    $('#fechaMaternidade').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    $('#fechaMaternidade').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+}
+
+function fntSearchMaternidadeD()
+{
+    let fecha = document.querySelector("#fechaMaternidade").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione uma data", "error");
+        return false;
+    }
+
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/getControleD';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('estado', 9);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            arrEntregas = objData.fonesD;
+
+            document.querySelector("#divMaternidadeD").classList.remove("d-none");
+            if(arrEntregas) {
+                document.querySelector("#datosMaternidadeD").innerHTML = arrEntregas;
+            } else {
+                document.querySelector("#divMaternidadeD").innerHTML = '<h5 class="text-center font-italic">Nenhuma Informação</h5>';
+            }
+        }
+
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
 function fntViewInfo(idcontrole)
 {
     divLoading.style.display = "flex";
@@ -722,6 +1522,60 @@ function fntSearchRescisaoMes()
         if(request.status == 200)
         {
             $("#graficaMesRescisao").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+function fntSearchINSSMes()
+{
+    let fecha = document.querySelector(".INSSMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/INSSMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesINSS").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+function fntSearchMaternidadeMes()
+{
+    let fecha = document.querySelector(".maternidadeMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Dashboard/maternidadeMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesMaternidade").html(request.responseText);
             divLoading.style.display = "none";
             return false;
         }

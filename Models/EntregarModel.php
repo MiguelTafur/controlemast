@@ -91,18 +91,19 @@ class EntregarModel extends Mysql
 
     public function selectProtocolo(int $idequipamento, int $estado) {
         $this->intIdEquipamento = $idequipamento;
+        $this->listEstado = $estado;
 
-        if($estado === 0) {
+        // if($estado === 0) {
+        //     $sql = "SELECT co.protocolo FROM controle co 
+        //             LEFT OUTER JOIN equipamento eq
+        //             ON(co.equipamentoid = eq.idequipamento)
+        //             WHERE co.status = 0 AND eq.idequipamento = $this->intIdEquipamento";
+        // } else {
             $sql = "SELECT co.protocolo FROM controle co 
                     LEFT OUTER JOIN equipamento eq
                     ON(co.equipamentoid = eq.idequipamento)
-                    WHERE co.status = 0 AND eq.idequipamento = $this->intIdEquipamento";
-        } else {
-            $sql = "SELECT co.protocolo FROM controle co 
-                    LEFT OUTER JOIN equipamento eq
-                    ON(co.equipamentoid = eq.idequipamento)
-                    WHERE co.status = 1 AND eq.idequipamento = $this->intIdEquipamento";
-        }
+                    WHERE co.status = $this->listEstado AND eq.idequipamento = $this->intIdEquipamento";
+        //}
         $request = $this->select($sql);
         return $request;
     }

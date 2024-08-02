@@ -139,7 +139,6 @@
                     <table class="table table-striped mb-4">
                       <thead>
                         <tr class="text-center">
-                          <th>CADASTRO</th>
                           <th>MARCA</th>
                           <th>CÓDIGO</th>
                           <th>LACRE</th>
@@ -181,7 +180,6 @@
                                               </button>';
                         ?>
                             <tr class="text-center">
-                              <td><?= $ultimosDisponibles['datecreated']; ?></td>
                               <td><?= $ultimosDisponibles['marca']; ?></td>
                               <td><?= $ultimosDisponibles['codigo']; ?></td>
                               <td><?= '#'.$ultimosDisponibles['lacre']; ?></td>
@@ -206,7 +204,6 @@
                     <table class="table table-striped mb-4">
                       <thead>
                         <tr class="text-center">
-                          <th>CADASTRO</th>
                           <th>MARCA</th>
                           <th>CÓDIGO</th>
                           <th>LACRE</th>
@@ -248,7 +245,6 @@
                                               </button>';
                         ?>
                             <tr class="text-center">
-                              <td><?= $ultimosUso['datecreated']; ?></td>
                               <td><?= $ultimosUso['marca']; ?></td>
                               <td><?= $ultimosUso['codigo']; ?></td>
                               <td><?= '#'.$ultimosUso['lacre']; ?></td>
@@ -273,7 +269,6 @@
                     <table class="table table-striped mb-4">
                       <thead>
                         <tr class="text-center">
-                          <th>CADASTRO</th>
                           <th>MARCA</th>
                           <th>CÓDIGO</th>
                           <th>LACRE</th>
@@ -283,27 +278,13 @@
                       </thead>
                       <tbody>
                       <?php
-                        if($data['ultimosFonesEstragados']) {
+                        if($data['ultimosFonesEstragados']) { 
                           foreach ($data['ultimosFonesEstragados'] as $ultimosEstragados)
                           {
                             if($ultimosEstragados['codigo'] === '') {
                               $ultimosEstragados['codigo'] = '<span class="font-italic text-secondary">nenhum</span>';
                             }
-
-                            switch ($ultimosEstragados['status']) {
-                              case '1':
-                                $trEstado = '<h5><span class="badge badge-success">Disponível</span></h5>';
-                                break;
-                              case '2':
-                                $trEstado = '<h5><span class="badge badge-info">Em Uso</span></h5>';
-                                break;
-                              case '3':
-                                $trEstado = '<h5><span class="badge badge-danger">Estragado</span></h5>';
-                                break;
-                              default:
-                                $trEstado = '<h5><span class="badge badge-warning">Concerto</span></h5>';
-                                break;
-                            }
+                            $trEstado = '<h5><span class="badge badge-danger">Estragado</span></h5>';
 
                             $ultimosEstragados['datecreated'] = date("d-m-Y", strtotime($ultimosEstragados['datecreated']));
 
@@ -315,7 +296,6 @@
                                               </button>';
                         ?>
                             <tr class="text-center">
-                              <td><?= $ultimosEstragados['datecreated']; ?></td>
                               <td><?= $ultimosEstragados['marca']; ?></td>
                               <td><?= $ultimosEstragados['codigo']; ?></td>
                               <td><?= '#'.$ultimosEstragados['lacre']; ?></td>
@@ -340,7 +320,6 @@
                     <table class="table table-striped mb-4">
                       <thead>
                         <tr class="text-center">
-                          <th>CADASTRO</th>
                           <th>MARCA</th>
                           <th>CÓDIGO</th>
                           <th>LACRE</th>
@@ -382,7 +361,6 @@
                                               </button>';
                         ?>
                             <tr class="text-center">
-                              <td><?= $ultimosConcerto['datecreated']; ?></td>
                               <td><?= $ultimosConcerto['marca']; ?></td>
                               <td><?= $ultimosConcerto['codigo']; ?></td>
                               <td><?= '#'.$ultimosConcerto['lacre']; ?></td>

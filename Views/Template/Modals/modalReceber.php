@@ -32,6 +32,8 @@
                 <option value="5">Sem renovação do contrato</option>
                 <option value="6">Justa causa</option>
                 <option value="7">Rescisão</option>
+                <option value="8">INSS</option>
+                <option value="9">Licança Maternidade</option>
               </select>
             </div>
             <div class="form-group col-md-12 mb-4">

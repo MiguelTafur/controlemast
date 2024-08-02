@@ -127,10 +127,10 @@
 
           <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-ativos-tab" data-toggle="pill" href="#pills-ativos" role="tab" aria-controls="pills-ativos" aria-selected="true">ATIVOS</a>
+              <a class="nav-link active" id="pills-ativos-tab" data-toggle="pill" href="#pills-ativos" role="tab" aria-controls="pills-ativos" aria-selected="true">USUÁRIOS ATIVOS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-inativos-tab" data-toggle="pill" href="#pills-inativos" role="tab" aria-controls="pills-inativos" aria-selected="false">INATIVOS</a>
+              <a class="nav-link" id="pills-inativos-tab" data-toggle="pill" href="#pills-inativos" role="tab" aria-controls="pills-inativos" aria-selected="false">USUÁRIOS INATIVOS</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">
@@ -185,12 +185,13 @@
                 <table class="table table-striped mb-4">
                   <thead>
                     <tr class="text-center">
+                      <th>Entrada</th>
+                      <th>Salida</th>
                       <th>Matrícula</th>
                       <th>Usuário</th>
                       <th>Cargo</th>
                       <th>Modelo</th>
                       <th>Estado</th>
-                      <th>Cadastro</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -220,15 +221,18 @@
                         }
 
                         $inactivo['datecreated'] = date("d-m-Y", strtotime($inactivo['datecreated']));
+                        $inactivo['fechaControle'] = date("d-m-Y", strtotime($inactivo['fechaControle']));
                         $inactivo['datecreated'] = fechaInline($inactivo['datecreated']);
+                        $inactivo['fechaControle'] = fechaInline($inactivo['fechaControle']);
                     ?>
                         <tr class="text-center">
-                        <td><?= $inactivo['matricula']; ?></td>
+                          <td><?= $inactivo['datecreated']; ?></td>
+                          <td><?= $inactivo['fechaControle']; ?></td>
+                          <td><?= $inactivo['matricula']; ?></td>
                           <td><?= $inactivo['nombres']; ?></td>
                           <td><?= $inactivo['nombrerol']; ?></td>
                           <td><?= $inactivo['modelo']; ?></td>
                           <td><?= $inactivo['status']; ?></td>
-                          <td><?= $inactivo['datecreated']; ?></td>
                         </tr>
                     <?php 
                       } 
@@ -246,10 +250,10 @@
           <h3 class="tile-title text-center">GRÁFICO DE USUÁRIOS</h3>
           <ul class="nav nav-tabs mb-3" id="pills-tabGrafico" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-graficoAtivos-tab" data-toggle="pill" href="#pills-graficoAtivos" role="tab" aria-controls="pills-ativos" aria-selected="true">ATIVOS</a>
+              <a class="nav-link active" id="pills-graficoAtivos-tab" data-toggle="pill" href="#pills-graficoAtivos" role="tab" aria-controls="pills-ativos" aria-selected="true">USUÁRIOS ATIVOS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-graficoInativos-tab" data-toggle="pill" href="#pills-graficoInativos" role="tab" aria-controls="pills-inativos" aria-selected="false">INATIVOS</a>
+              <a class="nav-link" id="pills-graficoInativos-tab" data-toggle="pill" href="#pills-graficoInativos" role="tab" aria-controls="pills-inativos" aria-selected="false">USUÁRIOS INATIVOS</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabGraficoContent">

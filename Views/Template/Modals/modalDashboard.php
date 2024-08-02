@@ -70,11 +70,12 @@
             <table class="table table-striped">
               <thead>
               <tr class="text-center">
-                  <th>CADASTRO</th>
+                  <th>ENTRADA</th>
+                  <th>SALIDA</th>
                   <th>MATRÍCULA</th>
                   <th>USUÁRIO</th>
                   <th>CARGO</th>
-                  <th>MODELO</th>
+                  <th>ESTADO</th>
                 </tr>
               </thead>
               <tbody id="datosUsuariosID">
@@ -230,6 +231,411 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Fechar
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles entregas -->
+<div class="modal fade" id="modalDetalleEntregas" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Entregas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaEntregas" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchEntregasD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divEntregasD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosEntregasD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles trocas -->
+<div class="modal fade" id="modalDetalleTrocas" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Trocas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaTrocas" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchTrocasD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divTrocasD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosTrocasD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles desligados -->
+<div class="modal fade" id="modalDetalleDesligados" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Desligados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaDesligados" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchDesligadosD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divDesligadosD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosDesligadosD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles pediu conta -->
+<div class="modal fade" id="modalDetallePediuConta" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Pediu Conta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaPediuConta" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchPediuContaD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divPediuContaD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosPediuContaD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles sem renovação -->
+<div class="modal fade" id="modalDetalleSemRenovacao" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Sem Renovação do Contrato</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaSemRenovacao" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchSemRenovacaoD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divSemRenovacaoD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosSemRenovacaoD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles Justa Causa -->
+<div class="modal fade" id="modalDetalleJustaCausa" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Justa Causa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaJustaCausa" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchJustaCausaD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divJustaCausaD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosJustaCausaD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles Recisão -->
+<div class="modal fade" id="modalDetalleRecisao" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Rescisão</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaRecisao" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchRecisaoD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divRecisaoD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosRecisaoD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles INSS -->
+<div class="modal fade" id="modalDetalleINSS" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">INSS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaINSS" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchINSSD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divINSSD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosINSSD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal detalles Licença Maternidade -->
+<div class="modal fade" id="modalDetalleMaternidade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Licença Maternidade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mb-4">
+          <div class="row">
+            <div class="col-10">
+                <input type="text" readonly class="form-control" id="fechaMaternidade" placeholder="Selecione uma Data">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-warning mb-2" onclick="fntSearchMaternidadeD()"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+        <div id="divMaternidadeD">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>CADASTRO</th>
+                  <th>PROTOCOLO</th>
+                  <th>EQUIPAMENTO</th>
+                  <th>MATRÍCULA</th>
+                  <th>USUARIO</th>
+                </tr>
+              </thead>
+              <tbody id="datosMaternidadeD">
+
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
       </div>
     </div>
   </div>

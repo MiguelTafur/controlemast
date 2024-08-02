@@ -54,6 +54,7 @@ class DashboardModel extends Mysql
 					   pe.rolid,
 					   pe.modelo,
 					   co.status,
+					   co.datecreated AS fechaControle,					   
 					   ro.nombrerol
 					FROM persona pe LEFT OUTER JOIN controle co
 					ON pe.idpersona = co.personaid 
@@ -136,12 +137,15 @@ class DashboardModel extends Mysql
 					   pe.apellidos,
 					   pe.modelo,
 					   pe.datecreated,
+					   co.status,
+					   co.datecreated AS fechaControle,
 					   ro.nombrerol
 					FROM persona pe 
-					LEFT OUTER JOIN rol ro 
-					ON(pe.rolid = ro.idrol) 
+					LEFT OUTER JOIN rol ro ON(pe.rolid = ro.idrol) 
+					LEFT OUTER JOIN controle co ON(pe.idpersona = co.personaid)
 					WHERE pe.datecreated
-					BETWEEN '{$this->strFecha}' AND '{$this->strFecha2}' AND pe.codigoruta = $ruta AND pe.status = 0 ORDER BY pe.datecreated desc";
+					BETWEEN '{$this->strFecha}' AND '{$this->strFecha2}' 
+					AND pe.codigoruta = $ruta AND pe.status = 0 AND co.status != 0 ORDER BY pe.datecreated desc";
 		}
 		
 		$request = $this->select_all($sql);
@@ -168,20 +172,23 @@ class DashboardModel extends Mysql
 		$rutaId = $_SESSION['idRuta'];
 		$this->intTipoEquipamento = $tipo;
 		$this->intEstadoEquipamento = $estado;
+
 		$sql = "SELECT idequipamento,
-					   marca,
-					   codigo,
-					   lacre,
-					   datecreated,
-					   status
+						marca,
+						codigo,
+						lacre,
+						datecreated,
+						status
 				FROM equipamento
 				WHERE codigoruta = $rutaId AND tipo = $this->intTipoEquipamento AND status = $this->intEstadoEquipamento
 				ORDER BY datecreated DESC LIMIT 6";
-		$request = $this->select_all($sql);
+
+		$request = $this->select_all($sql);	
+
 		return $request;
 	}
 
-	//Trae los usuarios en un rango de fechas 
+	//Trae los equipamentos en un rango de fechas 
 	public function selectFonesD(string $fechaI, string $fechaF, int $ruta, int $estado)
 	{
 		$this->strFecha = $fechaI;
@@ -292,6 +299,32 @@ class DashboardModel extends Mysql
 				WHERE idcontrole = $this->intIdControle";
 		$request = $this->select($sql);
 		return $request;
+	}
+
+	//Trae las entregas en un rango de fechas 
+	public function selectControleD(string $fechaI, string $fechaF, int $ruta, int $estado)
+	{
+		$this->strFecha = $fechaI;
+		$this->strFecha2 = $fechaF;
+		$this->intIdRuta = $ruta;
+		$this->intEstadoControle = $estado;
+
+		$sql = "SELECT co.protocolo, co.personaid, co.equipamentoid, co.datecreated, co.status, pe.matricula, pe.nombres, pe.apellidos, eq.lacre 
+				FROM controle co
+				LEFT OUTER JOIN persona pe
+				ON(co.personaid = pe.idpersona)
+				LEFT OUTER JOIN equipamento eq
+				ON(co.equipamentoid = eq.idequipamento)
+				WHERE co.datecreated
+				BETWEEN '{$this->strFecha}' AND '{$this->strFecha2}'
+				AND co.status = $this->intEstadoControle
+				AND pe.codigoruta = $this->intIdRuta
+				ORDER BY co.datecreated DESC";
+		
+		$request = $this->select_all($sql);
+	
+		return $request;
+
 	}
 
 	//Gráfica mensual de Controle

@@ -16,9 +16,9 @@ class Telas extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/entregar');
 		}
-		$data['page_tag'] = "Monitores";
-		$data['page_title'] = "MONITORES";
-		$data['page_name'] = "monitores";
+		$data['page_tag'] = "telas";
+		$data['page_title'] = "TELAS";
+		$data['page_name'] = "telas";
 		$data['page_functions_js'] = "functions_telas.js";
 		$this->views->getView($this,"telas",$data);
 	}

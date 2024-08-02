@@ -111,6 +111,34 @@
           </div>
           <?php } ?>
 
+          <!-- INSS -->
+          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
+          <div class="col-md-6 col-lg-3 pr-lg-0">
+            <a href="<?= base_url() ?>/recebidos" class="linkw">
+              <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
+                <div class="info">
+                  <h4>INSS</h4>
+                  <p>Total: <span class="text-success font-italic"><?= $data['INSS']; ?></span></p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <?php } ?>
+
+          <!-- Licença Maternidade -->
+          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
+          <div class="col-md-6 col-lg-3 pr-lg-0">
+            <a href="<?= base_url() ?>/recebidos" class="linkw">
+              <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
+                <div class="info">
+                  <h4>Licença Maternidade</h4>
+                  <p>Total: <span class="text-success font-italic"><?= $data['maternidade']; ?></span></p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <?php } ?>
+
         </div>
 
         <!-- informacion reciente de los controles -->
@@ -138,6 +166,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="pills-rescisão-tab" data-toggle="pill" href="#pills-rescisão" role="tab" aria-controls="pills-rescisão" aria-selected="false">RESCISÃO</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-inss-tab" data-toggle="pill" href="#pills-inss" role="tab" aria-controls="pills-inss" aria-selected="false">INSS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-maternidade-tab" data-toggle="pill" href="#pills-maternidade" role="tab" aria-controls="pills-maternidade" aria-selected="false">LICENÇA MATERNINDADE</a>
               </li>
             </ul>
 
@@ -180,9 +214,8 @@
                           $ultimasEntregas['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
                         
-                        $ultimo = explode(" ", $ultimasEntregas['apellidos']);
-                        $ultimasEntregas['nombres'] = strtoupper(strtok($ultimasEntregas['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
-                                              
+                        $ultimasEntregas['nombres'] = formatName($ultimasEntregas['nombres'], $ultimasEntregas['apellidos']);
+                        
                     ?>
                         <tr class="text-center">
                           <td><?= $ultimasEntregas['datecreated']; ?></td>
@@ -229,7 +262,7 @@
                       {
                         $ultimasTrocas['datecreated'] = date("d-m-Y", strtotime($ultimasTrocas['datecreated']));
 
-                        $ultimasTrocas['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimasTrocas['lacre'].'</span></h5>';
+                        $ultimasTrocas['lacre'] = '<h6>Fone: <span class="badge badge-secondary p-1 ">#'.$ultimasTrocas['lacre'].'</span></h5>';
 
                         $protocolo = getProtocolo($ultimasTrocas['equipamentoid'], 0);
                         
@@ -245,10 +278,9 @@
                         } else {
                           $ultimasTrocas['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
+                                      
+                        $ultimasTrocas['nombres'] = formatName($ultimasTrocas['nombres'], $ultimasTrocas['apellidos']);
                         
-                        $ultimo = explode(" ", $ultimasTrocas['apellidos']);
-                        $ultimasTrocas['nombres'] = strtoupper(strtok($ultimasTrocas['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
-                                              
                     ?>
                         <tr class="text-center">
                           <td><?= $ultimasTrocas['datecreated']; ?></td>
@@ -312,9 +344,7 @@
                           $ultimosDesligamentos['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
 
-                        $ultimo = explode(" ", $ultimosDesligamentos['apellidos']);
-                        $ultimosDesligamentos['nombres'] = strtoupper(strtok($ultimosDesligamentos['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
-                                              
+                        $ultimosDesligamentos['nombres'] = formatName($ultimosDesligamentos['nombres'], $ultimosDesligamentos['apellidos']);                      
                     ?>
                         <tr class="text-center">
                           <td><?= $ultimosDesligamentos['datecreated']; ?></td>
@@ -377,8 +407,7 @@
                           $ultimosPediuConta['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
 
-                        $ultimo = explode(" ", $ultimosPediuConta['apellidos']);
-                        $ultimosPediuConta['nombres'] = strtoupper(strtok($ultimosPediuConta['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+                        $ultimosPediuConta['nombres'] = formatName($ultimosPediuConta['nombres'], $ultimosPediuConta['apellidos']);
                                               
                     ?>
                         <tr class="text-center">
@@ -401,7 +430,7 @@
                     <?php } ?>
                   </tbody>
                 </table>
-                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchPediu Conta()"><i class="fa fa-search" aria-hidden="true"></i> Pediu Conta</button>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchPediuConta()"><i class="fa fa-search" aria-hidden="true"></i> Pediu Conta</button>
               </div>
             </div>
 
@@ -443,8 +472,7 @@
                           $ultimosSemRenovacao['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
                         
-                        $ultimo = explode(" ", $ultimosSemRenovacao['apellidos']);
-                        $ultimosSemRenovacao['nombres'] = strtoupper(strtok($ultimosSemRenovacao['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+                        $ultimosSemRenovacao['nombres'] = formatName($ultimosSemRenovacao['nombres'], $ultimosSemRenovacao['apellidos']);
                                               
                     ?>
                         <tr class="text-center">
@@ -467,7 +495,7 @@
                     <?php } ?>
                   </tbody>
                 </table>
-                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchSem Renovação()"><i class="fa fa-search" aria-hidden="true"></i> Sem Renovação</button>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchSemRenovacao()"><i class="fa fa-search" aria-hidden="true"></i> Sem Renovação</button>
               </div>
             </div>
 
@@ -509,8 +537,7 @@
                           $ultimosJustaCausa['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
 
-                        $ultimo = explode(" ", $ultimosJustaCausa['apellidos']);
-                        $ultimosJustaCausa['nombres'] = strtoupper(strtok($ultimosJustaCausa['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+                        $ultimosJustaCausa['nombres'] = formatName($ultimosJustaCausa['nombres'], $ultimosJustaCausa['apellidos']);
                                               
                     ?>
                         <tr class="text-center">
@@ -575,8 +602,7 @@
                           $ultimosRescisão['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
                         }
 
-                        $ultimo = explode(" ", $ultimosRescisão['apellidos']);
-                        $ultimosRescisão['nombres'] = strtoupper(strtok($ultimosRescisão['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+                        $ultimosRescisão['nombres'] = formatName($ultimosRescisão['nombres'], $ultimosRescisão['apellidos']);
                                               
                     ?>
                         <tr class="text-center">
@@ -599,7 +625,137 @@
                     <?php } ?>
                   </tbody>
                 </table>
-                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchRescisão()"><i class="fa fa-search" aria-hidden="true"></i> Rescisão</button>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchRescisao()"><i class="fa fa-search" aria-hidden="true"></i> Rescisão</button>
+              </div>
+            </div>
+
+            <!-- div INSS -->
+            <div class="tab-pane fade" id="pills-inss" role="tabpanel" aria-labelledby="inss-tab">
+              <div class="table-responsive">
+                <table class="table table-striped mb-4">
+                  <thead>
+                    <tr class="text-center">
+                      <th>CADASTRO</th>
+                      <th>PROTOCOLO</th>
+                      <th>EQUIPAMENTO</th>
+                      <th>MATRÍCULA</th>
+                      <th>USUARIO</th>
+                      <th>AÇÕES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    if($data['ultimosINSS']) {
+                      foreach ($data['ultimosINSS'] as $ultimosINSS)
+                      {
+                        $ultimosINSS['datecreated'] = date("d-m-Y", strtotime($ultimosINSS['datecreated']));
+
+                        $ultimosINSS['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosINSS['lacre'].'</span></h6>';
+
+                        $protocolo = getProtocolo($ultimosINSS['equipamentoid'], 0);
+                        
+                        if($protocolo) {
+                          $ultimosINSS['protocolo'] = '<a 
+                                                          href="'.base_url().'/Assets/images/imagenes/'.$protocolo.'" 
+                                                          target="_blank" 
+                                                          class="text-dark" 
+                                                          style="margin: 0;">
+                                                          <i class="fa fa-file-text-o fa-lg" aria-hidden="true">
+                                                          </i>
+                                                        </a>';
+                        } else {
+                          $ultimosINSS['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
+                        }
+
+                        $ultimosINSS['nombres'] = formatName($ultimosINSS['nombres'], $ultimosINSS['apellidos']);
+                                              
+                    ?>
+                        <tr class="text-center">
+                          <td><?= $ultimosINSS['datecreated']; ?></td>
+                          <td><?= $ultimosINSS['protocolo']; ?></td>
+                          <td><?= $ultimosINSS['lacre']; ?></td>
+                          <td><?= $ultimosINSS['matricula']; ?></td>
+                          <td><?= $ultimosINSS['nombres']; ?></td>
+                          <td>
+                            <button class="btn btn-secondary btn-sm" onClick="fntViewInfo(<?= $ultimosRescisão['idcontrole']; ?>)" title="Ver Troca">
+                              <i class="far fa-eye"></i>
+                            </button>
+                          </td>
+                        </tr>
+                    <?php
+                      }
+                    } else {
+                    ?>
+                      <tr class="text-center font-italic"><td colspan="6" class="py-4"><h5>Nenhuma Informação</h5></td></tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchINSS()"><i class="fa fa-search" aria-hidden="true"></i> INSS</button>
+              </div>
+            </div>
+
+            <!-- div Licença maternidade -->
+            <div class="tab-pane fade" id="pills-maternidade" role="tabpanel" aria-labelledby="maternidade-tab">
+              <div class="table-responsive">
+                <table class="table table-striped mb-4">
+                  <thead>
+                    <tr class="text-center">
+                      <th>CADASTRO</th>
+                      <th>PROTOCOLO</th>
+                      <th>EQUIPAMENTO</th>
+                      <th>MATRÍCULA</th>
+                      <th>USUARIO</th>
+                      <th>AÇÕES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    if($data['ultimosMaternidade']) {
+                      foreach ($data['ultimosMaternidade'] as $ultimosMaternidade)
+                      {
+                        $ultimosMaternidade['datecreated'] = date("d-m-Y", strtotime($ultimosMaternidade['datecreated']));
+
+                        $ultimosMaternidade['lacre'] = '<h6>Fone: <span class="badge badge-secondary">#'.$ultimosMaternidade['lacre'].'</span></h6>';
+
+                        $protocolo = getProtocolo($ultimosMaternidade['equipamentoid'], 0);
+                        
+                        if($protocolo) {
+                          $ultimosMaternidade['protocolo'] = '<a 
+                                                          href="'.base_url().'/Assets/images/imagenes/'.$protocolo.'" 
+                                                          target="_blank" 
+                                                          class="text-dark" 
+                                                          style="margin: 0;">
+                                                          <i class="fa fa-file-text-o fa-lg" aria-hidden="true">
+                                                          </i>
+                                                        </a>';
+                        } else {
+                          $ultimosMaternidade['protocolo'] = '<span class="font-italic text-secondary">Nenhum</span>';
+                        }
+
+                        $ultimosMaternidade['nombres'] = formatName($ultimosMaternidade['nombres'], $ultimosMaternidade['apellidos']);
+                                              
+                    ?>
+                        <tr class="text-center">
+                          <td><?= $ultimosMaternidade['datecreated']; ?></td>
+                          <td><?= $ultimosMaternidade['protocolo']; ?></td>
+                          <td><?= $ultimosMaternidade['lacre']; ?></td>
+                          <td><?= $ultimosMaternidade['matricula']; ?></td>
+                          <td><?= $ultimosMaternidade['nombres']; ?></td>
+                          <td>
+                            <button class="btn btn-secondary btn-sm" onClick="fntViewInfo(<?= $ultimosRescisão['idcontrole']; ?>)" title="Ver Troca">
+                              <i class="far fa-eye"></i>
+                            </button>
+                          </td>
+                        </tr>
+                    <?php
+                      }
+                    } else {
+                    ?>
+                      <tr class="text-center font-italic"><td colspan="6" class="py-4"><h5>Nenhuma Informação</h5></td></tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <button class="btn btn-primary btn-sm mb-4" onclick="fntsearchMaternidade()"><i class="fa fa-search" aria-hidden="true"></i> Licença Maternidade</button>
               </div>
             </div>
           </div>
@@ -629,6 +785,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" id="pills-graficoRescisao-tab" data-toggle="pill" href="#pills-graficoRescisao" role="tab" aria-controls="pills-graficoRescisao" aria-selected="false">RESCISÃO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-graficoINSS-tab" data-toggle="pill" href="#pills-graficoINSS" role="tab" aria-controls="pills-graficoINSS" aria-selected="false">INSS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-graficoMaternidade-tab" data-toggle="pill" href="#pills-graficoMaternidade" role="tab" aria-controls="pills-graficoMaternidade" aria-selected="false">MATERNIDADE</a>
             </li>
           </ul>
 
@@ -716,11 +878,37 @@
               <div class="tile">
                 <div class="container-title">
                   <div class="dflex">
-                    <input class="date-picker rescisaoMes" name="recicaoMes" placeholder="Mês e Ano">
+                    <input class="date-picker rescisaoMes" name="rescisaoMes" placeholder="Mês e Ano">
                     <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchRescisaoMes()" title="Procurar data"></i></button>
                   </div>
                 </div>
                 <div id="graficaMesRescisao"></div>
+              </div>
+            </div>
+
+            <!-- Gráfica INSS -->
+            <div class="tab-pane fade" id="pills-graficoINSS" role="tabpanel" aria-labelledby="pills-graficoINSS-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker INSSMes" name="INSSMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchINSSMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesINSS"></div>
+              </div>
+            </div>
+
+            <!-- Gráfica Licença maternidade -->
+            <div class="tab-pane fade" id="pills-graficoMaternidade" role="tabpanel" aria-labelledby="pills-graficoMaternidade-tab">
+              <div class="tile">
+                <div class="container-title">
+                  <div class="dflex">
+                    <input class="date-picker maternidadeMes" name="maternidadeMes" placeholder="Mês e Ano">
+                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-search" onclick="fntSearchMaternidadeMes()" title="Procurar data"></i></button>
+                  </div>
+                </div>
+                <div id="graficaMesMaternidade"></div>
               </div>
             </div>
 
@@ -1046,6 +1234,96 @@
         data: [
           <?php 
             foreach ($data['rescisaoMDia']['controles'] as $controle) {
+              echo $controle['controle'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+  // Gráfica INSS
+  Highcharts.chart('graficaMesINSS', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'INSS de <?= $data['INSSMDia']['mes'].' de '.$data['INSSMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['INSSMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['INSSMDia']['controles'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['INSSMDia']['controles'] as $controle) {
+              echo $controle['controle'].",";
+            }
+          ?>
+        ]
+    }]
+  });
+  // Gráfica Licança maternidade
+  Highcharts.chart('graficaMesMaternidade', 
+  {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Licença Maternidade de <?= $data['maternidadeMDia']['mes'].' de '.$data['maternidadeMDia']['anio']; ?>'
+    },
+    subtitle: {
+        text: 'Total: <?= $data['maternidadeMDia']['total']; ?>'
+    },
+    xAxis: {
+        categories: [
+          <?php 
+            foreach ($data['maternidadeMDia']['controles'] as $dia) {
+              echo $dia['dia'].",";
+            }
+          ?>
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'GLOBALCOB'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: '',
+        data: [
+          <?php 
+            foreach ($data['maternidadeMDia']['controles'] as $controle) {
               echo $controle['controle'].",";
             }
           ?>

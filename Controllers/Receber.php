@@ -64,6 +64,10 @@ class Receber extends Controllers{
 					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">JUSTA CAUSA</span></a>';
 				} else if($arrData[$i]['status'] === 7){
 					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">RESCISÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 8){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">INSS</span></a>';
+				} else if($arrData[$i]['status'] === 9){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">LICENÇA MATERNINDADE</span></a>';
 				}
 
 				//$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
@@ -163,6 +167,10 @@ class Receber extends Controllers{
 						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
 					} else if($arrData['status'] === 7){
 						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
+					} else if($arrData['status'] === 8){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">INSS</span>';
+					} else if($arrData['status'] === 9){
+						$arrData['status'] = '<span class="font-weight-bold font-italic text-danger">LICENÇA MATERNIDADE</span>';
 					}
 
 					$arrData['observacion'] = '<span class="font-italic">'.$arrData['observacion'].'</span>';
