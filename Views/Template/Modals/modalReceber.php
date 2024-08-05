@@ -38,7 +38,7 @@
             </div>
             <div class="form-group col-md-12 mb-4">
               <label for="fileReceber">Imagen</label>
-              <input type="file" class="form-control-file" id="fileReceber" name="fileReceber">
+              <input type="file" class="form-control-file" id="fileReceber" name="fileReceber" accept="application/pdf, image/png, image/jpeg">
             </div>
             <div class="form-group col-md-12">
               <label for="txtObservacion">Anotação <span class="required">*</span></label>

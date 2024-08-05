@@ -188,7 +188,11 @@ class Fones extends Controllers{
 						mkdir($carpetaImagenes);
 					}
 
-					$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					if($imagenAnotacion['type'] === 'application/pdf') {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".pdf";
+					} else {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					}
 
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
@@ -263,7 +267,11 @@ class Fones extends Controllers{
 						mkdir($carpetaImagenes);
 					}
 
-					$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					if($imagenAnotacion['type'] === 'application/pdf') {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".pdf";
+					} else {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					}
 
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
@@ -307,7 +315,11 @@ class Fones extends Controllers{
 						mkdir($carpetaImagenes);
 					}
 
-					$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					if($imagenAnotacion['type'] === 'application/pdf') {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".pdf";
+					} else {
+						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+					}
 
 					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}

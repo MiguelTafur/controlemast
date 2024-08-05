@@ -27,7 +27,7 @@
             </div>
             <div class="form-group col-md-12" id="divFileAnotacion">
               <label for="fileAnotacao">Imagen</label>
-              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
+              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao" accept="application/pdf, image/png, image/jpeg">
             </div>  
             <div class="form-group col-md-12" id="divTxtAnotacion">
               <label for="txtObservacion">Anotação</label>

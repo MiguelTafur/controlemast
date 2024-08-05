@@ -23,7 +23,7 @@
             </div> 
             <div class="form-group">
               <label for="fileProtocolo">Protocolo <span class="required">*</span></label>
-              <input type="file" class="form-control-file" id="fileProtocolo" name="fileProtocolo" accept="image/jpeg, image/png">
+              <input type="file" class="form-control-file" id="fileProtocolo" name="fileProtocolo" accept="application/pdf, image/png, image/jpeg">
             </div>
             <div class="form-group col-md-12">
               <label for="txtObservacion">Anotação</label>

@@ -23,7 +23,7 @@
             </div>
             <div class="form-group col-md-12 mb-4">
               <label for="fileAnotacao">Imagen</label>
-              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao">
+              <input type="file" class="form-control-file" id="fileAnotacao" name="fileAnotacao" accept="application/pdf, image/png, image/jpeg">
             </div>
             <div class="col-sm-12">
               <button type="submit" class="btn btn-primary my-1">Salvar</button>
@@ -111,7 +111,7 @@
             </div>
             <div class="form-group col-md-12 mb-4">
               <label for="fileEstado">Imagen</label>
-              <input type="file" class="form-control-file" id="fileEstado" name="fileEstado">
+              <input type="file" class="form-control-file" id="fileEstado" name="fileEstado" accept="application/pdf, image/png, image/jpeg">
             </div>
             <div class="col-sm-3">
               <button type="submit" class="btn btn-primary my-1">Salvar</button>
