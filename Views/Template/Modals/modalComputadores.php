@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Novo Fone</h5>
+        <h5 class="modal-title" id="titleModal">Novo Computador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -37,10 +37,27 @@
               <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado &nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
             </div>
           </div>
-          <div class="form-check col-md-12" id="divEqEstragado">
-            <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
-            <label for="equipamentoEstragado" class="form-check-label">Computador estragado</label>
+
+          <div id="divEstadoEquipamento">
+            <p class="font-weight-bold mt-2">Tipo de Estado</p>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="disponible" name="estado" class="custom-control-input" value="1" checked>
+              <label class="custom-control-label" for="disponible">Disponível</label>
+            </div>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="estragado" name="estado" class="custom-control-input" value="3">
+              <label class="custom-control-label" for="estragado">Estragado</label>
+            </div>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="concerto" name="estado" class="custom-control-input" value="4">
+              <label class="custom-control-label" for="concerto">Em Concerto</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="uso" name="estado" class="custom-control-input" value="2">
+              <label class="custom-control-label" for="uso">Em Uso</label>
+            </div>
           </div>
+
           <hr>
           <div class="tile-footer">
             <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Salvar</span></button>&nbsp;&nbsp;&nbsp;

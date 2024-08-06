@@ -171,11 +171,13 @@ class Computadores extends Controllers{
 				$strMarca =  ucwords(strClean($_POST['txtMarca']));
 				$strCodigo = strClean($_POST['txtCodigo']);
 				$strLacre =  strClean($_POST['txtLacre']);
-				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
+				$estado = $_POST['estado'];
 				$tipo = MCOMPUTADOR;
 				$intIdRuta = $_SESSION['idRuta'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
 				$request_user = "";
+
+				//dep($_POST);exit;
 
 				if($imagenAnotacion['error'] > 0) {
 					$nombreImagen = "";
@@ -192,7 +194,7 @@ class Computadores extends Controllers{
 						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 					}
 
-					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
+					//move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
 
 				if($idEquipamento == 0)
@@ -232,7 +234,7 @@ class Computadores extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! O Patrimônio do equipamento já existe, verifique novamente.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}

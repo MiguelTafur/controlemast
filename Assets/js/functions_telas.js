@@ -113,7 +113,7 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divEditarEstado').classList.remove('d-none');
     document.querySelector('#divTxtAnotacion').classList.add('d-none');
     document.querySelector('#divFileAnotacion').classList.add('d-none');
-    document.querySelector('#divEqEstragado').classList.add('d-none');
+    document.querySelector('#divEstadoEquipamento').classList.add('d-none');
 
     divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -387,11 +387,21 @@ function fntViewAddAnnotation(idequipamento) {
 function openModalEditStatus() {
 
     $('#listEstado').select2({
-        placeholder: " -- Escolh o Tipo de Estado -- ",
+        placeholder: " -- Escolha o Tipo de Estado -- ",
         allowClear: true,
         width: 'resolve',
         theme: "classic"
     });
+
+    var data = {
+        id: 2,
+        text: 'Em Uso'
+    }
+
+    if (!$('#listEstado').find("option[value='" + data.id + "']").length) {
+        var newOption = new Option(data.text, data.id, false, false);
+        $('#listEstado').append(newOption).trigger('change');
+    }
 
     $('#modalEditStatus').modal('show');
     $('#modalEditStatus').addClass('myModal');
@@ -409,6 +419,6 @@ function openModal()
     document.querySelector('#divEditarEstado').classList.add('d-none');
     document.querySelector('#divTxtAnotacion').classList.remove('d-none');
     document.querySelector('#divFileAnotacion').classList.remove('d-none');
-    document.querySelector('#divEqEstragado').classList.remove('d-none');
+    document.querySelector('#divEstadoEquipamento').classList.remove('d-none');
     $('#modalFormTelas').modal('show');
 }

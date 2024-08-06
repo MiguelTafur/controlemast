@@ -113,7 +113,7 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divEditarEstado').classList.remove('d-none');
     document.querySelector('#divTxtAnotacion').classList.add('d-none');
     document.querySelector('#divFileAnotacion').classList.add('d-none');
-    document.querySelector('#divEqEstragado').classList.add('d-none');
+    document.querySelector('#divEstadoEquipamento').classList.add('d-none');
 
     divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -411,6 +411,6 @@ function openModal()
     document.querySelector('#divEditarEstado').classList.add('d-none');
     document.querySelector('#divTxtAnotacion').classList.remove('d-none');
     document.querySelector('#divFileAnotacion').classList.remove('d-none');
-    document.querySelector('#divEqEstragado').classList.remove('d-none');
+    document.querySelector('#divEstadoEquipamento').classList.remove('d-none');
     $('#modalFormMouses').modal('show');
 }

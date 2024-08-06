@@ -16,9 +16,9 @@ class Telas extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/entregar');
 		}
-		$data['page_tag'] = "telas";
-		$data['page_title'] = "TELAS";
-		$data['page_name'] = "telas";
+		$data['page_tag'] = "monitores";
+		$data['page_title'] = "MONITORES";
+		$data['page_name'] = "Monitores";
 		$data['page_functions_js'] = "functions_telas.js";
 		$this->views->getView($this,"telas",$data);
 	}
@@ -134,7 +134,7 @@ class Telas extends Controllers{
 								}
 								$trAnotaciones .= '<td>'.$arrData[$i]['anotacion'].'</td>';
 								if(!empty($arrData[$i]['imagen'])) {
-									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank">Abrir &nbsp;<i style="margin-right: 0" class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
+									$trAnotaciones .= '<td><a href="'.media().'/images/imagenes/'.$arrData[$i]['imagen'].'" class="btn btn-info" type="button" target="_blank"><i style="margin-right: 0" class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></a></td>';
 								} else {
 									$trAnotaciones .= '<td><button class="btn btn-secondary" type="button" disabled><i style="margin-right: 0" class="fa fa-lg fa-file-image-o" aria-hidden="true"></i></button></td>';
 								}
@@ -171,7 +171,7 @@ class Telas extends Controllers{
 				$strMarca =  ucwords(strClean($_POST['txtMarca']));
 				$strCodigo = strClean($_POST['txtCodigo']);
 				$strLacre =  strClean($_POST['txtLacre']);
-				$estado = isset($_POST['equipamentoEstragado']) ?  3 : 1;
+				$estado = $_POST['estado'];
 				$tipo = MTELA;
 				$intIdRuta = $_SESSION['idRuta'];
 				$strObservacion =  strClean($_POST['txtObservacion']);
@@ -232,7 +232,7 @@ class Telas extends Controllers{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
 				}else if($request_user == '0'){
-					$arrResponse = array('status' => false, 'msg' => 'Atenção! O Patrimônio do equipamento já existe, verifique novamente.');
+					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Não foi possível armazenar os dados.');
 				}

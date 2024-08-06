@@ -76,6 +76,7 @@ class Entregar extends Controllers{
 	{ 
 		if($_POST)
 		{ 
+			$imagenAnotacion = $_FILES['fileProtocolo'];
 			$medida = 1000 * 1000;
 			if(empty($_POST['listUsuario']) || empty($_POST['listEquipamento']) || empty($_FILES['fileProtocolo']['name']))
 			{
@@ -127,6 +128,7 @@ class Entregar extends Controllers{
 	public function setUpdateProtocolo() 
 	{
 		if($_POST) {
+			$imagenAnotacion = $_FILES['fileEditProtocolo'];
 			$medida = 1000 * 1000;
 			if(empty($_FILES['fileEditProtocolo']['name']))
 			{
@@ -188,6 +190,8 @@ class Entregar extends Controllers{
 						$tipo = 'Teclado';
 					} else if ($arrData[$i]['tipo'] === 11) {
 						$tipo = 'Tela';
+					} else if ($arrData[$i]['tipo'] === 16) {
+						$tipo = 'PC';
 					}
 					$htmlOptions .= '<option value="'.$arrData[$i]['idequipamento'].'">'.$tipo.' - #'.$arrData[$i]['lacre'].'</option>';
 				}

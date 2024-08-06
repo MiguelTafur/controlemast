@@ -37,9 +37,24 @@
               <button class="btn btn-warning" type="button" onclick="openModalEditStatus();">Editar Estado &nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
             </div>
           </div>
-          <div class="form-check col-md-12" id="divEqEstragado">
-            <input type="checkbox" class="form-check-input" name="equipamentoEstragado" id="equipamentoEstragado">
-            <label for="equipamentoEstragado" class="form-check-label">Tela estragada</label>
+          <div id="divEstadoEquipamento">
+            <p class="font-weight-bold mt-2">Tipo de Estado</p>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="disponible" name="estado" class="custom-control-input" value="1" checked>
+              <label class="custom-control-label" for="disponible">Disponível</label>
+            </div>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="estragado" name="estado" class="custom-control-input" value="3">
+              <label class="custom-control-label" for="estragado">Estragado</label>
+            </div>
+            <div class="custom-control custom-radio mb-1">
+              <input type="radio" id="concerto" name="estado" class="custom-control-input" value="4">
+              <label class="custom-control-label" for="concerto">Em Concerto</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="uso" name="estado" class="custom-control-input" value="2">
+              <label class="custom-control-label" for="uso">Em Uso</label>
+            </div>
           </div>
           <hr>
           <div class="tile-footer">
