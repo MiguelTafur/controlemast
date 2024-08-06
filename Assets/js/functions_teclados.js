@@ -201,6 +201,8 @@ function fntEditStatus() {
                         }else{
                             if(objData.estado === 1) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-success">Disponível</span></h5>`;
+                            } else if(objData.estado === 2) {
+                                rowTable.cells[3].innerHTML = `<h5><span class="badge badge-info">Em Uso</span></h5>`;
                             } else if(objData.estado === 3) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-danger">Estragado</span></h5>`;
                             } else {

@@ -200,7 +200,9 @@ function fntEditStatus() {
                         }else{
                             if(objData.estado === 1) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-success">Disponível</span></h5>`;
-                            } else if(objData.estado === 3) {
+                            } else if(objData.estado === 2) {
+                                rowTable.cells[3].innerHTML = `<h5><span class="badge badge-info">Em Uso</span></h5>`;
+                            }else if(objData.estado === 3) {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-danger">Estragado</span></h5>`;
                             } else {
                                 rowTable.cells[3].innerHTML = `<h5><span class="badge badge-warning">Concerto</span></h5>`;
@@ -414,7 +416,7 @@ function openModal()
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Salvar";
-    document.querySelector('#titleModal').innerHTML = "Novo Tela";
+    document.querySelector('#titleModal').innerHTML = "Novo Monitor";
     document.querySelector("#formTelas").reset();
     document.querySelector('#divEditarEstado').classList.add('d-none');
     document.querySelector('#divTxtAnotacion').classList.remove('d-none');
