@@ -232,7 +232,13 @@ class Mouses extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+						 					 'msg' => 'Dados salvos com sucesso.',
+											 'cantMouseD' => $this->model->cantMouses(1),
+											 'cantMouseU' => $this->model->cantMouses(2),
+											 'cantMouseE' => $this->model->cantMouses(3),
+											 'cantMouseC' => $this->model->cantMouses(4),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}

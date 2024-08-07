@@ -231,7 +231,13 @@ class Teclados extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantTecladoD' => $this->model->cantTeclados(1),
+											 'cantTecladoU' => $this->model->cantTeclados(2),
+											 'cantTecladoE' => $this->model->cantTeclados(3),
+											 'cantTecladoC' => $this->model->cantTeclados(4),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}

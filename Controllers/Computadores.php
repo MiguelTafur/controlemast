@@ -198,7 +198,7 @@ class Computadores extends Controllers{
 						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 					}
 
-					//move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
+					move_uploaded_file($imagenAnotacion['tmp_name'], $carpetaImagenes . $nombreImagen);
 				}
 
 				if($idEquipamento == 0)
@@ -233,7 +233,13 @@ class Computadores extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantComputadorD' => $this->model->cantComputadores(1),
+											 'cantComputadorU' => $this->model->cantComputadores(2),
+											 'cantComputadorE' => $this->model->cantComputadores(3),
+											 'cantComputadorC' => $this->model->cantComputadores(4),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}

@@ -74,6 +74,11 @@ function fntCrearEquipamento() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantFoneD").textContent = objData.cantFoneD;
+                        document.querySelector("#cantFoneU").textContent = objData.cantFoneU;
+                        document.querySelector("#cantFoneE").textContent = objData.cantFoneE;
+                        document.querySelector("#cantFoneC").textContent = objData.cantFoneC;
+
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{

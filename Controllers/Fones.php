@@ -233,7 +233,13 @@ class Fones extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantFoneD' => $this->model->cantFones(1),
+											 'cantFoneU' => $this->model->cantFones(2),
+											 'cantFoneE' => $this->model->cantFones(3),
+											 'cantFoneC' => $this->model->cantFones(4),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
