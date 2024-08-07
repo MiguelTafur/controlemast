@@ -19,6 +19,10 @@ class Mouses extends Controllers{
 		$data['page_tag'] = "Mouses";
 		$data['page_title'] = "MOUSES";
 		$data['page_name'] = "mouses";
+		$data['cantidadMousesD'] = $this->model->cantMouses(1);
+		$data['cantidadMousesU'] = $this->model->cantMouses(2);
+		$data['cantidadMousesE'] = $this->model->cantMouses(3);
+		$data['cantidadMousesC'] = $this->model->cantMouses(4);
 		$data['page_functions_js'] = "functions_mouses.js";
 		$this->views->getView($this,"mouses",$data);
 	}
@@ -278,7 +282,14 @@ class Mouses extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MMOUSE);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.', 
+											 'estado' => $request_estado, 
+											 'cantMouseD' => $this->model->cantMouses(1),
+											 'cantMouseU' => $this->model->cantMouses(2),
+											 'cantMouseE' => $this->model->cantMouses(3),
+											 'cantMouseC' => $this->model->cantMouses(4),
+											);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {

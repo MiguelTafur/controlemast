@@ -198,6 +198,11 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantMouseD").textContent = objData.cantMouseD;
+                        document.querySelector("#cantMouseU").textContent = objData.cantMouseU;
+                        document.querySelector("#cantMouseE").textContent = objData.cantMouseE;
+                        document.querySelector("#cantMouseC").textContent = objData.cantMouseC;
+
                         if(rowTable == ""){
                             tableMouses.api().ajax.reload();
                         }else{

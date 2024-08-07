@@ -13,8 +13,30 @@
         </h1>
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/mouses"><?= $data['page_title'] ?></a></li>
+      <li class="mx-4">
+        <h6 class="mb-0">
+          DISPONÍVEIS: 
+          <span class="text-success font-italic" id="cantMouseD"><?= $data['cantidadMousesD']; ?></span>
+        </h6>
+      </li>
+      <li class="mx-4">
+        <h6 class="mb-0">
+          EM USO: 
+          <span class="text-info font-italic" id="cantMouseU"><?= $data['cantidadMousesU']; ?></span>
+        </h6>
+      </li>
+      <li class="mx-4">
+        <h6 class="mb-0">
+          ESTRAGADOS: 
+          <span class="text-danger font-italic" id="cantMouseE"><?= $data['cantidadMousesE']; ?></span>
+        </h6>
+      </li>
+      <li class="ml-3">
+        <h6 class="mb-0">
+          CONCERTO: 
+          <span class="text-warning font-italic" id="cantMouseC"><?= $data['cantidadMousesC']; ?></span>
+        </h6>
+      </li>
     </ul>
   </div>
 
