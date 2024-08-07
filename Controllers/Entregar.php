@@ -45,13 +45,15 @@ class Entregar extends Controllers{
 					$tipo = 'Teclado';
 				} else if ($arrData[$i]['equipamento'] === 11) {
 					$tipo = 'Tela';
+				} else if ($arrData[$i]['equipamento'] === 16) {
+					$tipo = 'PC';
 				}
 
 				$arrData[$i]['fechaRegistro'] = date("d-m-Y", strtotime($arrData[$i]['fechaRegistro']));
 
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
-				$arrData[$i]['equipamento'] = '<h6>'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				$arrData[$i]['equipamento'] = '<h6 class="m-0">'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
 				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 

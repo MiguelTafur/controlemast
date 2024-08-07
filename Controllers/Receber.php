@@ -42,6 +42,8 @@ class Receber extends Controllers{
 					$tipo = 'Teclado';
 				} else if ($arrData[$i]['equipamento'] === 11) {
 					$tipo = 'Tela';
+				} else if ($arrData[$i]['equipamento'] === 16) {
+					$tipo = 'PC';
 				}
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
@@ -92,7 +94,6 @@ class Receber extends Controllers{
 		if($_SESSION['permisosMod']['r']){
 			$intIdRuta = $_SESSION['idRuta'];
 			$arrData = $this->model->selectUsuarios($intIdRuta);
-			//dep($arrData);exit;
 			$htmlOptions = '<option></option>';
 			if(count($arrData) > 0){
 				for ($i=0; $i < count($arrData); $i++) { 
@@ -122,6 +123,8 @@ class Receber extends Controllers{
 					$arrData['tipo'] = 'Teclado';
 				} else if ($arrData['tipo'] === 11) {
 					$arrData['tipo'] = 'Tela';
+				} else if ($arrData['tipo'] === 16) {
+					$arrData['tipo'] = 'PC';
 				}
 
 				if(empty($arrData))

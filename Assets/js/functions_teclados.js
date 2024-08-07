@@ -146,9 +146,11 @@ function fntEditInfo(element, idequipamento)
                 } else {
                     estadoActual.textContent = `Em uso`;
                     //estadoActual.classList.add('text-info');
-                    document.querySelector("#noAlterado").classList.remove('d-none');
-                    document.querySelector("#formEditarEstado").classList.add('d-none');
-                    document.querySelector("#noAlterado").innerHTML = `<p class="text-uppercase text-center m-0 text-secondary font-weight-bold">Equipamento não pode ser alterado</p>`
+                    if(objData.data.idcontrole) {
+                        document.querySelector("#noAlterado").classList.remove('d-none');
+                        document.querySelector("#formEditarEstado").classList.add('d-none');
+                        document.querySelector("#noAlterado").innerHTML = `<p class="text-uppercase text-center m-0 text-secondary font-weight-bold">Equipamento não pode ser alterado</p>`
+                    }
                 }
 
                 

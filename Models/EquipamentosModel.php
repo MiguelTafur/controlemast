@@ -37,14 +37,16 @@ class EquipamentosModel extends Mysql
     public function selectEquipamento(int $idequipamento)
 	{
 		$this->intIdEquipamento = $idequipamento;
-		$sql = "SELECT idequipamento, 
-                       marca, 
-                       codigo, 
-                       lacre, 
-                       status, 
-					   DATE_FORMAT(datecreated, '%Y-%m-%d') as fechaRegistro 
-				FROM equipamento 
-				WHERE idequipamento = $this->intIdEquipamento";
+		$sql = "SELECT eq.idequipamento, 
+                       eq.marca, 
+                       eq.codigo, 
+                       eq.lacre, 
+                       eq.status, 
+					   DATE_FORMAT(eq.datecreated, '%Y-%m-%d') as fechaRegistro,
+					   co.idcontrole 
+				FROM equipamento eq
+				LEFT OUTER JOIN  controle co ON(eq.idequipamento = co.equipamentoid)
+				WHERE eq.idequipamento = $this->intIdEquipamento";
 		$request = $this->select($sql);
 		return $request;
 	}
