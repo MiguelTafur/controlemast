@@ -65,7 +65,7 @@ class EquipamentosModel extends Mysql
 		$fecha = date('Y-m-d');
 		$return = 0;
 
-		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' || codigo = '{$this->strCodigo}') AND codigoruta = $this->intIdRuta";
+		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' || (codigo != '' AND codigo = '{$this->strCodigo}')) AND codigoruta = $this->intIdRuta";
 		$request = $this->select_all($sql);
 
 		if(empty($request))
