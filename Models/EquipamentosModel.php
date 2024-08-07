@@ -155,11 +155,14 @@ class EquipamentosModel extends Mysql
 		$this->stringTipo = $tipo;
 		$return = 0;
 
-		$query_select = "SELECT status FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
+		$query_select = "SELECT eq.status, co.idcontrole FROM equipamento eq 
+						 LEFT OUTER JOIN controle co ON(eq.idequipamento = co.equipamentoid)
+						 WHERE idequipamento = $this->intIdEquipamento";
 		$request_select = $this->select($query_select);
 		$estado = $request_select['status'];
+		$idcontrole = $request_select['idcontrole'];
 		
-		if($estado === 2) {
+		if($estado === 2 && !empty($idcontrole)) {
 			$return = '0';
 		} else {
 			$query_update = "UPDATE equipamento SET status = ? WHERE idequipamento = $this->intIdEquipamento";

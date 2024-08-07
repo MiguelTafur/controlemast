@@ -19,6 +19,10 @@ class Computadores extends Controllers{
 		$data['page_tag'] = "Computadores";
 		$data['page_title'] = "COMPUTADORES";
 		$data['page_name'] = "computadores";
+		$data['cantidadComputadoresD'] = $this->model->cantComputadores(1);
+		$data['cantidadComputadoresU'] = $this->model->cantComputadores(2);
+		$data['cantidadComputadoresE'] = $this->model->cantComputadores(3);
+		$data['cantidadComputadoresC'] = $this->model->cantComputadores(4);
 		$data['page_functions_js'] = "functions_computadores.js";
 		$this->views->getView($this,"computadores",$data);
 	}
@@ -279,7 +283,14 @@ class Computadores extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MCOMPUTADOR);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.', 
+											 'estado' => $request_estado, 
+											 'cantComputadorD' => $this->model->cantComputadores(1),
+											 'cantComputadorU' => $this->model->cantComputadores(2),
+											 'cantComputadorE' => $this->model->cantComputadores(3),
+											 'cantComputadorC' => $this->model->cantComputadores(4),
+											);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {

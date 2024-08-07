@@ -195,6 +195,11 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantComputadorD").textContent = objData.cantComputadorD;
+                        document.querySelector("#cantComputadorU").textContent = objData.cantComputadorU;
+                        document.querySelector("#cantComputadorE").textContent = objData.cantComputadorE;
+                        document.querySelector("#cantComputadorC").textContent = objData.cantComputadorC;
+
                         if(rowTable == ""){
                             tableComputadores.api().ajax.reload();
                         }else{
