@@ -19,6 +19,10 @@ class Telas extends Controllers{
 		$data['page_tag'] = "monitores";
 		$data['page_title'] = "MONITORES";
 		$data['page_name'] = "Monitores";
+		$data['cantidadTelasD'] = $this->model->cantTelas(1);
+		$data['cantidadTelasU'] = $this->model->cantTelas(2);
+		$data['cantidadTelasE'] = $this->model->cantTelas(3);
+		$data['cantidadTelasC'] = $this->model->cantTelas(4);
 		$data['page_functions_js'] = "functions_telas.js";
 		$this->views->getView($this,"telas",$data);
 	}
@@ -279,7 +283,14 @@ class Telas extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MTELA);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.', 
+											 'estado' => $request_estado, 
+											 'cantTelaD' => $this->model->cantTelas(1),
+											 'cantTelaU' => $this->model->cantTelas(2),
+											 'cantTelaE' => $this->model->cantTelas(3),
+											 'cantTelaC' => $this->model->cantTelas(4),
+											);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {

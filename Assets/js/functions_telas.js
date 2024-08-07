@@ -197,6 +197,11 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantTelaD").textContent = objData.cantTelaD;
+                        document.querySelector("#cantTelaU").textContent = objData.cantTelaU;
+                        document.querySelector("#cantTelaE").textContent = objData.cantTelaE;
+                        document.querySelector("#cantTelaC").textContent = objData.cantTelaC;
+
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{
