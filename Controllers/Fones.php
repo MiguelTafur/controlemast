@@ -19,6 +19,10 @@ class Fones extends Controllers{
 		$data['page_tag'] = "Fones";
 		$data['page_title'] = "FONES";
 		$data['page_name'] = "fones";
+		$data['cantidadFonesD'] = $this->model->cantFones(1);
+		$data['cantidadFonesU'] = $this->model->cantFones(2);
+		$data['cantidadFonesE'] = $this->model->cantFones(3);
+		$data['cantidadFonesC'] = $this->model->cantFones(4);
 		$data['page_functions_js'] = "functions_fones.js";
 		$this->views->getView($this,"fones",$data);
 	}
@@ -279,7 +283,14 @@ class Fones extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MFONE);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.', 
+											 'estado' => $request_estado, 
+											 'cantFoneD' => $this->model->cantFones(1),
+											 'cantFoneU' => $this->model->cantFones(2),
+											 'cantFoneE' => $this->model->cantFones(3),
+											 'cantFoneC' => $this->model->cantFones(4),
+											);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {
