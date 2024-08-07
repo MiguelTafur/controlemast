@@ -198,6 +198,11 @@ function fntEditStatus() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantTecladoD").textContent = objData.cantTecladoD;
+                        document.querySelector("#cantTecladoU").textContent = objData.cantTecladoU;
+                        document.querySelector("#cantTecladoE").textContent = objData.cantTecladoE;
+                        document.querySelector("#cantTecladoC").textContent = objData.cantTecladoC;
+
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{

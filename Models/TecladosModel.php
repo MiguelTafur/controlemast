@@ -2,19 +2,20 @@
 
 class TecladosModel extends Mysql
 {
-	PRIVATE $intIdEquipamento;
-	PRIVATE $intIdPersona;
-	PRIVATE $strMarca;
-	PRIVATE $strCodigo;
-	PRIVATE $strLacre;
-	PRIVATE $intStatus;
-	PRIVATE $intTipo;
-	PRIVATE $strAnotacao;
-	PRIVATE $strImagem;
-	PRIVATE $intIdRuta;
-
 	public function __construct()
 	{
 		parent::__construct();
+	}
+
+	PRIVATE $intStatus;
+
+	public function cantTeclados($estado) {
+		$this->intStatus = $estado;
+		$ruta = $_SESSION['idRuta'];
+
+		$sql = "SELECT COUNT(*) AS total FROM equipamento WHERE status = $this->intStatus 
+																AND tipo = " . MTECLADO ." AND codigoruta = $ruta";
+		$request = $this->select($sql);
+		return $request['total'];
 	}
 }

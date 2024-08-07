@@ -19,6 +19,10 @@ class Teclados extends Controllers{
 		$data['page_tag'] = "Teclados";
 		$data['page_title'] = "TECLADOS";
 		$data['page_name'] = "teclados";
+		$data['cantidadTecladosD'] = $this->model->cantTeclados(1);
+		$data['cantidadTecladosU'] = $this->model->cantTeclados(2);
+		$data['cantidadTecladosE'] = $this->model->cantTeclados(3);
+		$data['cantidadTecladosC'] = $this->model->cantTeclados(4);
 		$data['page_functions_js'] = "functions_teclados.js";
 		$this->views->getView($this,"teclados",$data);
 	}
@@ -279,7 +283,14 @@ class Teclados extends Controllers{
 				if($_SESSION['permisosMod']['u']){
 					$request_estado = setEstadoEquipamento($idEquipamento, $estadoEquipamento, $txtAnotacion, $nombreImagen, MTECLADO);
 					if($request_estado > 0) {
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'estado' => $request_estado);
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.', 
+											 'estado' => $request_estado, 
+											 'cantTecladoD' => $this->model->cantTeclados(1),
+											 'cantTecladoU' => $this->model->cantTeclados(2),
+											 'cantTecladoE' => $this->model->cantTeclados(3),
+											 'cantTecladoC' => $this->model->cantTeclados(4),
+											);
 					} else if ($request_estado === '0') {
 						$arrResponse = array('status' => false, 'msg' => 'Não pode-se alterar um Equipamento em uso.');
 					}else {
