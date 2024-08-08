@@ -12,9 +12,19 @@
             <?php } ?>
         </h1>
     </div>
-    <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/entregar"><?= $data['page_title2'] ?></a></li>
+    <ul class="app-breadcrumb breadcrumb d-none d-lg-block text-right">
+    <li class="mx-4">
+        <h6 class="mb-2">
+          TOTAL: 
+          <span class="text-success font-italic" id="cantEntregas">&nbsp;<?= $data['cantidadEntregas']; ?></span>
+        </h6>
+      </li>
+      <li class="mx-4">
+        <h6 class="mb-0">
+          HOJE: 
+          <span class="text-success font-italic" id="cantEntregasHoy">&nbsp;<?= $data['cantidadEntregasHoy']; ?></span>
+        </h6>
+      </li>
     </ul>
   </div>
 

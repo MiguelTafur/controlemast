@@ -20,6 +20,9 @@ class Entregar extends Controllers{
 		$data['page_title'] = "EQUIPAMENTOS ENTREGUES";
 		$data['page_title2'] = "ENTREGUES";
 		$data['page_name'] = "Entregar";
+		$data['cantidadEntregas'] = $this->model->cantEntregues();
+		$data['cantidadEntregasHoy'] = $this->model->cantEntregues(NOWDATE);
+		//dep($data['cantidadEntregasHoy']);exit;
 		$data['page_functions_js'] = "functions_controle.js";
 		$this->views->getView($this,"entregar",$data);
 	}
@@ -103,7 +106,7 @@ class Entregar extends Controllers{
 						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 					}
 
-				move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
+				//move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
 
 				if($_SESSION['permisosMod']['w']){
 					$request_user = $this->model->insertControleEntrega(
@@ -115,7 +118,11 @@ class Entregar extends Controllers{
 
 				if($request_user > 0)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 'data' => $request_user);
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 
+										 'data' => $request_user,
+										 'cantEntregas' => $this->model->cantEntregues(),
+										 'cantEntregasHoy' => $this->model->cantEntregues(NOWDATE),
+										);
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'O Usuário já possui um equipamento.');
 				}else{

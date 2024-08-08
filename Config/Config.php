@@ -59,4 +59,7 @@
 	const RSUPERVISOR = 7;
 	const RGESTOR = 8;
 
+	//Fecha Actual
+	define('NOWDATE', date("Y-m-d"));
+
  ?>

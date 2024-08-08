@@ -75,24 +75,10 @@ function fntCrearControleEntrega() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        // if(rowTable == ""){
-                            tableEntregue.api().ajax.reload();
-                        // }else{
-                        //     rowTable.cells[0].textContent = strNombre;
-                        //     rowTable.cells[1].textContent = strMarca;
-                        //     if(strCodigo === '') {
-                        //         rowTable.cells[2].innerHTML = `<span class="font-italic">nenhum</span>`;
-                        //     } else {
-                        //         rowTable.cells[2].textContent = strCodigo;
-                        //     }
-                        //     if(strLacre === '') {
-                        //         rowTable.cells[3].innerHTML = `<span class="font-italic">nenhum</span>`;
-                        //     } else {
-                        //         rowTable.cells[3].textContent = strLacre;
-                        //     }
+                        document.querySelector("#cantEntregas").textContent = objData.cantEntregas;
+                        document.querySelector("#cantEntregasHoy").textContent = objData.cantEntregasHoy;
 
-                        //     rowTable = "";
-                        // }
+                        tableEntregue.api().ajax.reload();
                         $('#modalFormControleEntrega').modal("hide");
                         formControleEntrega.reset();
                         swal("Entrega", objData.msg, "success");

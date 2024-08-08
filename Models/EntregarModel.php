@@ -247,4 +247,15 @@ class EntregarModel extends Mysql
 
         return $request;
     }
+
+    public function cantEntregues(string $fecha = NULL)
+    {
+        $where = "";
+        if(!empty($fecha)) {
+            $where = " AND datecreated = '{$fecha}'";
+        }
+        $sql = "SELECT COUNT(*) as total FROM controle WHERE status = 1 " . $where;
+        $request = $this->select($sql);
+        return $request['total'];
+    }
 }
