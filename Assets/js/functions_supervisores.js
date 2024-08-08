@@ -76,6 +76,8 @@ function fntCrearSupervisores() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantSupervisores").textContent = objData.cantSupervisores;
+
                         if(rowTable == ""){
                             tableSupervisores.api().ajax.reload();
                         }else{
@@ -222,6 +224,7 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantSupervisores").textContent = objData.cantSupervisores;
                         swal("Remover!", objData.msg , "success");
                         tableSupervisores.api().ajax.reload();
                     }else{

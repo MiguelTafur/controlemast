@@ -19,6 +19,7 @@ class Supervisores extends Controllers{
 		$data['page_tag'] = "Supervisores";
 		$data['page_title'] = "SUPERVISORES";
 		$data['page_name'] = "supervisores";
+		$data['cantidadSupervisores'] = $this->model->cantSupervisores();
 		$data['page_functions_js'] = "functions_supervisores.js";
 		$this->views->getView($this,"supervisores",$data);
 	}
@@ -59,7 +60,10 @@ class Supervisores extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantSupervisores' => $this->model->cantSupervisores()	
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
@@ -149,7 +153,10 @@ class Supervisores extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+										 'msg' => 'Dados salvos com sucesso.',
+										 'cantSupervisores' => $this->model->cantSupervisores()	
+										);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Líder.');
 				}

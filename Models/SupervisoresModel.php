@@ -6,6 +6,13 @@ class SupervisoresModel extends Mysql
 	{
 		parent::__construct();
 	}	
+
+	public function cantSupervisores()
+	{
+		$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = " . RSUPERVISOR;
+		$request = $this->select($sql);
+		return $request['total'];
+	}
 }
 
 ?>
