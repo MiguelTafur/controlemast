@@ -143,7 +143,10 @@ class Aprendizes extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											'cantAprendizes' => $this->model->cantAprendizes()
+											);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Operador.');
 				}

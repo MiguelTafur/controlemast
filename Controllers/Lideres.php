@@ -19,6 +19,7 @@ class Lideres extends Controllers{
 		$data['page_tag'] = "Lideres";
 		$data['page_title'] = "LIDERES";
 		$data['page_name'] = "lideres";
+		$data['cantidadLideres'] = $this->model->cantLideres();
 		$data['page_functions_js'] = "functions_lideres.js";
 		$this->views->getView($this,"lideres",$data);
 	}
@@ -59,7 +60,10 @@ class Lideres extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantLideres' => $this->model->cantLideres(),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
@@ -149,7 +153,10 @@ class Lideres extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantLideres' => $this->model->cantLideres(),
+											);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Líder.');
 				}

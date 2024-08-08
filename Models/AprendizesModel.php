@@ -9,7 +9,7 @@ class AprendizesModel extends Mysql
 
 	public function cantAprendizes()
 	{
-		$sql = "SELECT COUNT(*) as total FROM persona WHERE rolid = " . RAPRENDIZ;
+		$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = " . RAPRENDIZ;
 		$request = $this->select($sql);
 		return $request['total'];
 	}

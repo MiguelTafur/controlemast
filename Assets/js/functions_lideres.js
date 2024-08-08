@@ -76,6 +76,8 @@ function fntCrearLideres() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantLideres").textContent = objData.cantLideres;
+
                         if(rowTable == ""){
                             tableLideres.api().ajax.reload();
                         }else{
@@ -222,6 +224,7 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantLideres").textContent = objData.cantLideres;
                         swal("Remover!", objData.msg , "success");
                         tableLideres.api().ajax.reload();
                     }else{

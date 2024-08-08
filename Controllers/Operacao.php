@@ -19,6 +19,8 @@ class Operacao extends Controllers{
 		$data['page_tag'] = "Operação";
 		$data['page_title'] = "OPERAÇÃO";
 		$data['page_name'] = "operação";
+		$data['cantidadOperadoresP'] = $this->model->cantOperadores(1);
+		$data['cantidadOperadoresH'] = $this->model->cantOperadores(2);
 		$data['page_functions_js'] = "functions_operacao.js";
 		$this->views->getView($this,"operacao",$data);
 	}
@@ -59,9 +61,17 @@ class Operacao extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantOperadoresP' => $this->model->cantOperadores(1),
+											 'cantOperadoresH' => $this->model->cantOperadores(2),
+											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantOperadoresP' => $this->model->cantOperadores(1),
+											 'cantOperadoresH' => $this->model->cantOperadores(2),
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe, insire outra.');
@@ -149,7 +159,11 @@ class Operacao extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantOperadoresP' => $this->model->cantOperadores(1),
+											 'cantOperadoresH' => $this->model->cantOperadores(2),
+											);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Operador.');
 				}

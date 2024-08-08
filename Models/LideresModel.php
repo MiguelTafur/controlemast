@@ -6,6 +6,13 @@ class LideresModel extends Mysql
 	{
 		parent::__construct();
 	}	
+
+	public function cantLideres()
+	{
+		$sql = "SELECT COUNT(*) as total FROM persona WHERE status != 0 AND rolid = " . RLIDER;
+		$request = $this->select($sql);
+		return $request['total'];
+	}
 }
 
 ?>

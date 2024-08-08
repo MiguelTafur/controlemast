@@ -75,6 +75,9 @@ function fntCrearOperacao() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantOperadoresP").textContent = objData.cantOperadoresP;
+                        document.querySelector("#cantOperadoresH").textContent = objData.cantOperadoresH;
+
                         if(rowTable == ""){
                             tableOperadores.api().ajax.reload();
                         }else{
@@ -222,6 +225,8 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantOperadoresP").textContent = objData.cantOperadoresP;
+                        document.querySelector("#cantOperadoresH").textContent = objData.cantOperadoresH;
                         swal("Remover!", objData.msg , "success");
                         tableOperadores.api().ajax.reload();
                     }else{
