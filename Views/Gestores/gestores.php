@@ -13,8 +13,12 @@
         </h1>
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-flex">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/supervisores"><?= $data['page_title'] ?></a></li>
+      <li class="mx-4">
+        <h6 class="mb-0">
+          TOTAL:  
+          <span class="text-success font-italic" id="cantGestores">&nbsp;<?= $data['cantidadGestores']; ?></span>
+        </h6>
+      </li>
     </ul>
   </div>
 

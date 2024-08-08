@@ -19,6 +19,7 @@ class Gestores extends Controllers{
 		$data['page_tag'] = "Gestores";
 		$data['page_title'] = "GESTORES";
 		$data['page_name'] = "gestores";
+		$data['cantidadGestores'] = $this->model->cantGestores();
 		$data['page_functions_js'] = "functions_gestores.js";
 		$this->views->getView($this,"gestores",$data);
 	}
@@ -59,7 +60,10 @@ class Gestores extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantGestores' => $this->model->cantGestores(),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
@@ -149,7 +153,10 @@ class Gestores extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+										 'msg' => 'Dados salvos com sucesso.',
+										 'cantGestores' => $this->model->cantGestores(),
+										);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Erro ao remover o Líder.');
 				}

@@ -76,6 +76,8 @@ function fntCrearGestores() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantGestores").textContent = objData.cantGestores;
+
                         if(rowTable == ""){
                             tableGestores.api().ajax.reload();
                         }else{
@@ -223,6 +225,7 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantGestores").textContent = objData.cantGestores;
                         swal("Remover!", objData.msg , "success");
                         tableGestores.api().ajax.reload();
                     }else{
