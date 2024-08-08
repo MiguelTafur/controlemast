@@ -20,6 +20,8 @@ class Receber extends Controllers{
 		$data['page_title'] = "EQUIPAMENTOS RECEBIDOS";
 		$data['page_title2'] = "RECEBIDOS";
 		$data['page_name'] = "Receber";
+		$data['cantidadRecebidos'] = $this->model->cantRecebidos();
+		$data['cantidadRecebidosHoy'] = $this->model->cantRecebidos(NOWDATE);
 		$data['page_functions_js'] = "functions_receber.js";
 		$this->views->getView($this,"receber",$data);
 	}

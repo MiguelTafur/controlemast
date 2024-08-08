@@ -76,6 +76,9 @@ function fntCrearControleReceber() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantRecebidos").textContent = objData.cantRecebidos;
+                        document.querySelector("#cantRecebidosHoy").textContent = objData.cantRecebidosHoy;
+
                         tableReceber.api().ajax.reload();
 
                         $('#modalFormControleReceber').modal("hide");

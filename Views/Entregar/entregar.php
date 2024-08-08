@@ -13,7 +13,7 @@
         </h1>
     </div>
     <ul class="app-breadcrumb breadcrumb d-none d-lg-block text-right">
-    <li class="mx-4">
+      <li class="mx-4">
         <h6 class="mb-2">
           TOTAL: 
           <span class="text-success font-italic" id="cantEntregas">&nbsp;<?= $data['cantidadEntregas']; ?></span>
