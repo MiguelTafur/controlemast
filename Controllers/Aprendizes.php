@@ -19,6 +19,7 @@ class Aprendizes extends Controllers{
 		$data['page_tag'] = "Aprendiz";
 		$data['page_title'] = "APRENDIZ";
 		$data['page_name'] = "aprendiz";
+		$data['cantidadAprendizes'] = $this->model->cantAprendizes();
 		$data['page_functions_js'] = "functions_aprendiz.js";
 		$this->views->getView($this,"aprendizes",$data);
 	}
@@ -59,7 +60,10 @@ class Aprendizes extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											'cantAprendizes' => $this->model->cantAprendizes()
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}

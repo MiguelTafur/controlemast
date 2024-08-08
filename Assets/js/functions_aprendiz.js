@@ -75,6 +75,8 @@ function fntCrearAprendiz() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantAprendizes").textContent = objData.cantAprendizes;
+
                         if(rowTable == ""){
                             tableAprendizes.api().ajax.reload();
                         }else{
