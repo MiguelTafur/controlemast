@@ -76,6 +76,8 @@ function fntCrearCoordinadores() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantCoordenadores").textContent = objData.cantCoordenadores;
+
                         if(rowTable == ""){
                             tableCoordinadores.api().ajax.reload();
                         }else{
@@ -221,6 +223,7 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantCoordenadores").textContent = objData.cantCoordenadores;
                         swal("Remover!", objData.msg , "success");
                         tableCoordinadores.api().ajax.reload();
                     }else{

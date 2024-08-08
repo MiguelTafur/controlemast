@@ -16,9 +16,10 @@ class Coordinadores extends Controllers{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location: ".base_url().'/controles');
 		}
-		$data['page_tag'] = "Coordinadores";
-		$data['page_title'] = "COORDINADORES";
-		$data['page_name'] = "coordinadores";
+		$data['page_tag'] = "Coordenadores";
+		$data['page_title'] = "COORDENADORES";
+		$data['page_name'] = "coordenadores";
+		$data['cantidadCoordenadores'] = $this->model->cantCoordenadores();
 		$data['page_functions_js'] = "functions_coordinadores.js";
 		$this->views->getView($this,"coordinadores",$data);
 	}
@@ -59,7 +60,10 @@ class Coordinadores extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantCoordenadores' => $this->model->cantCoordenadores(),
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
@@ -149,7 +153,10 @@ class Coordinadores extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+										 'msg' => 'Dados salvos com sucesso.',
+										 'cantCoordenadores' => $this->model->cantCoordenadores(),
+										);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Não foi possível remover o Coordinador.');
 				}
