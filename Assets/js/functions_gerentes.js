@@ -76,6 +76,8 @@ function fntCrearGerentes() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantGerentes").textContent = objData.cantGerentes;
+
                         if(rowTable == ""){
                             tableGerentes.api().ajax.reload();
                         }else{
@@ -221,6 +223,7 @@ function fntDelInfo(idpersona)
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        document.querySelector("#cantGerentes").textContent = objData.cantGerentes;
                         swal("Remover!", objData.msg , "success");
                         tableGerentes.api().ajax.reload();
                     }else{

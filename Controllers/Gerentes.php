@@ -19,6 +19,7 @@ class Gerentes extends Controllers{
 		$data['page_tag'] = "Gerentes";
 		$data['page_title'] = "GERENTES";
 		$data['page_name'] = "gerentes";
+		$data['cantidadGerentes'] = $this->model->cantGerentes();
 		$data['page_functions_js'] = "functions_gerentes.js";
 		$this->views->getView($this,"gerentes",$data);
 	}
@@ -60,7 +61,10 @@ class Gerentes extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
-						$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantGerentes' => $this->model->cantGerentes()
+											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
 					}
@@ -149,7 +153,10 @@ class Gerentes extends Controllers{
 				$requestDelete = getPersona($intIdpersona, 2);
 				if($requestDelete)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+											 'msg' => 'Dados salvos com sucesso.',
+											 'cantGerentes' => $this->model->cantGerentes()
+											);
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Não foi possível remover o Gerente.');
 				}
