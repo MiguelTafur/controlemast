@@ -106,7 +106,7 @@ class Entregar extends Controllers{
 						$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 					}
 
-				//move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
+				move_uploaded_file($_FILES['fileProtocolo']['tmp_name'], $carpetaImagenes . $nombreImagen);
 
 				if($_SESSION['permisosMod']['w']){
 					$request_user = $this->model->insertControleEntrega(
