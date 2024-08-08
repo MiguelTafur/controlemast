@@ -16,13 +16,13 @@
       <li class="mx-4">
         <h6 class="mb-2">
           TOTAL: 
-          <span class="text-success font-italic" id="cantEntregas">&nbsp;<?= $data['cantidadRecebidos']; ?></span>
+          <span class="text-success font-italic" id="cantRecebidos">&nbsp;<?= $data['cantidadRecebidos']; ?></span>
         </h6>
       </li>
       <li class="mx-4">
         <h6 class="mb-0">
           HOJE: 
-          <span class="text-success font-italic" id="cantEntregasHoy">&nbsp;<?= $data['cantidadRecebidosHoy']; ?></span>
+          <span class="text-success font-italic" id="cantRecebidosHoy">&nbsp;<?= $data['cantidadRecebidosHoy']; ?></span>
         </h6>
       </li>
     </ul>

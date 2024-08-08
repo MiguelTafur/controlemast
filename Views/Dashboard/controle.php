@@ -16,7 +16,7 @@
           <!-- Entregas -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/entregues" class="linkw">
+            <a href="<?= base_url() ?>/entregar" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-check fa-3x"></i>
                 <div class="info">
                   <h4>Entregas</h4>
@@ -30,7 +30,7 @@
           <!-- Trocas -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-exchange fa-3x"></i>
                 <div class="info">
                   <h4>Trocas</h4>
@@ -44,7 +44,7 @@
           <!-- Desligados -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Desligados(as)</h4>
@@ -58,7 +58,7 @@
           <!-- Pediu conta -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Pediu conta</h4>
@@ -72,7 +72,7 @@
           <!-- Sem Renovação -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Sem Renovação</h4>
@@ -86,7 +86,7 @@
           <!-- Justa Causa -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Justa Causa</h4>
@@ -100,7 +100,7 @@
           <!-- Rescisão -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Rescisão</h4>
@@ -114,7 +114,7 @@
           <!-- INSS -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>INSS</h4>
@@ -128,7 +128,7 @@
           <!-- Licença Maternidade -->
           <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <div class="col-md-6 col-lg-3 pr-lg-0">
-            <a href="<?= base_url() ?>/recebidos" class="linkw">
+            <a href="<?= base_url() ?>/receber" class="linkw">
               <div class="widget-small info coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
                 <div class="info">
                   <h4>Licença Maternidade</h4>

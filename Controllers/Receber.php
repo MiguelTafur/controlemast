@@ -233,7 +233,11 @@ class Receber extends Controllers{
 				}
 
 				if($request_user > 0){
-					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.');
+					$arrResponse = array('status' => true, 
+										 'msg' => 'Dados salvos com sucesso.',
+										 'cantRecebidos' => $this->model->cantRecebidos(),
+										 'cantRecebidosHoy' => $this->model->cantRecebidos(NOWDATE)
+										);
 				}else{
 				 	$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar os dados.');
 				}

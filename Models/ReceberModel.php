@@ -170,7 +170,7 @@ class ReceberModel extends Mysql
         if(!empty($fecha)) {
             $where = " AND datecreated = '{$fecha}'";
         }
-        $sql = "SELECT COUNT(*) as total FROM controle WHERE status != 1 " . $where;
+        $sql = "SELECT COUNT(*) as total FROM controle WHERE status != 0 AND status != 1 " . $where;
         $request = $this->select($sql);
         return $request['total'];
     }
