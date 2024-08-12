@@ -55,7 +55,6 @@
             </ul>
         </li>
         <?php } ?>
-        <?php if(!empty($_SESSION['permisos'][8]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
@@ -63,14 +62,23 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?= base_url(); ?>/fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/computadores"><i class="icon fa fa-circle-o"></i> Computadores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Monitores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
+                <?php if(!empty($_SESSION['permisos'][MFONE]['r'])){ ?>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/fones"><i class="icon fa fa-circle-o"></i> Fones</a></li>
+                <?php } ?>
+                <?php if(!empty($_SESSION['permisos'][MCOMPUTADOR]['r'])){ ?>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/computadores"><i class="icon fa fa-circle-o"></i> Computadores</a></li>
+                <?php } ?>
+                <?php if(!empty($_SESSION['permisos'][MMONITOR]['r'])){ ?>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Monitores</a></li>
+                <?php } ?>
+                <?php if(!empty($_SESSION['permisos'][MTECLADO]['r'])){ ?>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
+                <?php } ?>
+                <?php if(!empty($_SESSION['permisos'][MMOUSE]['r'])){ ?>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
+                <?php } ?>
             </ul>
         </li>
-        <?php } ?>
         <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
