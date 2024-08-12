@@ -19,8 +19,21 @@ class Operacao extends Controllers{
 		$data['page_tag'] = "Operação";
 		$data['page_title'] = "OPERAÇÃO";
 		$data['page_name'] = "operação";
+
+		//Cantidades
 		$data['cantidadOperadoresP'] = $this->model->cantOperadores(1);
 		$data['cantidadOperadoresH'] = $this->model->cantOperadores(2);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['operadoresMDia'] = $this->model->selectUsuariosMes($anio,$mes,ROPERACAO);
+
+		//Anual
+		$data['operadoresAnio'] = $this->model->selectUsuariosAnio($anio, ROPERACAO);
+
 		$data['page_functions_js'] = "functions_operacao.js";
 		$this->views->getView($this,"operacao",$data);
 	}
@@ -171,5 +184,36 @@ class Operacao extends Controllers{
 			}
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function operadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "operadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$operadores = $this->model->selectUsuariosMes($anio,$mes,ROPERACAO);
+			$script = getFile("Template/Modals/graficaOperadoresMes", $operadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function operadoresAnio(){
+		if($_POST){
+			$grafica = "operadoresAnio";
+			$anio = intval($_POST['anio']);
+			$operadores = $this->model->selectUsuariosAnio($anio, ROPERACAO);
+			$script = getFile("Template/Modals/graficaAnoOperadores",$operadores);
+			echo $script;
+			die();
+		}
 	}
 }
