@@ -68,14 +68,14 @@
                 <?php if(!empty($_SESSION['permisos'][MCOMPUTADOR]['r'])){ ?>
                     <li><a class="treeview-item" href="<?= base_url(); ?>/computadores"><i class="icon fa fa-circle-o"></i> Computadores</a></li>
                 <?php } ?>
-                <?php if(!empty($_SESSION['permisos'][MMONITOR]['r'])){ ?>
+                <?php if(!empty($_SESSION['permisos'][MTELA]['r'])){ ?>
                     <li><a class="treeview-item" href="<?= base_url(); ?>/telas"><i class="icon fa fa-circle-o"></i> Monitores</a></li>
                 <?php } ?>
                 <?php if(!empty($_SESSION['permisos'][MTECLADO]['r'])){ ?>
                     <li><a class="treeview-item" href="<?= base_url(); ?>/teclados"><i class="icon fa fa-circle-o"></i> Teclados</a></li>
                 <?php } ?>
                 <?php if(!empty($_SESSION['permisos'][MMOUSE]['r'])){ ?>
-                    <li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
+                    cli_set_process_title<li><a class="treeview-item" href="<?= base_url(); ?>/mouses"><i class="icon fa fa-circle-o"></i> Mouses</a></li>
                 <?php } ?>
             </ul>
         </li>
