@@ -1,18 +1,18 @@
+
 <?php 
-	if($grafica = "gastosAnio"){
-		$gastosAnio = $data;
-    //dep($gastosAnio);exit;
+	if($grafica = "computadoresAnio"){
+		$computadoresAnio = $data;
  ?>
  <script>
- 	Highcharts.chart('graficaGAnio', {
+ 	Highcharts.chart('graficaAnioComputadores', {
       chart: {
           type: 'column'
       },
       title: {
-          text: 'Gastos del año <?= $gastosAnio['anio'] ?> '
+          text: 'Computadores do Ano <?= $computadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Estadísticas de Gastos por mes<br><b>Total: <?= $gastosAnio['totalGastos'] ?></b> '
+        text: 'Computadores Cadastrados<br><b>Total: <?= $computadoresAnio['totalEquipamentos'] ?></b> '
       },
       xAxis: {
           type: 'category',
@@ -37,13 +37,13 @@
           pointFormat: ''
       },
       series: [{
-          name: 'Population',
+          name: 'Fones',
           data: [
             <?php 
-              foreach ($gastosAnio['meses'] as $mes) {
-                echo "['".$mes['mes']."',".$mes['gastos']."],";
-              }
-             ?>                 
+                foreach ($computadoresAnio['meses'] as $mes) {
+                    echo "['".$mes['mes']."',".$mes['total']."],";
+                }
+            ?>                  
           ],
           dataLabels: {
               enabled: true,
@@ -53,7 +53,7 @@
               format: '{point.y:.1f}', // one decimal
               y: 10, // 10 pixels down from the top
               style: {
-                  fontSize: '13px',
+                  fontSize: '15px',
                   fontFamily: 'Verdana, sans-serif'
               }
           }

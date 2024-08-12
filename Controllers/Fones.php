@@ -19,10 +19,21 @@ class Fones extends Controllers{
 		$data['page_tag'] = "Fones";
 		$data['page_title'] = "FONES";
 		$data['page_name'] = "fones";
+		// Cantidades
 		$data['cantidadFonesD'] = $this->model->cantFones(1);
 		$data['cantidadFonesU'] = $this->model->cantFones(2);
 		$data['cantidadFonesE'] = $this->model->cantFones(3);
 		$data['cantidadFonesC'] = $this->model->cantFones(4);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['fonesMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+
+		//Anual
+		$data['fonesAnio'] = $this->model->selectFonesAnio($anio);
 		$data['page_functions_js'] = "functions_fones.js";
 		$this->views->getView($this,"fones",$data);
 	}
@@ -361,5 +372,36 @@ class Fones extends Controllers{
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function FonesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "FonesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+			$script = getFile("Template/Modals/graficaFonesMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function fonesAnio(){
+		if($_POST){
+			$grafica = "fonesAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectFonesAnio($anio);
+			$script = getFile("Template/Modals/graficaAnoFones",$fones);
+			echo $script;
+			die();
+		}
 	}
 }

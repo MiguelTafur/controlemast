@@ -23,6 +23,17 @@ class Computadores extends Controllers{
 		$data['cantidadComputadoresU'] = $this->model->cantComputadores(2);
 		$data['cantidadComputadoresE'] = $this->model->cantComputadores(3);
 		$data['cantidadComputadoresC'] = $this->model->cantComputadores(4);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['computadoresMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
+
+		//Anual
+		$data['computadoresAnio'] = $this->model->selectEquipamentosAnio($anio, MCOMPUTADOR);
+
 		$data['page_functions_js'] = "functions_computadores.js";
 		$this->views->getView($this,"computadores",$data);
 	}
@@ -361,5 +372,36 @@ class Computadores extends Controllers{
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function ComputadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "ComputadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$computadores = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaComputadoresMes", $computadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function computadoresAnio(){
+		if($_POST){
+			$grafica = "computadoresAnio";
+			$anio = intval($_POST['anio']);
+			$computadores = $this->model->selectEquipamentosAnio($anio, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaAnoComputadores",$computadores);
+			echo $script;
+			die();
+		}
 	}
 }

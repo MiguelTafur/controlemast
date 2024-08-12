@@ -1,17 +1,18 @@
+
 <?php 
-	if($grafica = "cobradoAnio"){
-		$cobradoAnio = $data;
+	if($grafica = "fonesAnio"){
+		$fonesAnio = $data;
  ?>
  <script>
- 	Highcharts.chart('graficaCAnio', {
+ 	Highcharts.chart('graficaAnioFones', {
       chart: {
           type: 'column'
       },
       title: {
-          text: 'Cobrado del año <?= $cobradoAnio['anio'] ?> '
+          text: 'Fones do Ano <?= $fonesAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Estadísticas de Gastos por mes<br><b>Total: <?= $cobradoAnio['totalCobrado'] ?></b> '
+        text: 'Fones Cadastrados<br><b>Total: <?= $fonesAnio['totalFones'] ?></b> '
       },
       xAxis: {
           type: 'category',
@@ -36,13 +37,13 @@
           pointFormat: ''
       },
       series: [{
-          name: 'Population',
+          name: 'Fones',
           data: [
             <?php 
-              foreach ($cobradoAnio['meses'] as $mes) {
-                echo "['".$mes['mes']."',".$mes['cobrado']."],";
-              }
-             ?>                 
+                foreach ($fonesAnio['meses'] as $mes) {
+                    echo "['".$mes['mes']."',".$mes['total']."],";
+                }
+            ?>                  
           ],
           dataLabels: {
               enabled: true,
@@ -52,7 +53,7 @@
               format: '{point.y:.1f}', // one decimal
               y: 10, // 10 pixels down from the top
               style: {
-                  fontSize: '13px',
+                  fontSize: '15px',
                   fontFamily: 'Verdana, sans-serif'
               }
           }
