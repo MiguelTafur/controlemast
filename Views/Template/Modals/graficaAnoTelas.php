@@ -1,18 +1,18 @@
 
 <?php 
-	if($grafica = "computadoresAnio"){
-		$computadoresAnio = $data;
+	if($grafica = "telasAnio"){
+		$telasAnio = $data;
  ?>
  <script>
- 	Highcharts.chart('graficaAnioComputadores', {
+ 	Highcharts.chart('graficaAnioTelas', {
       chart: {
           type: 'column'
       },
       title: {
-          text: 'Computadores do Ano <?= $computadoresAnio['anio'] ?> '
+          text: 'Monitores do Ano <?= $telasAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Computadores Cadastrados<br><b>Total: <?= $computadoresAnio['totalEquipamentos'] ?></b> '
+        text: 'Monitores Cadastrados<br><b>Total: <?= $telasAnio['totalEquipamentos'] ?></b> '
       },
       xAxis: {
           type: 'category',
@@ -37,10 +37,10 @@
           pointFormat: ''
       },
       series: [{
-          name: 'Fones',
+          name: 'Monitores',
           data: [
             <?php 
-                foreach ($computadoresAnio['meses'] as $mes) {
+                foreach ($telasAnio['meses'] as $mes) {
                     echo "['".$mes['mes']."',".$mes['total']."],";
                 }
             ?>                  

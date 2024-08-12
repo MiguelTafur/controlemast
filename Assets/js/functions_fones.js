@@ -454,7 +454,7 @@ function fntSearchFonesMes()
     }
     divLoading.style.display = "flex";
     let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let  ajaxUrl = base_url+'/Fones/FonesMes';
+    let  ajaxUrl = base_url+'/Fones/fonesMes';
     let  formData = new FormData();
     formData.append('fecha', fecha);
     request.open("POST",ajaxUrl,true);
