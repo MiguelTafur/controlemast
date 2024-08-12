@@ -19,7 +19,20 @@ class Aprendizes extends Controllers{
 		$data['page_tag'] = "Aprendiz";
 		$data['page_title'] = "APRENDIZ";
 		$data['page_name'] = "aprendiz";
+
+		//Cantidad 
 		$data['cantidadAprendizes'] = $this->model->cantAprendizes();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['aprendizesMDia'] = $this->model->selectUsuariosMes($anio,$mes,RAPRENDIZ);
+
+		//Anual
+		$data['aprendizesAnio'] = $this->model->selectUsuariosAnio($anio, RAPRENDIZ);
+
 		$data['page_functions_js'] = "functions_aprendiz.js";
 		$this->views->getView($this,"aprendizes",$data);
 	}
@@ -154,5 +167,36 @@ class Aprendizes extends Controllers{
 			}
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function aprendizesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "aprendizesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$aprendizes = $this->model->selectUsuariosMes($anio,$mes,RAPRENDIZ);
+			$script = getFile("Template/Modals/graficaAprendizesMes", $aprendizes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function aprendizesAnio(){
+		if($_POST){
+			$grafica = "aprendizesAnio";
+			$anio = intval($_POST['anio']);
+			$aprendizes = $this->model->selectUsuariosAnio($anio, RAPRENDIZ);
+			$script = getFile("Template/Modals/graficaAnoAprendizes",$aprendizes);
+			echo $script;
+			die();
+		}
 	}
 }
