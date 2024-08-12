@@ -105,6 +105,7 @@
         </div>
     </div>
   </div> <!-- .container-fluid -->
+  
 </main>
 <?php footerAdmin($data); ?>
 
