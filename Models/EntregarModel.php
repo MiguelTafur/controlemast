@@ -11,15 +11,17 @@ class EntregarModel extends Mysql
 	PRIVATE $strObservacion;
 	PRIVATE $intIdEquipamento;
 	PRIVATE $intIdRuta;
+    PRIVATE $intTipo;
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-    public function selectEntregues()
+    public function selectEntregues(int $tipo)
 	{
 		$ruta = $_SESSION['idRuta'];
+        $this->intTipo = $tipo;
 		$sql = "SELECT co.idcontrole,
                        co.personaid,
                        co.equipamentoid,
@@ -37,7 +39,7 @@ class EntregarModel extends Mysql
                 ON co.personaid = pe.idpersona
                 LEFT OUTER JOIN equipamento eq
                 ON co.equipamentoid = eq.idequipamento
-                WHERE co.status = 1 
+                WHERE co.status = 1 AND eq.tipo = $this->intTipo 
                 AND pe.codigoruta = $ruta";
 		$request = $this->select_all($sql);
 		return $request;

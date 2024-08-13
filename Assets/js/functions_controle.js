@@ -1,4 +1,6 @@
 let tableEntregue;
+let tableEntregueComputadores;
+let tableEntregueTelas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -8,11 +10,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function iniciarApp() {
     fntTablaControles();
+    fntTablaControlesComputadores();
+    fntTablaControlesTelas();
     fntCrearControleEntrega();
     fntActualizarProtocolo();
 }
 
-// Tabela dos controles
+// Tabela dos controles de los fones
 function fntTablaControles() {
     tableEntregue = $('#tableEntregue').dataTable({
         "aProcessing":true,
@@ -22,6 +26,58 @@ function fntTablaControles() {
         },
         "ajax":{
             "url": " "+base_url+"/Entregar/getEntregues",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20
+    });
+}
+
+// Tabela dos controles de los fones
+function fntTablaControlesComputadores() {
+    tableEntregueComputadores = $('#tableEntregueComputadores').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Entregar/getEntreguesComputadores",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20
+    });
+}
+
+// Tabela dos controles de los fones
+function fntTablaControlesTelas() {
+    tableEntregueTelas = $('#tableEntregueTelas').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Entregar/getEntreguesTelas",
             "dataSrc":""
         },
         "columns":[

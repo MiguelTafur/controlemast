@@ -27,10 +27,11 @@ class Entregar extends Controllers{
 		$this->views->getView($this,"entregar",$data);
 	}
 
+	//Datos de los fones
     public function getEntregues()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectEntregues();
+			$arrData = $this->model->selectEntregues(MFONE);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -40,17 +41,89 @@ class Entregar extends Controllers{
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
-				if($arrData[$i]['equipamento'] === 8) {
-					$tipo = 'Fone';
-				} else if ($arrData[$i]['equipamento'] === 9) {
-					$tipo = 'Mouse';
-				} else if ($arrData[$i]['equipamento'] === 10) {
-					$tipo = 'Teclado';
-				} else if ($arrData[$i]['equipamento'] === 11) {
-					$tipo = 'Tela';
-				} else if ($arrData[$i]['equipamento'] === 16) {
-					$tipo = 'PC';
+				$tipo = 'Fone';
+
+				$arrData[$i]['fechaRegistro'] = date("d-m-Y", strtotime($arrData[$i]['fechaRegistro']));
+
+				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
+
+				$arrData[$i]['equipamento'] = '<h6 class="m-0">'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+
+				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+
+				if($_SESSION['permisosMod']['r']){
+					$btnView = '<button class="btn btn-secondary btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
 				}
+				if($_SESSION['permisosMod']['u']){
+					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditProtocolo('.$arrData[$i]['idcontrole'].')" title="Alterar Protocolo"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>';
+				}
+				/*if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
+				}*/
+
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.'</div>';
+			}
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	//Datos de los computadores
+    public function getEntreguesComputadores()
+	{
+		if($_SESSION['permisosMod']['r']){
+			$arrData = $this->model->selectEntregues(MCOMPUTADOR);
+			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				$btnEdit = '';
+				//$btnDelete = '';
+				$tipo = '';
+
+				$ultimo = explode(" ", $arrData[$i]['apellidos']);
+				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				$tipo = 'PC';
+
+				$arrData[$i]['fechaRegistro'] = date("d-m-Y", strtotime($arrData[$i]['fechaRegistro']));
+
+				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
+
+				$arrData[$i]['equipamento'] = '<h6 class="m-0">'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+
+				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+
+				if($_SESSION['permisosMod']['r']){
+					$btnView = '<button class="btn btn-secondary btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
+				}
+				if($_SESSION['permisosMod']['u']){
+					$btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditProtocolo('.$arrData[$i]['idcontrole'].')" title="Alterar Protocolo"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>';
+				}
+				/*if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
+				}*/
+
+				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.'</div>';
+			}
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	//Datos de los computadores
+    public function getEntreguesTelas()
+	{
+		if($_SESSION['permisosMod']['r']){
+			$arrData = $this->model->selectEntregues(MTELA);
+			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				$btnEdit = '';
+				//$btnDelete = '';
+				$tipo = '';
+
+				$ultimo = explode(" ", $arrData[$i]['apellidos']);
+				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				$tipo = 'TELA';
 
 				$arrData[$i]['fechaRegistro'] = date("d-m-Y", strtotime($arrData[$i]['fechaRegistro']));
 
