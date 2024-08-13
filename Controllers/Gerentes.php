@@ -19,7 +19,20 @@ class Gerentes extends Controllers{
 		$data['page_tag'] = "Gerentes";
 		$data['page_title'] = "GERENTES";
 		$data['page_name'] = "gerentes";
+
+		//Cantidades
 		$data['cantidadGerentes'] = $this->model->cantGerentes();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['gerentesMDia'] = $this->model->selectUsuariosMes($anio,$mes,RGERENTE);
+
+		//Anual
+		$data['gerentesAnio'] = $this->model->selectUsuariosAnio($anio, RGERENTE);
+
 		$data['page_functions_js'] = "functions_gerentes.js";
 		$this->views->getView($this,"gerentes",$data);
 	}
@@ -164,6 +177,37 @@ class Gerentes extends Controllers{
 			}
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function gerentesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "gerentesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$gerentes = $this->model->selectUsuariosMes($anio,$mes,RGERENTE);
+			$script = getFile("Template/Modals/graficaGerentesMes", $gerentes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function gerentesAnio(){
+		if($_POST){
+			$grafica = "gerentesAnio";
+			$anio = intval($_POST['anio']);
+			$gerentes = $this->model->selectUsuariosAnio($anio, RGERENTE);
+			$script = getFile("Template/Modals/graficaAnoGerentes",$gerentes);
+			echo $script;
+			die();
+		}
 	}
 	
 }
