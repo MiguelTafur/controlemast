@@ -19,7 +19,19 @@ class Coordinadores extends Controllers{
 		$data['page_tag'] = "Coordenadores";
 		$data['page_title'] = "COORDENADORES";
 		$data['page_name'] = "coordenadores";
+
 		$data['cantidadCoordenadores'] = $this->model->cantCoordenadores();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['coordenadoresMDia'] = $this->model->selectUsuariosMes($anio,$mes,RCOORDINADOR);
+
+		//Anual
+		$data['coordenadoresAnio'] = $this->model->selectUsuariosAnio($anio, RCOORDINADOR);
+
 		$data['page_functions_js'] = "functions_coordinadores.js";
 		$this->views->getView($this,"coordinadores",$data);
 	}
@@ -164,5 +176,36 @@ class Coordinadores extends Controllers{
 			}
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function coordenadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "coordenadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$coordenadores = $this->model->selectUsuariosMes($anio,$mes,RCOORDINADOR);
+			$script = getFile("Template/Modals/graficaCoordenadoresMes", $coordenadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function coordenadoresAnio(){
+		if($_POST){
+			$grafica = "coordenadoresAnio";
+			$anio = intval($_POST['anio']);
+			$coordenadores = $this->model->selectUsuariosAnio($anio, RCOORDINADOR);
+			$script = getFile("Template/Modals/graficaAnoCoordenadores",$coordenadores);
+			echo $script;
+			die();
+		}
 	}
 }
