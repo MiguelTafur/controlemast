@@ -1,6 +1,24 @@
 let tableSupervisores;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
+
+$('.date-picker').datepicker( {
+    closeText: 'Fechar',
+    prevText: '<Ant',
+    nextText: 'Seg>',
+    currentText: 'Hoje',
+    monthNames: ['1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -', '11 -', '12 -'],
+    monthNamesShort: ['Janeiro','Fevereiro','Março','Abril', 'Maio','Junho','Julho','Agosto','Setembro', 'Outubro','Novembro','Dezembro'],
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'MM yy',
+    showDays: false,
+    onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
@@ -246,4 +264,61 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Novo Supervisor";
     document.querySelector("#formSupervisor").reset();
     $('#modalFormSupervisor').modal('show');
+}
+
+/*** GRÁFICAS ***/
+
+//Buscador gráfica mensual
+function fntSearchSupervisoresMes()
+{
+    let fecha = document.querySelector(".supervisoresMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Supervisores/supervisoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesSupervisores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchSupervisoresAnio(){
+    let anio = document.querySelector(".supervisoresAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Supervisores/supervisoresAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioSupervisores").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
 }
