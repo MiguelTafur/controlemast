@@ -240,7 +240,13 @@ class Mouses extends Controllers{
 											 'cantMouseC' => $this->model->cantMouses(4),
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantMouseD' => $this->model->cantMouses(1),
+											 'cantMouseU' => $this->model->cantMouses(2),
+											 'cantMouseE' => $this->model->cantMouses(3),
+											 'cantMouseC' => $this->model->cantMouses(4),
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');

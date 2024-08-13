@@ -241,7 +241,13 @@ class Computadores extends Controllers{
 											 'cantComputadorC' => $this->model->cantComputadores(4),
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantComputadorD' => $this->model->cantComputadores(1),
+											 'cantComputadorU' => $this->model->cantComputadores(2),
+											 'cantComputadorE' => $this->model->cantComputadores(3),
+											 'cantComputadorC' => $this->model->cantComputadores(4),
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');

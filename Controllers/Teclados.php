@@ -239,7 +239,13 @@ class Teclados extends Controllers{
 											 'cantTecladoC' => $this->model->cantTeclados(4),
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantTecladoD' => $this->model->cantTeclados(1),
+											 'cantTecladoU' => $this->model->cantTeclados(2),
+											 'cantTecladoE' => $this->model->cantTeclados(3),
+											 'cantTecladoC' => $this->model->cantTeclados(4),
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');

@@ -239,7 +239,13 @@ class Telas extends Controllers{
 											 'cantTelaC' => $this->model->cantTelas(4),
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantTelaD' => $this->model->cantTelas(1),
+											 'cantTelaU' => $this->model->cantTelas(2),
+											 'cantTelaE' => $this->model->cantTelas(3),
+											 'cantTelaC' => $this->model->cantTelas(4),
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! O equipamento já existe, verifique novamente.');
