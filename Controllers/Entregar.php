@@ -20,9 +20,36 @@ class Entregar extends Controllers{
 		$data['page_title'] = "EQUIPAMENTOS ENTREGUES";
 		$data['page_title2'] = "ENTREGUES";
 		$data['page_name'] = "Entregar";
+
+		//Cantidades
 		$data['cantidadEntregas'] = $this->model->cantEntregues();
 		$data['cantidadEntregasHoy'] = $this->model->cantEntregues(NOWDATE);
-		//dep($data['cantidadEntregasHoy']);exit;
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		/* MENSAL */
+		//fone
+		$data['entregarFonesMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MFONE);
+
+		//pc
+		$data['entregarComputadoresMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR);
+
+		//tela
+		$data['entregarTelasMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MTELA);
+
+		/* ANUAL */
+		//fone
+		$data['entregarFonesAnio'] = $this->model->selectControleEquipamentosAnio($anio, MFONE);
+
+		//pc
+		$data['entregarComputadoresAnio'] = $this->model->selectControleEquipamentosAnio($anio, MCOMPUTADOR);
+
+		//tela
+		$data['entregarTelasAnio'] = $this->model->selectControleEquipamentosAnio($anio, MTELA);
+
+
 		$data['page_functions_js'] = "functions_controle.js";
 		$this->views->getView($this,"entregar",$data);
 	}
@@ -366,5 +393,99 @@ class Entregar extends Controllers{
 			}
 		}
 		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	/** FONES **/
+	//Mostrar gráfica mensual
+	public function entregarFonesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "entregarFonesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectControleEquipamentosMes($anio,$mes, MFONE);
+			$script = getFile("Template/Modals/graficaEntregarFonesMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function entregarFonesAnio(){
+		if($_POST){
+			$grafica = "entregarFonesAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectControleEquipamentosAnio($anio, MFONE);
+			$script = getFile("Template/Modals/graficaEntregarFonesAnio",$fones);
+			echo $script;
+			die();
+		}
+	}
+
+	/** PCS **/
+	//Mostrar gráfica mensual
+	public function entregarComputadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "entregarComputadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$pcs = $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaEntregarComputadoresMes", $pcs);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function entregarComputadoresAnio(){
+		if($_POST)
+		{
+			$grafica = "entregarComputadoresAnio";
+			$anio = intval($_POST['anio']);
+			$pcs = $this->model->selectControleEquipamentosAnio($anio, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaEntregarComputadoresAnio",$pcs);
+			echo $script;
+			die();
+		}
+	}
+
+	/** TELAS **/
+	//Mostrar gráfica mensual
+	public function entregarTelasMes()
+	{
+		if($_POST)
+		{
+			$grafica = "entregarTelasMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$telas = $this->model->selectControleEquipamentosMes($anio,$mes, MTELA);
+			$script = getFile("Template/Modals/graficaEntregarTelasMes", $telas);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function entregarTelasAnio(){
+		if($_POST)
+		{
+			$grafica = "entregarTelasAnio";
+			$anio = intval($_POST['anio']);
+			$telas = $this->model->selectControleEquipamentosAnio($anio, MTELA);
+			$script = getFile("Template/Modals/graficaEntregarTelasAnio",$telas);
+			echo $script;
+			die();
+		}
 	}
 }

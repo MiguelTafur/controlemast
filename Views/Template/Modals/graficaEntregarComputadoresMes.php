@@ -1,20 +1,20 @@
-<?php if($grafica = "entregasMes"){ $entregasMes = $data;?>
+<?php if($grafica = "entregarComputadoresMes"){ $entregarComputadoresMes = $data;?>
 
 <script>
-    Highcharts.chart('graficaMesEntregas', {
+    Highcharts.chart('graficaMesEntregarComputadores', {
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Entregas de <?= $entregasMes['mes'].' de '.$entregasMes['anio']; ?>'
+            text: 'Computadores Entregues de <?= $entregarComputadoresMes['mes'].' de '.$entregarComputadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $entregasMes['total']; ?>'
+            text: 'Total: <?= $entregarComputadoresMes['total']; ?>'
         },
         xAxis: {
             categories: [
                 <?php 
-                foreach ($entregasMes['controles'] as $dia) {
+                foreach ($entregarComputadoresMes['controles'] as $dia) {
                     echo $dia['dia'].",";
                 }
                 ?>
@@ -37,7 +37,7 @@
             name: '',
             data: [
                 <?php 
-                foreach ($entregasMes['controles'] as $dia) {
+                foreach ($entregarComputadoresMes['controles'] as $dia) {
                     echo $dia['controle'].",";
                 }
                 ?>
