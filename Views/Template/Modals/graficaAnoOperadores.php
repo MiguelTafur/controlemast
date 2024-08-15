@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Operadores do Ano <?= $operadoresAnio['anio'] ?> '
+          text: 'Operadores cadastrados de<?= $operadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Operadores Cadastrados<br><b>Total: <?= $operadoresAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $operadoresAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

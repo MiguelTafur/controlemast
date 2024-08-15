@@ -117,10 +117,10 @@
         type: 'line'
     },
     title: {
-        text: 'Aprendizes Cadastrados <?= $data['aprendizesMDia']['mes'].' de '.$data['aprendizesMDia']['anio']; ?>'
+        text: 'Aprendizes cadastrados de <?= $data['aprendizesMDia']['mes'].' de '.$data['aprendizesMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['aprendizesMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['aprendizesMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -165,10 +165,10 @@
         type: 'column'
     },
     title: {
-        text: 'Aprendizes do Ano <?= $data['aprendizesAnio']['anio'] ?>'
+        text: 'Aprendizes de <?= $data['aprendizesAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Aprendizes Cadastrados<br><b>Total: <?= $data['aprendizesAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['aprendizesAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Monitores do Ano <?= $telasAnio['anio'] ?> '
+          text: 'Monitores cadastrados de <?= $telasAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Monitores Cadastrados<br><b>Total: <?= $telasAnio['totalEquipamentos'] ?></b> '
+        text: '<b>Total: <?= $telasAnio['totalEquipamentos'] ?></b> '
       },
       xAxis: {
           type: 'category',

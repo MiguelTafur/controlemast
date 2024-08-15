@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Monitores Entregues de <?= $entregarTelasAnio['anio'] ?> '
+          text: 'Monitores entregues de <?= $entregarTelasAnio['anio'] ?> '
       },
       subtitle: {
-        text: '<br><b>Total: <?= $entregarTelasAnio['totalControle'] ?></b> '
+        text: '<b>Total: <?= $entregarTelasAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',

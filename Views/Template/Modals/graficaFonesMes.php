@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Fones Cadastrados <?= $FonesMes['mes'].' de '.$FonesMes['anio']; ?>'
+            text: 'Fones cadastrados de <?= $FonesMes['mes'].' de '.$FonesMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $FonesMes['total']; ?>'
+            text: '<b>Total: <?= $FonesMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

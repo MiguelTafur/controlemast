@@ -115,10 +115,10 @@
         type: 'line'
     },
     title: {
-        text: 'Lideres Cadastrados <?= $data['lideresMDia']['mes'].' de '.$data['lideresMDia']['anio']; ?>'
+        text: 'Líderes cadastrados de <?= $data['lideresMDia']['mes'].' de '.$data['lideresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['lideresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['lideresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -163,10 +163,10 @@
         type: 'column'
     },
     title: {
-        text: 'Lideres do Ano <?= $data['lideresAnio']['anio'] ?>'
+        text: 'Líderes de <?= $data['lideresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Lideres Cadastrados<br><b>Total: <?= $data['lideresAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['lideresAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

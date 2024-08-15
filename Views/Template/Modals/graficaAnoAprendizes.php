@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Aprendizes de<?= $aprendizesAnio['anio'] ?> '
+          text: 'Aprendizes cadastrados de <?= $aprendizesAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Aprendizes Cadastrados<br><b>Total: <?= $aprendizesAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $aprendizesAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

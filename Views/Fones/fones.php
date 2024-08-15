@@ -136,10 +136,10 @@
         type: 'line'
     },
     title: {
-        text: 'Fones Cadastrados <?= $data['fonesMDia']['mes'].' de '.$data['fonesMDia']['anio']; ?>'
+        text: 'Fones cadastrados de <?= $data['fonesMDia']['mes'].' de '.$data['fonesMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['fonesMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['fonesMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -184,10 +184,10 @@
         type: 'column'
     },
     title: {
-        text: 'Fones do Ano <?= $data['fonesAnio']['anio'] ?>'
+        text: 'Fones cadastrados de <?= $data['fonesAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Fones Cadastrados<br><b>Total: <?= $data['fonesAnio']['totalFones'] ?></b> '
+        text: '<b>Total: <?= $data['fonesAnio']['totalFones'] ?></b> '
     },
     xAxis: {
         type: 'category',

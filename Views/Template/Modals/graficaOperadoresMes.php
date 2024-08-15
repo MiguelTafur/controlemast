@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Operadores Cadastrados <?= $operadoresMes['mes'].' de '.$operadoresMes['anio']; ?>'
+            text: 'Operadores cadastrados de <?= $operadoresMes['mes'].' de '.$operadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $operadoresMes['total']; ?>'
+            text: '<b>Total: <?= $operadoresMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

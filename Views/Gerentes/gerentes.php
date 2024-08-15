@@ -115,10 +115,10 @@
         type: 'line'
     },
     title: {
-        text: 'Gerentes Cadastrados <?= $data['gerentesMDia']['mes'].' de '.$data['gerentesMDia']['anio']; ?>'
+        text: 'Gerentes cadastrados de <?= $data['gerentesMDia']['mes'].' de '.$data['gerentesMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['gerentesMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['gerentesMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -163,10 +163,10 @@
         type: 'column'
     },
     title: {
-        text: 'Gerentes do Ano <?= $data['gerentesAnio']['anio'] ?>'
+        text: 'Gerentes de <?= $data['gerentesAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Gerentes Cadastrados<br><b>Total: <?= $data['gerentesAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['gerentesAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

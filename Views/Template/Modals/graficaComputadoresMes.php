@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Computadores Cadastrados <?= $ComputadoresMes['mes'].' de '.$ComputadoresMes['anio']; ?>'
+            text: 'Computadores cadastrados de <?= $ComputadoresMes['mes'].' de '.$ComputadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $ComputadoresMes['total']; ?>'
+            text: '<b>Total: <?= $ComputadoresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

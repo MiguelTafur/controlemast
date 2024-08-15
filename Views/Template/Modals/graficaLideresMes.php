@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Líderes Cadastrados <?= $lideresMes['mes'].' de '.$lideresMes['anio']; ?>'
+            text: 'Líderes cadastrados de <?= $lideresMes['mes'].' de '.$lideresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $lideresMes['total']; ?>'
+            text: '<b>Total: <?= $lideresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

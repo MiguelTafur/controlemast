@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Gestores Cadastrados <?= $gestoresMes['mes'].' de '.$gestoresMes['anio']; ?>'
+            text: 'Gestores cadastrados de <?= $gestoresMes['mes'].' de '.$gestoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $gestoresMes['total']; ?>'
+            text: '<b>Total: <?= $gestoresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

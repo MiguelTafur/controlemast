@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Coordenadores Cadastrados <?= $coordenadoresMes['mes'].' de '.$coordenadoresMes['anio']; ?>'
+            text: 'Coordenadores cadastrados de <?= $coordenadoresMes['mes'].' de '.$coordenadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $coordenadoresMes['total']; ?>'
+            text: '<b>Total: <?= $coordenadoresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

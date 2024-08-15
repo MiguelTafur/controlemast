@@ -115,10 +115,10 @@
         type: 'line'
     },
     title: {
-        text: 'Supervisores Cadastrados <?= $data['supervisoresMDia']['mes'].' de '.$data['supervisoresMDia']['anio']; ?>'
+        text: 'Supervisores cadastrados de <?= $data['supervisoresMDia']['mes'].' de '.$data['supervisoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['supervisoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['supervisoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -163,10 +163,10 @@
         type: 'column'
     },
     title: {
-        text: 'Supervisores do Ano <?= $data['supervisoresAnio']['anio'] ?>'
+        text: 'Supervisores de <?= $data['supervisoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Supervisores Cadastrados<br><b>Total: <?= $data['supervisoresAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['supervisoresAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

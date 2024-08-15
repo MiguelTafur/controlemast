@@ -117,10 +117,10 @@
         type: 'line'
     },
     title: {
-        text: 'Gestores Cadastrados <?= $data['gestoresMDia']['mes'].' de '.$data['gestoresMDia']['anio']; ?>'
+        text: 'Gestores cadastrados de <?= $data['gestoresMDia']['mes'].' de '.$data['gestoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['gestoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['gestoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -165,10 +165,10 @@
         type: 'column'
     },
     title: {
-        text: 'Gestores do Ano <?= $data['gestoresAnio']['anio'] ?>'
+        text: 'Gestores de <?= $data['gestoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Gestores Cadastrados<br><b>Total: <?= $data['gestoresAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['gestoresAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

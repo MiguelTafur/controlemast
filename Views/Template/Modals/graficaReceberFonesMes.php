@@ -9,7 +9,7 @@
             text: 'Fones recebidos de <?= $receberFonesMes['mes'].' de '.$receberFonesMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $receberFonesMes['total']; ?>'
+            text: '<b>Total: <?= $receberFonesMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

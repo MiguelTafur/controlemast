@@ -259,7 +259,7 @@
         text: 'Fones recebidos de <?= $data['receberFonesMDia']['mes'].' de '.$data['receberFonesMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['receberFonesMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['receberFonesMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -307,7 +307,7 @@
         text: 'Fones recebidos de <?= $data['receberFonesAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['receberFonesAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['receberFonesAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',
@@ -365,7 +365,7 @@
         text: 'Computadores recebidos de <?= $data['receberComputadoresMDia']['mes'].' de '.$data['receberComputadoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['receberComputadoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['receberComputadoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -413,7 +413,7 @@
         text: 'Computadores recebidos de <?= $data['receberComputadoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['receberComputadoresAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['receberComputadoresAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',
@@ -471,7 +471,7 @@
         text: 'Monitores recebidos de <?= $data['receberTelasMDia']['mes'].' de '.$data['receberTelasMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['receberTelasMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['receberTelasMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -519,7 +519,7 @@
         text: 'Monitores recebidos de <?= $data['receberTelasAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['receberTelasAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['receberTelasAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',

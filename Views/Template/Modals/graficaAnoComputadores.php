@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Computadores do Ano <?= $computadoresAnio['anio'] ?> '
+          text: 'Computadores cadastrados de <?= $computadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Computadores Cadastrados<br><b>Total: <?= $computadoresAnio['totalEquipamentos'] ?></b> '
+        text: '<b>Total: <?= $computadoresAnio['totalEquipamentos'] ?></b> '
       },
       xAxis: {
           type: 'category',

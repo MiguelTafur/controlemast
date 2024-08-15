@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Monitores Cadastrados <?= $MonitoresMes['mes'].' de '.$MonitoresMes['anio']; ?>'
+            text: 'Monitores cadastrados de <?= $MonitoresMes['mes'].' de '.$MonitoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $MonitoresMes['total']; ?>'
+            text: '<b>Total: <?= $MonitoresMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

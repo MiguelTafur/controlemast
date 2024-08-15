@@ -115,10 +115,10 @@
         type: 'line'
     },
     title: {
-        text: 'Coordenadores Cadastrados <?= $data['coordenadoresMDia']['mes'].' de '.$data['coordenadoresMDia']['anio']; ?>'
+        text: 'Coordenadores cadastrados de <?= $data['coordenadoresMDia']['mes'].' de '.$data['coordenadoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['coordenadoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['coordenadoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -163,10 +163,10 @@
         type: 'column'
     },
     title: {
-        text: 'Coordenadores do Ano <?= $data['coordenadoresAnio']['anio'] ?>'
+        text: 'Coordenadores de <?= $data['coordenadoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Coordenadores Cadastrados<br><b>Total: <?= $data['coordenadoresAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['coordenadoresAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

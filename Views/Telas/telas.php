@@ -133,10 +133,10 @@
         type: 'line'
     },
     title: {
-        text: 'Telas Cadastradas <?= $data['telasMDia']['mes'].' de '.$data['telasMDia']['anio']; ?>'
+        text: 'Monitores cadastrados de <?= $data['telasMDia']['mes'].' de '.$data['telasMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['telasMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['telasMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -181,10 +181,10 @@
         type: 'column'
     },
     title: {
-        text: 'Telas do Ano <?= $data['telasAnio']['anio'] ?>'
+        text: 'Monitores cadastrados de <?= $data['telasAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Telas Cadastrados<br><b>Total: <?= $data['telasAnio']['totalEquipamentos'] ?></b> '
+        text: '<b>Total: <?= $data['telasAnio']['totalEquipamentos'] ?></b> '
     },
     xAxis: {
         type: 'category',

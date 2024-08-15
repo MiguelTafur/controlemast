@@ -261,7 +261,7 @@
         text: 'Fones entregues de <?= $data['entregarFonesMDia']['mes'].' de '.$data['entregarFonesMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['entregarFonesMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['entregarFonesMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -309,7 +309,7 @@
         text: 'Fones entregues de <?= $data['entregarFonesAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['entregarFonesAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['entregarFonesAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',
@@ -367,7 +367,7 @@
         text: 'Computadores entregues de <?= $data['entregarComputadoresMDia']['mes'].' de '.$data['entregarComputadoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['entregarComputadoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['entregarComputadoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -415,7 +415,7 @@
         text: 'Computadores entregues de <?= $data['entregarComputadoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['entregarComputadoresAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['entregarComputadoresAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',
@@ -473,7 +473,7 @@
         text: 'Monitores entregues de <?= $data['entregarTelasMDia']['mes'].' de '.$data['entregarTelasMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['entregarTelasMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['entregarTelasMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -521,7 +521,7 @@
         text: 'Monitores entregues de <?= $data['entregarTelasAnio']['anio'] ?>'
     },
     subtitle: {
-        text: '<br><b>Total: <?= $data['entregarTelasAnio']['totalControle'] ?></b>'
+        text: '<b>Total: <?= $data['entregarTelasAnio']['totalControle'] ?></b>'
     },
     xAxis: {
         type: 'category',

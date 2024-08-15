@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Gerentes do Ano <?= $gerentesAnio['anio'] ?> '
+          text: 'Gerentes cadastrados de <?= $gerentesAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Gerentes Cadastrados<br><b>Total: <?= $gerentesAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $gerentesAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

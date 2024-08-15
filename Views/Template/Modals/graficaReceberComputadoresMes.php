@@ -9,7 +9,7 @@
             text: 'Computadores recebidos de <?= $receberComputadoresMes['mes'].' de '.$receberComputadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $receberComputadoresMes['total']; ?>'
+            text: '<b>Total: <?= $receberComputadoresMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

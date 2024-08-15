@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Supervisores do Ano <?= $supervisoresAnio['anio'] ?> '
+          text: 'Supervisores cadastrados de <?= $supervisoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Supervisores Cadastrados<br><b>Total: <?= $supervisoresAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $supervisoresAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

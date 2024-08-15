@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Computadores de <?= $receberComputadoresAnio['anio'] ?> '
+          text: 'Computadores recebidos de <?= $receberComputadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Recebidos<br><b>Total: <?= $receberComputadoresAnio['totalControle'] ?></b> '
+        text: '<b>Total: <?= $receberComputadoresAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',

@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Supervisores Cadastrados <?= $supervisoresMes['mes'].' de '.$supervisoresMes['anio']; ?>'
+            text: 'Supervisores cadastrados de <?= $supervisoresMes['mes'].' de '.$supervisoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $supervisoresMes['total']; ?>'
+            text: '<b>Total: <?= $supervisoresMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

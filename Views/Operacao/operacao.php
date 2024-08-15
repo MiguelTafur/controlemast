@@ -121,10 +121,10 @@
         type: 'line'
     },
     title: {
-        text: 'Operadores Cadastrados <?= $data['operadoresMDia']['mes'].' de '.$data['operadoresMDia']['anio']; ?>'
+        text: 'Operadores cadastrados de <?= $data['operadoresMDia']['mes'].' de '.$data['operadoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['operadoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['operadoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -169,10 +169,10 @@
         type: 'column'
     },
     title: {
-        text: 'Operadores do Ano <?= $data['operadoresAnio']['anio'] ?>'
+        text: 'Operadores de <?= $data['operadoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Operadores Cadastrados<br><b>Total: <?= $data['operadoresAnio']['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $data['operadoresAnio']['totalUsuarios'] ?></b> '
     },
     xAxis: {
         type: 'category',

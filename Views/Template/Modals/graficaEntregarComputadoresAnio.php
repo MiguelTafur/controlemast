@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Computadores <?= $entregarComputadoresAnio['anio'] ?> '
+          text: 'Computadores entregues de <?= $entregarComputadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Entregues<br><b>Total: <?= $entregarComputadoresAnio['totalControle'] ?></b> '
+        text: '<b>Total: <?= $entregarComputadoresAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',

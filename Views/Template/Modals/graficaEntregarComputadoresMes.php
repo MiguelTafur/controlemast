@@ -6,10 +6,10 @@
             type: 'line'
         },
         title: {
-            text: 'Computadores Entregues de <?= $entregarComputadoresMes['mes'].' de '.$entregarComputadoresMes['anio']; ?>'
+            text: 'Computadores entregues de <?= $entregarComputadoresMes['mes'].' de '.$entregarComputadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $entregarComputadoresMes['total']; ?>'
+            text: '<b>Total: <?= $entregarComputadoresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

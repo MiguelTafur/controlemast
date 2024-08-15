@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Líderes do Ano <?= $LideresAnio['anio'] ?> '
+          text: 'Líderes cadastrados de <?= $LideresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Líderes Cadastrados<br><b>Total: <?= $LideresAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $LideresAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

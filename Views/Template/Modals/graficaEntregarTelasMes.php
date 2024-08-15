@@ -6,10 +6,10 @@
             type: 'line'
         },
         title: {
-            text: 'Telas Entregues de <?= $entregarTelasMes['mes'].' de '.$entregarTelasMes['anio']; ?>'
+            text: 'Monitores entregues de <?= $entregarTelasMes['mes'].' de '.$entregarTelasMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $entregarTelasMes['total']; ?>'
+            text: '<b>Total: <?= $entregarTelasMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

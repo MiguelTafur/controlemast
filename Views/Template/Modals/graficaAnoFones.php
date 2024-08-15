@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Fones do Ano <?= $fonesAnio['anio'] ?> '
+          text: 'Fones cadastrados de <?= $fonesAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Fones Cadastrados<br><b>Total: <?= $fonesAnio['totalFones'] ?></b> '
+        text: '<b>Total: <?= $fonesAnio['totalFones'] ?></b> '
       },
       xAxis: {
           type: 'category',

@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Mouses Cadastrados <?= $MousesMes['mes'].' de '.$MousesMes['anio']; ?>'
+            text: 'Mouses cadastrados de <?= $MousesMes['mes'].' de '.$MousesMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $MousesMes['total']; ?>'
+            text: '<b>Total: <?= $MousesMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

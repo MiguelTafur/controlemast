@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Coordenadores do Ano <?= $coordenadoresAnio['anio'] ?> '
+          text: 'Coordenadores cadastrados de <?= $coordenadoresAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Coordenadores Cadastrados<br><b>Total: <?= $coordenadoresAnio['totalUsuarios'] ?></b> '
+        text: '<b>Total: <?= $coordenadoresAnio['totalUsuarios'] ?></b> '
       },
       xAxis: {
           type: 'category',

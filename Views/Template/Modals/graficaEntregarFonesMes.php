@@ -6,10 +6,10 @@
             type: 'line'
         },
         title: {
-            text: 'Fones Entregues de <?= $entregarFonesMes['mes'].' de '.$entregarFonesMes['anio']; ?>'
+            text: 'Fones entregues de <?= $entregarFonesMes['mes'].' de '.$entregarFonesMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $entregarFonesMes['total']; ?>'
+            text: '<b>Total: <?= $entregarFonesMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [

@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Telas de <?= $receberTelasAnio['anio'] ?> '
+          text: 'Monitores recebidos de <?= $receberTelasAnio['anio'] ?> '
       },
       subtitle: {
-        text: '<br><b>Total: <?= $receberTelasAnio['totalControle'] ?></b> '
+        text: '<b>Total: <?= $receberTelasAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',

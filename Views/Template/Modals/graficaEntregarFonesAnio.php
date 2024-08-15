@@ -9,10 +9,10 @@
           type: 'column'
       },
       title: {
-          text: 'Fones de <?= $entregarFonesAnio['anio'] ?> '
+          text: 'Fones entregues de <?= $entregarFonesAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Entregues<br><b>Total: <?= $entregarFonesAnio['totalControle'] ?></b> '
+        text: '<b>Total: <?= $entregarFonesAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',

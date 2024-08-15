@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Teclados Cadastrados <?= $TecladosMes['mes'].' de '.$TecladosMes['anio']; ?>'
+            text: 'Teclados cadastrados de <?= $TecladosMes['mes'].' de '.$TecladosMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $TecladosMes['total']; ?>'
+            text: '<b>Total: <?= $TecladosMes['total']; ?></b>'
         },
         xAxis: {
             categories: [

@@ -133,10 +133,10 @@
         type: 'line'
     },
     title: {
-        text: 'Computadores Cadastrados <?= $data['computadoresMDia']['mes'].' de '.$data['computadoresMDia']['anio']; ?>'
+        text: 'Computadores cadastrados de <?= $data['computadoresMDia']['mes'].' de '.$data['computadoresMDia']['anio']; ?>'
     },
     subtitle: {
-        text: 'Total: <?= $data['computadoresMDia']['total']; ?>'
+        text: '<b>Total: <?= $data['computadoresMDia']['total']; ?></b>'
     },
     xAxis: {
         categories: [
@@ -181,10 +181,10 @@
         type: 'column'
     },
     title: {
-        text: 'Computadores do Ano <?= $data['computadoresAnio']['anio'] ?>'
+        text: 'Computadores cadastrados de <?= $data['computadoresAnio']['anio'] ?>'
     },
     subtitle: {
-        text: 'Computadores Cadastrados<br><b>Total: <?= $data['computadoresAnio']['totalEquipamentos'] ?></b> '
+        text: '<b>Total: <?= $data['computadoresAnio']['totalEquipamentos'] ?></b> '
     },
     xAxis: {
         type: 'category',
