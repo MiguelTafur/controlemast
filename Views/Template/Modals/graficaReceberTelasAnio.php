@@ -1,18 +1,18 @@
 
 <?php 
-	if($grafica = "entregarFonesAnio"){
-		$entregarFonesAnio = $data;
+	if($grafica = "receberTelasAnio"){
+		$receberTelasAnio = $data;
  ?>
  <script>
- 	Highcharts.chart('graficaAnioEntregarFones', {
+ 	Highcharts.chart('graficaAnioReceberTelas', {
       chart: {
           type: 'column'
       },
       title: {
-          text: 'Fones de <?= $entregarFonesAnio['anio'] ?> '
+          text: 'Telas de <?= $receberTelasAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Entregues<br><b>Total: <?= $entregarFonesAnio['totalControle'] ?></b> '
+        text: '<br><b>Total: <?= $receberTelasAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',
@@ -37,10 +37,10 @@
           pointFormat: ''
       },
       series: [{
-          name: 'Fones',
+          name: 'Telas',
           data: [
             <?php 
-                foreach ($entregarFonesAnio['meses'] as $mes) {
+                foreach ($receberTelasAnio['meses'] as $mes) {
                     echo "['".$mes['mes']."',".$mes['total']."],";
                 }
             ?>                  

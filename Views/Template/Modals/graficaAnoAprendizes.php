@@ -9,7 +9,7 @@
           type: 'column'
       },
       title: {
-          text: 'Aprendizes do Ano <?= $aprendizesAnio['anio'] ?> '
+          text: 'Aprendizes de<?= $aprendizesAnio['anio'] ?> '
       },
       subtitle: {
         text: 'Aprendizes Cadastrados<br><b>Total: <?= $aprendizesAnio['totalUsuarios'] ?></b> '

@@ -11,15 +11,18 @@ class ReceberModel extends Mysql
 	PRIVATE $strObservacion;
 	PRIVATE $intIdEquipamento;
 	PRIVATE $intIdRuta;
+	PRIVATE $intTipo;
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function selectRecebidos()
+	public function selectRecebidos(int $tipo)
 	{
 		$ruta = $_SESSION['idRuta'];
+		$this->intTipo = $tipo;
+
 		$sql = "SELECT co.idcontrole,
                        co.personaid,
                        co.equipamentoid,
@@ -38,6 +41,7 @@ class ReceberModel extends Mysql
                 ON co.equipamentoid = eq.idequipamento
                 WHERE co.status != 1 
 				AND co.status != 0
+				AND eq.tipo = $this->intTipo
                 AND pe.codigoruta = $ruta";
 		$request = $this->select_all($sql);
 		return $request;
@@ -174,4 +178,100 @@ class ReceberModel extends Mysql
         $request = $this->select($sql);
         return $request['total'];
     }
+
+	/***** GRÁFICAS *****/
+
+    //Gráfica mensual de ControleFones
+	public function selectControleEquipamentosMes(string $anio, string $mes, int $tipo)
+	{
+		$totalControleMes = 0;
+		$arrControleDias = array();
+		$rutaId = $_SESSION['idRuta'];
+        $this->intTipo = $tipo;
+		$dias = cal_days_in_month(CAL_GREGORIAN,$mes,$anio);
+		$n_dia = 1;
+		for ($i=0; $i < $dias; $i++)
+		{
+			$date = date_create($anio.'-'.$mes.'-'.$n_dia);
+			$fechaControle = date_format($date, "Y-m-d");
+		
+			$sql = "SELECT DAY(co.datecreated) as dia FROM controle co
+					LEFT OUTER JOIN persona pe
+					ON(pe.idpersona = co.personaid)
+                    LEFT OUTER JOIN equipamento eq
+					ON(eq.idequipamento = co.equipamentoid)
+					WHERE DATE(co.datecreated) = '$fechaControle' 
+					AND pe.codigoruta = $rutaId 
+					AND co.status = 2
+                    AND eq.tipo = $this->intTipo";
+			$controleDia = $this->select($sql);
+
+			$sqlTotal = "SELECT COUNT(*) as total FROM controle co 
+						 LEFT OUTER JOIN persona pe
+						 ON(pe.idpersona = co.personaid)
+                         LEFT OUTER JOIN equipamento eq
+                         ON(eq.idequipamento = co.equipamentoid)
+						 WHERE DATE(co.datecreated) = '$fechaControle' 
+						 AND pe.codigoruta = $rutaId 
+						 AND co.status = 2
+                         AND eq.tipo = $this->intTipo";
+			$controleDiaTotal = $this->select($sqlTotal);
+			$controleDiaTotal = $controleDiaTotal['total'];
+
+			$controleDia['dia'] = $n_dia;
+			$controleDia['controle'] = $controleDiaTotal;
+			$controleDia['controle'] = $controleDia['controle'] == "" ? 0 : $controleDia['controle'];
+			$totalControleMes += $controleDiaTotal;
+			array_push($arrControleDias, $controleDia);
+			$n_dia++;
+
+		}
+		$meses = Meses();
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalControleMes, 'controles' => $arrControleDias);
+		return $arrData;
+	}
+
+	//Gráfica anual de ControleFones
+    public function selectControleEquipamentosAnio(string $anio, int $tipo) 
+    {
+		$this->intTipo = $tipo;
+		$arrMEntrega = array();
+		$arrMeses = Meses();
+		$totalControle = 0;
+		$ruta = $_SESSION['idRuta'];
+
+		for ($i=1; $i <= 12; $i++) {
+			$arrData = array('anio' => '', 'no_mes' => '', 'mes' => '');
+			$sql = "SELECT $anio AS anio, $i AS mes, COUNT(idcontrole) AS total
+					FROM controle co
+                    LEFT OUTER JOIN persona pe
+					ON(pe.idpersona = co.personaid)
+                    LEFT OUTER JOIN equipamento eq
+					ON(eq.idequipamento = co.equipamentoid)
+					WHERE month(co.datecreated) = $i 
+					AND year(co.datecreated) = $anio 
+					AND co.status = 2
+					AND pe.codigoruta = $ruta
+                    AND eq.tipo = $this->intTipo
+					GROUP BY month(co.datecreated)";
+			$controleMes = $this->select($sql);
+			$arrData['mes'] = $arrMeses[$i-1];
+
+			if(empty($controleMes)){
+				$arrData['anio'] = $anio;
+				$arrData['no_mes'] = $i;
+				$arrData['total'] = 0;
+			}else{
+				$arrData['anio'] = $controleMes['anio'];
+				$arrData['no_mes'] = $controleMes['mes'];
+				$arrData['total'] = $controleMes['total'];
+				$totalControle += $controleMes['total'];
+			}
+			array_push($arrMEntrega, $arrData);
+		}
+
+		$arrControle = array('totalControle' => $totalControle, 'anio' => $anio, 'meses' => $arrMEntrega);
+		return $arrControle;
+
+	}
 }

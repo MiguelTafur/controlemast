@@ -1,6 +1,25 @@
 let tableReceber;
+let tableReceberComputadores;
+let tableReceberTelas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
+
+$('.date-picker').datepicker( {
+    closeText: 'Fechar',
+    prevText: '<Ant',
+    nextText: 'Seg>',
+    currentText: 'Hoje',
+    monthNames: ['1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -', '11 -', '12 -'],
+    monthNamesShort: ['Janeiro','Fevereiro','Março','Abril', 'Maio','Junho','Julho','Agosto','Setembro', 'Outubro','Novembro','Dezembro'],
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'MM yy',
+    showDays: false,
+    onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
@@ -8,10 +27,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function iniciarApp() {
     fntTablaReceber();
+    fntTablaReceberComputadores();
+    fntTablaReceberTelas();
     fntCrearControleReceber();
 }
 
-//Tabela dos recebimentos
+//Tabela fones recebidos
 function fntTablaReceber() {
     tableReceber = $('#tableReceber').dataTable({
         "aProcessing":true,
@@ -21,6 +42,60 @@ function fntTablaReceber() {
         },
         "ajax":{
             "url": " "+base_url+"/Receber/getRecebidos",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20,
+        "order":[[0,"desc"]]  
+    });
+}
+
+//Tabela pcs recebidos
+function fntTablaReceberComputadores() {
+    tableReceberComputadores = $('#tableReceberComputadores').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "dn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Receber/getRecebidosComputadores",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20,
+        "order":[[0,"desc"]]  
+    });
+}
+
+//Tabela telas recebidos
+function fntTablaReceberTelas() {
+    tableReceberTelas = $('#tableReceberTelas').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "dn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Receber/getRecebidosTelas",
             "dataSrc":""
         },
         "columns":[
@@ -221,4 +296,172 @@ function openModalReceber()
     });
     fntUsuarios();
     $('#modalFormControleReceber').modal('show');
+}
+
+/** GRÁFICA FONES **/
+//mensual
+function fntSearchReceberFonesMes()
+{
+    let fecha = document.querySelector(".receberFonesMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Receber/receberFonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesReceberFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchReceberFonesAnio(){
+    let anio = document.querySelector(".receberFonesAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Receber/receberFonesAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioReceberFones").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+/** GRÁFICA PCS **/
+//mensual
+function fntSearchReceberComputadoresMes()
+{
+    let fecha = document.querySelector(".receberComputadoresMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Receber/receberComputadoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesReceberComputadores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchReceberComputadoresAnio(){
+    let anio = document.querySelector(".receberComputadoresAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Receber/receberComputadoresAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioReceberComputadores").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+/** GRÁFICA TELAS **/
+//mensual
+function fntSearchReceberTelasMes()
+{
+    let fecha = document.querySelector(".receberTelasMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Receber/receberTelasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesReceberTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchReceberTelasAnio(){
+    let anio = document.querySelector(".receberTelasAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Receber/receberTelasAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioReceberTelas").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
 }

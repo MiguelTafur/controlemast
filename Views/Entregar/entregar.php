@@ -29,7 +29,8 @@
       </li>
     </ul>
   </div>
-
+  
+  <!-- GRÁFICAS -->
   <div class="container-fluid">
     <ul class="nav nav-pills my-4 justify-content-center" id="pills-tab" role="tablist">
       <li class="nav-item">
@@ -48,19 +49,19 @@
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-lista" role="tabpanel" aria-labelledby="pills-lista-tab">
         <div class="tile">
-        <nav class="mb-4">
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-fone-tab" data-toggle="tab" href="#nav-fone" role="tab" aria-controls="nav-fone" aria-selected="true">FONES</a>
-            <a class="nav-item nav-link" id="nav-computador-tab" data-toggle="tab" href="#nav-computador" role="tab" aria-controls="nav-computador" aria-selected="false">COMPUTADORES</a>
-            <a class="nav-item nav-link" id="nav-tela-tab" data-toggle="tab" href="#nav-tela" role="tab" aria-controls="nav-tela" aria-selected="false">MONITORES</a>
-          </div>
-        </nav>
+          <nav class="mb-4">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-fone-tab" data-toggle="tab" href="#nav-fone" role="tab" aria-controls="nav-fone" aria-selected="true">FONES</a>
+              <a class="nav-item nav-link" id="nav-computador-tab" data-toggle="tab" href="#nav-computador" role="tab" aria-controls="nav-computador" aria-selected="false">COMPUTADORES</a>
+              <a class="nav-item nav-link" id="nav-tela-tab" data-toggle="tab" href="#nav-tela" role="tab" aria-controls="nav-tela" aria-selected="false">MONITORES</a>
+            </div>
+          </nav>
           <div class="tile-body">
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="nav-fone" role="tabpanel" aria-labelledby="nav-fone-tab">
                 <!-- Tabla Fones -->
                 <div class="table-responsive">
-                  <table class="table table-striped text-center" id="tableEntregue">
+                  <table class="table table-striped text-center w-100" id="tableEntregue">
                     <thead>
                       <tr>
                         <th>Data</th>
@@ -305,7 +306,7 @@
         type: 'column'
     },
     title: {
-        text: 'Fones Entregues de <?= $data['entregarFonesAnio']['anio'] ?>'
+        text: 'Fones entregues de <?= $data['entregarFonesAnio']['anio'] ?>'
     },
     subtitle: {
         text: '<br><b>Total: <?= $data['entregarFonesAnio']['totalControle'] ?></b>'
@@ -411,7 +412,7 @@
         type: 'column'
     },
     title: {
-        text: 'Computadores Entregues de <?= $data['entregarComputadoresAnio']['anio'] ?>'
+        text: 'Computadores entregues de <?= $data['entregarComputadoresAnio']['anio'] ?>'
     },
     subtitle: {
         text: '<br><b>Total: <?= $data['entregarComputadoresAnio']['totalControle'] ?></b>'
@@ -517,7 +518,7 @@
         type: 'column'
     },
     title: {
-        text: 'Monitores Entregues de de <?= $data['entregarTelasAnio']['anio'] ?>'
+        text: 'Monitores entregues de <?= $data['entregarTelasAnio']['anio'] ?>'
     },
     subtitle: {
         text: '<br><b>Total: <?= $data['entregarTelasAnio']['totalControle'] ?></b>'

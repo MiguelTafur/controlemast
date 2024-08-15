@@ -314,7 +314,8 @@ class EntregarModel extends Mysql
 	}
 
     //Gráfica anual de ControleFones
-    public function selectControleEquipamentosAnio(string $anio, int $tipo) {
+    public function selectControleEquipamentosAnio(string $anio, int $tipo) 
+    {
 		$this->intTipo = $tipo;
 		$arrMEntrega = array();
 		$arrMeses = Meses();

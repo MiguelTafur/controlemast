@@ -20,33 +20,162 @@ class Receber extends Controllers{
 		$data['page_title'] = "EQUIPAMENTOS RECEBIDOS";
 		$data['page_title2'] = "RECEBIDOS";
 		$data['page_name'] = "Receber";
+
+		//Cantidades
 		$data['cantidadRecebidos'] = $this->model->cantRecebidos();
 		$data['cantidadRecebidosHoy'] = $this->model->cantRecebidos(NOWDATE);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		/* FONE */
+		//mensal
+		$data['receberFonesMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MFONE);
+
+		//anual
+		$data['receberFonesAnio'] = $this->model->selectControleEquipamentosAnio($anio, MFONE);
+
+		/* PCS */
+		//mensal
+		$data['receberComputadoresMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR);
+
+		//anual
+		$data['receberComputadoresAnio'] = $this->model->selectControleEquipamentosAnio($anio, MCOMPUTADOR);
+
+		/* TELAS */
+		//mensal
+		$data['receberTelasMDia'] = $this->model->selectControleEquipamentosMes($anio,$mes, MTELA);
+
+		//anual
+		$data['receberTelasAnio'] = $this->model->selectControleEquipamentosAnio($anio, MTELA);
+
 		$data['page_functions_js'] = "functions_receber.js";
 		$this->views->getView($this,"receber",$data);
 	}
 
+	//Tabla de fones
 	public function getRecebidos()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = $this->model->selectRecebidos();
+			$arrData = $this->model->selectRecebidos(MFONE);
 			//dep($arrData);exit;
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				//$btnReceived = '';
 				//$btnDelete = '';
 				
-				if($arrData[$i]['equipamento'] === 8) {
-					$tipo = 'Fone';
-				} else if ($arrData[$i]['equipamento'] === 9) {
-					$tipo = 'Mouse';
-				} else if ($arrData[$i]['equipamento'] === 10) {
-					$tipo = 'Teclado';
-				} else if ($arrData[$i]['equipamento'] === 11) {
-					$tipo = 'Tela';
-				} else if ($arrData[$i]['equipamento'] === 16) {
-					$tipo = 'PC';
+				$tipo = 'Fone';
+
+				$ultimo = explode(" ", $arrData[$i]['apellidos']);
+				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
+
+				if($arrData[$i]['status'] === 2) {
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">TROCA</span></a>';
+				} else if($arrData[$i]['status'] === 3){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">DESLIGAMENTO</span></a>';
+				} else if($arrData[$i]['status'] === 4){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">PEDIU CONTA</span></a>';
+				} else if($arrData[$i]['status'] === 5){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">SEM RENOVAÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 6){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">JUSTA CAUSA</span></a>';
+				} else if($arrData[$i]['status'] === 7){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">RESCISÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 8){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">INSS</span></a>';
+				} else if($arrData[$i]['status'] === 9){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">LICENÇA MATERNINDADE</span></a>';
 				}
+
+				//$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+
+				if($_SESSION['permisosMod']['r']){
+					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
+				}
+				// if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+				// 	$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
+				// }
+
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.'</div>';
+			}
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	//Tabla de computadores
+	public function getRecebidosComputadores()
+	{
+		if($_SESSION['permisosMod']['r']){
+			$arrData = $this->model->selectRecebidos(MCOMPUTADOR);
+			//dep($arrData);exit;
+			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				//$btnReceived = '';
+				//$btnDelete = '';
+				
+				$tipo = 'PC';
+
+				$ultimo = explode(" ", $arrData[$i]['apellidos']);
+				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
+
+				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
+
+				if($arrData[$i]['status'] === 2) {
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">TROCA</span></a>';
+				} else if($arrData[$i]['status'] === 3){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">DESLIGAMENTO</span></a>';
+				} else if($arrData[$i]['status'] === 4){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">PEDIU CONTA</span></a>';
+				} else if($arrData[$i]['status'] === 5){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">SEM RENOVAÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 6){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">JUSTA CAUSA</span></a>';
+				} else if($arrData[$i]['status'] === 7){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">RESCISÇAO</span></a>';
+				} else if($arrData[$i]['status'] === 8){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">INSS</span></a>';
+				} else if($arrData[$i]['status'] === 9){
+					$arrData[$i]['status'] = '<a href="'.media().'/images/imagenes/'.$protocolo.'" target="_blank"><span class="font-weight-bold font-italic text-danger" title="Abrir protocolo">LICENÇA MATERNINDADE</span></a>';
+				}
+
+				//$arrData[$i]['status'] = '<a href="#" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
+
+				if($_SESSION['permisosMod']['r']){
+					$btnView = '<button class="btn btn-secondary btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcontrole'].')" title="Ver Entrega"><i class="far fa-eye"></i></button>';
+				}
+				// if($_SESSION['permisosMod']['d'] AND $_SESSION['idUser'] == 1){
+				// 	$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcontrole'].', '.$arrData[$i]['equipamentoid'].')" title="Remover Entrega"><i class="far fa-trash-alt"></i></button>';
+				// }
+
+				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.'</div>';
+			}
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	//Tabla de telas
+	public function getRecebidosTelas()
+	{
+		if($_SESSION['permisosMod']['r']){
+			$arrData = $this->model->selectRecebidos(MTELA);
+			//dep($arrData);exit;
+			for ($i=0; $i < count($arrData); $i++) {
+				$btnView = '';
+				//$btnReceived = '';
+				//$btnDelete = '';
+				
+				$tipo = 'MONITOR';
 
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
@@ -246,4 +375,100 @@ class Receber extends Controllers{
 			}
 		}
 	}
+
+	/*** GRÁFICAS ***/
+	
+	/** FONES **/
+	//Mostrar gráfica mensual
+	public function receberFonesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "receberFonesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectControleEquipamentosMes($anio,$mes, MFONE);
+			$script = getFile("Template/Modals/graficaReceberFonesMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function receberFonesAnio()
+	{
+		if($_POST){
+			$grafica = "receberFonesAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectControleEquipamentosAnio($anio, MFONE);
+			$script = getFile("Template/Modals/graficaReceberFonesAnio",$fones);
+			echo $script;
+			die();
+		}
+	}
+
+	/** PCS **/
+	//Mostrar gráfica mensual
+	public function receberComputadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "receberComputadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaReceberComputadoresMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function receberComputadoresAnio()
+	{
+		if($_POST){
+			$grafica = "receberComputadoresAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectControleEquipamentosAnio($anio, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaReceberComputadoresAnio",$fones);
+			echo $script;
+			die();
+		}
+	}
+
+	/** TELAS **/
+	//Mostrar gráfica mensual
+	public function receberTelasMes()
+	{
+		if($_POST)
+		{
+			$grafica = "receberTelasMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectControleEquipamentosMes($anio,$mes, MTELA);
+			$script = getFile("Template/Modals/graficaReceberTelasMes", $fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function receberTelasAnio()
+	{
+		if($_POST){
+			$grafica = "receberTelasAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectControleEquipamentosAnio($anio, MTELA);
+			$script = getFile("Template/Modals/graficaReceberTelasAnio",$fones);
+			echo $script;
+			die();
+		}
+	}
+
 }
