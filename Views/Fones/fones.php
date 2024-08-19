@@ -130,7 +130,7 @@
  
 <script>
   //Mes
-  let mes = '<?= $data['fonesMDia']['nombreMes']; ?>';
+  let mes = '<?= $data['fonesMDia']['numeroMes']; ?>';
   let ano = '<?= $data['fonesMDia']['anio']; ?>';
   Highcharts.chart('graficaMesFones', 
   {
@@ -170,7 +170,7 @@
                 cursor: 'pointer',
                 events: {
                   click: function(event){
-                    fntInfoChartFones([ano, mes, event.point.category]);
+                    fntInfoChartEquipamento([ano, mes, event.point.category]);
                   }
               },
             },

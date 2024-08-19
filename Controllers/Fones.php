@@ -407,12 +407,13 @@ class Fones extends Controllers{
 		}
 	}
 
-	public function getDatosGraficaFone()
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
 	{
 		if($_POST)
 		{
 			$fechaGrafica = $_POST['fecha'];
-			$arrData = $this->model->DatosGraficaFone($fechaGrafica, MFONE);
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, MFONE);
 			$informacion_td = "";
 
 			foreach($arrData as $fones)

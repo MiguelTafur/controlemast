@@ -8,6 +8,7 @@ class ComputadoresModel extends Mysql
 	}
 
 	PRIVATE $intStatus;
+	PRIVATE $intTipo;
 
 	//Cantidades
 	public function cantComputadores($estado) {
@@ -56,7 +57,7 @@ class ComputadoresModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalComputadoresMes, 'equipamentos' => $arrEquipamentosDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'numeroMes' => $mes, 'total' => $totalComputadoresMes, 'equipamentos' => $arrEquipamentosDias);
 		return $arrData;
 	}
 
@@ -97,5 +98,17 @@ class ComputadoresModel extends Mysql
 		$arrEquipamentos = array('totalEquipamentos' => $totalEquipamentos, 'anio' => $anio, 'meses' => $arrMEquipamentos);
 		return $arrEquipamentos;
 
+	}
+
+	//Información de la gráfica
+	public function datosGraficaEquipamento(string $fecha, int $tipo) 
+	{
+		$this->strFecha = $fecha;
+		$this->intTipo = $tipo;
+
+		$sql = "SELECT lacre, marca, status, DATE_FORMAT(datecreated, '%d-%m-%Y') as fecha 
+				FROM equipamento WHERE tipo = $this->intTipo AND datecreated = '{$this->strFecha}'";
+		$request = $this->select_all($sql);
+		return $request;
 	}
 }

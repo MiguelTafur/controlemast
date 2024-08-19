@@ -2,7 +2,7 @@
 
 <script>
     
-    mes = '<?= $FonesMes['nombreMes']; ?>';
+    mes = '<?= $FonesMes['numeroMes']; ?>';
     ano = '<?= $FonesMes['anio']; ?>';
 
     Highcharts.chart('graficaMesFones', {
@@ -38,7 +38,7 @@
                 cursor: 'pointer',
                 events: {
                   click: function(event){
-                    fntInfoChartFones([ano, mes, event.point.category]);
+                    fntInfoChartEquipamento([ano, mes, event.point.category]);
                   }
               },
             },

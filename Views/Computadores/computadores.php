@@ -127,10 +127,16 @@
 
 <script>
   //Mes
+  let mes = '<?= $data['computadoresMDia']['numeroMes']; ?>';
+  let ano = '<?= $data['computadoresMDia']['anio']; ?>';
   Highcharts.chart('graficaMesComputadores', 
   {
     chart: {
-        type: 'line'
+      type: 'line',
+      scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+      }
     },
     title: {
         text: 'Computadores cadastrados de <?= $data['computadoresMDia']['mes'].' de '.$data['computadoresMDia']['anio']; ?>'
@@ -139,27 +145,35 @@
         text: '<b>Total: <?= $data['computadoresMDia']['total']; ?></b>'
     },
     xAxis: {
-        categories: [
-          <?php 
-            foreach ($data['computadoresMDia']['equipamentos'] as $dia) {
-              echo $dia['dia'].",";
-            }
-          ?>
-        ]
+      categories: [
+        <?php 
+          foreach ($data['computadoresMDia']['equipamentos'] as $dia) {
+            echo $dia['dia'].",";
+          }
+        ?>
+      ]
     },
     yAxis: {
-        title: {
-            text: 'GLOBALCOB'
-        }
+      title: {
+          text: 'GLOBALCOB'
+      }
     },
 
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
+        series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartEquipamento([ano, mes, event.point.category]);
+          }
+        },
+      },
+      line: {
+        dataLabels: {
+            enabled: true
+        },
+        enableMouseTracking: true
+      }
     },
     
     series: [{

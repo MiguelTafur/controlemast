@@ -101,7 +101,6 @@
 </div>
 
 <!-- modal ver fone gráfica -->
- <!-- modal ver Fone -->
 <div class="modal fade" id="modalViewEquipamentoGrafica" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

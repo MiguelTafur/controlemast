@@ -485,7 +485,8 @@ function fntSearchComputadoresMes()
 }
 
 //Buscador gráfica anual
-function fntSearchComputadoresAnio(){
+function fntSearchComputadoresAnio()
+{
     let anio = document.querySelector(".computadoresAnio").value;
     if(anio == ""){
         swal("", "Digite o Ano " , "error");
@@ -508,5 +509,40 @@ function fntSearchComputadoresAnio(){
                 return false;
             }
         }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Computadores/getDatosGraficaEquipamento';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    console.log(objData);
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateEquipamentoGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    swal("Computadores", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
     }
 }

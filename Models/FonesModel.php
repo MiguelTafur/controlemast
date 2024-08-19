@@ -58,7 +58,7 @@ class FonesModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'nombreMes' => $mes, 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'numeroMes' => $mes, 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
 		return $arrData;
 	}
 
@@ -100,7 +100,8 @@ class FonesModel extends Mysql
 
 	}
 
-	public function DatosGraficaFone(string $fecha, int $tipo) 
+	//Información de la gráfica
+	public function datosGraficaEquipamento(string $fecha, int $tipo) 
 	{
 		$this->strFecha = $fecha;
 		$this->intTipo = $tipo;

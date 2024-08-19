@@ -498,12 +498,13 @@ function fntSearchFonesAnio(){
     }
 }
 
-function fntInfoChartFones(fecha) 
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
 {
     let date = fecha.join("-")
     divLoading.style.display = "flex";
     let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let  ajaxUrl = base_url+'/Fones/getDatosGraficaFone';
+    let  ajaxUrl = base_url+'/Fones/getDatosGraficaEquipamento';
     let  formData = new FormData();
     formData.append('fecha', date);
     request.open("POST",ajaxUrl,true);
