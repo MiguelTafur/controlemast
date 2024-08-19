@@ -498,3 +498,36 @@ function fntSearchFonesAnio(){
     }
 }
 
+function fntInfoChartFones(fecha) 
+{
+    let date = fecha.join("-")
+    //divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Fones/getDatosGraficaFone';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateFoneGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    swal("Fones", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
+}
+

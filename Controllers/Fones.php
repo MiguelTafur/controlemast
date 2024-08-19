@@ -31,6 +31,7 @@ class Fones extends Controllers{
 
 		//Mensal
 		$data['fonesMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+		//dep($data['fonesMDia']);exit;
 
 		//Anual
 		$data['fonesAnio'] = $this->model->selectFonesAnio($anio);
@@ -389,12 +390,13 @@ class Fones extends Controllers{
 			$fones = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
 			$script = getFile("Template/Modals/graficaFonesMes", $fones);
 			echo $script;
-			die();
+			///die();
 		}
 	}
 
 	//Mostrar gráfica anual
-	public function fonesAnio(){
+	public function fonesAnio()
+	{
 		if($_POST){
 			$grafica = "fonesAnio";
 			$anio = intval($_POST['anio']);
@@ -403,5 +405,50 @@ class Fones extends Controllers{
 			echo $script;
 			die();
 		}
+	}
+
+	public function getDatosGraficaFone()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->DatosGraficaFone($fechaGrafica, MFONE);
+			$informacion_td = "";
+
+			foreach($arrData as $fones)
+			{
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>#'.$fones['lacre'].'</td>';
+				$informacion_td .= '<td>'.$fones['marca'].'</td>';
+
+				switch ($fones['status']) {
+					case '1':
+						$informacion_td .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+						break;
+					case '2':
+						$informacion_td .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+						break;
+					case '3':
+						$informacion_td .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+						break;
+					default:
+						$informacion_td .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+						break;
+				}
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
 	}
 }

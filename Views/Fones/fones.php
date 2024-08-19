@@ -130,10 +130,16 @@
  
 <script>
   //Mes
+  let mes = '<?= $data['fonesMDia']['nombreMes']; ?>';
+  let ano = '<?= $data['fonesMDia']['anio']; ?>';
   Highcharts.chart('graficaMesFones', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+            minWidth: 700,
+            scrollPositionX: 1
+        }
     },
     title: {
         text: 'Fones cadastrados de <?= $data['fonesMDia']['mes'].' de '.$data['fonesMDia']['anio']; ?>'
@@ -148,7 +154,10 @@
               echo $dia['dia'].",";
             }
           ?>
-        ]
+        ],
+        labels: {
+            overflow: 'justify'
+        }
     },
     yAxis: {
         title: {
@@ -157,16 +166,24 @@
     },
 
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(event){
+                    fntInfoChartFones([ano, mes, event.point.category]);
+                  }
+              },
             },
-            enableMouseTracking: false
-        }
-    },
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
     
     series: [{
-        name: '',
+        name: 'Fones',
         data: [
           <?php 
             foreach ($data['fonesMDia']['equipamentos'] as $equipamento) {

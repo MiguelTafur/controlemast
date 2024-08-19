@@ -8,6 +8,8 @@ class FonesModel extends Mysql
 	}
 
 	PRIVATE $intStatus;
+	PRIVATE $intTipo;
+	PRIVATE $strFecha;
 
 	// Cantidades
 	public function cantFones($estado) {
@@ -56,7 +58,7 @@ class FonesModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'nombreMes' => $mes, 'total' => $totalUsuariosMes, 'equipamentos' => $arrEquipamentosDias);
 		return $arrData;
 	}
 
@@ -96,5 +98,16 @@ class FonesModel extends Mysql
 		$arrFones = array('totalFones' => $totalFones, 'anio' => $anio, 'meses' => $arrMFones);
 		return $arrFones;
 
+	}
+
+	public function DatosGraficaFone(string $fecha, int $tipo) 
+	{
+		$this->strFecha = $fecha;
+		$this->intTipo = $tipo;
+
+		$sql = "SELECT lacre, marca, status, DATE_FORMAT(datecreated, '%d-%m-%Y') as fecha FROM equipamento WHERE tipo = $this->intTipo AND datecreated = '{$this->strFecha}'";
+		$request = $this->select_all($sql);
+
+		return $request;
 	}
 }
