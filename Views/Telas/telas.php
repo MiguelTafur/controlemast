@@ -127,10 +127,18 @@
 
 <script>
   //Mes
+
+  let mes = '<?= $data['telasMDia']['numeroMes']; ?>';
+  let ano = '<?= $data['telasMDia']['anio']; ?>';
+
   Highcharts.chart('graficaMesTelas', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+            minWidth: 700,
+            scrollPositionX: 1
+        }
     },
     title: {
         text: 'Monitores cadastrados de <?= $data['telasMDia']['mes'].' de '.$data['telasMDia']['anio']; ?>'
@@ -154,16 +162,24 @@
     },
 
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
+      series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartEquipamento([ano, mes, event.point.category]);
+          }
         }
+      },
+      line: {
+          dataLabels: {
+            enabled: true
+          },
+          enableMouseTracking: true
+      }
     },
     
     series: [{
-        name: '',
+        name: 'Monitores',
         data: [
           <?php 
             foreach ($data['telasMDia']['equipamentos'] as $equipamento) {

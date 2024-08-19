@@ -387,7 +387,7 @@ class Telas extends Controllers{
 			$mes = $arrFecha[0];
 			$anio = $arrFecha[1];
 			$telas = $this->model->selectEquipamentosMes($anio,$mes,MTELA);
-			$script = getFile("Template/Modals/graficaTelasMes", $telas);
+			$script = getFile("Template/Modals/graficaMonitoresMes", $telas);
 			echo $script;
 			die();
 		}
@@ -403,5 +403,51 @@ class Telas extends Controllers{
 			echo $script;
 			die();
 		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, MTELA);
+			$informacion_td = "";
+
+			foreach($arrData as $telas)
+			{
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>#'.$telas['lacre'].'</td>';
+				$informacion_td .= '<td>'.$telas['marca'].'</td>';
+
+				switch ($telas['status']) {
+					case '1':
+						$informacion_td .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+						break;
+					case '2':
+						$informacion_td .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+						break;
+					case '3':
+						$informacion_td .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+						break;
+					default:
+						$informacion_td .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+						break;
+				}
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
 	}
 }

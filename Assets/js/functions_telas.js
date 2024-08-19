@@ -510,3 +510,37 @@ function fntSearchTelasAnio(){
         }
     }
 }
+
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Telas/getDatosGraficaEquipamento';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateEquipamentoGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    swal("Monitores", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
+}
