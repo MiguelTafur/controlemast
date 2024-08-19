@@ -501,7 +501,7 @@ function fntSearchFonesAnio(){
 function fntInfoChartFones(fecha) 
 {
     let date = fecha.join("-")
-    //divLoading.style.display = "flex";
+    divLoading.style.display = "flex";
     let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let  ajaxUrl = base_url+'/Fones/getDatosGraficaFone';
     let  formData = new FormData();
