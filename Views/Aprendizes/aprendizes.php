@@ -111,10 +111,18 @@
 
 <script>
   //Mes
+
+  let mes = '<?= $data['aprendizesMDia']['numeroMes']; ?>';
+  let ano = '<?= $data['aprendizesMDia']['anio']; ?>';
+
   Highcharts.chart('graficaMesAprendizes', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+        }
     },
     title: {
         text: 'Aprendizes cadastrados de <?= $data['aprendizesMDia']['mes'].' de '.$data['aprendizesMDia']['anio']; ?>'
@@ -138,16 +146,24 @@
     },
 
     plotOptions: {
+      series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartPersona([ano, mes, event.point.category]);
+          }
+        }
+      },
         line: {
             dataLabels: {
                 enabled: true
             },
-            enableMouseTracking: false
+            enableMouseTracking: true
         }
     },
     
     series: [{
-        name: '',
+        name: 'Aprendizes',
         data: [
           <?php 
             foreach ($data['aprendizesMDia']['usuarios'] as $usuario) {

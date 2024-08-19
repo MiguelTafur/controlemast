@@ -101,3 +101,38 @@
     </div>
   </div>
 </div>
+
+<!-- modal ver tela gráfica -->
+<div class="modal fade" id="modalViewPersonaGrafica" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Aprendizes Cadastrados: <span id="datePersonaGrafica" class="font-italic font-weight-normal"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">  
+        <div class="table-responsive">
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Modelo</th>
+              </tr>
+            </thead>
+            <tbody id="listgraficaPersona">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
