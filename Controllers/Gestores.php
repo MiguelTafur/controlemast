@@ -199,7 +199,8 @@ class Gestores extends Controllers{
 	}
 
 	//Mostrar gráfica anual
-	public function gestoresAnio(){
+	public function gestoresAnio()
+	{
 		if($_POST){
 			$grafica = "gestoresAnio";
 			$anio = intval($_POST['anio']);
@@ -208,6 +209,39 @@ class Gestores extends Controllers{
 			echo $script;
 			die();
 		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, RGESTOR);
+			$informacion_td = "";
+
+			foreach($arrData as $aprendiz)
+			{
+				$modelo = $aprendiz['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$aprendiz['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($aprendiz['nombres'], $aprendiz['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
 	}
 }
 
