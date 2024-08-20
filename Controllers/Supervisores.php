@@ -199,7 +199,8 @@ class Supervisores extends Controllers{
 	}
 
 	//Mostrar gráfica anual
-	public function supervisoresAnio(){
+	public function supervisoresAnio()
+	{
 		if($_POST){
 			$grafica = "supervisoresAnio";
 			$anio = intval($_POST['anio']);
@@ -208,6 +209,39 @@ class Supervisores extends Controllers{
 			echo $script;
 			die();
 		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, RSUPERVISOR);
+			$informacion_td = "";
+
+			foreach($arrData as $supervisor)
+			{
+				$modelo = $supervisor['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$supervisor['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($supervisor['nombres'], $supervisor['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
 	}
 }
 

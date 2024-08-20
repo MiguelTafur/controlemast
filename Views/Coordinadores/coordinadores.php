@@ -116,7 +116,11 @@
   Highcharts.chart('graficaMesCoordenadores', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+        }
     },
     title: {
         text: 'Coordenadores cadastrados de <?= $data['coordenadoresMDia']['mes'].' de '.$data['coordenadoresMDia']['anio']; ?>'

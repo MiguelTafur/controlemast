@@ -297,7 +297,8 @@ function fntSearchSupervisoresMes()
 }
 
 //Buscador gráfica anual
-function fntSearchSupervisoresAnio(){
+function fntSearchSupervisoresAnio()
+{
     let anio = document.querySelector(".supervisoresAnio").value;
     if(anio == ""){
         swal("", "Digite o Ano " , "error");
@@ -320,5 +321,39 @@ function fntSearchSupervisoresAnio(){
                 return false;
             }
         }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartPersona(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Supervisores/getDatosGraficaPersona';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaPersona").innerHTML = tdAnotaciones;
+                    document.querySelector("#datePersonaGrafica").textContent = fecha;
+                    $('#modalViewPersonaGrafica').modal('show');
+                } else {
+                    swal("Supervisor(a)", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
     }
 }

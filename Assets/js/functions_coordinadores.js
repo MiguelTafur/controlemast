@@ -348,7 +348,7 @@ function fntInfoChartPersona(fecha)
                     document.querySelector("#datePersonaGrafica").textContent = fecha;
                     $('#modalViewPersonaGrafica').modal('show');
                 } else {
-                    swal("Aprendiz", objData.msg, "warning");
+                    swal("Coordenador", objData.msg, "warning");
                 }
             }
             divLoading.style.display = "none";
