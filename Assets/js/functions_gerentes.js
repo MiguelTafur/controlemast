@@ -296,7 +296,8 @@ function fntSearchGerentesMes()
 }
 
 //Buscador gráfica anual
-function fntSearchGerentesAnio(){
+function fntSearchGerentesAnio()
+{
     let anio = document.querySelector(".gerentesAnio").value;
     if(anio == ""){
         swal("", "Digite o Ano " , "error");
@@ -319,5 +320,39 @@ function fntSearchGerentesAnio(){
                 return false;
             }
         }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartPersona(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Gerentes/getDatosGraficaPersona';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaPersona").innerHTML = tdAnotaciones;
+                    document.querySelector("#datePersonaGrafica").textContent = fecha;
+                    $('#modalViewPersonaGrafica').modal('show');
+                } else {
+                    swal("Aprendiz", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
     }
 }
