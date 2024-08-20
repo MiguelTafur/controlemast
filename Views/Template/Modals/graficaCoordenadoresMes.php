@@ -1,10 +1,17 @@
 <?php if($grafica = "coordenadoresMes"){ $coordenadoresMes = $data;?>
 
 <script>
+
+    mes = '<?= $coordenadoresMes['numeroMes']; ?>';
+    ano = '<?= $coordenadoresMes['anio']; ?>';
     
     Highcharts.chart('graficaMesCoordenadores', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
             text: 'Coordenadores cadastrados de <?= $coordenadoresMes['mes'].' de '.$coordenadoresMes['anio']; ?>'
@@ -27,15 +34,23 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                    click: function(event){
+                        fntInfoChartPersona([ano, mes, event.point.category]);
+                    }
+                }
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'Coordenadores',
             data: [
                 <?php 
                 foreach ($coordenadoresMes['usuarios'] as $dia) {
