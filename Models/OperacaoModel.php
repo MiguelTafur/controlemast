@@ -4,7 +4,7 @@ class OperacaoModel extends Mysql
 {
 	PRIVATE $intModelo;
 	PRIVATE $intStatus;
-
+	PRIVATE $intTipo;
 	public function __construct()
 	{
 		parent::__construct();
@@ -50,7 +50,7 @@ class OperacaoModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalUsuariosMes, 'usuarios' => $arrUsuariosDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'numeroMes' => $mes, 'total' => $totalUsuariosMes, 'usuarios' => $arrUsuariosDias);
 		return $arrData;
 	}
 
@@ -91,5 +91,21 @@ class OperacaoModel extends Mysql
 		$arrUsuarios = array('totalUsuarios' => $totalUsuarios, 'anio' => $anio, 'meses' => $arrMUsuarios);
 		return $arrUsuarios;
 
+	}
+
+	//Información de la gráfica
+	public function datosGraficaPersona(string $fecha, int $tipo) 
+	{
+		$this->strFecha = $fecha;
+		$this->intTipo = $tipo;
+		$rutaId = $_SESSION['idRuta'];
+
+		$sql = "SELECT pe.matricula, pe.nombres, pe.apellidos, pe.modelo, DATE_FORMAT(pe.datecreated, '%d-%m-%Y') as fecha 
+				FROM persona pe
+				LEFT OUTER JOIN rol ro ON(ro.idrol = pe.rolid)
+				WHERE ro.idrol = $this->intTipo AND pe.datecreated = '{$this->strFecha}' AND pe.codigoruta = $rutaId";
+		$request = $this->select_all($sql);
+
+		return $request;
 	}
 }

@@ -1,10 +1,17 @@
 <?php if($grafica = "operadoresMes"){ $operadoresMes = $data;?>
 
 <script>
+
+    mes = '<?= $operadoresMes['numeroMes']; ?>';
+    ano = '<?= $operadoresMes['anio']; ?>';
     
     Highcharts.chart('graficaMesOperadores', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
             text: 'Operadores cadastrados de <?= $operadoresMes['mes'].' de '.$operadoresMes['anio']; ?>'
@@ -27,15 +34,23 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                    click: function(event){
+                        fntInfoChartPersona([ano, mes, event.point.category]);
+                    }
+                }
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'Operadores',
             data: [
                 <?php 
                 foreach ($operadoresMes['usuarios'] as $dia) {
