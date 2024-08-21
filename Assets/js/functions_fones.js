@@ -95,6 +95,13 @@ function fntCrearEquipamento() {
                         document.querySelector("#cantFoneE").textContent = objData.cantFoneE;
                         document.querySelector("#cantFoneC").textContent = objData.cantFoneC;
 
+                        let mes = objData.infoGrafica.numeroMes;
+                        let ano = objData.infoGrafica.anio;
+
+                        let fecha = [mes, ano].join("-");
+
+                        fntInfoGrafica(fecha);
+
                         if(rowTable == ""){
                             tableEquipamentos.api().ajax.reload();
                         }else{
@@ -472,7 +479,8 @@ function fntSearchFonesMes()
 }
 
 //Buscador gráfica anual
-function fntSearchFonesAnio(){
+function fntSearchFonesAnio() 
+{
     let anio = document.querySelector(".fonesAnio").value;
     if(anio == ""){
         swal("", "Digite o Ano " , "error");
@@ -532,3 +540,23 @@ function fntInfoChartEquipamento(fecha)
     }
 }
 
+function fntInfoGrafica(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Fones/fonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}

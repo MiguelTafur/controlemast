@@ -244,6 +244,9 @@ class Fones extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+					
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -251,6 +254,7 @@ class Fones extends Controllers{
 											 'cantFoneU' => $this->model->cantFones(2),
 											 'cantFoneE' => $this->model->cantFones(3),
 											 'cantFoneC' => $this->model->cantFones(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MFONE)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
@@ -378,7 +382,7 @@ class Fones extends Controllers{
 	/*** GRÁFICAS ***/
 	
 	//Mostrar gráfica mensual
-	public function FonesMes()
+	public function fonesMes()
 	{
 		if($_POST)
 		{
