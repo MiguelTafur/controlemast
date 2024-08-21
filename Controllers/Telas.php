@@ -241,6 +241,9 @@ class Telas extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -248,6 +251,7 @@ class Telas extends Controllers{
 											 'cantTelaU' => $this->model->cantTelas(2),
 											 'cantTelaE' => $this->model->cantTelas(3),
 											 'cantTelaC' => $this->model->cantTelas(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MTELA)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
@@ -377,7 +381,7 @@ class Telas extends Controllers{
 	/*** GRÁFICAS ***/
 	
 	//Mostrar gráfica mensual
-	public function TelasMes()
+	public function telasMes()
 	{
 		if($_POST)
 		{

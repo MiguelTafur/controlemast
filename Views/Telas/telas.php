@@ -8,7 +8,7 @@
         <h1>
             <i class="fa fa-television" aria-hidden="true"></i> <?= $data['page_title'] ?>&nbsp;
             <?php if($_SESSION['permisosMod']['w']){ ?>
-              <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> Adicionar</button>
+              <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> </button>
             <?php } ?>
         </h1>
     </div>

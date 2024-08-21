@@ -96,6 +96,13 @@ function fntCrearTelas() {
                         document.querySelector("#cantTelaU").textContent = objData.cantTelaU;
                         document.querySelector("#cantTelaE").textContent = objData.cantTelaE;
                         document.querySelector("#cantTelaC").textContent = objData.cantTelaC;
+
+                        let mes = objData.infoGrafica.numeroMes;
+                        let ano = objData.infoGrafica.anio;
+
+                        let fecha = [mes, ano].join("-");
+
+                        fntInfoGrafica(fecha);
                         
                         if(rowTable == ""){
                             tableTelas.api().ajax.reload();
@@ -467,7 +474,7 @@ function fntSearchTelasMes()
     }
     divLoading.style.display = "flex";
     let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let  ajaxUrl = base_url+'/Telas/TelasMes';
+    let  ajaxUrl = base_url+'/Telas/telasMes';
     let  formData = new FormData();
     formData.append('fecha', fecha);
     request.open("POST",ajaxUrl,true);
@@ -542,5 +549,26 @@ function fntInfoChartEquipamento(fecha)
             }
             divLoading.style.display = "none";
             return false;
+    }
+}
+
+function fntInfoGrafica(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Telas/telasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
     }
 }
