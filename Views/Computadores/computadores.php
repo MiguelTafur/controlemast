@@ -177,7 +177,7 @@
     },
     
     series: [{
-        name: '',
+        name: 'PC',
         data: [
           <?php 
             foreach ($data['computadoresMDia']['equipamentos'] as $equipamento) {
@@ -223,7 +223,7 @@
         pointFormat: ''
     },
     series: [{
-        name: 'Computadores',
+        name: 'PC',
         data: [
           <?php 
             foreach ($data['computadoresAnio']['meses'] as $mes) {

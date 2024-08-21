@@ -243,6 +243,9 @@ class Computadores extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -250,6 +253,7 @@ class Computadores extends Controllers{
 											 'cantComputadorU' => $this->model->cantComputadores(2),
 											 'cantComputadorE' => $this->model->cantComputadores(3),
 											 'cantComputadorC' => $this->model->cantComputadores(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
@@ -377,7 +381,7 @@ class Computadores extends Controllers{
 	/*** GRÁFICAS ***/
 	
 	//Mostrar gráfica mensual
-	public function ComputadoresMes()
+	public function computadoresMes()
 	{
 		if($_POST)
 		{

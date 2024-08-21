@@ -91,6 +91,13 @@ function fntCrearEquipamento() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+                        let mes = objData.infoGrafica.numeroMes;
+                        let ano = objData.infoGrafica.anio;
+
+                        let fecha = [mes, ano].join("-");
+
+                        fntInfoGrafica(fecha);
+
                         document.querySelector("#cantComputadorD").textContent = objData.cantComputadorD;
                         document.querySelector("#cantComputadorU").textContent = objData.cantComputadorU;
                         document.querySelector("#cantComputadorE").textContent = objData.cantComputadorE;
@@ -544,5 +551,26 @@ function fntInfoChartEquipamento(fecha)
             }
             divLoading.style.display = "none";
             return false;
+    }
+}
+
+function fntInfoGrafica(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Computadores/computadoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesComputadores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
     }
 }
