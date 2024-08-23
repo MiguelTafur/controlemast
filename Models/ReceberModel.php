@@ -202,7 +202,7 @@ class ReceberModel extends Mysql
 					ON(eq.idequipamento = co.equipamentoid)
 					WHERE DATE(co.datecreated) = '$fechaControle' 
 					AND pe.codigoruta = $rutaId 
-					AND co.status = 2
+					AND (co.status != 1 AND co.status != 0)
                     AND eq.tipo = $this->intTipo";
 			$controleDia = $this->select($sql);
 
@@ -213,7 +213,7 @@ class ReceberModel extends Mysql
                          ON(eq.idequipamento = co.equipamentoid)
 						 WHERE DATE(co.datecreated) = '$fechaControle' 
 						 AND pe.codigoruta = $rutaId 
-						 AND co.status = 2
+						 AND (co.status != 1 AND co.status != 0)
                          AND eq.tipo = $this->intTipo";
 			$controleDiaTotal = $this->select($sqlTotal);
 			$controleDiaTotal = $controleDiaTotal['total'];
@@ -227,7 +227,7 @@ class ReceberModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalControleMes, 'controles' => $arrControleDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'numeroMes' => $mes, 'total' => $totalControleMes, 'controles' => $arrControleDias);
 		return $arrData;
 	}
 
@@ -250,7 +250,7 @@ class ReceberModel extends Mysql
 					ON(eq.idequipamento = co.equipamentoid)
 					WHERE month(co.datecreated) = $i 
 					AND year(co.datecreated) = $anio 
-					AND co.status = 2
+					AND (co.status != 1 AND co.status != 0)
 					AND pe.codigoruta = $ruta
                     AND eq.tipo = $this->intTipo
 					GROUP BY month(co.datecreated)";
@@ -273,5 +273,34 @@ class ReceberModel extends Mysql
 		$arrControle = array('totalControle' => $totalControle, 'anio' => $anio, 'meses' => $arrMEntrega);
 		return $arrControle;
 
+	}
+
+	//Información de la gráfica
+	public function datosGraficaEquipamento(string $fecha, int $tipo) 
+	{
+		$this->strFecha = $fecha;
+		$this->intTipo = $tipo;
+        $ruta = $_SESSION['idRuta'];
+
+		$sql = "SELECT co.protocolo, 
+                       DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fecha,
+                       co.status,
+                       pe.matricula,
+                       pe.nombres,
+                       pe.apellidos,
+                       eq.tipo as equipamento,
+                       eq.lacre
+                FROM controle co
+                LEFT OUTER JOIN persona pe
+                ON co.personaid = pe.idpersona
+                LEFT OUTER JOIN equipamento eq
+                ON co.equipamentoid = eq.idequipamento
+                WHERE (co.status != 1 AND co.status != 0)
+                AND co.datecreated = '{$this->strFecha}' 
+                AND eq.tipo = $this->intTipo 
+                AND pe.codigoruta = $ruta";
+		$request = $this->select_all($sql);
+
+		return $request;
 	}
 }

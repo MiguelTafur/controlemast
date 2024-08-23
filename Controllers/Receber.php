@@ -361,11 +361,18 @@ class Receber extends Controllers{
 																		$nombreImagen);
 				}
 
-				if($request_user > 0){
+				if($request_user > 0)
+				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					$arrResponse = array('status' => true, 
 										 'msg' => 'Dados salvos com sucesso.',
 										 'cantRecebidos' => $this->model->cantRecebidos(),
-										 'cantRecebidosHoy' => $this->model->cantRecebidos(NOWDATE)
+										 'cantRecebidosHoy' => $this->model->cantRecebidos(NOWDATE),
+										 'infoGraficaFone' => $this->model->selectControleEquipamentosMes($anio,$mes, MFONE),
+										 'infoGraficaPc' => $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR),
+										 'infoGraficaMonitor' => $this->model->selectControleEquipamentosMes($anio,$mes, MTELA)
 										);
 				}else{
 				 	$arrResponse = array('status' => false, 'msg' => 'Erro ao salvar os dados.');
@@ -471,4 +478,64 @@ class Receber extends Controllers{
 		}
 	}
 
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$equipamento = $_POST['equipamento'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, $equipamento);
+			$informacion_td = "";
+			$tipo = '';
+
+			foreach($arrData as $equipamentos)
+			{
+				if($equipamentos['equipamento'] === 8) {
+					$tipo = 'Fone';
+				} else if ($equipamentos['equipamento'] === 11) {
+					$tipo = 'Tela';
+				} else if ($equipamentos['equipamento'] === 16) {
+					$tipo = 'PC';
+				}
+
+				if($equipamentos['status'] === 2) {
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">TROCA</span>';
+				} else if($equipamentos['status'] === 3) {
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">DESLIGAMENTO</span>';
+				} else if($equipamentos['status'] === 4){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">PEDIU CONTA</span>';
+				} else if($equipamentos['status'] === 5){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">SEM RENOVAÇÃO DO CONTRATO</span>';
+				} else if($equipamentos['status'] === 6){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">JUSTA CAUSA</span>';
+				} else if($equipamentos['status'] === 7){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">RESCISÃO</span>';
+				} else if($equipamentos['status'] === 8){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">INSS</span>';
+				} else if($equipamentos['status'] === 9){
+					$equipamentos['status'] = '<span class="font-weight-bold font-italic text-danger">LICENÇA MATERNIDADE</span>';
+				}
+
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>'.$equipamentos['status'].'</td>';
+				$informacion_td .= '<td>'.$equipamentos['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($equipamentos['nombres'], $equipamentos['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$tipo.': #'.$equipamentos['lacre'].'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
 }

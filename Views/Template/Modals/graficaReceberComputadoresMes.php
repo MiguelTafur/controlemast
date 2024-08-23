@@ -1,9 +1,17 @@
 <?php if($grafica = "receberComputadoresMes"){ $receberComputadoresMes = $data;?>
 
 <script>
+
+    mes16 = '<?= $receberComputadoresMes['numeroMes']; ?>';
+    ano16 = '<?= $receberComputadoresMes['anio']; ?>';
+
     Highcharts.chart('graficaMesReceberComputadores', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
             text: 'Computadores recebidos de <?= $receberComputadoresMes['mes'].' de '.$receberComputadoresMes['anio']; ?>'
@@ -26,15 +34,23 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(event){
+                    fntInfoChartEquipamento([ano16, mes16, event.point.category, 16]);
+                  }
+              },
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'Computadores',
             data: [
                 <?php 
                 foreach ($receberComputadoresMes['controles'] as $dia) {
