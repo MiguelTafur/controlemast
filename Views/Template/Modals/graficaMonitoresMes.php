@@ -1,21 +1,28 @@
-<?php if($grafica = "MonitoresMes"){ $MonitoresMes = $data;?>
+<?php if($grafica = "TelasMes"){ $TelasMes = $data;?>
 
 <script>
+
+    mes = '<?= $TelasMes['numeroMes']; ?>';
+    ano = '<?= $TelasMes['anio']; ?>';
     
-    Highcharts.chart('graficaMesMonitores', {
+    Highcharts.chart('graficaMesTelas', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
-            text: 'Monitores Cadastrados <?= $MonitoresMes['mes'].' de '.$MonitoresMes['anio']; ?>'
+            text: 'Monitores cadastrados de <?= $TelasMes['mes'].' de '.$TelasMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $MonitoresMes['total']; ?>'
+            text: '<b>Total: <?= $TelasMes['total']; ?></b>'
         },
         xAxis: {
             categories: [
                 <?php 
-                foreach ($MonitoresMes['equipamentos'] as $dia) {
+                foreach ($TelasMes['equipamentos'] as $dia) {
                     echo $dia['dia'].",";
                 }
                 ?>
@@ -27,18 +34,26 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(event){
+                    fntInfoChartEquipamento([ano, mes, event.point.category]);
+                  }
+              }
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'Monitores',
             data: [
                 <?php 
-                foreach ($MonitoresMes['equipamentos'] as $dia) {
+                foreach ($TelasMes['equipamentos'] as $dia) {
                     echo $dia['equipamento'].",";
                 }
                 ?>

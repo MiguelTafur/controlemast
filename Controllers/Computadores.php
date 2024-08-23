@@ -23,6 +23,17 @@ class Computadores extends Controllers{
 		$data['cantidadComputadoresU'] = $this->model->cantComputadores(2);
 		$data['cantidadComputadoresE'] = $this->model->cantComputadores(3);
 		$data['cantidadComputadoresC'] = $this->model->cantComputadores(4);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['computadoresMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
+
+		//Anual
+		$data['computadoresAnio'] = $this->model->selectEquipamentosAnio($anio, MCOMPUTADOR);
+
 		$data['page_functions_js'] = "functions_computadores.js";
 		$this->views->getView($this,"computadores",$data);
 	}
@@ -232,6 +243,9 @@ class Computadores extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -239,6 +253,7 @@ class Computadores extends Controllers{
 											 'cantComputadorU' => $this->model->cantComputadores(2),
 											 'cantComputadorE' => $this->model->cantComputadores(3),
 											 'cantComputadorC' => $this->model->cantComputadores(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR)
 											);
 					}else{
 						$arrResponse = array('status' => true, 
@@ -364,6 +379,83 @@ class Computadores extends Controllers{
 					}
 				}
 			}
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function computadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "ComputadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$computadores = $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaComputadoresMes", $computadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function computadoresAnio(){
+		if($_POST){
+			$grafica = "computadoresAnio";
+			$anio = intval($_POST['anio']);
+			$computadores = $this->model->selectEquipamentosAnio($anio, MCOMPUTADOR);
+			$script = getFile("Template/Modals/graficaAnoComputadores",$computadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, MCOMPUTADOR);
+			$informacion_td = "";
+
+			foreach($arrData as $pcs)
+			{
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>#'.$pcs['lacre'].'</td>';
+				$informacion_td .= '<td>'.$pcs['marca'].'</td>';
+
+				switch ($pcs['status']) {
+					case '1':
+						$informacion_td .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+						break;
+					case '2':
+						$informacion_td .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+						break;
+					case '3':
+						$informacion_td .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+						break;
+					default:
+						$informacion_td .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+						break;
+				}
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();

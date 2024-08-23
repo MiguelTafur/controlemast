@@ -1,16 +1,23 @@
-<?php if($grafica = "FonesMes"){ $FonesMes = $data;?>
+<?php if($grafica = "FonesMes"){ $FonesMes = $data; ?>
 
 <script>
     
+    mes = '<?= $FonesMes['numeroMes']; ?>';
+    ano = '<?= $FonesMes['anio']; ?>';
+
     Highcharts.chart('graficaMesFones', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
-            text: 'Fones Cadastrados <?= $FonesMes['mes'].' de '.$FonesMes['anio']; ?>'
+            text: 'Fones cadastrados de <?= $FonesMes['mes'].' de '.$FonesMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $FonesMes['total']; ?>'
+            text: '<b>Total: <?= $FonesMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [
@@ -27,15 +34,23 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(event){
+                    fntInfoChartEquipamento([ano, mes, event.point.category]);
+                  }
+              },
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'Fones',
             data: [
                 <?php 
                 foreach ($FonesMes['equipamentos'] as $dia) {

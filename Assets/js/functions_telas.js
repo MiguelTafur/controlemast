@@ -2,6 +2,23 @@ let tableTelas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
+$('.date-picker').datepicker( {
+    closeText: 'Fechar',
+    prevText: '<Ant',
+    nextText: 'Seg>',
+    currentText: 'Hoje',
+    monthNames: ['1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -', '11 -', '12 -'],
+    monthNamesShort: ['Janeiro','Fevereiro','Março','Abril', 'Maio','Junho','Julho','Agosto','Setembro', 'Outubro','Novembro','Dezembro'],
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'MM yy',
+    showDays: false,
+    onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
@@ -79,6 +96,13 @@ function fntCrearTelas() {
                         document.querySelector("#cantTelaU").textContent = objData.cantTelaU;
                         document.querySelector("#cantTelaE").textContent = objData.cantTelaE;
                         document.querySelector("#cantTelaC").textContent = objData.cantTelaC;
+
+                        let mes = objData.infoGrafica.numeroMes;
+                        let ano = objData.infoGrafica.anio;
+
+                        let fecha = [mes, ano].join("-");
+
+                        fntInfoGrafica(fecha);
                         
                         if(rowTable == ""){
                             tableTelas.api().ajax.reload();
@@ -435,4 +459,116 @@ function openModal()
     document.querySelector('#divFileAnotacion').classList.remove('d-none');
     document.querySelector('#divEstadoEquipamento').classList.remove('d-none');
     $('#modalFormTelas').modal('show');
+}
+
+/*** GRÁFICAS ***/
+
+//Buscador gráfica mensual
+function fntSearchTelasMes()
+{
+    let fecha = document.querySelector(".telasMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Telas/telasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchTelasAnio(){
+    let anio = document.querySelector(".telasAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Telas/telasAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioTelas").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Telas/getDatosGraficaEquipamento';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateEquipamentoGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    swal("Monitores", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
+}
+
+function fntInfoGrafica(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Telas/telasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
 }

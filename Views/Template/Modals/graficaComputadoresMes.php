@@ -2,15 +2,22 @@
 
 <script>
     
+    mes = '<?= $ComputadoresMes['numeroMes']; ?>';
+    ano = '<?= $ComputadoresMes['anio']; ?>';
+
     Highcharts.chart('graficaMesComputadores', {
         chart: {
-            type: 'line'
+            type: 'line',
+            scrollablePlotArea: {
+                minWidth: 700,
+                scrollPositionX: 1
+            }
         },
         title: {
-            text: 'Computadores Cadastrados <?= $ComputadoresMes['mes'].' de '.$ComputadoresMes['anio']; ?>'
+            text: 'Computadores cadastrados de <?= $ComputadoresMes['mes'].' de '.$ComputadoresMes['anio']; ?>'
         },
         subtitle: {
-            text: 'Total: <?= $ComputadoresMes['total']; ?>'
+            text: '<b>Total: <?= $ComputadoresMes['total']; ?><b/>'
         },
         xAxis: {
             categories: [
@@ -27,15 +34,23 @@
             }
         },
         plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(event){
+                    fntInfoChartEquipamento([ano, mes, event.point.category]);
+                  }
+              },
+            },
             line: {
                 dataLabels: {
                     enabled: true
                 },
-                enableMouseTracking: false
+                enableMouseTracking: true
             }
         },
         series: [{
-            name: '',
+            name: 'PC',
             data: [
                 <?php 
                 foreach ($ComputadoresMes['equipamentos'] as $dia) {

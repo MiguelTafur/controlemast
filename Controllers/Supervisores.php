@@ -19,7 +19,20 @@ class Supervisores extends Controllers{
 		$data['page_tag'] = "Supervisores";
 		$data['page_title'] = "SUPERVISORES";
 		$data['page_name'] = "supervisores";
+
+		//Cantidades
 		$data['cantidadSupervisores'] = $this->model->cantSupervisores();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['supervisoresMDia'] = $this->model->selectUsuariosMes($anio,$mes,RSUPERVISOR);
+
+		//Anual
+		$data['supervisoresAnio'] = $this->model->selectUsuariosAnio($anio, RSUPERVISOR);
+
 		$data['page_functions_js'] = "functions_supervisores.js";
 		$this->views->getView($this,"supervisores",$data);
 	}
@@ -162,6 +175,71 @@ class Supervisores extends Controllers{
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function supervisoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "supervisoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$supervisores = $this->model->selectUsuariosMes($anio,$mes,RSUPERVISOR);
+			$script = getFile("Template/Modals/graficaSupervisoresMes", $supervisores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function supervisoresAnio()
+	{
+		if($_POST){
+			$grafica = "supervisoresAnio";
+			$anio = intval($_POST['anio']);
+			$supervisores = $this->model->selectUsuariosAnio($anio, RSUPERVISOR);
+			$script = getFile("Template/Modals/graficaAnoSupervisores",$supervisores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, RSUPERVISOR);
+			$informacion_td = "";
+
+			foreach($arrData as $supervisor)
+			{
+				$modelo = $supervisor['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$supervisor['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($supervisor['nombres'], $supervisor['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}

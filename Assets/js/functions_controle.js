@@ -1,6 +1,25 @@
 let tableEntregue;
+let tableEntregueComputadores;
+let tableEntregueTelas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
+
+$('.date-picker').datepicker( {
+    closeText: 'Fechar',
+    prevText: '<Ant',
+    nextText: 'Seg>',
+    currentText: 'Hoje',
+    monthNames: ['1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -', '11 -', '12 -'],
+    monthNamesShort: ['Janeiro','Fevereiro','Março','Abril', 'Maio','Junho','Julho','Agosto','Setembro', 'Outubro','Novembro','Dezembro'],
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'MM yy',
+    showDays: false,
+    onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
@@ -8,11 +27,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function iniciarApp() {
     fntTablaControles();
+    fntTablaControlesComputadores();
+    fntTablaControlesTelas();
     fntCrearControleEntrega();
     fntActualizarProtocolo();
 }
 
-// Tabela dos controles
+// Tabela dos controles de los fones
 function fntTablaControles() {
     tableEntregue = $('#tableEntregue').dataTable({
         "aProcessing":true,
@@ -22,6 +43,58 @@ function fntTablaControles() {
         },
         "ajax":{
             "url": " "+base_url+"/Entregar/getEntregues",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20
+    });
+}
+
+// Tabela dos controles de los fones
+function fntTablaControlesComputadores() {
+    tableEntregueComputadores = $('#tableEntregueComputadores').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Entregar/getEntreguesComputadores",
+            "dataSrc":""
+        },
+        "columns":[
+            {"data":"fechaRegistro"},
+            {"data":"status"},
+            {"data":"equipamento"},
+            {"data":"matricula"},
+            {"data":"nombres"},
+            {"data":"options"}
+        ],
+        "resonsieve":"true",
+        "bDestroy": true,
+        "iDisplayLength": 20
+    });
+}
+
+// Tabela dos controles de los fones
+function fntTablaControlesTelas() {
+    tableEntregueTelas = $('#tableEntregueTelas').dataTable({
+        "aProcessing":true,
+        "aServerSide":true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        },
+        "ajax":{
+            "url": " "+base_url+"/Entregar/getEntreguesTelas",
             "dataSrc":""
         },
         "columns":[
@@ -75,6 +148,23 @@ function fntCrearControleEntrega() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+
+
+                        let mesFone = objData.infoGraficaFone.numeroMes;
+                        let anoFone = objData.infoGraficaFone.anio;
+                        let mesPc = objData.infoGraficaPc.numeroMes;
+                        let anoPc = objData.infoGraficaPc.anio;
+                        let mesMonitor = objData.infoGraficaMonitor.numeroMes;
+                        let anoMonitor = objData.infoGraficaMonitor.anio;
+
+                        let fechaFone = [mesFone, anoFone].join("-");
+                        let fechaPc = [mesPc, anoPc].join("-");
+                        let fechaMonitor = [mesMonitor, anoMonitor].join("-");
+
+                        fntInfoGraficaFone(fechaFone);
+                        fntInfoGraficaPc(fechaPc);
+                        fntInfoGraficaMonitor(fechaMonitor);
+
                         document.querySelector("#cantEntregas").textContent = objData.cantEntregas;
                         document.querySelector("#cantEntregasHoy").textContent = objData.cantEntregasHoy;
 
@@ -311,4 +401,277 @@ function openModalEntregue()
     fntEquipamentos();
     fntUsuarios();
     $('#modalFormControleEntrega').modal('show');
+}
+
+/** FONES **/
+//Buscador gráfica mensual
+function fntSearchEntregarFonesMes()
+{
+    let fecha = document.querySelector(".entregarFonesMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarFonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchEntregarFonesAnio(){
+    let anio = document.querySelector(".entregarFonesAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Entregar/entregarFonesAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioEntregarFones").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+/** PCS **/
+//Buscador gráfica mensual
+function fntSearchEntregarComputadoresMes()
+{
+    let fecha = document.querySelector(".entregarComputadoresMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarComputadoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarComputadores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchEntregarComputadoresAnio(){
+    let anio = document.querySelector(".entregarComputadoresAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Entregar/entregarComputadoresAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioEntregarComputadores").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+/** TELAS **/
+//Buscador gráfica mensual
+function fntSearchEntregarTelasMes()
+{
+    let fecha = document.querySelector(".entregarTelasMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarTelasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchEntregarTelasAnio(){
+    let anio = document.querySelector(".entregarTelasAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Entregar/entregarTelasAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioEntregarTelas").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
+{
+    let equipamento = fecha.pop();
+    let date = fecha.join("-");
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/getDatosGraficaEquipamento';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    formData.append('equipamento', equipamento);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateFoneGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    if(equipamento === 8)
+                    {
+                        equipamento = 'Fone';
+                    } else if (equipamento === 16){
+                        equipamento = 'Computador';
+                    } else {
+                        equipamento = 'Monitor';
+                    }
+                    swal(equipamento, objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
+}
+
+function fntInfoGraficaFone(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarFonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+function fntInfoGraficaPc(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarComputadoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarComputadores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+function fntInfoGraficaMonitor(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarTelasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
 }

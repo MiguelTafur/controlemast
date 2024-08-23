@@ -1,17 +1,18 @@
+
 <?php 
-	if($grafica = "cobradoAnio"){
-		$cobradoAnio = $data;
+	if($grafica = "entregarTelasAnio"){
+		$entregarTelasAnio = $data;
  ?>
  <script>
- 	Highcharts.chart('graficaCAnio', {
+ 	Highcharts.chart('graficaAnioEntregarTelas', {
       chart: {
           type: 'column'
       },
       title: {
-          text: 'Cobrado del año <?= $cobradoAnio['anio'] ?> '
+          text: 'Monitores entregues de <?= $entregarTelasAnio['anio'] ?> '
       },
       subtitle: {
-        text: 'Estadísticas de Gastos por mes<br><b>Total: <?= $cobradoAnio['totalCobrado'] ?></b> '
+        text: '<b>Total: <?= $entregarTelasAnio['totalControle'] ?></b> '
       },
       xAxis: {
           type: 'category',
@@ -36,23 +37,22 @@
           pointFormat: ''
       },
       series: [{
-          name: 'Population',
+          name: 'Telas',
           data: [
             <?php 
-              foreach ($cobradoAnio['meses'] as $mes) {
-                echo "['".$mes['mes']."',".$mes['cobrado']."],";
-              }
-             ?>                 
+                foreach ($entregarTelasAnio['meses'] as $mes) {
+                    echo "['".$mes['mes']."',".$mes['total']."],";
+                }
+            ?>                  
           ],
           dataLabels: {
               enabled: true,
               rotation: -90,
               color: '#FFFFFF',
               align: 'right',
-              format: '{point.y:.1f}', // one decimal
               y: 10, // 10 pixels down from the top
               style: {
-                  fontSize: '13px',
+                  fontSize: '15px',
                   fontFamily: 'Verdana, sans-serif'
               }
           }

@@ -1,6 +1,24 @@
 let tableGerentes;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
+
+$('.date-picker').datepicker( {
+    closeText: 'Fechar',
+    prevText: '<Ant',
+    nextText: 'Seg>',
+    currentText: 'Hoje',
+    monthNames: ['1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -', '11 -', '12 -'],
+    monthNamesShort: ['Janeiro','Fevereiro','Março','Abril', 'Maio','Junho','Julho','Agosto','Setembro', 'Outubro','Novembro','Dezembro'],
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'MM yy',
+    showDays: false,
+    onClose: function(dateText, inst) {
+        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
@@ -245,4 +263,96 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Novo Gerente";
     document.querySelector("#formGerente").reset();
     $('#modalFormGerente').modal('show');
+}
+
+/*** GRÁFICAS ***/
+
+//Buscador gráfica mensual
+function fntSearchGerentesMes()
+{
+    let fecha = document.querySelector(".gerentesMes").value;
+    if(fecha == "")
+    {
+        swal("", "Selecione mês e ano", "error");
+        return false;
+    }
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Gerentes/gerentesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesGerentes").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+
+//Buscador gráfica anual
+function fntSearchGerentesAnio()
+{
+    let anio = document.querySelector(".gerentesAnio").value;
+    if(anio == ""){
+        swal("", "Digite o Ano " , "error");
+        return false;
+    }else{
+        let request = (window.XMLHttpRequest) ?
+            new XMLHttpRequest() :
+            new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/Gerentes/gerentesAnio';
+        divLoading.style.display = "flex";
+        let formData = new FormData();
+        formData.append('anio',anio);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if(request.readyState != 4) return;
+            if(request.status == 200){
+                $("#graficaAnioGerentes").html(request.responseText);
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartPersona(fecha) 
+{
+    let date = fecha.join("-")
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Gerentes/getDatosGraficaPersona';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaPersona").innerHTML = tdAnotaciones;
+                    document.querySelector("#datePersonaGrafica").textContent = fecha;
+                    $('#modalViewPersonaGrafica').modal('show');
+                } else {
+                    swal("Aprendiz", objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
 }

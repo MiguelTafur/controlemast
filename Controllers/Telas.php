@@ -23,6 +23,17 @@ class Telas extends Controllers{
 		$data['cantidadTelasU'] = $this->model->cantTelas(2);
 		$data['cantidadTelasE'] = $this->model->cantTelas(3);
 		$data['cantidadTelasC'] = $this->model->cantTelas(4);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['telasMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MTELA);
+
+		//Anual
+		$data['telasAnio'] = $this->model->selectEquipamentosAnio($anio, MTELA);
+
 		$data['page_functions_js'] = "functions_telas.js";
 		$this->views->getView($this,"telas",$data);
 	}
@@ -230,6 +241,9 @@ class Telas extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -237,6 +251,7 @@ class Telas extends Controllers{
 											 'cantTelaU' => $this->model->cantTelas(2),
 											 'cantTelaE' => $this->model->cantTelas(3),
 											 'cantTelaC' => $this->model->cantTelas(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MTELA)
 											);
 					}else{
 						$arrResponse = array('status' => true, 
@@ -364,6 +379,83 @@ class Telas extends Controllers{
 					}
 				}
 			}
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function telasMes()
+	{
+		if($_POST)
+		{
+			$grafica = "TelasMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$telas = $this->model->selectEquipamentosMes($anio,$mes,MTELA);
+			$script = getFile("Template/Modals/graficaMonitoresMes", $telas);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function telasAnio(){
+		if($_POST){
+			$grafica = "telasAnio";
+			$anio = intval($_POST['anio']);
+			$telas = $this->model->selectEquipamentosAnio($anio, MTELA);
+			$script = getFile("Template/Modals/graficaAnoTelas",$telas);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, MTELA);
+			$informacion_td = "";
+
+			foreach($arrData as $telas)
+			{
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>#'.$telas['lacre'].'</td>';
+				$informacion_td .= '<td>'.$telas['marca'].'</td>';
+
+				switch ($telas['status']) {
+					case '1':
+						$informacion_td .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+						break;
+					case '2':
+						$informacion_td .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+						break;
+					case '3':
+						$informacion_td .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+						break;
+					default:
+						$informacion_td .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+						break;
+				}
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();

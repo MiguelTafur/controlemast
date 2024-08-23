@@ -19,7 +19,20 @@ class Aprendizes extends Controllers{
 		$data['page_tag'] = "Aprendiz";
 		$data['page_title'] = "APRENDIZ";
 		$data['page_name'] = "aprendiz";
+
+		//Cantidad 
 		$data['cantidadAprendizes'] = $this->model->cantAprendizes();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['aprendizesMDia'] = $this->model->selectUsuariosMes($anio,$mes,RAPRENDIZ);
+
+		//Anual
+		$data['aprendizesAnio'] = $this->model->selectUsuariosAnio($anio, RAPRENDIZ);
+
 		$data['page_functions_js'] = "functions_aprendiz.js";
 		$this->views->getView($this,"aprendizes",$data);
 	}
@@ -152,6 +165,71 @@ class Aprendizes extends Controllers{
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function aprendizesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "aprendizesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$aprendizes = $this->model->selectUsuariosMes($anio,$mes,RAPRENDIZ);
+			$script = getFile("Template/Modals/graficaAprendizesMes", $aprendizes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function aprendizesAnio()
+	{
+		if($_POST){
+			$grafica = "aprendizesAnio";
+			$anio = intval($_POST['anio']);
+			$aprendizes = $this->model->selectUsuariosAnio($anio, RAPRENDIZ);
+			$script = getFile("Template/Modals/graficaAnoAprendizes",$aprendizes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, RAPRENDIZ);
+			$informacion_td = "";
+
+			foreach($arrData as $aprendiz)
+			{
+				$modelo = $aprendiz['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$aprendiz['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($aprendiz['nombres'], $aprendiz['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}

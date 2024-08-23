@@ -19,8 +19,21 @@ class Operacao extends Controllers{
 		$data['page_tag'] = "Operação";
 		$data['page_title'] = "OPERAÇÃO";
 		$data['page_name'] = "operação";
+
+		//Cantidades
 		$data['cantidadOperadoresP'] = $this->model->cantOperadores(1);
 		$data['cantidadOperadoresH'] = $this->model->cantOperadores(2);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['operadoresMDia'] = $this->model->selectUsuariosMes($anio,$mes,ROPERACAO);
+
+		//Anual
+		$data['operadoresAnio'] = $this->model->selectUsuariosAnio($anio, ROPERACAO);
+
 		$data['page_functions_js'] = "functions_operacao.js";
 		$this->views->getView($this,"operacao",$data);
 	}
@@ -169,6 +182,70 @@ class Operacao extends Controllers{
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function operadoresMes()
+	{
+		if($_POST)
+		{
+			$grafica = "operadoresMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$operadores = $this->model->selectUsuariosMes($anio,$mes,ROPERACAO);
+			$script = getFile("Template/Modals/graficaOperadoresMes", $operadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function operadoresAnio(){
+		if($_POST){
+			$grafica = "operadoresAnio";
+			$anio = intval($_POST['anio']);
+			$operadores = $this->model->selectUsuariosAnio($anio, ROPERACAO);
+			$script = getFile("Template/Modals/graficaAnoOperadores",$operadores);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, ROPERACAO);
+			$informacion_td = "";
+
+			foreach($arrData as $operacao)
+			{
+				$modelo = $operacao['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$operacao['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($operacao['nombres'], $operacao['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}

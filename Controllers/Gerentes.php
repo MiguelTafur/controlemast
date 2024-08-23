@@ -19,7 +19,20 @@ class Gerentes extends Controllers{
 		$data['page_tag'] = "Gerentes";
 		$data['page_title'] = "GERENTES";
 		$data['page_name'] = "gerentes";
+
+		//Cantidades
 		$data['cantidadGerentes'] = $this->model->cantGerentes();
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['gerentesMDia'] = $this->model->selectUsuariosMes($anio,$mes,RGERENTE);
+
+		//Anual
+		$data['gerentesAnio'] = $this->model->selectUsuariosAnio($anio, RGERENTE);
+
 		$data['page_functions_js'] = "functions_gerentes.js";
 		$this->views->getView($this,"gerentes",$data);
 	}
@@ -162,6 +175,71 @@ class Gerentes extends Controllers{
 				}
 				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);	
 			}
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function gerentesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "gerentesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$gerentes = $this->model->selectUsuariosMes($anio,$mes,RGERENTE);
+			$script = getFile("Template/Modals/graficaGerentesMes", $gerentes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function gerentesAnio()
+	{
+		if($_POST){
+			$grafica = "gerentesAnio";
+			$anio = intval($_POST['anio']);
+			$gerentes = $this->model->selectUsuariosAnio($anio, RGERENTE);
+			$script = getFile("Template/Modals/graficaAnoGerentes",$gerentes);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaPersona()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaPersona($fechaGrafica, RGERENTE);
+			$informacion_td = "";
+
+			foreach($arrData as $aprendiz)
+			{
+				$modelo = $aprendiz['modelo'] === 1 ? 'Presencial' : 'Home Office';
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td class="font-weight-bold font-italic">#'.$aprendiz['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($aprendiz['nombres'], $aprendiz['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$modelo.'</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
 	}

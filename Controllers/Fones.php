@@ -19,10 +19,22 @@ class Fones extends Controllers{
 		$data['page_tag'] = "Fones";
 		$data['page_title'] = "FONES";
 		$data['page_name'] = "fones";
+		// Cantidades
 		$data['cantidadFonesD'] = $this->model->cantFones(1);
 		$data['cantidadFonesU'] = $this->model->cantFones(2);
 		$data['cantidadFonesE'] = $this->model->cantFones(3);
 		$data['cantidadFonesC'] = $this->model->cantFones(4);
+
+		/*** Gráficas ***/ 
+		$anio = date("Y");
+		$mes = date("m");
+
+		//Mensal
+		$data['fonesMDia'] = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+		//dep($data['fonesMDia']);exit;
+
+		//Anual
+		$data['fonesAnio'] = $this->model->selectFonesAnio($anio);
 		$data['page_functions_js'] = "functions_fones.js";
 		$this->views->getView($this,"fones",$data);
 	}
@@ -232,6 +244,9 @@ class Fones extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+					
 					if($option == 1){
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -239,6 +254,7 @@ class Fones extends Controllers{
 											 'cantFoneU' => $this->model->cantFones(2),
 											 'cantFoneE' => $this->model->cantFones(3),
 											 'cantFoneC' => $this->model->cantFones(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MFONE)
 											);
 					}else{
 						$arrResponse = array('status' => true, 
@@ -364,6 +380,84 @@ class Fones extends Controllers{
 					}
 				}
 			}
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	/*** GRÁFICAS ***/
+	
+	//Mostrar gráfica mensual
+	public function fonesMes()
+	{
+		if($_POST)
+		{
+			$grafica = "FonesMes";
+			$nFecha = str_replace(" ", "", $_POST['fecha']);
+			$arrFecha = explode('-', $nFecha);
+			$mes = $arrFecha[0];
+			$anio = $arrFecha[1];
+			$fones = $this->model->selectEquipamentosMes($anio,$mes,MFONE);
+			$script = getFile("Template/Modals/graficaFonesMes", $fones);
+			echo $script;
+			///die();
+		}
+	}
+
+	//Mostrar gráfica anual
+	public function fonesAnio()
+	{
+		if($_POST){
+			$grafica = "fonesAnio";
+			$anio = intval($_POST['anio']);
+			$fones = $this->model->selectFonesAnio($anio);
+			$script = getFile("Template/Modals/graficaAnoFones",$fones);
+			echo $script;
+			die();
+		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, MFONE);
+			$informacion_td = "";
+
+			foreach($arrData as $fones)
+			{
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>#'.$fones['lacre'].'</td>';
+				$informacion_td .= '<td>'.$fones['marca'].'</td>';
+
+				switch ($fones['status']) {
+					case '1':
+						$informacion_td .= '<td><h5><span class="badge badge-success">Disponível</span></h5></td>';
+						break;
+					case '2':
+						$informacion_td .= '<td><h5><span class="badge badge-info">Em Uso</span></h5></td>';
+						break;
+					case '3':
+						$informacion_td .= '<td><h5><span class="badge badge-danger">Estragado</span></h5></td>';
+						break;
+					default:
+						$informacion_td .= '<td><h5><span class="badge badge-warning">Concerto</span></h5></td>';
+						break;
+				}
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 		}
 		die();
