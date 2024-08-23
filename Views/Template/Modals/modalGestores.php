@@ -120,9 +120,9 @@
           <table class="table table-striped text-center">
             <thead>
               <tr>
-                <th>Matrícula</th>
-                <th>Nome</th>
-                <th>Modelo</th>
+                <th>MATRÍCULA</th>
+                <th>NOME</th>
+                <th>MODELO</th>
               </tr>
             </thead>
             <tbody id="listgraficaPersona">

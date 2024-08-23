@@ -132,9 +132,9 @@
           <table class="table table-striped text-center">
             <thead>
               <tr>
-                <th>Lacre</th>
-                <th>Marca</th>
-                <th>Estado Atual</th>
+                <th>LACRE</th>
+                <th>MARCA</th>
+                <th>ESTADO</th>
               </tr>
             </thead>
             <tbody id="listgraficaEquipamentos">
