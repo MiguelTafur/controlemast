@@ -12,6 +12,7 @@ class EntregarModel extends Mysql
 	PRIVATE $intIdEquipamento;
 	PRIVATE $intIdRuta;
     PRIVATE $intTipo;
+    PRIVATE $strFecha;
 
 	public function __construct()
 	{
@@ -55,12 +56,13 @@ class EntregarModel extends Mysql
     public function selectUsuarios($ruta)
     {
         $this->intIdRuta = $ruta;
-        $sql = "SELECT idpersona, matricula, nombres, apellidos
-            FROM persona
-            WHERE status != 0
-            AND codigoruta = $this->intIdRuta
-            AND idpersona != 1
-            ORDER BY nombres ASC";
+        $sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos
+            FROM persona pe
+            LEFT OUTER JOIN rol ro ON(pe.rolid = ro.idrol)
+            WHERE pe.status != 0
+            AND pe.codigoruta = $this->intIdRuta
+            AND pe.rolid != 1
+            ORDER BY pe.nombres ASC";
         $request = $this->select_all($sql);
         return $request;
     }
@@ -263,7 +265,7 @@ class EntregarModel extends Mysql
 
     /***** GRÁFICAS *****/
 
-    //Gráfica mensual de ControleFones
+    //Gráfica mensual de Controle Equipamentos
 	public function selectControleEquipamentosMes(string $anio, string $mes, int $tipo)
 	{
 		$totalControleMes = 0;
@@ -309,11 +311,11 @@ class EntregarModel extends Mysql
 
 		}
 		$meses = Meses();
-		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'total' => $totalControleMes, 'controles' => $arrControleDias);
+		$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes - 1)], 'numeroMes' => $mes, 'total' => $totalControleMes, 'controles' => $arrControleDias);
 		return $arrData;
 	}
 
-    //Gráfica anual de ControleFones
+    //Gráfica anual de Controle Equipamentos
     public function selectControleEquipamentosAnio(string $anio, int $tipo) 
     {
 		$this->intTipo = $tipo;
@@ -355,5 +357,35 @@ class EntregarModel extends Mysql
 		$arrControle = array('totalControle' => $totalControle, 'anio' => $anio, 'meses' => $arrMEntrega);
 		return $arrControle;
 
+	}
+
+    //Información de la gráfica
+	public function datosGraficaEquipamento(string $fecha, int $tipo) 
+	{
+		$this->strFecha = $fecha;
+		$this->intTipo = $tipo;
+        $ruta = $_SESSION['idRuta'];
+
+		$sql = "SELECT co.protocolo, 
+                       DATE_FORMAT(co.datecreated, '%d-%m-%Y') as fecha,
+                       co.status,
+                       pe.matricula,
+                       pe.nombres,
+                       pe.apellidos,
+                       eq.tipo as equipamento,
+                       eq.lacre
+
+                FROM controle co
+                LEFT OUTER JOIN persona pe
+                ON co.personaid = pe.idpersona
+                LEFT OUTER JOIN equipamento eq
+                ON co.equipamentoid = eq.idequipamento
+                WHERE (co.status = 1 || co.status = 0)
+                AND co.datecreated = '{$this->strFecha}' 
+                AND eq.tipo = $this->intTipo 
+                AND pe.codigoruta = $ruta";
+		$request = $this->select_all($sql);
+
+		return $request;
 	}
 }

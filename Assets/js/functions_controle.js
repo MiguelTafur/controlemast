@@ -148,6 +148,23 @@ function fntCrearControleEntrega() {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
+
+
+                        let mesFone = objData.infoGraficaFone.numeroMes;
+                        let anoFone = objData.infoGraficaFone.anio;
+                        let mesPc = objData.infoGraficaPc.numeroMes;
+                        let anoPc = objData.infoGraficaPc.anio;
+                        let mesMonitor = objData.infoGraficaMonitor.numeroMes;
+                        let anoMonitor = objData.infoGraficaMonitor.anio;
+
+                        let fechaFone = [mesFone, anoFone].join("-");
+                        let fechaPc = [mesPc, anoPc].join("-");
+                        let fechaMonitor = [mesMonitor, anoMonitor].join("-");
+
+                        fntInfoGraficaFone(fechaFone);
+                        fntInfoGraficaPc(fechaPc);
+                        fntInfoGraficaMonitor(fechaMonitor);
+
                         document.querySelector("#cantEntregas").textContent = objData.cantEntregas;
                         document.querySelector("#cantEntregasHoy").textContent = objData.cantEntregasHoy;
 
@@ -550,6 +567,111 @@ function fntSearchEntregarTelasAnio(){
                 divLoading.style.display = "none";
                 return false;
             }
+        }
+    }
+}
+
+//Infoamrción de la gráfica
+function fntInfoChartEquipamento(fecha) 
+{
+    let equipamento = fecha.pop();
+    let date = fecha.join("-");
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/getDatosGraficaEquipamento';
+    let  formData = new FormData();
+    formData.append('fecha', date);
+    formData.append('equipamento', equipamento);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+            if(request.status == 200)
+            {
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    let tdAnotaciones = objData.data;
+                    let fecha = objData.fecha;
+                    
+                    document.querySelector("#listgraficaEquipamentos").innerHTML = tdAnotaciones;
+                    document.querySelector("#dateFoneGrafica").textContent = fecha;
+                    $('#modalViewEquipamentoGrafica').modal('show');
+                } else {
+                    if(equipamento === 8)
+                    {
+                        equipamento = 'Fone';
+                    } else if (equipamento === 16){
+                        equipamento = 'Computador';
+                    } else {
+                        equipamento = 'Monitor';
+                    }
+                    swal(equipamento, objData.msg, "warning");
+                }
+            }
+            divLoading.style.display = "none";
+            return false;
+    }
+}
+
+function fntInfoGraficaFone(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarFonesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarFones").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+function fntInfoGraficaPc(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarComputadoresMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarComputadores").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+}
+function fntInfoGraficaMonitor(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Entregar/entregarTelasMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesEntregarTelas").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
         }
     }
 }

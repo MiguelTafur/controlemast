@@ -218,10 +218,16 @@ class Entregar extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					$arrResponse = array('status' => true, 'msg' => 'Dados salvos com sucesso.', 
 										 'data' => $request_user,
 										 'cantEntregas' => $this->model->cantEntregues(),
 										 'cantEntregasHoy' => $this->model->cantEntregues(NOWDATE),
+										 'infoGraficaFone' => $this->model->selectControleEquipamentosMes($anio,$mes, MFONE),
+										 'infoGraficaPc' => $this->model->selectControleEquipamentosMes($anio,$mes, MCOMPUTADOR),
+										 'infoGraficaMonitor' => $this->model->selectControleEquipamentosMes($anio,$mes, MTELA)
 										);
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'O Usuário já possui um equipamento.');
@@ -416,7 +422,8 @@ class Entregar extends Controllers{
 	}
 
 	//Mostrar gráfica anual
-	public function entregarFonesAnio(){
+	public function entregarFonesAnio()
+	{
 		if($_POST){
 			$grafica = "entregarFonesAnio";
 			$anio = intval($_POST['anio']);
@@ -446,7 +453,8 @@ class Entregar extends Controllers{
 	}
 
 	//Mostrar gráfica anual
-	public function entregarComputadoresAnio(){
+	public function entregarComputadoresAnio()
+	{
 		if($_POST)
 		{
 			$grafica = "entregarComputadoresAnio";
@@ -477,7 +485,8 @@ class Entregar extends Controllers{
 	}
 
 	//Mostrar gráfica anual
-	public function entregarTelasAnio(){
+	public function entregarTelasAnio()
+	{
 		if($_POST)
 		{
 			$grafica = "entregarTelasAnio";
@@ -487,5 +496,56 @@ class Entregar extends Controllers{
 			echo $script;
 			die();
 		}
+	}
+
+	//Información de la gráfica
+	public function getDatosGraficaEquipamento()
+	{
+		if($_POST)
+		{
+			$fechaGrafica = $_POST['fecha'];
+			$equipamento = $_POST['equipamento'];
+			$arrData = $this->model->datosGraficaEquipamento($fechaGrafica, $equipamento);
+			$informacion_td = "";
+			$tipo = '';
+
+			foreach($arrData as $equipamentos)
+			{
+				if($equipamentos['equipamento'] === 8) {
+					$tipo = 'Fone';
+				} else if ($equipamentos['equipamento'] === 11) {
+					$tipo = 'Tela';
+				} else if ($equipamentos['equipamento'] === 16) {
+					$tipo = 'PC';
+				}
+
+				$equipamentos['status'] = $equipamentos['status'] === 1 ? '<i class="fa fa-check-square fa-lg text-success" aria-hidden="true"></i>' 
+																		: '<i class="fa fa-window-close fa-lg text-danger" aria-hidden="true"></i>';
+
+				$informacion_td .= "<tr>";
+				$informacion_td .= '<td>'.$equipamentos['status'].'</td>';
+				$informacion_td .= '<td>'.$equipamentos['matricula'].'</td>';
+				$informacion_td .= '<td>'.formatName($equipamentos['nombres'], $equipamentos['apellidos']).'</td>';
+				$informacion_td .= '<td>'.$tipo.': #'.$equipamentos['lacre'].'</td>';
+				$informacion_td .= '<td>
+										<a href="'.base_url().'/Assets/images/imagenes/'.$equipamentos['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;">
+											<i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i>
+										</a>
+									</td>';
+			}
+
+			$informacion_td .= "</tr>";
+			
+			if($arrData)
+			{
+				$fecha = $arrData[0]['fecha'];
+				$arrResponse = array('status' => true, 'data' => $informacion_td, 'fecha' => $fecha);	
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Nenhum dado encontrado.');
+			}
+
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+		}
+		die();
 	}
 }

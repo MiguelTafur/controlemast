@@ -252,10 +252,18 @@
 <script>
   /** FONES **/
   //Mes
+
+  let mes = '<?= $data['entregarFonesMDia']['numeroMes']; ?>';
+  let ano = '<?= $data['entregarFonesMDia']['anio']; ?>';
+
   Highcharts.chart('graficaMesEntregarFones', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+        }
     },
     title: {
         text: 'Fones entregues de <?= $data['entregarFonesMDia']['mes'].' de '.$data['entregarFonesMDia']['anio']; ?>'
@@ -279,16 +287,24 @@
     },
 
     plotOptions: {
+      series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartEquipamento([ano, mes, event.point.category, 8]);
+          }
+        },
+      },
         line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
+          dataLabels: {
+              enabled: true
+          },
+          enableMouseTracking: true
         }
     },
     
     series: [{
-        name: '',
+        name: 'Fones',
         data: [
           <?php 
             foreach ($data['entregarFonesMDia']['controles'] as $usuario) {
@@ -361,7 +377,11 @@
   Highcharts.chart('graficaMesEntregarComputadores', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+        }
     },
     title: {
         text: 'Computadores entregues de <?= $data['entregarComputadoresMDia']['mes'].' de '.$data['entregarComputadoresMDia']['anio']; ?>'
@@ -385,16 +405,24 @@
     },
 
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
+      series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartEquipamento([ano, mes, event.point.category, 16]);
+          }
+        },
+      },
+      line: {
+        dataLabels: {
+            enabled: true
+        },
+        enableMouseTracking: true
+      }
     },
     
     series: [{
-        name: '',
+        name: 'Computadores',
         data: [
           <?php 
             foreach ($data['entregarComputadoresMDia']['controles'] as $usuario) {
@@ -467,7 +495,11 @@
   Highcharts.chart('graficaMesEntregarTelas', 
   {
     chart: {
-        type: 'line'
+        type: 'line',
+        scrollablePlotArea: {
+          minWidth: 700,
+          scrollPositionX: 1
+        }
     },
     title: {
         text: 'Monitores entregues de <?= $data['entregarTelasMDia']['mes'].' de '.$data['entregarTelasMDia']['anio']; ?>'
@@ -491,16 +523,24 @@
     },
 
     plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
+      series: {
+        cursor: 'pointer',
+        events: {
+          click: function(event){
+            fntInfoChartEquipamento([ano, mes, event.point.category, 11]);
+          }
+        },
+      },
+      line: {
+        dataLabels: {
+          enabled: true
+        },
+        enableMouseTracking: true
+      }
     },
     
     series: [{
-        name: '',
+        name: 'Monitores',
         data: [
           <?php 
             foreach ($data['entregarTelasMDia']['controles'] as $usuario) {
