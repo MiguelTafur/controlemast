@@ -10,7 +10,7 @@
       </div>
       <ul class="app-menu">
         <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
-        <li class="treeview">
+        <!-- <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-dashboard" aria-hidden="true"></i>
                 <span class="app-menu__label">Dashboard</span>
@@ -21,7 +21,7 @@
                 <li><a class="treeview-item" href="<?= base_url(); ?>/dashboard/equipamentos"><i class="icon fa fa-circle-o"></i> Equipamentos</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/dashboard/controle"><i class="icon fa fa-circle-o"></i> Controle</a></li>
             </ul>
-        </li>
+        </li> -->
         <?php } ?>
         <?php if(!empty($_SESSION['permisos'][3]['r']) AND $_SESSION['idUser'] == 1){ ?>
         <li class="treeview">
