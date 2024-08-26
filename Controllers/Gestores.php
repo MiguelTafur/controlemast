@@ -73,9 +73,14 @@ class Gestores extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
+
+						$anio = date("Y");
+						$mes = date("m");
+
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
 											 'cantGestores' => $this->model->cantGestores(),
+											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RGESTOR)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
