@@ -73,9 +73,14 @@ class Aprendizes extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
+
+						$anio = date("Y");
+						$mes = date("m");
+
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
-											'cantAprendizes' => $this->model->cantAprendizes()
+											'cantAprendizes' => $this->model->cantAprendizes(),
+											'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RAPRENDIZ)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
