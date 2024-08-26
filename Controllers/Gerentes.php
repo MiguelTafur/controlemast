@@ -74,9 +74,14 @@ class Gerentes extends Controllers{
 				if($request_user > 0)
 				{
 					if($option == 1){
+
+						$anio = date("Y");
+						$mes = date("m");
+
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
-											 'cantGerentes' => $this->model->cantGerentes()
+											 'cantGerentes' => $this->model->cantGerentes(),
+											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RGERENTE)
 											);
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');

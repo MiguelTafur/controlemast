@@ -85,7 +85,7 @@ class Usuarios extends Controllers{
 	public function getUsuarios()
 	{
 		if($_SESSION['permisosMod']['r']){
-			$arrData = getPersonas();
+			$arrData = getPersonas(RADMINISTRADOR);
 
 			for ($i=0; $i < count($arrData); $i++) {
 

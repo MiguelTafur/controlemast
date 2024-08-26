@@ -64,8 +64,6 @@ function fntCrearGerentes() {
             let strMatricula = document.querySelector('#txtMatricula').value;
             let strNombre = document.querySelector('#txtNombre').value;
             let strApellido = document.querySelector('#txtSobrenome').value;
-            let intTelefono = document.querySelector('#txtTelefono').value;
-            let strEmail = document.querySelector('#txtEmail').value;
             let intModelo = document.querySelector('#listModelo').value;
 
             if(strMatricula == '' || strNombre == '' || strApellido == '' || intModelo == '')
@@ -95,6 +93,13 @@ function fntCrearGerentes() {
                     if(objData.status)
                     {
                         document.querySelector("#cantGerentes").textContent = objData.cantGerentes;
+
+                        let mes = objData.infoGrafica.numeroMes;
+                        let ano = objData.infoGrafica.anio;
+
+                        let fecha = [mes, ano].join("-");
+
+                        fntInfoGrafica(fecha);
 
                         if(rowTable == ""){
                             tableGerentes.api().ajax.reload();
@@ -354,5 +359,26 @@ function fntInfoChartPersona(fecha)
             }
             divLoading.style.display = "none";
             return false;
+    }
+}
+
+function fntInfoGrafica(fecha) 
+{
+    divLoading.style.display = "flex";
+    let  request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let  ajaxUrl = base_url+'/Gerentes/gerentesMes';
+    let  formData = new FormData();
+    formData.append('fecha', fecha);
+    request.open("POST",ajaxUrl,true);
+    request.send(formData);
+    request.onreadystatechange = function()
+    {
+        if(request.readyState != 4) return;
+        if(request.status == 200)
+        {
+            $("#graficaMesGerentes").html(request.responseText);
+            divLoading.style.display = "none";
+            return false;
+        }
     }
 }
