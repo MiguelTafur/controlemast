@@ -48,7 +48,8 @@ class EntregarModel extends Mysql
 
     public function selectEquipamentos()
     {
-        $sql = "SELECT idequipamento, tipo, lacre from equipamento WHERE status = 1 AND lacre != ''";
+        $sql = "SELECT idequipamento, tipo, lacre from equipamento 
+                WHERE status = 1 OR (status = 2 AND NOT EXISTS(select * from controle WHERE controle.equipamentoid = equipamento.idequipamento))";
         $request = $this->select_all($sql);
         return $request;
     }
