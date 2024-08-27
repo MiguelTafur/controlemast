@@ -162,12 +162,12 @@ function fntEditInfo(element, idpersona)
                 let htmlModelo = objData.data.modelo === "Presencial" ? 1 : 2;
                 document.querySelector("#listModelo").value = htmlModelo;
                 $('#listModelo').selectpicker('render');
+                $('#modalFormCoordinador').modal('show');
             }
                 
         }
         divLoading.style.display = "none";
         return false;
-        $('#modalFormCoordinador').modal('show');
     }
 }
 

@@ -71,10 +71,11 @@ class Coordinadores extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 
-						$anio = date("Y");
-						$mes = date("m");
 
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -82,7 +83,11 @@ class Coordinadores extends Controllers{
 											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RCOORDINADOR)
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantCoordenadores' => $this->model->cantCoordenadores(),
+											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RCOORDINADOR)
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');
@@ -118,13 +123,13 @@ class Coordinadores extends Controllers{
 				}
 
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Líder"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm mr-1" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver Coordenador"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Alterar Líder"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary btn-sm mr-1" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Alterar Coordenador"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Líder"><i class="far fa-trash-alt"></i></button>';
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Remover Coordenador"><i class="far fa-trash-alt"></i></button>';
 				}
 
 				$arrData[$i]['options'] = '<div class="text-center d-flex justify-content-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';

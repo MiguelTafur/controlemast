@@ -260,6 +260,7 @@ class Telas extends Controllers{
 											 'cantTelaU' => $this->model->cantTelas(2),
 											 'cantTelaE' => $this->model->cantTelas(3),
 											 'cantTelaC' => $this->model->cantTelas(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MTELA)
 											);
 					}
 				}else if($request_user == '0'){

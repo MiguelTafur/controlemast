@@ -72,10 +72,10 @@ class Lideres extends Controllers{
 
 				if($request_user > 0)
 				{
-					if($option == 1){
+					$anio = date("Y");
+					$mes = date("m");
 
-						$anio = date("Y");
-						$mes = date("m");
+					if($option == 1){
 
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -83,7 +83,11 @@ class Lideres extends Controllers{
 											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RLIDER)
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantLideres' => $this->model->cantLideres(),
+											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RLIDER)
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');

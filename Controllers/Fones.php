@@ -263,6 +263,7 @@ class Fones extends Controllers{
 											 'cantFoneU' => $this->model->cantFones(2),
 											 'cantFoneE' => $this->model->cantFones(3),
 											 'cantFoneC' => $this->model->cantFones(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MFONE)
 											);
 					}
 				}else if($request_user == '0'){

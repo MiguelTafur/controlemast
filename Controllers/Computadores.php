@@ -262,6 +262,7 @@ class Computadores extends Controllers{
 											 'cantComputadorU' => $this->model->cantComputadores(2),
 											 'cantComputadorE' => $this->model->cantComputadores(3),
 											 'cantComputadorC' => $this->model->cantComputadores(4),
+											 'infoGrafica' => $this->model->selectEquipamentosMes($anio,$mes,MCOMPUTADOR)
 											);
 					}
 				}else if($request_user == '0'){

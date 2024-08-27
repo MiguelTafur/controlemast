@@ -72,10 +72,11 @@ class Supervisores extends Controllers{
 
 				if($request_user > 0)
 				{
+					$anio = date("Y");
+					$mes = date("m");
+
 					if($option == 1){
 
-						$anio = date("Y");
-						$mes = date("m");
 
 						$arrResponse = array('status' => true, 
 											 'msg' => 'Dados salvos com sucesso.',
@@ -83,7 +84,11 @@ class Supervisores extends Controllers{
 											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RSUPERVISOR)	
 											);
 					}else{
-						$arrResponse = array('status' => true, 'msg' => 'Dados atualizados com sucesso.');
+						$arrResponse = array('status' => true, 
+											 'msg' => 'Dados atualizados com sucesso.',
+											 'cantSupervisores' => $this->model->cantSupervisores(),
+											 'infoGrafica' => $this->model->selectUsuariosMes($anio,$mes,RSUPERVISOR)	
+											);
 					}
 				}else if($request_user == '0'){
 					$arrResponse = array('status' => false, 'msg' => 'Atenção! A Matrícula já existe.');
