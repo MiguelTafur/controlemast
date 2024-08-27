@@ -41,7 +41,7 @@ class UsuariosModel extends Mysql
 				FROM persona p 
 				INNER JOIN rol r 
 				ON p.rolid = r.idrol 
-				WHERE p.status != 0 AND /*p.codigoruta = $ruta*/".$whereAdmin."".$whereRol;
+				WHERE p.status != 0".$whereAdmin."".$whereRol;
 		$request = $this->select_all($sql);
 		return $request;
 	}

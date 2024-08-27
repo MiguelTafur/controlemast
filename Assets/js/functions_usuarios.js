@@ -32,6 +32,7 @@ function tablaUsuarios() {
                 {"data":"telefono"},
                 {"data":"nombrerol"},
                 {"data":"modelo"},
+                {"data":"codigoruta"},
                 {"data":"status"},
                 {"data":"options"}
             ],
