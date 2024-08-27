@@ -92,6 +92,20 @@
             </ul>
         </li>
         <?php } ?>
+        <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-book" aria-hidden="true"></i>
+                    <span class="app-menu__label">Manual</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/manual/manualEquipamentos"><i class="icon fa fa-circle-o"></i> Equipamentos</a></li>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/manual"><i class="icon fa fa-circle-o"></i> Usuários</a></li>
+                    <li><a class="treeview-item" href="<?= base_url(); ?>/manual/manualControle"><i class="icon fa fa-circle-o"></i> Controle</a></li>
+                </ul>
+            </li>
+        <?php } ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>

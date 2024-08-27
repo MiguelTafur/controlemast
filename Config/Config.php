@@ -33,7 +33,7 @@
 
 	//Módulos
 	const MRUTAS = 1;
-	const MDASHBOARD = 2;
+	const MMANUAL = 2;
 	const MUSUARIO = 3;
 	const MGERENTE = 4;
 	const MCOORDINADOR = 5;
