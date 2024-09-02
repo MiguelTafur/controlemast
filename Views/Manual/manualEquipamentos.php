@@ -21,7 +21,7 @@
                                 </h2>
                             </div>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingCriar" data-parent="#accordionEquipamentos">
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingCriar" data-parent="#accordionEquipamentos">
                                 <div class="card-body">
                                     <video controls class="w-100">
                                         <source src="<?= media(); ?>/videos/Criarequipamento.mp4" type="video/mp4" />
