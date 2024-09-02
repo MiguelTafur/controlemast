@@ -72,7 +72,7 @@ class Receber extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0, $arrData[$i]['personaid']);
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
 				if($arrData[$i]['status'] === 2) {
@@ -127,7 +127,7 @@ class Receber extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0, $arrData[$i]['personaid']);
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
 				if($arrData[$i]['status'] === 2) {
@@ -182,7 +182,7 @@ class Receber extends Controllers{
 
 				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
 
-				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0);
+				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0, $arrData[$i]['personaid']);
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
 				if($arrData[$i]['status'] === 2) {

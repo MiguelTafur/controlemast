@@ -195,12 +195,12 @@
     }
 
     //Trea el protocolo de la entrega con el estado 0
-    function getProtocolo(int $idequipamento, int $estado)
+    function getProtocolo(int $idequipamento, int $estado, int $idpersona)
     {
         
         require_once("Models/EntregarModel.php");
         $objEntregar = new EntregarModel();
-        $request = $objEntregar->selectProtocolo($idequipamento, $estado);
+        $request = $objEntregar->selectProtocolo($idequipamento, $estado, $idpersona);
 
         return $request['protocolo'];
     }
