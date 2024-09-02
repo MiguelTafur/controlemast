@@ -97,9 +97,10 @@ class EntregarModel extends Mysql
 		return $request;
 	}
 
-    public function selectProtocolo(int $idequipamento, int $estado) {
+    public function selectProtocolo(int $idequipamento, int $estado, int $idpersona) {
         $this->intIdEquipamento = $idequipamento;
         $this->listEstado = $estado;
+        $this->intIdUsuario = $idpersona;
 
         // if($estado === 0) {
         //     $sql = "SELECT co.protocolo FROM controle co 
@@ -110,7 +111,9 @@ class EntregarModel extends Mysql
             $sql = "SELECT co.protocolo FROM controle co 
                     LEFT OUTER JOIN equipamento eq
                     ON(co.equipamentoid = eq.idequipamento)
-                    WHERE co.status = $this->listEstado AND eq.idequipamento = $this->intIdEquipamento";
+                    LEFT OUTER JOIN persona pe
+                    ON(co.personaid = pe.idpersona)
+                    WHERE co.status = $this->listEstado AND eq.idequipamento = $this->intIdEquipamento AND pe.idpersona = $this->intIdUsuario";
         //}
         $request = $this->select($sql);
         return $request;

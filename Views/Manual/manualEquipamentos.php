@@ -24,7 +24,7 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingCriar" data-parent="#accordionEquipamentos">
                                 <div class="card-body">
                                     <video controls class="w-100">
-                                        <source src="<?= media(); ?>/videos/Criarequipamento.mp4" type="video/mp4" />
+                                        <source src="<?= media(); ?>/videos/criarequipamento.mp4" type="video/mp4" />
                                     </video>
                                 </div>
                             </div>
