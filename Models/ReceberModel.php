@@ -51,15 +51,24 @@ class ReceberModel extends Mysql
 	public function selectUsuarios($ruta)
 	{
 		$this->intIdRuta = $ruta;
-		$sql = "SELECT pe.idpersona, pe.matricula, pe.nombres, pe.apellidos, co.equipamentoid, co.personaid, co.status
-			FROM persona pe
-			LEFT OUTER JOIN controle co
-			ON pe.idpersona = co.personaid
-			WHERE pe.status != 0
-			AND pe.idpersona != 1
-			AND co.status = 1
-			AND codigoruta = $this->intIdRuta
-			ORDER BY nombres ASC";
+		$sql = "SELECT  pe.idpersona, 
+						pe.matricula, 
+						pe.nombres, 
+						pe.apellidos, 
+						co.equipamentoid, 
+						co.personaid, 
+						co.status,
+						eq.tipo
+				FROM persona pe
+				LEFT OUTER JOIN controle co
+				ON pe.idpersona = co.personaid
+				LEFT OUTER JOIN equipamento eq
+				ON co.equipamentoid = eq.idequipamento
+				WHERE pe.status != 0
+				AND pe.idpersona != 1
+				AND co.status = 1
+				AND pe.codigoruta = $this->intIdRuta
+				ORDER BY pe.nombres ASC";
 		$request = $this->select_all($sql);
 		return $request;
 	}

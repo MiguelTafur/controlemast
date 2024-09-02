@@ -230,7 +230,18 @@ class Receber extends Controllers{
 				for ($i=0; $i < count($arrData); $i++) { 
 					$ultimo = $arrData[$i]['apellidos'];
 					$ultimo = explode(" ", $ultimo);
-					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].', '.$arrData[$i]['equipamentoid'].'">'.strtoupper(strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0]).' - '.$arrData[$i]['matricula'].'</option>';
+					
+					if($arrData[$i]['tipo'] === 8) {
+						$tipo = '<span class="font-italic">fone</span>';
+					} else if ($arrData[$i]['tipo'] === 11) {
+						$tipo = '<span class="font-italic">tela</span>';
+					} else if ($arrData[$i]['tipo'] === 16) {
+						$tipo = '<span class="font-italic">pc</span>';
+					}
+
+					$htmlOptions .= '<option value="'.$arrData[$i]['idpersona'].', '.$arrData[$i]['equipamentoid'].'">
+										'.strtoupper(strtok($arrData[$i]['nombres'], " ").' '.array_reverse($ultimo)[0]).' - '.$arrData[$i]['matricula'].' | '.$tipo.'
+									</option>';
 				}
 			}
 			echo $htmlOptions;
