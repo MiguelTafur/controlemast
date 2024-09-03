@@ -291,7 +291,7 @@ function fntViewInfo(identrega)
                 const datacreated = objData.data.datecreated;
                 const fechaObj = new Date(datacreated);
                 const mes = fechaObj.getMonth();
-                const dia = fechaObj.getDate() + 1;
+                const dia = fechaObj.getDate() + 2;
                 const year = fechaObj.getFullYear();
                 const fechaUTC = new Date(Date.UTC(year, mes, dia));
                 const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
