@@ -10453,6 +10453,14 @@ a.text-secondary:hover, a.text-secondary:focus {
   color: #494f54 !important;
 }
 
+.text-secundario {
+  color: var(--secundario) !important;
+}
+
+a.text-secondary:hover, a.text-secondary:focus {
+  color: var(--secundario) !important;
+}
+
 .text-success {
   color: #28a745 !important;
 }

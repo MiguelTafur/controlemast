@@ -322,7 +322,12 @@ function fntViewInfo(identrega)
 
 function fntEditProtocolo(identrega) {
 
-    document.querySelector("#fileEditProtocolo").value = "";
+    $('#fileEditProtocolo').on('change',function(e){
+        let fileName = e.target.files[0].name;
+        if(e.target.files[0].name){
+            $(this).next('.custom-file-label').html(fileName);
+        }
+    })
 
     divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -341,13 +346,12 @@ function fntEditProtocolo(identrega) {
                 let imagen = base_url + '/Assets/images/imagenes/' + objData.data.protocolo;
                 document.querySelector("#protocoloActual").setAttribute('target', '_blank');   
                 document.querySelector("#protocoloActual").setAttribute('href', imagen);   
+                $('#modalEditProtocolo').modal('show');
             }
         }
         divLoading.style.display = "none";
         return false;
     }
-
-    $('#modalEditProtocolo').modal('show');
 }
 
 // funcion para eliminar el control de la entrega

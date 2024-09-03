@@ -114,15 +114,19 @@
       </div>
       <div class="modal-body">
         <div class="text-right mb-3">
-          <a class="font-weight-bold text-decoration-underline" id="protocoloActual"><u>Protocolo atual</u></a>
+          <a class="font-weight-bold text-decoration-underline text-secundario" id="protocoloActual"><u>Protocolo atual</u></a>
         </div>
         <form class="mt-2" id="formEditarProtocolo" name="formEditarProtocolo">
           <input type="hidden" id="idControle" name="idControle" value="">
           <input type="hidden" id="imagenBD" name="imagenBD" value="">
-          <div class="form-row text-center justify-content-center">
-            <div class="form-group col-9">
+          <div class="form-row justify-content-center">
+            <!-- <div class="form-group col-9">
               <label for="fileEditProtocolo" class="font-weight-bold">Novo Protocolo <span class="required">*</span></label>
-              <input type="file" class="form-control-file" id="fileEditProtocolo" name="fileEditProtocolo" accept="image/jpeg, image/png" required>
+              <input type="file" class="form-control-file" id="fileEditProtocolo" name="fileEditProtocolo" accept="application/pdf, image/jpeg, image/png" required>
+            </div> -->
+            <div class="custom-file my-3">
+              <input type="file" class="custom-file-input" id="fileEditProtocolo" name="fileEditProtocolo" accept="application/pdf, image/jpeg, image/png">
+              <label class="custom-file-label" for="fileEditProtocolo" data-browse="Escolher">Novo protocolo</label>
             </div>
             <div class="col-5">
               <button type="submit" class="btn btn-block btn-primary my-1">Salvar</button>

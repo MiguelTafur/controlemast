@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="Controle de equipamentos">
