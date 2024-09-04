@@ -179,8 +179,6 @@ function fntEditInfo(element, idequipamento)
                     
                 }
 
-                
-                
                 document.querySelector("#idEquipamento").value = objData.data.idequipamento;
                 if(document.querySelector("#idEquipamentoEstado")) {
                     document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
@@ -188,11 +186,58 @@ function fntEditInfo(element, idequipamento)
                 document.querySelector("#txtMarca").value = objData.data.marca;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
                 document.querySelector("#txtLacre").value = objData.data.lacre;
+
+                document.querySelector("#txtMarca").addEventListener("keyup", function() {
+                    fntMarca(objData.data.marca);
+                });
+                document.querySelector("#txtLacre").addEventListener("keyup", function() {
+                    fntLacre(objData.data.lacre);
+                });
+                document.querySelector("#txtCodigo").addEventListener("keyup", function() {
+                    fntCodigo(objData.data.codigo);
+                });
             }
         }
         $('#modalFormEquipamentos').modal('show');
         divLoading.style.display = "none";
         return false;
+    }
+}
+
+function fntMarca(marca)
+{
+    let valorMarca = document.getElementById("txtMarca").value;
+  
+    if(valorMarca !== marca){
+        document.getElementById("txtLacre").setAttribute("readonly", true);
+        document.getElementById("txtCodigo").setAttribute("readonly", true);	
+    } else {
+        document.getElementById("txtLacre").removeAttribute("readonly", false);
+        document.getElementById("txtCodigo").removeAttribute("readonly", false);
+    }
+}
+
+function fntLacre(lacre) {
+    let valorLacre = document.getElementById("txtLacre").value;
+
+    if(valorLacre !== lacre){
+        document.getElementById("txtMarca").setAttribute("readonly", true);
+        document.getElementById("txtCodigo").setAttribute("readonly", true);	
+    } else {
+        document.getElementById("txtMarca").removeAttribute("readonly", false);
+        document.getElementById("txtCodigo").removeAttribute("readonly", false);
+    }
+}
+
+function fntCodigo(codigo) {
+    let valorCodigo = document.getElementById("txtCodigo").value;
+
+    if(valorCodigo !== codigo){
+        document.getElementById("txtMarca").setAttribute("readonly", true);
+        document.getElementById("txtLacre").setAttribute("readonly", true);	
+    } else {
+        document.getElementById("txtMarca").removeAttribute("readonly", false);
+        document.getElementById("txtLacre").removeAttribute("readonly", false);
     }
 }
 
