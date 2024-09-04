@@ -124,6 +124,8 @@ class EquipamentosModel extends Mysql
 
 		if(empty($request))
 		{
+			$sql_eq = "SELECT * FROM equipamento WHERE idequipamento = $this->intIdEquipamento";
+			$request = $this->select($sql_eq);
 			$sql = "UPDATE equipamento 
 					SET	marca = ?, 
 						codigo = ?, 
@@ -131,12 +133,33 @@ class EquipamentosModel extends Mysql
 					WHERE idequipamento = $this->intIdEquipamento";
 			$arrData = array($this->strMarca,$this->strCodigo,$this->strLacre);
 
-			setAnotaciones($this->intIdEquipamento,
+			$mensaje = '';
+
+			
+			if($this->strMarca !== $request['marca'] && $this->strLacre === $request['lacre'] && $this->strCodigo === $request['codigo']) {
+				$mensaje = 'MARCA MODIFICADA | Anterior: "' . $request['marca'] . '"  /  Atual: "' . $this->strMarca . '"';
+			}
+		
+			if($this->strMarca === $request['marca'] && $this->strLacre !== $request['lacre'] && $this->strCodigo === $request['codigo']) {
+				$mensaje = 'LACRE MODIFICADO | Anterior: "' . $request['lacre'] . '"  /  Atual: "' . $this->strLacre . '"';
+			} 
+
+			if($this->strMarca === $request['marca'] && $this->strLacre === $request['lacre'] && $this->strCodigo !== $request['codigo']) {
+
+				$mensaje = 'CÓDIGO MODIFICADO | Anterior: "' . $request['codigo'] . '"  /  Atual: "' . $this->strCodigo . '"';
+			}
+
+			// echo $mensaje;
+			// exit; 
+
+			if($mensaje) {
+				setAnotaciones($this->intIdEquipamento,
 							   $this->intIdPersona,
-							   'Alteração de dados do Equipamento',
+							   $mensaje,
 							   '',
 							   $this->intStatus,
-							   $this->stringTipo);
+							   $this->stringTipo);	
+			}
 
 			$request = $this->update($sql, $arrData);
 		}else{
