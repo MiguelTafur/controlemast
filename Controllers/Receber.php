@@ -249,7 +249,8 @@ class Receber extends Controllers{
 		}	
 	}
 
-	public function getEquipamento() {
+	public function getEquipamento() 
+	{
 		if($_POST) {
 			if($_SESSION['permisosMod']['r']) {
 				$idUsuario = intval($_POST['idUsuario']);

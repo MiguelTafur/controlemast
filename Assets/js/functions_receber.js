@@ -170,6 +170,8 @@ function fntCrearControleReceber() {
                         document.querySelector("#cantRecebidosHoy").textContent = objData.cantRecebidosHoy;
 
                         tableReceber.api().ajax.reload();
+                        tableReceberComputadores.api().ajax.reload();
+                        tableReceberTelas.api().ajax.reload();
 
                         $('#modalFormControleReceber').modal("hide");
                         formControleReceber.reset();
@@ -241,7 +243,7 @@ function fntEquipamento(idusuario, idequipamento) {
             let equipamento = document.querySelector('#txtEquipamento');
             let idequipamento = document.querySelector('#idequipamentoReceber');
             idequipamento.value = id;
-            equipamento.value = nombre + ': #' + lacre;
+            equipamento.value = '#' + lacre;
         }
     }
 }
