@@ -68,7 +68,18 @@ class EquipamentosModel extends Mysql
 		$sql = "SELECT * FROM equipamento WHERE (lacre = '{$this->strLacre}' || (codigo != '' AND codigo = '{$this->strCodigo}')) AND codigoruta = $this->intIdRuta";
 		$request = $this->select_all($sql);
 
-		if(empty($request))
+		$repetido = false;
+
+		$sql_equi = "SELECT lacre FROM equipamento WHERE tipo = $this->stringTipo";
+		$request_equi = $this->select_all($sql_equi);
+
+		foreach ($request_equi as $equipamento) {
+			if(intval($equipamento['lacre']) === intval($this->strLacre)) {
+				$repetido = true;
+			}
+		}
+
+		if(empty($request) && $repetido === false)
 		{
 			$query_insert = "INSERT INTO equipamento(marca,codigo,lacre,datecreated,status,tipo,codigoruta)  VALUES(?,?,?,?,?,?,?)";
 			$arrData = array($this->strMarca,
