@@ -60,6 +60,11 @@ function fntCrearEquipamento() {
         formEquipamentos.onsubmit = function(e)
         {
             e.preventDefault();
+
+            document.querySelector("#txtMarca").disabled = false;
+            document.querySelector("#txtLacre").disabled = false;
+            document.querySelector("#txtCodigo").disabled = false;
+
             let strMarca = document.querySelector('#txtMarca').value;
             let strCodigo = document.querySelector('#txtCodigo').value;
             let strLacre = document.querySelector('#txtLacre').value;
@@ -142,8 +147,11 @@ function fntEditInfo(element, idequipamento)
     document.querySelector('#divFileAnotacion').classList.add('d-none');
     document.querySelector('#divEqEstragado').classList.add('d-none');
 
+    document.querySelector("#txtMarca").disabled = false;
+    document.querySelector("#txtLacre").disabled = false;
+    document.querySelector("#txtCodigo").disabled = false;
+
     divLoading.style.display = "flex";
-    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
     request.open("GET",ajaxUrl,true);
@@ -161,23 +169,17 @@ function fntEditInfo(element, idequipamento)
                 document.querySelector("#noAlterado").classList.add('d-none');
                 if(objData.data.status === 1) {
                     estadoActual.innerHTML = `<u>Disponível</u>`;
-                    //estadoActual.classList.add('text-success');
                 } else if(objData.data.status === 3) {
                     estadoActual.innerHTML = `<u>Estragado</u>`;
-                    //estadoActual.classList.add('text-danger');
                 } else if(objData.data.status === 4){
                     estadoActual.innerHTML = `<u>Concerto</u>`;
-                    //estadoActual.classList.add('text-warning');
                 } else {
                     estadoActual.textContent = `Em uso`;
-                    //estadoActual.classList.add('text-info');
                     document.querySelector("#noAlterado").classList.remove('d-none');
                     document.querySelector("#formEditarEstado").classList.add('d-none');
                     document.querySelector("#noAlterado").innerHTML = `<p class="text-uppercase text-center m-0 text-secondary font-weight-bold">Equipamento não pode ser alterado</p>`
                 }
 
-                
-                
                 document.querySelector("#idEquipamento").value = objData.data.idequipamento;
                 if(document.querySelector("#idEquipamentoEstado")) {
                     document.querySelector("#idEquipamentoEstado").value = objData.data.idequipamento;
@@ -208,11 +210,11 @@ function fntMarca(marca)
     let valorMarca = document.getElementById("txtMarca").value;
   
     if(valorMarca !== marca){
-        document.getElementById("txtLacre").setAttribute("readonly", true);
-        document.getElementById("txtCodigo").setAttribute("readonly", true);	
+        document.getElementById("txtLacre").disabled = true;
+        document.getElementById("txtCodigo").disabled = true;
     } else {
-        document.getElementById("txtLacre").removeAttribute("readonly", false);
-        document.getElementById("txtCodigo").removeAttribute("readonly", false);
+        document.getElementById("txtLacre").disabled = false;
+        document.getElementById("txtCodigo").disabled = false;
     }
 }
 
@@ -220,11 +222,11 @@ function fntLacre(lacre) {
     let valorLacre = document.getElementById("txtLacre").value;
 
     if(valorLacre !== lacre){
-        document.getElementById("txtMarca").setAttribute("readonly", true);
-        document.getElementById("txtCodigo").setAttribute("readonly", true);	
+        document.getElementById("txtMarca").disabled = true;
+        document.getElementById("txtCodigo").disabled = true;	
     } else {
-        document.getElementById("txtMarca").removeAttribute("readonly", false);
-        document.getElementById("txtCodigo").removeAttribute("readonly", false);
+        document.getElementById("txtMarca").disabled = false;
+        document.getElementById("txtCodigo").disabled = false;
     }
 }
 
@@ -232,11 +234,11 @@ function fntCodigo(codigo) {
     let valorCodigo = document.getElementById("txtCodigo").value;
 
     if(valorCodigo !== codigo){
-        document.getElementById("txtMarca").setAttribute("readonly", true);
-        document.getElementById("txtLacre").setAttribute("readonly", true);	
+        document.getElementById("txtMarca").disabled = true;
+        document.getElementById("txtLacre").disabled = true;	
     } else {
-        document.getElementById("txtMarca").removeAttribute("readonly", false);
-        document.getElementById("txtLacre").removeAttribute("readonly", false);
+        document.getElementById("txtMarca").disabled = false;
+        document.getElementById("txtLacre").disabled = false;
     }
 }
 
@@ -492,6 +494,27 @@ function openModal()
     document.querySelector('#divTxtAnotacion').classList.remove('d-none');
     document.querySelector('#divFileAnotacion').classList.remove('d-none');
     document.querySelector('#divEqEstragado').classList.remove('d-none');
+
+    document.querySelector("#txtMarca").disabled = false;
+    document.querySelector("#txtLacre").disabled = false;
+    document.querySelector("#txtCodigo").disabled = false;
+
+    document.querySelector("#txtMarca").addEventListener("keyup", function() {
+        document.querySelector("#txtMarca").disabled = false;
+        document.querySelector("#txtLacre").disabled = false;
+        document.querySelector("#txtCodigo").disabled = false;
+    });
+    document.querySelector("#txtLacre").addEventListener("keyup", function() {
+        document.querySelector("#txtMarca").disabled = false;
+        document.querySelector("#txtLacre").disabled = false;
+        document.querySelector("#txtCodigo").disabled = false;
+    });
+    document.querySelector("#txtCodigo").addEventListener("keyup", function() {
+        document.querySelector("#txtMarca").disabled = false;
+        document.querySelector("#txtLacre").disabled = false;
+        document.querySelector("#txtCodigo").disabled = false;
+    });
+
     $('#modalFormEquipamentos').modal('show');
 }
 
