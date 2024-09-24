@@ -122,24 +122,24 @@ class ReceberModel extends Mysql
 		$fecha = date('Y-m-d');
 		$return = 0;
 
-		//Selecciona el ID del control actual entregado
-		$query_select = "SELECT * 
-						 FROM controle 
-						 WHERE personaid = $this->listUsuario 
-						 AND equipamentoid = $this->listEquipamento
-						 AND status = 1";
-		$request_select = $this->select($query_select);
-		$idcontrole = $request_select['idcontrole'];
-
-		$e = $this->selectEquipamento($this->listUsuario, $this->listEquipamento);
-
         $query_insert = "INSERT INTO controle(personaid,equipamentoid,protocolo,observacion,datecreated,status)  VALUES(?,?,?,?,?,?)";
         $arrData = array($this->listUsuario,$this->listEquipamento,$this->strProtocolo,$this->strObservacion,$fecha,$this->listEstado);
         $request_insert = $this->insert($query_insert, $arrData);
 		
         if($request_insert) {
+
+			//Selecciona el ID del control actual entregado
+			$query_select = "SELECT * FROM controle 
+			WHERE personaid = $this->listUsuario 
+			AND equipamentoid = $this->listEquipamento
+			AND status = 1";
+			$request_select = $this->select($query_select);
+			$idcontrole = $request_select['idcontrole'];
+
+			$e = $this->selectEquipamento($this->listUsuario, $this->listEquipamento);
+
 			//Actualizar el estado del usuario
-			if($this->listEstado !== 2) {
+			if($this->listEstado !== 2 && empty($request_select)) {
 				$query_update_usuario = "UPDATE persona SET status = ? WHERE idpersona = $this->listUsuario";
 				$arrData = array(0);
 				$request_update_usuario = $this->update($query_update_usuario, $arrData);
