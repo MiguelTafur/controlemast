@@ -45,13 +45,14 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?= base_url(); ?>/gerentes"><i class="icon fa fa-circle-o"></i> Gerentes</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/supervisores"><i class="icon fa fa-circle-o"></i> Supervisores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/coordinadores"><i class="icon fa fa-circle-o"></i> Coordenadores</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/gestores"><i class="icon fa fa-circle-o"></i> Monitores de Qualidade</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/lideres"><i class="icon fa fa-circle-o"></i> Líderes</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/operacao"><i class="icon fa fa-circle-o"></i> Operadores</a></li>
                 <li><a class="treeview-item" href="<?= base_url(); ?>/aprendizes"><i class="icon fa fa-circle-o"></i> Aprendizes</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/operacao"><i class="icon fa fa-circle-o"></i> Operadores</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/lideres"><i class="icon fa fa-circle-o"></i> Líderes</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/gestores"><i class="icon fa fa-circle-o"></i> Monitores de Qualidade</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/coordinadores"><i class="icon fa fa-circle-o"></i> Coordenadores</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/supervisores"><i class="icon fa fa-circle-o"></i> Supervisores</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/gerentes"><i class="icon fa fa-circle-o"></i> Gerentes</a></li>
+                <li><a class="treeview-item" href="<?= base_url(); ?>/dp"><i class="icon fa fa-circle-o"></i> DP</a></li>
             </ul>
         </li>
         <?php } ?>

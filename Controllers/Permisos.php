@@ -61,9 +61,9 @@
 				}
 				if($requestPermiso > 0)
 				{
-					$arrResponse = array('status' => true, 'msg' => 'Permisos asignados correctamente.');
+					$arrResponse = array('status' => true, 'msg' => 'Dados salvos.');
 				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible asignar los permisos.');
+					$arrResponse = array("status" => false, "msg" => 'Erro ao salvar os dados.');
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}

@@ -48,6 +48,7 @@
 	const MSUPERVISOR = 14;
 	const MGESTOR = 15;
 	const MCOMPUTADOR = 16;
+	const MDP = 17;
 
 	//Roles
 	const RADMINISTRADOR = 1;
@@ -58,6 +59,7 @@
 	const RAPRENDIZ = 6;
 	const RSUPERVISOR = 7;
 	const RGESTOR = 8;
+	const RDP = 9;
 
 	//Fecha Actual
 	define('NOWDATE', date("Y-m-d"));
