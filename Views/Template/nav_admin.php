@@ -99,6 +99,16 @@
             </ul>
         </li>
         <?php } ?>
+        
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/logout">
+                <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
+                <span class="app-menu__label">Logout</span>
+            </a>
+        </li>
+      </ul>
+
+      <ul class="app-menu">
         <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
@@ -113,11 +123,5 @@
                 </ul>
             </li>
         <?php } ?>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/logout">
-                <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
-                <span class="app-menu__label">Logout</span>
-            </a>
-        </li>
       </ul>
     </aside>
