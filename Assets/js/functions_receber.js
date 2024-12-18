@@ -44,6 +44,43 @@ function fntTablaReceber() {
             "url": " "+base_url+"/Receber/getRecebidos",
             "dataSrc":""
         },
+        "dom": 'lBfrtip',
+        'buttons': 
+        [
+            {
+                "extend": "copyHtml5",
+                "text": "<i class='far fa-copy'></i> Copiar",
+                "titleAttr":"Copiar",
+                "className": "btn btn-secondary",
+                "exportOptions": { 
+                    "columns": [ 0, 1, 2, 3, 4] 
+                }
+            },{
+                "extend": "excelHtml5",
+                "text": "<i class='fas fa-file-excel'></i> Excel",
+                "titleAttr":"Esportar a Excel",
+                "className": "btn btn-success",
+                "exportOptions": { 
+                    "columns": [ 0, 1, 2, 3, 4] 
+                } 
+            },{
+                "extend": "pdfHtml5",
+                "text": "<i class='fas fa-file-pdf'></i> PDF",
+                "titleAttr":"Esportar a PDF",
+                "className": "btn btn-danger",
+                "exportOptions": { 
+                    "columns": [ 0, 1, 2, 3, 4] 
+                }
+            },{
+                "extend": "csvHtml5",
+                "text": "<i class='fas fa-file-csv'></i> CSV",
+                "titleAttr":"Esportar a CSV",
+                "className": "btn btn-info",
+                "exportOptions": { 
+                    "columns": [ 0, 1, 2, 3, 4] 
+                }
+            }
+        ],
         "columns":[
             {"data":"fechaRegistro"},
             {"data":"status"},
