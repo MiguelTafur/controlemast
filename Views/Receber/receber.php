@@ -1,6 +1,7 @@
 <?php 
   headerAdmin($data);
   getModal('modalReceber',$data); 
+  getModal('modalControle',$data); 
 ?>
 <main class="app-content">
   <div class="app-title">

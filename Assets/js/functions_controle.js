@@ -148,8 +148,13 @@ function fntTablaControlesTelas() {
     });
 }
 
+//Información completa del equipamento
 function fntViewFone(idequipamento)
 {
+    const btnAnnotation =  document.querySelector(".btnAnnotation");
+
+    btnAnnotation.setAttribute('id', idequipamento);
+
     divLoading.style.display = "flex";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
@@ -205,6 +210,39 @@ function fntViewFone(idequipamento)
         return false;
     }
 }
+
+//anotaciones del equipamento
+function fntViewAnnotation()
+{
+    let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
+
+    divLoading.style.display = "flex";
+    
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Fones/getAnotacionesFone/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+           
+            if(objData.status)
+            {
+                let trAnotaciones = objData.data;
+                document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            }else{
+                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="5">Nenhuma anotação</td><tr>';
+            }
+            $('#modalViewAnnotation').modal('show');
+            $('#modalViewAnnotation').addClass('myModal');
+        }
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
 
 // função para criar o controle de entrega
 function fntCrearControleEntrega() {

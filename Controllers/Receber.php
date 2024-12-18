@@ -70,7 +70,7 @@ class Receber extends Controllers{
 				$ultimo = explode(" ", $arrData[$i]['apellidos']);
 				$arrData[$i]['nombres'] = strtoupper(strtok($arrData[$i]['nombres'], " "). ' ' . array_reverse($ultimo)[0]);
 
-				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h6>';
+				$arrData[$i]['equipamento'] = '<h6>'.$tipo.' <span style="cursor: pointer;" class="badge badge-secondary" onClick="fntViewFone('.$arrData[$i]['equipamentoid'].')">#'.$arrData[$i]['lacre'].'</span></h6>';
 
 				$protocolo = getProtocolo($arrData[$i]['equipamentoid'], 0, $arrData[$i]['personaid']);
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);

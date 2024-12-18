@@ -285,6 +285,101 @@ function fntEquipamento(idusuario, idequipamento) {
     }
 }
 
+function fntViewFone(idequipamento)
+{
+    const btnAnnotation =  document.querySelector(".btnAnnotation");
+
+    btnAnnotation.setAttribute('id', idequipamento);
+    
+    divLoading.style.display = "flex";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Fones/getFone/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                const datacreated = objData.data.fechaRegistro;
+                const fechaObj = new Date(datacreated);
+                const mes = fechaObj.getMonth();
+                const dia = fechaObj.getDate() + 2;
+                const year = fechaObj.getFullYear();
+                const fechaUTC = new Date(Date.UTC(year, mes, dia));
+                const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                const fechaFormateada = fechaUTC.toLocaleDateString('pt-BR', opciones);
+
+                document.querySelector("#celMarcaF").innerHTML = objData.data.marca;
+                if(objData.data.codigo) {
+                    document.querySelector("#celCodigo").innerHTML = objData.data.codigo;
+                } else {
+                    document.querySelector("#celCodigo").innerHTML = '<span class="font-italic">nenhum<span/>';
+                }
+
+                document.querySelector("#celLacreF").innerHTML = '#' + objData.data.lacre;
+                
+                document.querySelector("#celFechaRegistroF").innerHTML = fechaFormateada;
+                switch (objData.data.status) {
+                    case 1:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-success">Disponível</span>';    
+                        break;
+                    case 3:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-danger">Estragado</span>';    
+                        break;
+                    case 4:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-warning">Concerto</span>';    
+                        break;
+                    default:
+                        document.querySelector("#celEstado").innerHTML = '<pan class="text-uppercase text-info">Em Uso</span>';    
+                        break;
+                }
+
+                $('#modalViewEquipamento').modal('show');
+            }else{
+                swal("Erro", objData.msg, "error");
+            }
+        }
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+//anotaciones del equipamento
+function fntViewAnnotation()
+{
+    let idequipamento = document.querySelector(".btnAnnotation").getAttribute('id');
+
+    divLoading.style.display = "flex";
+    
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Fones/getAnotacionesFone/'+idequipamento;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function()
+    {
+        if(request.readyState == 4 && request.status == 200)
+        {
+            let objData = JSON.parse(request.responseText);
+           
+            if(objData.status)
+            {
+                let trAnotaciones = objData.data;
+                document.querySelector("#listAnotaciones").innerHTML = trAnotaciones;
+            }else{
+                document.querySelector("#listAnotaciones").innerHTML = '<tr><td class"textcenter font-italic" colspan="5">Nenhuma anotação</td><tr>';
+            }
+            $('#modalViewAnnotation').modal('show');
+            $('#modalViewAnnotation').addClass('myModal');
+        }
+        divLoading.style.display = "none";
+        return false;
+    }
+}
+
+
 // funcion para ver los detalles del control del Recebimiento
 function fntViewInfo(idrecebido)
 {
@@ -564,7 +659,6 @@ function fntInfoChartEquipamento(fecha)
     }
 }
 
-//
 function fntInfoGraficaFone(fecha) 
 {
     divLoading.style.display = "flex";
