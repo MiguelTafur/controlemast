@@ -74,7 +74,7 @@ class Entregar extends Controllers{
 
 				$arrData[$i]['fechaRegistro'] = fechaInline($arrData[$i]['fechaRegistro']);
 
-				$arrData[$i]['equipamento'] = '<h5 class="m-0">'.$tipo.': <span class="badge badge-secondary">#'.$arrData[$i]['lacre'].'</span></h5>';
+				$arrData[$i]['equipamento'] = '<h5 class="m-0">'.$tipo.': <span style="cursor: pointer;" class="badge badge-secondary" onClick="fntViewFone('.$arrData[$i]['equipamentoid'].')">#'.$arrData[$i]['lacre'].'</span></h5>';
 
 				$arrData[$i]['status'] = '<a href="'.base_url().'/Assets/images/imagenes/'.$arrData[$i]['protocolo'].'" target="_blank" class="text-dark" style="margin: 0;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a>';
 

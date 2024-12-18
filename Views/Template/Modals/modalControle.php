@@ -179,3 +179,51 @@
     </div>
   </div>
 </div>
+
+<!-- modal ver Fone -->
+<div class="modal fade" id="modalViewEquipamento" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-primary">
+        <h5 class="modal-title" id="titleModal">Dados do Equipamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Marca:</td>
+              <td id="celMarcaF"></td>
+            </tr>
+            <tr>
+              <td>Código / Serial:</td>
+              <td id="celCodigo"></td>
+            </tr>
+            <tr>
+              <td>Lacre:</td>
+              <td id="celLacreF"></td>
+            </tr>
+            <tr>
+              <td>Data Registro:</td>
+              <td id="celFechaRegistroF"></td>
+            </tr>
+            <tr>
+              <td>Estado:</td>
+              <td id="celEstado"></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button class="btn btn-info btn-block btnAnnotation" onclick="fntViewAnnotation();" >Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
