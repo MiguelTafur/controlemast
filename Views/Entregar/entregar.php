@@ -52,8 +52,8 @@
           <nav class="mb-4">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
               <a class="nav-item nav-link active" id="nav-fone-tab" data-toggle="tab" href="#nav-fone" role="tab" aria-controls="nav-fone" aria-selected="true">FONES</a>
-              <a class="nav-item nav-link" id="nav-computador-tab" data-toggle="tab" href="#nav-computador" role="tab" aria-controls="nav-computador" aria-selected="false">COMPUTADORES</a>
-              <a class="nav-item nav-link" id="nav-tela-tab" data-toggle="tab" href="#nav-tela" role="tab" aria-controls="nav-tela" aria-selected="false">MONITORES</a>
+              <!-- <a class="nav-item nav-link" id="nav-computador-tab" data-toggle="tab" href="#nav-computador" role="tab" aria-controls="nav-computador" aria-selected="false">COMPUTADORES</a>
+              <a class="nav-item nav-link" id="nav-tela-tab" data-toggle="tab" href="#nav-tela" role="tab" aria-controls="nav-tela" aria-selected="false">MONITORES</a> -->
             </div>
           </nav>
           <div class="tile-body">
@@ -124,8 +124,8 @@
           <nav class="mb-4">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
               <a class="nav-item nav-link active" id="nav-graficoFones-tab" data-toggle="tab" href="#nav-graficoFones" role="tab" aria-controls="nav-graficoFones" aria-selected="true">FONES</a>
-              <a class="nav-item nav-link" id="nav-graficoComputadores-tab" data-toggle="tab" href="#nav-graficoComputadores" role="tab" aria-controls="nav-graficoComputadores" aria-selected="false">COMPUTADORES</a>
-              <a class="nav-item nav-link" id="nav-graficoTelas-tab" data-toggle="tab" href="#nav-graficoTelas" role="tab" aria-controls="nav-graficoTelas" aria-selected="false">MONITORES</a>
+              <!-- <a class="nav-item nav-link" id="nav-graficoComputadores-tab" data-toggle="tab" href="#nav-graficoComputadores" role="tab" aria-controls="nav-graficoComputadores" aria-selected="false">COMPUTADORES</a>
+              <a class="nav-item nav-link" id="nav-graficoTelas-tab" data-toggle="tab" href="#nav-graficoTelas" role="tab" aria-controls="nav-graficoTelas" aria-selected="false">MONITORES</a> -->
             </div>
           </nav>
           <div class="tab-content" id="nav-tabContent">
