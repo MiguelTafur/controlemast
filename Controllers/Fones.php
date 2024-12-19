@@ -49,7 +49,7 @@ class Fones extends Controllers{
 				$btnAnnotation = '';
 				$btnDelete = '';
 
-				$arrData[$i]['marca'] = ucwords($arrData[$i]['marca']);
+				$arrData[$i]['marca'] = strtoupper($arrData[$i]['marca']);
 				$arrData[$i]['lacre'] = '<span class="font-weight-bold">#'.$arrData[$i]['lacre'].'</span>';
 
 				switch ($arrData[$i]['status']) {
