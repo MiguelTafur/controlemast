@@ -440,6 +440,20 @@ function fntViewInfo(idequipamento)
                         break;
                 }
 
+                if(!objData.usuario)
+                {
+                    document.querySelector('#cptUser').classList.add('d-none');
+                    document.querySelector('#tblUser').classList.add('d-none');
+                } else {
+                    document.querySelector('#cptUser').classList.remove('d-none');
+                    document.querySelector('#tblUser').classList.remove('d-none');
+                    document.querySelector("#celNombres").innerHTML = objData.usuario.nombres;
+                    document.querySelector("#celApellidos").innerHTML = objData.usuario.apellidos;
+                    document.querySelector("#celMatricula").innerHTML = objData.usuario.matricula;
+                }
+                 
+
+
                 $('#modalViewEquipamento').modal('show');
             }else{
                 swal("Erro", objData.msg, "error");

@@ -205,6 +205,15 @@
         return $request['protocolo'];
     }
 
+    //trae los datos del control según el equipamento
+    function getControle(int $idequipamento)
+    {
+        require_once("Models/EntregarModel.php");
+        $objEntregar = new EntregarModel();
+        $request = $objEntregar->selectEntrega2($idequipamento);
+        return $request;
+    }
+
     function sessionUser(int $idpersona){
         require_once ("Models/LoginModel.php");
         $objLogin = new LoginModel();

@@ -64,6 +64,7 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered">
+          <caption class="mt-3 mb-0" id="cptUser">USUÁRIO</caption>
           <tbody>
             <tr>
               <td>Marca:</td>
@@ -84,6 +85,22 @@
             <tr>
               <td>Estado:</td>
               <td id="celEstado"></td>
+            </tr>
+            <tr>
+              <table class="table table-borderless" id="tblUser">
+                <tr>
+                  <th>Matrícula</th>
+                  <td id="celMatricula">123</td>
+                </tr>
+                <tr>
+                  <th>Nombres</th>
+                  <td id="celNombres">qqq</td>
+                </tr>
+                <tr>
+                  <th>Apellidos</th>
+                  <td id="celApellidos">www</td>
+                </tr>
+              </table>
             </tr>
             <tr>
               <td colspan="2"><button class="btn btn-info btn-block btnAnnotation" onclick="fntViewAnnotation();" >Ver Anotações &nbsp;<i class="fa fa-file-text-o" aria-hidden="true"></i></button></td>

@@ -97,24 +97,31 @@ class EntregarModel extends Mysql
 		return $request;
 	}
 
+    function selectEntrega2($idequipamento)
+    {
+        $this->intIdEquipamento = $idequipamento;
+        $sql = "SELECT personaid FROM controle WHERE status = 1 AND equipamentoid = $this->intIdEquipamento";
+        $request = $this->select($sql);
+
+        $usuario = $request['personaid'] ?? 0;
+
+        $sql2 = "SELECT matricula, nombres, apellidos FROM persona WHERE idpersona = $usuario";
+        $request2 = $this->select($sql2);
+
+        return $request2;
+    }
+
     public function selectProtocolo(int $idequipamento, int $estado, int $idpersona) {
         $this->intIdEquipamento = $idequipamento;
         $this->listEstado = $estado;
         $this->intIdUsuario = $idpersona;
 
-        // if($estado === 0) {
-        //     $sql = "SELECT co.protocolo FROM controle co 
-        //             LEFT OUTER JOIN equipamento eq
-        //             ON(co.equipamentoid = eq.idequipamento)
-        //             WHERE co.status = 0 AND eq.idequipamento = $this->intIdEquipamento";
-        // } else {
-            $sql = "SELECT co.protocolo FROM controle co 
-                    LEFT OUTER JOIN equipamento eq
-                    ON(co.equipamentoid = eq.idequipamento)
-                    LEFT OUTER JOIN persona pe
-                    ON(co.personaid = pe.idpersona)
-                    WHERE co.status = $this->listEstado AND eq.idequipamento = $this->intIdEquipamento AND pe.idpersona = $this->intIdUsuario";
-        //}
+        $sql = "SELECT co.protocolo FROM controle co 
+                LEFT OUTER JOIN equipamento eq
+                ON(co.equipamentoid = eq.idequipamento)
+                LEFT OUTER JOIN persona pe
+                ON(co.personaid = pe.idpersona)
+                WHERE co.status = $this->listEstado AND eq.idequipamento = $this->intIdEquipamento AND pe.idpersona = $this->intIdUsuario";
         $request = $this->select($sql);
         return $request;
     }

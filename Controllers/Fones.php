@@ -99,13 +99,13 @@ class Fones extends Controllers{
 			$IDequipamento = intval($idequipamento);
 			if($IDequipamento > 0)
 			{
-				//$arrData = $this->model->selectFone($IDequipamento);
 				$arrData = getEquipamentos("", $IDequipamento);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Dados não encontrados.');
 				}else{
-					$arrResponse = array('status' => true, 'data' => $arrData);
+					$usuario = getControle($IDequipamento) ?? 0;
+					$arrResponse = array('status' => true, 'data' => $arrData, 'usuario' => $usuario);
 				}
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			}
