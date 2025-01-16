@@ -86,7 +86,8 @@ function fntTablaEquipamentos() {
         
         "resonsieve":"true",
         "bDestroy": true,
-        "iDisplayLength": 20 
+        "iDisplayLength": 20, 
+        "order":[[3,"asc"]]  
     });
 }
 

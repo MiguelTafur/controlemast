@@ -29,7 +29,7 @@ class EquipamentosModel extends Mysql
                 FROM equipamento 
                 WHERE codigoruta = $ruta  
                 AND status != 0
-				AND tipo = " . $tipo . " ORDER BY datecreated DESC";
+				AND tipo = " . $tipo;
 		$request = $this->select_all($sql);
 		return $request;
 	}

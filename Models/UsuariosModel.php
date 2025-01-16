@@ -22,9 +22,9 @@ class UsuariosModel extends Mysql
 		if($_SESSION['idUser'] != 1){
 			$whereAdmin = " and p.idpersona != 1";
 		}
-		if($rol != NULL) {
-			$whereRol = " and rolid = $rol";
-		}
+		// if($rol != NULL) {
+		// 	$whereRol = " and rolid = $rol";
+		// }
 		$sql = "SELECT 
 					p.idpersona, 
 					p.nombres,
@@ -41,7 +41,7 @@ class UsuariosModel extends Mysql
 				FROM persona p 
 				INNER JOIN rol r 
 				ON p.rolid = r.idrol 
-				WHERE p.status != 0".$whereAdmin."".$whereRol;
+				WHERE p.status != 2 AND p.codigoruta = $ruta".$whereAdmin."".$whereRol;
 		$request = $this->select_all($sql);
 		return $request;
 	}
