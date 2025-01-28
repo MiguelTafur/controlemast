@@ -18,7 +18,7 @@
       <li class="mx-4">
         <h6 class="mb-0">
           TOTAL:  
-          <span class="text-success font-italic" id="cantGestores">&nbsp;<?= $data['cantidadDP']; ?></span>
+          <span class="text-success font-italic" id="cantDP">&nbsp;<?= $data['cantidadDP']; ?></span>
         </h6>
       </li>
     </ul>
